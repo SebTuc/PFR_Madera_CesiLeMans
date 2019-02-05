@@ -8,26 +8,62 @@
     </jsp-property-group>
   </jsp-config>
   
+  <!--SERVLET -->
+  <!-- INIT -->
   <servlet>
 		<servlet-name>initServlet</servlet-name>
-		<servlet-class>com.seb.servlet.InitServlet</servlet-class>
+		<servlet-class>com.ril.servlet.InitServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
   </servlet>
   
+  <!-- METIER -->
+  <servlet>
+  	<servlet-name>MetierList</servlet-name>
+  	<servlet-class>com.ril.servlet.metier.MetierList</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>MetierEdit</servlet-name>
+  	<servlet-class>com.ril.servlet.metier.MetierEdit</servlet-class>
+  </servlet>
+   <servlet>
+  	<servlet-name>MetierDelete</servlet-name>
+  	<servlet-class>com.ril.servlet.metier.MetierDelete</servlet-class>
+  </servlet>
+
+
+  <!--SERVLET-MAPPING -->  
+  <!-- DWR (AJAX GENERATOR) -->
+  <servlet-mapping>
+  	<servlet-name>dwr-invoker</servlet-name>
+  	<url-pattern>/dwr/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- METIER -->
+  <servlet-mapping>
+    <servlet-name>MetierList</servlet-name>
+    <url-pattern>/MetierList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MetierEdit</servlet-name>
+    <url-pattern>/MetierEdit</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>MetierDelete</servlet-name>
+    <url-pattern>/MetierDelete</url-pattern>
+  </servlet-mapping>
   
   
   <!-- error default page -->
   <error-page>
   	<location>/jsp/common/error.jsp</location>
   </error-page>
-  
   <!-- Page d'acceuil  
   <welcome-file-list>
     <welcome-file>Test</welcome-file>
   </welcome-file-list>  --> 
   
   <resource-ref>
-      <res-ref-name>jdbc/MySqlDS</res-ref-name>
+      <res-ref-name>jdbc/Modularis</res-ref-name>
       <res-type>javax.sql.DataSource</res-type>
   </resource-ref>  
 </web-app>
