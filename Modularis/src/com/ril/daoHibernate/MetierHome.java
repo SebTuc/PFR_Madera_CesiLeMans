@@ -4,15 +4,12 @@ package com.ril.daoHibernate;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
+import org.jboss.logging.Logger;
 
 import com.ril.hibernate.HibernateUtil;
 import com.ril.model.Metier;
@@ -25,7 +22,7 @@ import com.ril.model.Metier;
 @Stateless
 public class MetierHome {
 
-	private static final Log log = LogFactory.getLog(MetierHome.class);
+	private static Logger log = Logger.getLogger(MetierHome.class.toString());
 
 	public void persist(Metier transientInstance) {
 		log.debug("persisting Metier instance");

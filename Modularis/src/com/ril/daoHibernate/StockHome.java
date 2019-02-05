@@ -2,10 +2,8 @@ package com.ril.daoHibernate;
 // Generated 9 janv. 2019 13:13:58 by Hibernate Tools 4.3.5.Final
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import org.jboss.logging.Logger;
 
 import com.ril.hibernate.HibernateUtil;
 import com.ril.model.Stock;
@@ -18,7 +16,7 @@ import com.ril.model.Stock;
 @Stateless
 public class StockHome {
 
-	private static final Log log = LogFactory.getLog(StockHome.class);
+	private static Logger log = Logger.getLogger(StockHome.class.toString());
 	
 	public void persist(Stock transientInstance) {
 		log.debug("persisting Stock instance");

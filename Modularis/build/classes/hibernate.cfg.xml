@@ -28,7 +28,7 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         
-       	<property name="default_schema">MKYONG</property>
+       	<!-- <property name="default_schema">MKYONG</property>  -->
        	
        	<mapping class="com.ril.model.Angle"/>      
        	<mapping class="com.ril.model.Catalogue"/>

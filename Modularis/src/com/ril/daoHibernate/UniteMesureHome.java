@@ -2,10 +2,8 @@ package com.ril.daoHibernate;
 // Generated 9 janv. 2019 13:13:58 by Hibernate Tools 4.3.5.Final
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import org.jboss.logging.Logger;
 
 import com.ril.hibernate.HibernateUtil;
 import com.ril.model.UniteMesure;
@@ -18,7 +16,7 @@ import com.ril.model.UniteMesure;
 @Stateless
 public class UniteMesureHome {
 
-	private static final Log log = LogFactory.getLog(UniteMesureHome.class);
+	private static Logger log = Logger.getLogger(UniteMesureHome.class.toString());
 
 	public void persist(UniteMesure transientInstance) {
 		log.debug("persisting UniteMesure instance");

@@ -2,10 +2,8 @@ package com.ril.daoHibernate;
 // Generated 9 janv. 2019 13:13:58 by Hibernate Tools 4.3.5.Final
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import org.jboss.logging.Logger;
 
 import com.ril.hibernate.HibernateUtil;
 import com.ril.model.Facture;
@@ -18,8 +16,8 @@ import com.ril.model.Facture;
 @Stateless
 public class FactureHome {
 
-	private static final Log log = LogFactory.getLog(FactureHome.class);
-
+	private static Logger log = Logger.getLogger(FactureHome.class.toString());
+	
 	public void persist(Facture transientInstance) {
 		log.debug("persisting Facture instance");
 		try {
