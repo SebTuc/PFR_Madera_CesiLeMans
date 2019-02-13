@@ -29,14 +29,31 @@
   	<servlet-name>MetierDelete</servlet-name>
   	<servlet-class>com.ril.servlet.metier.MetierDelete</servlet-class>
   </servlet>
+  
+  <!-- UNITE_MESURE -->
+  <servlet>
+  	<servlet-name>UniteMesureList</servlet-name>
+  	<servlet-class>com.ril.servlet.uniteMesure.UniteMesureList</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>UniteMesureEdit</servlet-name>
+  	<servlet-class>com.ril.servlet.uniteMesure.UniteMesureEdit</servlet-class>
+  </servlet>
+   <servlet>
+  	<servlet-name>UniteMesureDelete</servlet-name>
+  	<servlet-class>com.ril.servlet.uniteMesure.UniteMesureDelete</servlet-class>
+  </servlet>
 
 
   <!--SERVLET-MAPPING -->  
+  
   <!-- DWR (AJAX GENERATOR) -->
+  <!-- 
   <servlet-mapping>
   	<servlet-name>dwr-invoker</servlet-name>
   	<url-pattern>/dwr/*</url-pattern>
   </servlet-mapping>
+  -->
   
   <!-- METIER -->
   <servlet-mapping>
@@ -50,6 +67,20 @@
    <servlet-mapping>
     <servlet-name>MetierDelete</servlet-name>
     <url-pattern>/MetierDelete</url-pattern>
+  </servlet-mapping>
+  
+    <!-- METIER -->
+  <servlet-mapping>
+    <servlet-name>UniteMesureList</servlet-name>
+    <url-pattern>/UniteMesureList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UniteMesureEdit</servlet-name>
+    <url-pattern>/UniteMesureEdit</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>UniteMesureDelete</servlet-name>
+    <url-pattern>/UniteMesureDelete</url-pattern>
   </servlet-mapping>
   
   
