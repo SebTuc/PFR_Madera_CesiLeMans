@@ -249,6 +249,9 @@ button.btn-check-login:hover {
 /*---FIN MODAL---*/
 /*---------------*/
 
+/*----MENU----*/
+.menu-link {background: var(--primary-color);font-size: 25px; color:#fff;text-align: center;transition: all 0.3s;border: 5px solid #fff}
+.menu-link:hover{background: var(--primary-color-light);color: #fff; text-decoration: none}
 
 
 @media screen and (max-height: 450px) {

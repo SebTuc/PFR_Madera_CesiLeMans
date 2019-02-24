@@ -1,4 +1,4 @@
-package com.ril.servlet.uniteMesure;
+package com.ril.servlet.unitemesure;
 
 import java.io.IOException;
 import java.util.List;
