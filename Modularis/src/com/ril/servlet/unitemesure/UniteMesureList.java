@@ -32,15 +32,22 @@ public class UniteMesureList extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 			
+		String uniteId = req.getParameter("uniteId");
 		String uniteMesureNom = req.getParameter("uniteNom");		
 		
-		//Ajout
-		if(uniteMesureNom.trim() != "") uniteMesureService.addUniteMesure(uniteMesureNom);					
-						
+		//Ajout ou Delete		
+		if (uniteMesureNom != null) {
+			if(uniteMesureNom.trim() != null) {
+				uniteMesureService.addUniteMesure(uniteMesureNom);					
+			}
+		} else if(uniteId != null) {				
+			uniteMesureService.removeUniteMesureById(Integer.parseInt(uniteId));
+		}
+		
 		//Definit la reponse comme "See Other" et redirige
 		//Evite la multi-insertion après un refresh de l'utilsateur		
 		resp.setStatus(303);	
-		resp.sendRedirect(req.getContextPath()+"/UniteMesureList");
+		resp.sendRedirect(req.getContextPath()+"/Configuration/UniteMesureList");
 	}
 
 }

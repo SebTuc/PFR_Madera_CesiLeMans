@@ -41,6 +41,6 @@ public class MetierEdit extends HttpServlet {
 			metierService.editMetier(metier);
 		}
 		
-		resp.sendRedirect(req.getContextPath() + "/MetierList");
+		resp.sendRedirect(req.getContextPath() + "/Configuration/MetierList");
 	}
 }

@@ -31,15 +31,22 @@ public class MetierList extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 			
-		String metierNom = req.getParameter("metierNom");		
-		
-		//Ajout
-		if(metierNom.trim() != null) metierService.addMetier(metierNom);					
+		String metierId = req.getParameter("metierId");
+		String metierNom = req.getParameter("metierNom");	
+				
+		// Ajout ou Delete
+		if (metierNom != null) {						
+			if (metierNom.trim() != null) {				
+				metierService.addMetier(metierNom);
+			}
+		} else if (metierId != null) {
+			metierService.removeMetierById(Integer.parseInt(metierId));
+		}	
 						
 		//Definit la reponse comme "See Other" et redirige
 		//Evite la multi-insertion après un refresh de l'utilsateur		
 		resp.setStatus(303);	
-		resp.sendRedirect(req.getContextPath()+"/MetierList");
+		resp.sendRedirect(req.getContextPath()+"/Configuration/MetierList");
 	}
 
 }

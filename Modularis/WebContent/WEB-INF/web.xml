@@ -31,10 +31,6 @@
   	<servlet-name>MetierEdit</servlet-name>
   	<servlet-class>com.ril.servlet.metier.MetierEdit</servlet-class>
   </servlet>
-   <servlet>
-  	<servlet-name>MetierDelete</servlet-name>
-  	<servlet-class>com.ril.servlet.metier.MetierDelete</servlet-class>
-  </servlet>
   
   <!-- UNITE_MESURE -->
   <servlet>
@@ -44,10 +40,6 @@
   <servlet>
   	<servlet-name>UniteMesureEdit</servlet-name>
   	<servlet-class>com.ril.servlet.unitemesure.UniteMesureEdit</servlet-class>
-  </servlet>
-   <servlet>
-  	<servlet-name>UniteMesureDelete</servlet-name>
-  	<servlet-class>com.ril.servlet.unitemesure.UniteMesureDelete</servlet-class>
   </servlet>
 
 
@@ -78,39 +70,28 @@
   <servlet-mapping>
     <servlet-name>MetierList</servlet-name>
     <url-pattern>/Configuration/MetierList</url-pattern>
-    <url-pattern>/Configuration/Metier</url-pattern>
-    <url-pattern>/Configuration/metier</url-pattern>
-    <url-pattern>/Configuration/metier-list</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MetierEdit</servlet-name>
     <url-pattern>/Configuration/MetierEdit</url-pattern>
-    <url-pattern>/Configuration/metier-edit</url-pattern>
   </servlet-mapping>
    <servlet-mapping>
     <servlet-name>MetierDelete</servlet-name>
     <url-pattern>/Configuration/MetierDelete</url-pattern>
-    <url-pattern>/Configuration/metier-delete</url-pattern>
   </servlet-mapping>
   
     <!-- METIER -->
   <servlet-mapping>
     <servlet-name>UniteMesureList</servlet-name>
     <url-pattern>/Configuration/UniteMesureList</url-pattern>
-    <url-pattern>/Configuration/UniteMesure</url-pattern>
-    <url-pattern>/Configuration/unitemesure</url-pattern>
-    <url-pattern>/Configuration/unite-mesure</url-pattern>
-   	<url-pattern>/Configuration/unite-mesure-list</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>UniteMesureEdit</servlet-name>
     <url-pattern>/Configuration/UniteMesureEdit</url-pattern>
-    <url-pattern>/Configuration/unite-mesure-edit</url-pattern>
   </servlet-mapping>
    <servlet-mapping>
     <servlet-name>UniteMesureDelete</servlet-name>
     <url-pattern>/Configuration/UniteMesureDelete</url-pattern>
-    <url-pattern>/Configuration/unite-mesure-delete</url-pattern>
   </servlet-mapping>
   
   

@@ -41,6 +41,6 @@ public class UniteMesureEdit extends HttpServlet {
 			uniteMesureService.editUniteMesure(uniteMesure);
 		}
 		
-		resp.sendRedirect(req.getContextPath() + "/UniteMesureList");
+		resp.sendRedirect(req.getContextPath() + "/Configuration/UniteMesureList");
 	}
 }
