@@ -1,8 +1,14 @@
 package com.ril.daoHibernate;
 // Generated 9 janv. 2019 13:13:58 by Hibernate Tools 4.3.5.Final
 
-import javax.ejb.Stateless;
+import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
 import org.jboss.logging.Logger;
 
 import com.ril.hibernate.HibernateUtil;
@@ -66,4 +72,34 @@ public class FamilleComposantHome {
 			throw re;
 		}
 	}
+	
+	public List<FamilleComposant> findAll() {
+		log.debug("getting all UniteMesure");
+		try {
+			Session session = HibernateUtil.getSession();
+	
+			CriteriaBuilder builder = HibernateUtil.getCriteriaBuilder();
+			
+			CriteriaQuery<FamilleComposant> crit = builder.createQuery(FamilleComposant.class);
+			
+			Root<FamilleComposant> TypesRoot = crit.from(FamilleComposant.class);
+			
+			crit.select(TypesRoot);
+			
+			List<FamilleComposant> types = session.createQuery(crit).getResultList();
+			
+			if(types.isEmpty()) {
+				log.debug("get successful, no instance found");
+				return null;
+				
+			}else {
+				log.debug("get successful");
+				return types;
+			}
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+	
 }

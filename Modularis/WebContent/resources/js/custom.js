@@ -4,6 +4,14 @@
 $(document).ready ( function () {
     $("#open-btn").click(e => {$("#mySidenav").css('width','250px')});
     $("#close-btn").click(e =>{$("#mySidenav").css('width','0px')});
+    
+    
+    /*
+     * Initialisation de la dataTable
+     * 
+     */
+    
+    $('#Edition').DataTable();
 });
 
 /**

@@ -21,25 +21,8 @@
 	</button>
 	
 	<!-- Button Connexion -->
-	<a href="#" class="btn btn-connect ml-auto" data-toggle="modal" data-target="#sem-login"><span class="glyphicon glyphicon-lock"></span> Connexion</a>
+	<a href="#" class="btn btn-connect ml-auto" data-toggle="modal" data-target="#sem-login"><span class="glyphicon glyphicon-lock"></span> Deconnexion</a>
 	
-	<!-- Menu utilisateur connect� -->
-<!--     <div class="collapse navbar-collapse pull-right ml-auto" id="bs-example-navbar-collapse-1"> -->
-    
-<!--       <ul class="nav navbar-nav navbar-left"> -->
-<!--           <li class="dropdown"> -->
-<!--        		<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-<!-- 				<i class="material-icons">account_circle</i> -->
-<!-- 			</button> -->
-<!--           	<ul class="dropdown-menu"> -->
-<!--             	<li align="center" class="well"> -->
-<!--                 	<a href="#" class="btn btn-sm btn-default dropdown-item"><span class="glyphicon glyphicon-lock"></span> Deconnexion</a> -->
-<!--             	</li> -->
-<!--            </ul> -->
-<!--         </li> -->
-<!--       </ul> -->
-<!--     </div> -->
-    
 </nav>
 
 <!-- MODAL CONNEXION-->

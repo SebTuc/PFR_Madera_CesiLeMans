@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>Modularis</display-name>
   <jsp-config>
     <jsp-property-group>
@@ -7,80 +7,49 @@
       <include-prelude>/jsp/common/tagLib.jsp</include-prelude>
     </jsp-property-group>
   </jsp-config>
-  
-  <!--SERVLET -->
-  <!-- INIT -->
   <servlet>
-		<servlet-name>initServlet</servlet-name>
-		<servlet-class>com.ril.servlet.InitServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-  </servlet>
-  
-  <!-- INDEX -->
-  <servlet>
-  	<servlet-name>Index</servlet-name>
-  	<servlet-class>com.ril.servlet.Index</servlet-class>
-  </servlet>
-  
-  <!-- METIER -->
-  <servlet>
-  	<servlet-name>MetierList</servlet-name>
-  	<servlet-class>com.ril.servlet.metier.MetierList</servlet-class>
+    <servlet-name>initServlet</servlet-name>
+    <servlet-class>com.ril.servlet.InitServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet>
-  	<servlet-name>MetierEdit</servlet-name>
-  	<servlet-class>com.ril.servlet.metier.MetierEdit</servlet-class>
-  </servlet>
-  
-  <!-- UNITE_MESURE -->
-  <servlet>
-  	<servlet-name>UniteMesureList</servlet-name>
-  	<servlet-class>com.ril.servlet.unitemesure.UniteMesureList</servlet-class>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>com.ril.servlet.Index</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>UniteMesureEdit</servlet-name>
-  	<servlet-class>com.ril.servlet.unitemesure.UniteMesureEdit</servlet-class>
+    <servlet-name>AjoutMetier</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutMetier</servlet-class>
   </servlet>
-
-
-  <!--SERVLET-MAPPING -->  
-  
-  <!-- DWR (AJAX GENERATOR) -->
-  <!-- 
   <servlet-mapping>
-  	<servlet-name>dwr-invoker</servlet-name>
-  	<url-pattern>/dwr/*</url-pattern>
+    <servlet-name>AjoutMetier</servlet-name>
+    <url-pattern>/Configuration/AjoutMetier</url-pattern>
   </servlet-mapping>
-  -->
+  <servlet>
+    <servlet-name>AjoutFamilleComposant</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutFamilleComposant</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutFamilleComposant</servlet-name>
+    <url-pattern>/Configuration/AjoutFamilleComposant</url-pattern>
+  </servlet-mapping>
   
-  <!-- INDEX -->
-    
+  <servlet>
+    <servlet-name>UniteMesureList</servlet-name>
+    <servlet-class>com.ril.servlet.UniteMesureList</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UniteMesureEdit</servlet-name>
+    <servlet-class>com.ril.servlet.UniteMesureEdit</servlet-class>
+  </servlet>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>
-  
   <servlet-mapping>
     <servlet-name>Index</servlet-name>
     <url-pattern>/Index</url-pattern>
     <url-pattern>/index</url-pattern>
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
-  
-  <!-- METIER -->
-  <servlet-mapping>
-    <servlet-name>MetierList</servlet-name>
-    <url-pattern>/Configuration/MetierList</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>MetierEdit</servlet-name>
-    <url-pattern>/Configuration/MetierEdit</url-pattern>
-  </servlet-mapping>
-   <servlet-mapping>
-    <servlet-name>MetierDelete</servlet-name>
-    <url-pattern>/Configuration/MetierDelete</url-pattern>
-  </servlet-mapping>
-  
-    <!-- METIER -->
   <servlet-mapping>
     <servlet-name>UniteMesureList</servlet-name>
     <url-pattern>/Configuration/UniteMesureList</url-pattern>
@@ -89,19 +58,15 @@
     <servlet-name>UniteMesureEdit</servlet-name>
     <url-pattern>/Configuration/UniteMesureEdit</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>UniteMesureDelete</servlet-name>
     <url-pattern>/Configuration/UniteMesureDelete</url-pattern>
   </servlet-mapping>
-  
-  
-  <!-- error default page -->
   <error-page>
-  	<location>/jsp/common/error.jsp</location>
-  </error-page> 
-  
+    <location>/jsp/common/error.jsp</location>
+  </error-page>
   <resource-ref>
-      <res-ref-name>jdbc/Modularis</res-ref-name>
-      <res-type>javax.sql.DataSource</res-type>
-  </resource-ref>  
+    <res-ref-name>jdbc/Modularis</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+  </resource-ref>
 </web-app>
