@@ -74,7 +74,7 @@ public class MetierHome {
 	}
 	
 	public List<Metier> findAll() {
-		log.debug("getting all UniteMesure");
+		log.debug("getting all Metier");
 		try {
 			Session session = HibernateUtil.getSession();
 	

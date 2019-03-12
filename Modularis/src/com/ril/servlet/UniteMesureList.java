@@ -26,7 +26,7 @@ public class UniteMesureList extends HttpServlet {
 		List<UniteMesure> uniteMesures = uniteMesureService.getAllUniteMesures();
 		req.setAttribute("uniteMesures", uniteMesures);
 		
-		req.getRequestDispatcher("/jsp/application/uniteMesure/listUniteMesure.jsp").forward(req, resp);
+		req.getRequestDispatcher("/jsp/application/Configuration/listUniteMesure.jsp").forward(req, resp);
 	}
 
 	@Override

@@ -12,7 +12,6 @@ import org.hibernate.Session;
 import org.jboss.logging.Logger;
 
 import com.ril.hibernate.HibernateUtil;
-import com.ril.model.Metier;
 import com.ril.model.UniteMesure;
 
 /**

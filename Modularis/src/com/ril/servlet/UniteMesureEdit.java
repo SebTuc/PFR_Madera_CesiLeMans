@@ -22,7 +22,7 @@ public class UniteMesureEdit extends HttpServlet {
 		if(uniteId != null) {
 			UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.parseInt(uniteId));
 			req.setAttribute("uniteMesure", uniteMesure);
-			req.getRequestDispatcher("/jsp/application/uniteMesure/editUniteMesure.jsp").forward(req, resp);
+			req.getRequestDispatcher("/jsp/application/Configuration/editUniteMesure.jsp").forward(req, resp);
 		}else{
 			req.getRequestDispatcher("/jsp/application/common/error.jsp").forward(req, resp);
 		}

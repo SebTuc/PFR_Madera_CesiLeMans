@@ -2,58 +2,71 @@ package com.ril.service;
 
 import java.util.List;
 
-import com.ril.daoHibernate.MetierHome;
 import com.ril.daoHibernate.UniteMesureHome;
 import com.ril.model.UniteMesure;
 
 public class UniteMesureService {
-	private UniteMesureHome dao;
-	
-	public UniteMesureService() {
-		this.dao = new UniteMesureHome();
-	}
-	
+		
 	public int addUniteMesure(String libelle) {
-		UniteMesure uniteMesure = null;
+
+		UniteMesureHome dao = new UniteMesureHome();
+		
 		if(libelle != null) {
-			uniteMesure = new UniteMesure(libelle);
+			
+			UniteMesure uniteMesure = new UniteMesure(libelle);
+			
 			dao.persist(uniteMesure);
+			
 			return uniteMesure.getUniteId();			
-		}else {
+			
+		} else {
+			
 			return -1;
 		}
 	}
 	
-	public void editUniteMesureById(Integer id) {
-		if(id != null) {
-			UniteMesure metier = getUniteMesureById(id);
-			dao.merge(metier);
-		}
-	}
-	
 	public void editUniteMesure(UniteMesure uniteMesure) {
+		
+		UniteMesureHome dao = new UniteMesureHome();
+		
 		if(uniteMesure != null) {
+		
 			dao.merge(uniteMesure);
 		}
 	}
 	
 	public void removeUniteMesureById(Integer id) {
+
+		UniteMesureHome dao = new UniteMesureHome();
+		
 		if(id != null) {
+			
 			UniteMesure uniteMesure = getUniteMesureById(id);
+			
 			dao.remove(uniteMesure);
 		}
 	}
 	public void removeUniteMesure(UniteMesure uniteMesure) {
+		
+		UniteMesureHome dao = new UniteMesureHome();
+		
 		if(uniteMesure != null) {
+		
 			dao.remove(uniteMesure);
 		}
 	}
 	
 	public UniteMesure getUniteMesureById(Integer id) {
+
+		UniteMesureHome dao = new UniteMesureHome();
+		
 		return dao.findById(id);
 	}
 	
 	public List<UniteMesure> getAllUniteMesures(){
+
+		UniteMesureHome dao = new UniteMesureHome();
+		
 		return dao.findAll();
 	}
 }

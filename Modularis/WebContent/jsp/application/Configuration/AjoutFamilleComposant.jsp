@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Edition Famille Composant</title>
+  <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
+
+</head>
+
+<body>
+
+  <jsp:include page="/jsp/common/navbar.jsp" />
+
+  <div role="main" class="container">
+  
+<br>
+<div class="card card-edition">
+	<div class="card-header">
+		<input id="search_table" type="text" class="form-control card-search" placeholder="Rechercher..." />
+	</div>
+	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
+		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; ">
+			<thead>
+				<tr style="text-align: center">
+			  		<th>Famille Composant</th>
+			  	</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="FamilleComposant" items="${ListFamilleComposant}">
+					<tr style="text-align: center">
+				    	<td id="${FamilleComposant.familleComposantId }"> ${fn:escapeXml(FamilleComposant.nom) } </td>
+				    </tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>	
+<br>			
+<div id="new_table_paginate" class="d-flex justify-content-center"></div>	
+  
+  	<div class="row justify-content-center">
+		<div class="col-4">
+		    <form method="post" class="form-inline">
+		      <div class="form-group">
+		        <input id="familleComposantNom" class="form-control" name="familleComposantNom" placeholder="Nouvel Famille Composant" required />
+		        <button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
+		      </div>
+		    </form>
+		</div>
+		<div class="col-4">
+			<div class="row modification">
+				<button id="buttonEditRow" class="btn btn-warning btn-block">Edit selected row</button>
+			</div>
+			
+		</div>
+		<div class="col-4">
+			<button id="buttonDeleteRow" class="btn btn-danger btn-block">Delete row</button>
+		</div>
+	</div>
+    
+  </div>
+	
+  <jsp:include page="/jsp/common/defaultScripts.jsp" />
+  <jsp:include page="/jsp/common/confirmModal.jsp" />
+</body>
+
+</html>

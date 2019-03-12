@@ -25,7 +25,7 @@ public class AjoutFamilleComposant extends HttpServlet {
 		List<FamilleComposant> ListFamilleComposant = familleComposantService.getAllFamilleComposant();
 		request.setAttribute("ListFamilleComposant", ListFamilleComposant);
 		
-		request.getRequestDispatcher("/jsp/application/FamilleComposant/AjoutFamilleComposant.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/application/Configuration/AjoutFamilleComposant.jsp").forward(request, response);
 	}
 
 	/**

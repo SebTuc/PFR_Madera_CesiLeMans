@@ -25,7 +25,7 @@ public class AjoutMetier extends HttpServlet {
 		List<Metier> metiers = metierService.getAllMetiers();
 		req.setAttribute("metiers", metiers);
 		
-		req.getRequestDispatcher("/jsp/application/metier/AjoutMetier.jsp").forward(req, resp);
+		req.getRequestDispatcher("/jsp/application/Configuration/AjoutMetier.jsp").forward(req, resp);
 	}
 
 	/**

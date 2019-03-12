@@ -8,10 +8,109 @@ $(document).ready ( function () {
     
     /*
      * Initialisation de la dataTable
-     * 
      */
+    var table = $('#Edition').DataTable({
+        
+    	"paging":   true,
+        "ordering": true,
+		"sDom": '<"searchBox">rtip',
+        "info":     false,
+		"autoWidth": false
+		
+    });
+ 
+    // sert a placer la pagination et la serch table où l'on veut
+    var table_paginate = $('#Edition_paginate');
+	$('#new_table_paginate').html(table_paginate);
     
-    $('#Edition').DataTable();
+    $('#search_table').on( 'keyup', function () {
+        table.search( this.value ).draw();
+    } );
+    
+    //Selection item
+    $('#Edition tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+    
+    //Delete select item
+    $('#buttonDeleteRow').click( function () {
+    	//Ici executer le code pour supprimer
+        table.row('.selected').remove().draw( false );
+    } );
+    
+    //Edition select item
+    $('#buttonEditRow').click( function edit() {
+    	//Voir a la limite pour enlever l'ajout classique
+        var nbSelection = $('.selected').length;
+        if(nbSelection != 0){
+	        $('.selected').each(function(index){
+	        	
+	        	var data = this;
+	        	$(this).removeClass('selected');
+	        	var newTr = '<tr class="Update" >';
+	        	for(var test in data.cells){
+	        		var tdValue = data.cells[test].innerText
+	        		if (tdValue != undefined){
+	        			//var idValue = data.cells[test].attributes[0].value
+	        			//newTr += '<td><input id="'+idValue+'" type="text" style="text-align: center" class="form-control" value="'+tdValue+'"></td>';
+	        			newTr += '<td><input type="text" style="text-align: center" class="form-control" value="'+tdValue+'"></td>';
+	        		}
+	        	}
+	        	newTr += '</tr>'
+	        	$(this).replaceWith(newTr);
+	        });
+	        $('#buttonEditRow').remove();
+	        $('.modification').append('<div class="col-6 update_bouton"><button id="button_update" class="btn btn-warning btn-block">Update</button></div>')
+	        
+	        
+	        $('.modification').append('<div class="col-6 return_button"><button id="button_retour" class="btn btn-default btn-block">Return</button></div>')
+	        $('#button_retour').on( "click", function() {
+			
+				$('.Update').each(function(index){
+					
+					var data = $(this).find('input');
+					
+					$(this).removeClass('Update');
+					
+					if (($(this).rowIndex) % 2 != 1){
+						
+						var newTr = '<tr style="text-align: center" role ="row" class="odd">';
+						
+					}else{
+						
+						var newTr = '<tr style="text-align: center" role ="row" class="even">';
+						
+					}
+					for(var test in data){
+						var tdValue = data[test].defaultValue;
+						if (tdValue != undefined){
+							//var idValue = data[test].attributes[0].value					
+							//newTr += '<td id="'+idValue+'">'+tdValue+'</td>';
+							newTr += '<td>'+tdValue+'</td>';
+						}
+					}
+
+					newTr += '</tr>'
+					
+					$(this).replaceWith(newTr);
+				});
+				$('.return_button').remove();
+				$('.update_bouton').remove();
+				$('.modification').append('<button id="buttonEditRow" class="btn btn-warning btn-block">Edit selected row</button>')
+				$('#buttonEditRow').on( "click", function (){
+					//on réedite ici puis la reinstance
+					edit()
+				});	
+	        });
+        }
+    } );
+    
 });
 
 /**
