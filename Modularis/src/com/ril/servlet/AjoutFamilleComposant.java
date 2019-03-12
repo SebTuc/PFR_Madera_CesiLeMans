@@ -34,15 +34,30 @@ public class AjoutFamilleComposant extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String metierId = request.getParameter("metierId");
 		String metierNom = request.getParameter("familleComposantNom");	
+		String action = request.getParameter("action");
+		String idValeur = request.getParameter("id");
+		String valeur = request.getParameter("valeur");
 				
 		// Ajout ou Delete
-		if (metierNom != null) {						
+		if(action != null) {
+			if(action.equals("Delete")) {
+				
+				familleComposantService.removeFamilleComposantById(Integer.valueOf(idValeur));
+				
+			}else if(action.equals("Edition")) {
+				
+				FamilleComposant familleComposant = familleComposantService.getFamilleComposantById(Integer.valueOf(idValeur));
+				familleComposant.setNom(valeur);
+				familleComposantService.editFamilleComposant(familleComposant);
+				
+			}
+		}else if (metierNom != null) {						
 			if (metierNom.trim() != null) {				
 				familleComposantService.addFamilleComposant(metierNom);
 			}
-		} else if (metierId != null) {
-			familleComposantService.removeFamilleComposantById(Integer.parseInt(metierId));
-		}	
+		}else {
+			//Post de null part
+		}
 						
 		//Definit la reponse comme "See Other" et redirige
 		//Evite la multi-insertion après un refresh de l'utilsateur		

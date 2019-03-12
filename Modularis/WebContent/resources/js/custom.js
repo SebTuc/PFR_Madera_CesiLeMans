@@ -41,6 +41,32 @@ $(document).ready ( function () {
     //Delete select item
     $('#buttonDeleteRow').click( function () {
     	//Ici executer le code pour supprimer
+    	var idValue= "";
+    	$('.selected').each(function(index){
+        	
+        	var data = this;
+        	for(var test in data.cells){
+        		var tdValue = data.cells[test].innerText
+        		if (tdValue != undefined){
+        			idValue = data.cells[test].attributes[0].value
+        		}
+        	}
+        	
+    	});
+    	 $.ajax({ // fonction permettant de faire de l'ajax
+			   type: "POST",
+			   data: "id="+idValue+"&action=Delete", // données à transmettre
+			   success: function(msg){ // si l'appel a bien fonctionné
+					if(msg==1) // si a fonctionnée
+					{
+
+					}
+					else // si n'a pas fonctionnée
+					{
+						
+					}
+			   }
+		 });
         table.row('.selected').remove().draw( false );
     } );
     
@@ -57,9 +83,8 @@ $(document).ready ( function () {
 	        	for(var test in data.cells){
 	        		var tdValue = data.cells[test].innerText
 	        		if (tdValue != undefined){
-	        			//var idValue = data.cells[test].attributes[0].value
-	        			//newTr += '<td><input id="'+idValue+'" type="text" style="text-align: center" class="form-control" value="'+tdValue+'"></td>';
-	        			newTr += '<td><input type="text" style="text-align: center" class="form-control" value="'+tdValue+'"></td>';
+	        			var idValue = data.cells[test].attributes[0].value
+	        			newTr += '<td><input id="'+idValue+'" type="text" style="text-align: center" class="form-control" value="'+tdValue+'"></td>';
 	        		}
 	        	}
 	        	newTr += '</tr>'
@@ -90,9 +115,8 @@ $(document).ready ( function () {
 					for(var test in data){
 						var tdValue = data[test].defaultValue;
 						if (tdValue != undefined){
-							//var idValue = data[test].attributes[0].value					
-							//newTr += '<td id="'+idValue+'">'+tdValue+'</td>';
-							newTr += '<td>'+tdValue+'</td>';
+							var idValue = data[test].attributes[0].value					
+							newTr += '<td id="'+idValue+'">'+tdValue+'</td>';
 						}
 					}
 
@@ -108,6 +132,37 @@ $(document).ready ( function () {
 					edit()
 				});	
 	        });
+	        $('#button_update').on( "click", function() {
+				 
+				 //On demande confirmation
+				 
+	        	
+				 
+				 
+				//On mes a jour ou non selon confirmation ou non
+	        	var idValue= "";
+				 var valueSend= "";
+				 $('.Update').each(function(index){
+					 var data = $(this).find('input');
+					 for(var test in data){
+							var tdValue = data[test].value;
+							if (tdValue != undefined){
+								if(tdValue == ""){
+									continue;
+								}
+								idValue = data[test].attributes[0].value;					
+								valueSend = tdValue;
+							}
+					}
+				 });
+				 
+				 $.ajax({ // fonction permettant de faire de l'ajax
+					   type: "POST",
+					   data: "id="+idValue+"&valeur="+valueSend+"&action=Edition", // données à transmettre
+				 });
+				 //faire de l'asynchrone pur pour pas avoir besoin de refresh la page
+				 
+			 });
         }
     } );
     
