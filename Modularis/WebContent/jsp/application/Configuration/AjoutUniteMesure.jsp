@@ -14,28 +14,24 @@
 
   <jsp:include page="/jsp/common/navbar.jsp" />
 
-  <div role="main" class="container">
+<div role="main" class="container">
   
 <br>
-<div class="card">
+<div class="card card-edition">
 	<div class="card-header">
 		<input id="search_table" type="text" class="form-control card-search" placeholder="Rechercher..." />
 	</div>
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
-		<table id="Edition" class="table table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; ">
+		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; ">
 			<thead>
-				<tr>
-			  		<th>Uniter Mesure</th>
-			  		<th>Editer</th>
-			  		<th>Supprimer</th>
+				<tr style="text-align: center">
+			  		<th>Unite de Mesure</th>
 			  	</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="FamilleComposant" items="${ListFamilleComposant}">
-					<tr>
-				    	<td id="${FamilleComposant.familleComposantId }"> ${fn:escapeXml(FamilleComposant.nom) } </td>
-				        <td><button class="material-icons-btn material-icons material-icons-airy">edit</button></td>
-				        <td><button class="material-icons-btn material-icons material-icons-airy">delete</button></td>
+				<c:forEach var="UniteMesure" items="${ListUniteMesure}">
+					<tr style="text-align: center">
+				    	<td id="${fn:escapeXml(UniteMesure.uniteId) }"> ${fn:escapeXml(UniteMesure.nomUnite) } </td>
 				    </tr>
 				</c:forEach>
 			</tbody>
@@ -45,14 +41,45 @@
 <br>			
 <div id="new_table_paginate" class="d-flex justify-content-center"></div>	
   
-  
-    <form method="post" class="form-inline mt-3">
-      <div class="form-group">
-        <input id="familleComposantNom" class="form-control" name="familleComposantNom" placeholder="Nouvel Famille Composant" required />
-        <button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
-      </div>
-    </form>
-  </div>
+  	<div class="row justify-content-center">
+		<div class="col-4">
+		    <form method="post" class="form-inline">
+		      <div class="form-group">
+		        <input id="uniteMesureNom" class="form-control" name="uniteMesureNom" placeholder="Nouvel Unite de mesure" required />
+		        <button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
+		      </div>
+		    </form>
+		</div>
+		<div class="col-4">
+			<div class="row modification">
+				<button id="buttonEditRow" class="btn btn-warning btn-block">Edit selected row</button>
+			</div>
+			
+		</div>
+		<div class="col-4">
+			<button id="buttonDeleteRow" class="btn btn-danger btn-block">Delete row</button>
+		</div>
+	</div>
+    
+    <!-- Modal Edition/Suppresion -->
+	<div class="modal fade" id="ModalConfirmation" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationTitle" aria-hidden="true">
+	  	<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="ModalConfirmationTitle">Confirmation</h5>
+		      </div>
+		      <div class="modal-body">
+		        Etez-vous sur de vouloir continuer ?
+		      </div>
+			      <div class="modal-footer">
+			        <button type="button" id="btnModalNon" class="btn btn-primary">Non</button>
+			    	<button type="button" id="btnModalOui" class="btn btn-danger">Oui</button>
+		    	</div>
+		   	</div>
+		</div>
+	</div>
+    
+</div>
 
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
   <jsp:include page="/jsp/common/confirmModal.jsp" />

@@ -32,8 +32,7 @@ public class AjoutFamilleComposant extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String metierId = request.getParameter("metierId");
-		String metierNom = request.getParameter("familleComposantNom");	
+		String familleComposantNom = request.getParameter("familleComposantNom");	
 		String action = request.getParameter("action");
 		String idValeur = request.getParameter("id");
 		String valeur = request.getParameter("valeur");
@@ -51,9 +50,9 @@ public class AjoutFamilleComposant extends HttpServlet {
 				familleComposantService.editFamilleComposant(familleComposant);
 				
 			}
-		}else if (metierNom != null) {						
-			if (metierNom.trim() != null) {				
-				familleComposantService.addFamilleComposant(metierNom);
+		}else if (familleComposantNom != null) {						
+			if (familleComposantNom.trim() != null) {				
+				familleComposantService.addFamilleComposant(familleComposantNom);
 			}
 		}else {
 			//Post de null part

@@ -21,33 +21,44 @@ public class AjoutMetier extends HttpServlet {
     
 	private MetierService metierService = new MetierService();
 	
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Metier> metiers = metierService.getAllMetiers();
-		req.setAttribute("metiers", metiers);
+		request.setAttribute("ListMetier", metiers);
 		
-		req.getRequestDispatcher("/jsp/application/Configuration/AjoutMetier.jsp").forward(req, resp);
+		request.getRequestDispatcher("/jsp/application/Configuration/AjoutMetier.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String metierId = req.getParameter("metierId");
-		String metierNom = req.getParameter("metierNom");	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String metierNom = request.getParameter("metierNom");	
+		String action = request.getParameter("action");
+		String idValeur = request.getParameter("id");
+		String valeur = request.getParameter("valeur");
 				
 		// Ajout ou Delete
-		if (metierNom != null) {						
+		if(action != null) {
+			if(action.equals("Delete")) {
+				
+				metierService.removeMetierById(Integer.valueOf(idValeur));
+				
+			}else if(action.equals("Edition")) {
+				
+				Metier metier = metierService.getMetierById(Integer.valueOf(idValeur));
+				metier.setNom(valeur);
+				metierService.editMetier(metier);
+				
+			}
+		}else if (metierNom != null) {						
 			if (metierNom.trim() != null) {				
 				metierService.addMetier(metierNom);
 			}
-		} else if (metierId != null) {
-			metierService.removeMetierById(Integer.parseInt(metierId));
-		}	
+		}else {
+			//Post de null part
+		}
 						
 		//Definit la reponse comme "See Other" et redirige
 		//Evite la multi-insertion après un refresh de l'utilsateur		
-		resp.setStatus(303);	
-		resp.sendRedirect(req.getContextPath()+"/Configuration/AjoutMetier");
+		response.setStatus(303);	
+		response.sendRedirect(request.getContextPath()+"/Configuration/AjoutFamilleComposant");
 	}
 
 }

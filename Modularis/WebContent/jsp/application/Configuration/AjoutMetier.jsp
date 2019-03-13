@@ -15,34 +15,71 @@
   <jsp:include page="/jsp/common/navbar.jsp" />
 
   <div role="main" class="container">
-    <ul class="list-group mt-4">
-      <c:forEach var="Metier" items="${metiers}">
-        <li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center">
-          <span>${fn:escapeXml(Metier.nom)}</span>
-          <div class="d-flex">
-            <form method="get" action="MetierEdit">
-              <input type="hidden" name="buttonEdit" value="${Metier.metierId}">
-              <button type="submit" class="material-icons-btn material-icons material-icons-airy">edit</button>
-            </form>
-            <button data-toggle="modal" data-target="#modal-confirm"
-              class="material-icons-btn material-icons material-icons-airy" 
-              confirm-modal 
-              confirm-modal-title="&Egrave;tes vous sur de vouloir supprimer <i>${fn:escapeXml(Metier.nom)}</i> ?"
-              confirm-modal-button="Supprimer"
-              confirm-modal-action=""
-              confirm-modal-method="POST"
-              confirm-modal-param='[{"name":"metierId","value":"${Metier.metierId}"}]'>delete</button>
-          </div>
-        </li>
-      </c:forEach>
-    </ul>
-    <form method="post" class="form-inline mt-3">
-      <div class="form-group">
-        <input id="metierNom" class="form-control" name="metierNom" placeholder="Nouveau metier" required />
-        <button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
-      </div>
-    </form>
-  </div>
+  
+<br>
+<div class="card card-edition">
+	<div class="card-header">
+		<input id="search_table" type="text" class="form-control card-search" placeholder="Rechercher..." />
+	</div>
+	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
+		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; ">
+			<thead>
+				<tr style="text-align: center">
+			  		<th>Metier</th>
+			  	</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="Metier" items="${ListMetier}">
+					<tr style="text-align: center">
+				    	<td id="${fn:escapeXml(Metier.metierId)}"> ${fn:escapeXml(Metier.nom) } </td>
+				    </tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>	
+<br>			
+<div id="new_table_paginate" class="d-flex justify-content-center"></div>	
+  
+  	<div class="row justify-content-center">
+		<div class="col-4">
+		    <form method="post" class="form-inline">
+		      <div class="form-group">
+		        <input id="metierNom" class="form-control" name="metierNom" placeholder="Nouveau metier" required />
+		        <button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
+		      </div>
+		    </form>
+		</div>
+		<div class="col-4">
+			<div class="row modification">
+				<button id="buttonEditRow" class="btn btn-warning btn-block">Edit selected row</button>
+			</div>
+			
+		</div>
+		<div class="col-4">
+			<button id="buttonDeleteRow" class="btn btn-danger btn-block">Delete row</button>
+		</div>
+	</div>
+    
+    <!-- Modal Edition/Suppresion -->
+	<div class="modal fade" id="ModalConfirmation" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationTitle" aria-hidden="true">
+	  	<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="ModalConfirmationTitle">Confirmation</h5>
+		      </div>
+		      <div class="modal-body">
+		        Etez-vous sur de vouloir continuer ?
+		      </div>
+			      <div class="modal-footer">
+			        <button type="button" id="btnModalNon" class="btn btn-primary">Non</button>
+			    	<button type="button" id="btnModalOui" class="btn btn-danger">Oui</button>
+		    	</div>
+		   	</div>
+		</div>
+	</div>
+    
+</div>
 
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
   <jsp:include page="/jsp/common/confirmModal.jsp" />

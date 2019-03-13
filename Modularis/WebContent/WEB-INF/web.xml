@@ -32,15 +32,15 @@
     <servlet-name>AjoutFamilleComposant</servlet-name>
     <url-pattern>/Configuration/AjoutFamilleComposant</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutUniteMesure</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutUniteMesure</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutUniteMesure</servlet-name>
+    <url-pattern>/Configuration/AjoutUniteMesure</url-pattern>
+  </servlet-mapping>
   
-  <servlet>
-    <servlet-name>UniteMesureList</servlet-name>
-    <servlet-class>com.ril.servlet.UniteMesureList</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>UniteMesureEdit</servlet-name>
-    <servlet-class>com.ril.servlet.UniteMesureEdit</servlet-class>
-  </servlet>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>
@@ -50,18 +50,7 @@
     <url-pattern>/index</url-pattern>
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UniteMesureList</servlet-name>
-    <url-pattern>/Configuration/UniteMesureList</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UniteMesureEdit</servlet-name>
-    <url-pattern>/Configuration/UniteMesureEdit</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UniteMesureDelete</servlet-name>
-    <url-pattern>/Configuration/UniteMesureDelete</url-pattern>
-  </servlet-mapping>
+  
   <error-page>
     <location>/jsp/common/error.jsp</location>
   </error-page>

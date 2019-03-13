@@ -14,7 +14,7 @@
 
   <jsp:include page="/jsp/common/navbar.jsp" />
 
-  <div role="main" class="container">
+<div role="main" class="container">
   
 <br>
 <div class="card card-edition">
@@ -31,7 +31,7 @@
 			<tbody>
 				<c:forEach var="FamilleComposant" items="${ListFamilleComposant}">
 					<tr style="text-align: center">
-				    	<td id="${FamilleComposant.familleComposantId }"> ${fn:escapeXml(FamilleComposant.nom) } </td>
+				    	<td id="${fn:escapeXml(FamilleComposant.familleComposantId) }"> ${fn:escapeXml(FamilleComposant.nom) } </td>
 				    </tr>
 				</c:forEach>
 			</tbody>
@@ -61,7 +61,25 @@
 		</div>
 	</div>
     
-  </div>
+    <!-- Modal Edition/Suppresion -->
+	<div class="modal fade" id="ModalConfirmation" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationTitle" aria-hidden="true">
+	  	<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="ModalConfirmationTitle">Confirmation</h5>
+		      </div>
+		      <div class="modal-body">
+		        Etez-vous sur de vouloir continuer ?
+		      </div>
+			      <div class="modal-footer">
+			        <button type="button" id="btnModalNon" class="btn btn-primary">Non</button>
+			    	<button type="button" id="btnModalOui" class="btn btn-danger">Oui</button>
+		    	</div>
+		   	</div>
+		</div>
+	</div>
+    
+</div>
 	
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
   <jsp:include page="/jsp/common/confirmModal.jsp" />
