@@ -16,6 +16,20 @@
     <servlet-name>Index</servlet-name>
     <servlet-class>com.ril.servlet.Index</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/Index</url-pattern>
+    <url-pattern>/index</url-pattern>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Configuration</servlet-name>
+    <servlet-class>com.ril.servlet.Configuration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Configuration</servlet-name>
+    <url-pattern>/Configuration</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>AjoutMetier</servlet-name>
     <servlet-class>com.ril.servlet.AjoutMetier</servlet-class>
@@ -40,16 +54,17 @@
     <servlet-name>AjoutUniteMesure</servlet-name>
     <url-pattern>/Configuration/AjoutUniteMesure</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>AjoutGamme</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutGamme</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutGamme</servlet-name>
+    <url-pattern>/Configuration/AjoutGamme</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>
-  <servlet-mapping>
-    <servlet-name>Index</servlet-name>
-    <url-pattern>/Index</url-pattern>
-    <url-pattern>/index</url-pattern>
-    <url-pattern>/home</url-pattern>
-  </servlet-mapping>
   
   <error-page>
     <location>/jsp/common/error.jsp</location>

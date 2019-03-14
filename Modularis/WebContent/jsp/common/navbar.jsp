@@ -4,10 +4,7 @@
 <!-- SIDEBAR -->
 <div id="mySidenav" class="sidenav">
   <a class ="closebtn" id="close-btn">&times;</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+  <a href="Configuration">Configuration</a>
 </div>
 
 <!-- NAVBAR -->

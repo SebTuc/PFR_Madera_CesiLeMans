@@ -15,7 +15,7 @@ $(document).ready ( function () {
         "ordering": true,
 		"sDom": '<"searchBox">rtip',
         "info":     false,
-		"autoWidth": false
+		"autoWidth": false,
 		
     });
  
@@ -39,52 +39,41 @@ $(document).ready ( function () {
     } );
     
     //-------------------   Delete select item  -----------------------
-    $('#buttonDeleteRow').click( function () {
-    	 var nbSelection = $('.selected').length;
-         if(nbSelection != 0){
-        	//On demande si ok 
-        	 $('#ModalConfirmation').modal({backdrop: 'static', keyboard: false, show: true});
-         	
-         	$('#btnModalNon').click(function(){
-         		
-         		$('#ModalConfirmation').modal('hide');
-         		
-         	});
-         	$('#btnModalOui').click(function(){
-     	    	//Ici executer le code pour supprimer
-     	    	var idValue= "";
-     	    	$('.selected').each(function(index){
+   $('#btnModalSupprOui').click(function(){
+	   //Ici executer le code pour supprimer
+	   	var idValue= "";
+	   	$('.selected').each(function(index){
      	        	
-     	        	var data = this;
-     	        	for(var test in data.cells){
-     	        		var tdValue = data.cells[test].innerText
-     	        		if (tdValue != undefined){
-     	        			idValue = data.cells[test].attributes[0].value
-     	        		}
-     	        	}
+	   		var data = this;
+	   		for(var test in data.cells){
+	   			var tdValue = data.cells[test].innerText
+	   			if (tdValue != undefined){
+	   				idValue = data.cells[test].attributes[0].value
+	   			}
+	   		}
      	        	
-     	    	});
-     	    	 $.ajax({ // fonction permettant de faire de l'ajax
-     				   type: "POST",
-     				   data: "id="+idValue+"&action=Delete", // données à transmettre
-     				   success: function(msg){ // si l'appel a bien fonctionné
-     						if(msg==1) // si a fonctionnée
-     						{
+	   	});
      	
-     						}
-     						else // si n'a pas fonctionnée
-     						{
+	   	$.ajax({ // fonction permettant de faire de l'ajax
+	   		type: "POST",
+	   		data: "id="+idValue+"&action=Delete", // données à transmettre
+	   		success: function(msg){ // si l'appel a bien fonctionné
+	   			if(msg==1) // si a fonctionnée
+     			{
+     	
+     			}
+     			else // si n'a pas fonctionnée
+     			{
      							
-     						}
-     				   }
-     			 });
-     	    	 //On supprime pour le visuel (cette methode ne supprime pas en base
-     	        table.row('.selected').remove().draw( false );
-     	        $('#ModalConfirmation').modal('hide');
-         	});
-         }
-    	
-    } );
+     			}
+     		}
+	   	});
+     	//On supprime pour le visuel (cette methode ne supprime pas en base
+     	table.row('.selected').remove().draw( false );
+     	$('#ModalConfirmationSuppression').modal('hide');
+     	
+   });
+        
     
     
     
@@ -108,11 +97,12 @@ $(document).ready ( function () {
 	        	newTr += '</tr>'
 	        	$(this).replaceWith(newTr);
 	        });
-	        $('#buttonEditRow').remove();
-	        $('.modification').append('<div class="col-6 update_bouton"><button id="button_update" class="btn btn-warning btn-block">Update</button></div>')
-	        $('.modification').append('<div class="col-6 return_button"><button id="button_retour" class="btn btn-default btn-block">Return</button></div>')
+
+	        $('#buttonEditRow').hide();
+	        $('#update_bouton').show();
+	        $('#return_button').show();
 	        
-	        $('#button_retour').on( "click", function() {
+	        $('#button_retour').click( function() {
 			
 				$('.Update').each(function(index){
 					
@@ -141,24 +131,13 @@ $(document).ready ( function () {
 					
 					$(this).replaceWith(newTr);
 				});
-				$('.return_button').remove();
-				$('.update_bouton').remove();
-				$('.modification').append('<button id="buttonEditRow" class="btn btn-warning btn-block">Edit selected row</button>')
-				$('#buttonEditRow').on( "click", function (){
-					//on reinstance
-					edit()
-				});	
+				
+				$('#return_button').hide();
+				$('#update_bouton').hide();
+				$('#buttonEditRow').show();
+				
 	        });
-	        $('#button_update').on("click",function() {
-				 
-				 //On demande confirmation
-	        	$('#ModalConfirmation').modal({backdrop: 'static', keyboard: false, show: true});
-	        	
-	        	$('#btnModalNon').click(function(){
-	        		
-	        		$('#ModalConfirmation').modal('hide');
-	        		
-	        	});
+	        
 	        	$('#btnModalOui').click(function(){
 	        		//On mes a jour ou non selon confirmation ou non
 	        		var idValue= "";
@@ -210,20 +189,17 @@ $(document).ready ( function () {
 							
 							$(this).replaceWith(newTr);
 						});
-					 	
-						$('.return_button').remove();
-						$('.update_bouton').remove();
-						$('.modification').append('<button id="buttonEditRow" class="btn btn-warning btn-block">Edit selected row</button>')
-						$('#buttonEditRow').on( "click", function (){
-							//on reinstance le bouton
-							edit()
-						});	
+
+						$('#return_button').hide();
+						$('#update_bouton').hide();
+						$('#buttonEditRow').show();
+						
 						
 	        	});
-				 
-			 });
+
         }
-    } );
+        
+    });
     
     
     

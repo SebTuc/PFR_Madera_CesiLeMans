@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="ISO-8859-1">
-  <title>Liste des Metiers</title>
+  <title>Edition Unite Mesure</title>
   <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
 
 </head>
@@ -14,7 +14,7 @@
 
   <jsp:include page="/jsp/common/navbar.jsp" />
 
-  <div role="main" class="container">
+<div role="main" class="container">
   
 <br>
 
@@ -28,13 +28,13 @@
 		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; ">
 			<thead>
 				<tr style="text-align: center">
-			  		<th>Metier</th>
+			  		<th>Gamme</th>
 			  	</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="Metier" items="${ListMetier}">
+				<c:forEach var="Gamme" items="${ListGamme}">
 					<tr style="text-align: center">
-				    	<td id="${fn:escapeXml(Metier.metierId)}"> ${fn:escapeXml(Metier.nom) } </td>
+				    	<td id="${fn:escapeXml(Gamme.gammeId) }"> ${fn:escapeXml(Gamme.nom) } </td>
 				    </tr>
 				</c:forEach>
 			</tbody>
@@ -48,7 +48,7 @@
 		<div class="col-4">
 		    <form method="post" class="form-inline">
 		      <div class="form-group">
-		        <input id="metierNom" class="form-control" name="metierNom" placeholder="Nouveau metier" required />
+		        <input id="gammeNom" class="form-control" name="gammeNom" placeholder="Nouvel Gamme" required />
 		        <button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
 		      </div>
 		    </form>

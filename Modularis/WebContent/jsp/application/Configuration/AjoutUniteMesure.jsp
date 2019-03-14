@@ -17,6 +17,9 @@
 <div role="main" class="container">
   
 <br>
+
+<a href="/Modularis/Configuration" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
+
 <div class="card card-edition">
 	<div class="card-header">
 		<input id="search_table" type="text" class="form-control card-search" placeholder="Rechercher..." />
@@ -51,29 +54,48 @@
 		    </form>
 		</div>
 		<div class="col-4">
-			<div class="row modification">
+			<div id="modification" class="row">
 				<button id="buttonEditRow" class="btn btn-warning btn-block">Edit selected row</button>
+				<div id="update_bouton" class="col-6" style="display: none;"><button id="button_update" class="btn btn-warning btn-block" data-toggle="modal" data-target="#ModalConfirmation" >Update</button></div>
+				<div id="return_button" class="col-6" style="display: none;"><button id="button_retour" class="btn btn-default btn-block" >Return</button></div>
 			</div>
 			
 		</div>
 		<div class="col-4">
-			<button id="buttonDeleteRow" class="btn btn-danger btn-block">Delete row</button>
+			<button id="buttonDeleteRow" class="btn btn-danger btn-block" data-toggle="modal" data-target="#ModalConfirmationSuppression">Delete row</button>
 		</div>
 	</div>
     
-    <!-- Modal Edition/Suppresion -->
-	<div class="modal fade" id="ModalConfirmation" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationTitle" aria-hidden="true">
+    <!-- Modal Edition -->
+	<div class="modal static fade" id="ModalConfirmation" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationTitle" aria-hidden="true">
 	  	<div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="ModalConfirmationTitle">Confirmation</h5>
+		        <h5 class="modal-title" id="ModalConfirmationTitle">Edition</h5>
 		      </div>
 		      <div class="modal-body">
 		        Etez-vous sur de vouloir continuer ?
 		      </div>
 			      <div class="modal-footer">
-			        <button type="button" id="btnModalNon" class="btn btn-primary">Non</button>
+			        <button type="button" id="btnModalNon" class="btn btn-primary" data-dismiss="modal">Non</button>
 			    	<button type="button" id="btnModalOui" class="btn btn-danger">Oui</button>
+		    	</div>
+		   	</div>
+		</div>
+	</div>
+	<!-- Modal Suppresion -->
+	<div class="modal static fade" id="ModalConfirmationSuppression" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationSuppressionTitle" aria-hidden="true">
+	  	<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="ModalConfirmationSuppressionTitle">Suppression</h5>
+		      </div>
+		      <div class="modal-body">
+		        Etez-vous sur de vouloir continuer ?
+		      </div>
+			      <div class="modal-footer">
+			        <button type="button" id="btnModalSupprNon" class="btn btn-primary" data-dismiss="modal">Non</button>
+			    	<button type="button" id="btnModalSupprOui" class="btn btn-danger">Oui</button>
 		    	</div>
 		   	</div>
 		</div>
