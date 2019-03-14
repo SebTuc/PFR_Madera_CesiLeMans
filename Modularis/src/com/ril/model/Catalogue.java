@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,6 +24,7 @@ public class Catalogue implements java.io.Serializable {
 
 	private Integer catalogueId;
 	private int annee;
+	private String catalogueNom;
 	private Set<Projet> projets = new HashSet<Projet>(0);
 
 	public Catalogue() {
@@ -37,7 +41,6 @@ public class Catalogue implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "CATALOGUE_ID", unique = true, nullable = false)
 	public Integer getCatalogueId() {
 		return this.catalogueId;
@@ -56,7 +59,19 @@ public class Catalogue implements java.io.Serializable {
 		this.annee = annee;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogue")
+	@Column(name = "CATALOGUE_NOM", nullable = false)
+	public String getCatalogueNom() {
+		return catalogueNom;
+	}
+
+	public void setCatalogueNom(String catalogueNom) {
+		this.catalogueNom = catalogueNom;
+	}
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "PROJET_X_CATALOGUE", catalog = "modularisbdd", joinColumns = {
+			@JoinColumn(name = "CATALOGUE_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "PROJET_ID", nullable = false, updatable = false) })
 	public Set<Projet> getProjets() {
 		return this.projets;
 	}

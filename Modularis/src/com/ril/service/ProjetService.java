@@ -8,13 +8,13 @@ import com.ril.model.Projet;
 
 public class ProjetService {
 
-public int addProjet(Catalogue catalogue, String nom) {
+public int addProjet(String nom) {
 		
 		ProjetHome dao = new ProjetHome();
 		
-		if(catalogue != null && nom != null) {
+		if(nom != null) {
 			
-			Projet projet = new Projet(catalogue, nom);
+			Projet projet = new Projet(nom);
 			
 			dao.persist(projet);
 			

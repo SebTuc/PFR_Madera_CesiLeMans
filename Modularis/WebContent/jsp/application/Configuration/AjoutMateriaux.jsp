@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="ISO-8859-1">
-  <title>Edition Unite Mesure</title>
+  <title>Edition Materiaux</title>
   <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
 
 </head>
@@ -17,10 +17,7 @@
 <div role="main" class="container">
   
 <br>
-
 <a href="/Modularis/Configuration" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
-
-<br>
 <div class="card card-edition">
 	<div class="card-header">
 		<input id="search_table" type="text" class="form-control card-search" placeholder="Rechercher..." />
@@ -29,13 +26,13 @@
 		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; ">
 			<thead>
 				<tr style="text-align: center">
-			  		<th>Unite de Mesure</th>
+			  		<th>Materiaux</th>
 			  	</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="UniteMesure" items="${ListUniteMesure}">
+				<c:forEach var="Materiaux" items="${ListMateriaux}">
 					<tr style="text-align: center">
-				    	<td id="${fn:escapeXml(UniteMesure.uniteId) }"> ${fn:escapeXml(UniteMesure.nomUnite) } </td>
+				    	<td id="${fn:escapeXml(Materiaux.materiauxId) }"> ${fn:escapeXml(Materiaux.nom) } </td>
 				    </tr>
 				</c:forEach>
 			</tbody>
@@ -49,7 +46,7 @@
 		<div class="col-4">
 		    <form method="post" class="form-inline">
 		      <div class="form-group">
-		        <input id="uniteMesureNom" class="form-control" name="uniteMesureNom" placeholder="Nouvel Unite de mesure" required />
+		        <input id="materiauxNom" class="form-control" name="materiauxNom" placeholder="Nouveau Materiaux" required />
 		        <button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
 		      </div>
 		    </form>
@@ -67,7 +64,7 @@
 		</div>
 	</div>
 </div>
-
+	
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
   <jsp:include page="/jsp/common/confirmModal.jsp" />
 </body>

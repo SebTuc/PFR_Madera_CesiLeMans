@@ -31,6 +31,12 @@
 				<a href="Configuration/AjoutUniteMesure" class="p-2 col-md-4 menu-link">
 					Unite Mesure
 				</a>
+				<a href="Configuration/AjoutEntrepot" class="p-2 col-md-4 menu-link">
+					Entrepot
+				</a>
+				<a href="Configuration/AjoutMateriaux" class="p-2 col-md-4 menu-link">
+					Materiaux
+				</a>
     	</div>
      </div>
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />

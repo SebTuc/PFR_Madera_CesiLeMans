@@ -1,15 +1,18 @@
 package com.ril.model;
 // Generated 9 janv. 2019 10:36:15 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,20 +25,26 @@ import javax.persistence.Table;
 public class Projet implements java.io.Serializable {
 
 	private Integer projetId;
-	private Catalogue catalogue;
+	private Set<Catalogue> catalogue = new HashSet<Catalogue>(0);
+	
 	private String nom;
 	private Set<Devis> devises = new HashSet<Devis>(0);
 	private Set<Plan> plans = new HashSet<Plan>(0);
-
+	
+	private Image image;
+	
 	public Projet() {
 	}
 
-	public Projet(Catalogue catalogue, String nom) {
+	public Projet( String nom) {
+		this.nom = nom;
+	}
+	public Projet(Set<Catalogue> catalogue, String nom) {
 		this.catalogue = catalogue;
 		this.nom = nom;
 	}
 
-	public Projet(Catalogue catalogue, String nom, Set<Devis> devises, Set<Plan> plans) {
+	public Projet(Set<Catalogue> catalogue, String nom, Set<Devis> devises, Set<Plan> plans) {
 		this.catalogue = catalogue;
 		this.nom = nom;
 		this.devises = devises;
@@ -44,7 +53,6 @@ public class Projet implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "PROJET_ID", unique = true, nullable = false)
 	public Integer getProjetId() {
 		return this.projetId;
@@ -54,16 +62,16 @@ public class Projet implements java.io.Serializable {
 		this.projetId = projetId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CATALOGUE_ID", nullable = false)
-	public Catalogue getCatalogue() {
-		return this.catalogue;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "projets")
+	public Set<Catalogue> getCatalogue() {
+		return catalogue;
 	}
 
-	public void setCatalogue(Catalogue catalogue) {
+	public void setCatalogue(Set<Catalogue> catalogue) {
 		this.catalogue = catalogue;
 	}
 
+	
 	@Column(name = "NOM", nullable = false)
 	public String getNom() {
 		return this.nom;
@@ -90,5 +98,16 @@ public class Projet implements java.io.Serializable {
 	public void setPlans(Set<Plan> plans) {
 		this.plans = plans;
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "IMAGE_ID", nullable = false)
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
 
 }
