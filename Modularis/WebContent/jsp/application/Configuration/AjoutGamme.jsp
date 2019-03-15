@@ -21,11 +21,11 @@
 <a href="/Modularis/Configuration" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
 
 <div class="card card-edition">
-	<div class="card-header">
+	<!-- <div class="card-header">
 		<input id="search_table" type="text" class="form-control card-search" placeholder="Rechercher..." />
-	</div>
+	</div> -->
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
-		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important;" column-defs='[{"data": "id","title": "Id"},{"data":"name","title": "Gamme"}]' data-set='[<c:forEach var="Gamme" items="${ListGamme}">{"id":"${fn:escapeXml(Gamme.gammeId)}","name":"${fn:escapeXml(Gamme.nom)}"},</c:forEach>]'>
+		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important;" column-defs='[{"data": "id","title": "","type": "hidden","visible": false},{"data":"valeur","title": "Gamme"}]' data-set='[<c:forEach var="Gamme" items="${ListGamme}">{"id":"${fn:escapeXml(Gamme.gammeId)}","valeur":"${fn:escapeXml(Gamme.nom)}"},</c:forEach>]'>
 <%-- 			<thead>
 				<tr style="text-align: center">
 			  		<th>Gamme</th>
@@ -44,7 +44,7 @@
 <br>			
 <div id="new_table_paginate" class="d-flex justify-content-center"></div>	
   
-  	<div class="row justify-content-center">
+  	<div class="row">
 		<div class="col-4">
 		    <form method="post" class="form-inline">
 		      <div class="form-group">
@@ -53,7 +53,7 @@
 		      </div>
 		    </form>
 		</div>
-		<div class="col-4">
+		<!-- <div class="col-4">
 			<div id="modification" class="row">
 				<button id="buttonEditRow" class="btn btn-warning btn-block">Edit selected row</button>
 				<div id="update_bouton" class="col-6" style="display: none;"><button id="button_update" class="btn btn-warning btn-block" data-toggle="modal" data-target="#ModalConfirmation" >Update</button></div>
@@ -63,7 +63,7 @@
 		</div>
 		<div class="col-4">
 			<button id="buttonDeleteRow" class="btn btn-danger btn-block" data-toggle="modal" data-target="#ModalConfirmationSuppression">Delete row</button>
-		</div>
+		</div> -->
 	</div>
     
 </div>

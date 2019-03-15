@@ -4,7 +4,7 @@
    Bleu clair : #08088A
    Vert : 		#009522bd
    Vert foncer: #02650e
-   Vert tr�s clair : #ddfde5bd
+   Vert tr�s clair : #ddfde5bd
    Rouge : 		#A10413
    Gris foncé : #D9D9D9
    Gris clair : #F0F0F0
@@ -100,14 +100,10 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 .list-group-item-light{border-left: 0; border-right: 0;}
 .list-group-item-light:first-child{border-top: 0;}
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
 
 /*----EDITION----*/
 .card-edition{
-	border-color: #001434;
+	border: none;
 }
 
 .table-edition>thead {
@@ -132,8 +128,61 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 	
 }
 
+
 .Update{
 	
 	    background-color: #F0B200 !important;
 }
+
+/*-----Surcharge classes datatables par défaut-----*/
+.dataTables_wrapper .dt-buttons{ display: flex; justify-content: flex-start; align-items: flex-start;padding: 7px 5px }
+.dataTables_wrapper .dataTables_filter {position: absolute; top: 0; right: 0; padding: 7px 5px; }
+.dataTables_wrapper .dataTables_info {    position: absolute; bottom: 0; padding: 10px 15px; font-size: 14px; color: #777;}
+
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* MEDIA QUERYS */
+/*--------------------------------------------------------------------------------------------------------------*/
+/*-- LG + Default ------------15----------------------------------------------------------------------------------------------*/
+@media (min-width: 1200px) {
+
+}
+/*-- MD ------------------------------------------------------------------------------------------------------------*/
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/*-- SM ------------------------------------------------------------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+  
+/*-- XS ------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 767px) {
+	.dataTables_wrapper .dataTables_filter input {max-width: 20%}
+}
+
+@media screen and (max-width: 644px) {
+
+}
+
+@media screen and (max-width: 500px) {
+
+}
+
+@media screen and (max-width: 460px) {
+
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+@media screen and (max-width: 368px) {
+
+}
+
 

@@ -48,20 +48,29 @@ public class AjoutGamme extends HttpServlet {
 				Gamme gamme = gammeService.getGammeById(Integer.valueOf(idValeur));
 				gamme.setNom(valeur);
 				gammeService.editGamme(gamme);
+								
+				// Retour de l'objet modifier sous format json
+
+				response.setStatus(200);
+				response.setContentType("application/json");
+				response.getWriter().print("{ \"id\": \""+gamme.getGammeId()+"\", \"valeur\": \""+gamme.getNom()+"\" }");
+				response.getWriter().flush();
 				
 			}
 		}else if (gammeNom != null) {						
 			if (gammeNom.trim() != null) {				
 				gammeService.addGamme(gammeNom);
+				
+				//Definit la reponse comme "See Other" et redirige
+				//Evite la multi-insertion après un refresh de l'utilsateur		
+				response.setStatus(303);	
+				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutGamme");
 			}
 		}else {
 			//Post de null part
 		}
 						
-		//Definit la reponse comme "See Other" et redirige
-		//Evite la multi-insertion après un refresh de l'utilsateur		
-		response.setStatus(303);	
-		response.sendRedirect(request.getContextPath()+"/Configuration/AjoutGamme");
+
 	}
 
 }

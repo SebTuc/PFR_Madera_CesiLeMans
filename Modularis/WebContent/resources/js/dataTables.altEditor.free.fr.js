@@ -351,9 +351,9 @@
                 data += "</form>";
                 var selector = this.modal_selector;
                 $(selector).on('show.bs.modal', function () {
-                    var btns = '<button type="button" data-content="remove" class="btn btn-default" data-dismiss="modal">Close</button>' +
-                        '<button type="button" data-content="remove" class="btn btn-primary" id="editRowBtn">Edit</button>';
-                    $(selector).find('.modal-title').html('Edit Record');
+                    var btns = '<button type="button" data-content="remove" class="btn btn-default" data-dismiss="modal">Fermer</button>' +
+                        '<button type="button" data-content="remove" class="btn btn-primary" id="editRowBtn">Editer</button>';
+                    $(selector).find('.modal-title').html('Edition');
                     $(selector).find('.modal-body').html(data);
                     $(selector).find('.modal-footer').html(btns);
                 });
@@ -458,9 +458,9 @@ console.log(rowDataArray); //DEBUG
 
                 var selector = this.modal_selector;
                 $(selector).on('show.bs.modal', function () {
-                    var btns = '<button type="button" data-content="remove" class="btn btn-default" data-dismiss="modal">Close</button>' +
-                        '<button type="button"  data-content="remove" class="btn btn-danger" id="deleteRowBtn">Delete</button>';
-                    $(selector).find('.modal-title').html('Delete Record');
+                    var btns = '<button type="button" data-content="remove" class="btn btn-default" data-dismiss="modal">Fermer</button>' +
+                        '<button type="button"  data-content="remove" class="btn btn-danger" id="deleteRowBtn">Supprimer</button>';
+                    $(selector).find('.modal-title').html('Suppression');
                     $(selector).find('.modal-body').html(data);
                     $(selector).find('.modal-footer').html(btns);
                 });
@@ -599,10 +599,10 @@ console.log(rowDataArray); //DEBUG
 
                 var selector = this.modal_selector;
                 $(selector).on('show.bs.modal', function () {
-                    var btns = '<button type="button" data-content="remove" class="btn btn-default" data-dismiss="modal">Close</button>' +
-                        '<button type="button"  data-content="remove" class="btn btn-primary" id="addRowBtn">Add</button>';
+                    var btns = '<button type="button" data-content="remove" class="btn btn-default" data-dismiss="modal">Fermer</button>' +
+                        '<button type="button"  data-content="remove" class="btn btn-primary" id="addRowBtn">Ajouter</button>';
                     $(selector).find('.modal-title').html(
-                        'Add Record');
+                        'Ajouter');
                     $(selector).find('.modal-body')
                         .html(data);
                     $(selector)
@@ -653,7 +653,7 @@ console.log(rowDataArray); //DEBUG
                     $(selector + ' .modal-body .alert').remove();
 
                     var message = '<div class="alert alert-success" role="alert">' +
-                        '<strong>Success!</strong>' +
+                        '<strong>Suppression effectu&eacute;</strong>' +
                         '</div>';
                     $(selector + ' .modal-body').append(message);
 
@@ -680,7 +680,7 @@ console.log(rowDataArray); //DEBUG
                     $(selector + ' .modal-body .alert').remove();
 
                     var message = '<div class="alert alert-success" role="alert">' +
-                        '<strong>Success!</strong>' +
+                        '<strong>Ajout effectu&eacute;!</strong>' +
                         '</div>';
                     $(selector + ' .modal-body').append(message);
 
@@ -704,7 +704,7 @@ console.log(rowDataArray); //DEBUG
                     $(selector + ' .modal-body .alert').remove();
 
                     var message = '<div class="alert alert-success" role="alert">' +
-                        '<strong>Success!</strong>' +
+                        '<strong>Modification effectu&eacute;</strong>' +
                         '</div>';
                     $(selector + ' .modal-body').append(message);
 
