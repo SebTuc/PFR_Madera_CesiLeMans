@@ -25,8 +25,8 @@
 		<input id="search_table" type="text" class="form-control card-search" placeholder="Rechercher..." />
 	</div>
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
-		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; ">
-			<thead>
+		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important;" column-defs='[{"data": "id","title": "Id"},{"data":"name","title": "Gamme"}]' data-set='[<c:forEach var="Gamme" items="${ListGamme}">{"id":"${fn:escapeXml(Gamme.gammeId)}","name":"${fn:escapeXml(Gamme.nom)}"},</c:forEach>]'>
+<%-- 			<thead>
 				<tr style="text-align: center">
 			  		<th>Gamme</th>
 			  	</tr>
@@ -36,8 +36,8 @@
 					<tr style="text-align: center">
 				    	<td id="${fn:escapeXml(Gamme.gammeId) }"> ${fn:escapeXml(Gamme.nom) } </td>
 				    </tr>
-				</c:forEach>
-			</tbody>
+				</c:forEach>				
+			</tbody> --%>
 		</table>
 	</div>
 </div>	
