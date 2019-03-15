@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>Modularis</display-name>
   <jsp-config>
     <jsp-property-group>
@@ -7,27 +7,85 @@
       <include-prelude>/jsp/common/tagLib.jsp</include-prelude>
     </jsp-property-group>
   </jsp-config>
-  
   <servlet>
-		<servlet-name>initServlet</servlet-name>
-		<servlet-class>com.seb.servlet.InitServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
+    <servlet-name>initServlet</servlet-name>
+    <servlet-class>com.ril.servlet.InitServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
-  
-  
-  
-  <!-- error default page -->
-  <error-page>
-  	<location>/jsp/common/error.jsp</location>
-  </error-page>
-  
-  <!-- Page d'acceuil  
+  <servlet>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>com.ril.servlet.Index</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/Index</url-pattern>
+    <url-pattern>/index</url-pattern>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Configuration</servlet-name>
+    <servlet-class>com.ril.servlet.Configuration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Configuration</servlet-name>
+    <url-pattern>/Configuration</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutMetier</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutMetier</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutMetier</servlet-name>
+    <url-pattern>/Configuration/AjoutMetier</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutFamilleComposant</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutFamilleComposant</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutFamilleComposant</servlet-name>
+    <url-pattern>/Configuration/AjoutFamilleComposant</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutUniteMesure</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutUniteMesure</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutUniteMesure</servlet-name>
+    <url-pattern>/Configuration/AjoutUniteMesure</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutGamme</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutGamme</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutGamme</servlet-name>
+    <url-pattern>/Configuration/AjoutGamme</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutMateriaux</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutMateriaux</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutMateriaux</servlet-name>
+    <url-pattern>/Configuration/AjoutMateriaux</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutEntrepot</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutEntrepot</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutEntrepot</servlet-name>
+    <url-pattern>/Configuration/AjoutEntrepot</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>Test</welcome-file>
-  </welcome-file-list>  --> 
-  
+    <welcome-file>Index</welcome-file>
+  </welcome-file-list>
+  <error-page>
+    <location>/jsp/common/error.jsp</location>
+  </error-page>
   <resource-ref>
-      <res-ref-name>jdbc/MySqlDS</res-ref-name>
-      <res-type>javax.sql.DataSource</res-type>
-  </resource-ref>  
+    <res-ref-name>jdbc/Modularis</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+  </resource-ref>
 </web-app>

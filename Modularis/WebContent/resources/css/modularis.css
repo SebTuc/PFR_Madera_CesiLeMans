@@ -1,7 +1,11 @@
 /* -------Aide couleur---------
    ---Background---
-   Bleu foncé : #0067F9
-   Bleu clair : #027BFE
+   Bleu foncé : #012A57
+   Bleu clair : #08088A
+   Vert : 		#009522bd
+   Vert foncer: #02650e
+   Vert tr�s clair : #ddfde5bd
+   Rouge : 		#A10413
    Gris foncé : #D9D9D9
    Gris clair : #F0F0F0
 
@@ -10,3 +14,126 @@
    Texte noir  : #030303
    Texte blanc : #FFFFFF
 */
+
+:root {
+   --dark-blue: #012A57;
+   --blue: #08088A;
+   --green: #009522bd;
+   --red : #A10413;
+}
+
+/*-------------*/
+/*----FONTS----*/
+/*-------------*/
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/material-icons.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(../fonts/Montserrat-Regular.ttf) format('ttf');
+}
+
+
+/*----Material Icons----*/
+.material-icons { font-family: 'Material Icons'; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; }
+.material-icons-airy { padding: 2px; }
+.material-icons-btn{ background: transparent; border: none; } 
+.material-icons-btn:hover{ cursor: pointer}
+.material-icons-btn-add { color: var(--green); font-size: 40px; line-height: 0; text-align: left; border-radius: 40px; width: 40px; height: 40px; padding-left: 0px; padding-bottom: 5px; }
+
+
+/*----NAVBAR----*/
+.navbar-modularis { background: var(--blue) }
+.navbar-modularis .navbar-logo{ color: #fff; font-family: 'Montserrat', sans-serif; }
+.navbar-modularis .btn-menu{ background: transparent; color: #fff; font-size: 22px; border: none; padding:0 10px 4px 0; }
+
+.navbar-modularis .btn-menu:hover{  cursor: pointer;}
+.navbar-modularis .btn-menu:active,
+.navbar-modularis .btn-menu:focus{outline: -webkit-focus-ring-color auto 0px;}
+
+.navbar-modularis .btn-connect{ color: #fff; border: none;}
+.navbar-modularis .btn-connect:hover{ color: #fff; text-decoration: underline;}
+.navbar-modularis .btn-connect:active,
+.navbar-modularis .btn-connect:focus {border: none; box-shadow: none;}
+
+/*----SIDENAV BAR----*/
+.sidenav { height: 100%; width: 0; position: fixed; z-index: 1; top: 0; left: 0; background-color: #111; overflow-x: hidden; transition: 0.5s; padding-top: 60px; z-index: 999}
+.sidenav a { padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s; }
+.sidenav a.closebtn { color: #fff; }
+.sidenav a:hover { color: #f1f1f1; }
+.sidenav .closebtn { position: absolute; top: 0; right: 25px; font-size: 36px; margin-left: 50px; cursor: pointer }
+
+/*----MODAL CONNEXION----*/
+.seminor-login-modal-body .close{ position: relative; top: -45px; left: 10px; color: #1cd8ad; }
+.seminor-login-modal-body .close{ opacity:0.75; }
+.seminor-login-modal-body .close:focus, .seminor-login-modal-body .close:hover { color: #39e8b0; opacity: 1; text-decoration: none; outline:0; }
+.seminor-login-modal .modal-dialog .modal-content{ border-radius:0px; }
+
+.seminor-login-form .form-group { position: relative; margin-bottom: 1.5em !important; }
+.seminor-login-form .form-control{ border: 0px solid #ced4da !important; border-bottom:1px solid #adadad !important; border-radius:0 !important; }
+.seminor-login-form .form-control:focus, .seminor-login-form .form-control:active{ outline:none !important; outline-width: 0; border-color: #adadad !important; box-shadow: 0 0 0 0.2rem transparent; }
+.seminor-login-form  *:focus { outline: none; }
+.seminor-login-form{ padding: 2em 0 0; }
+
+.form-control-placeholder { position: absolute; top: 0; padding: 7px 0 0 13px; transition: all 200ms; opacity: 0.5; border-top: 0px; border-left: 0; border-right: 0; }
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder { font-size: 75%; -webkit-transform: translate3d(0, -100%, 0); transform: translate3d(0, -100%, 0); opacity: 1; }
+
+.container-checkbox input { position: absolute; opacity: 0; cursor: pointer; }
+.btn-check-log .btn-check-login { font-size: 16px; padding: 10px 0; }
+button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); border: 2px solid var(--dark-blue); }
+.btn-check-login { color: var(--primaty-color-dark); background-color: transparent; border: 2px solid var(--dark-blue); transition: all ease-in-out .3s; }
+.btn-check-login { display: inline-block; padding: 12px 0; margin-bottom: 0; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border-radius: 0; width: 100%; }
+.select-form-control-placeholder{ font-size: 100%; padding: 7px 0 0 13px; margin: 0; }
+
+/*----MENU----*/
+.menu-link {background: var(--blue);font-size: 25px; color:#fff;text-align: center;transition: all 0.3s;border: 5px solid #fff}
+.menu-link:hover{background: var(--dark-blue);color: #fff; text-decoration: none}
+
+/*----LISTING-----*/
+.list-group-item-light{border-left: 0; border-right: 0;}
+.list-group-item-light:first-child{border-top: 0;}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/*----EDITION----*/
+.card-edition{
+	border-color: #001434;
+}
+
+.table-edition>thead {
+	background-color: #002052;
+	color: white;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+	background-color: #f2f9fc;
+}
+
+.card-edition>.card-header {
+	background: #012A57 !important;
+	color: white;
+	border-color: #001434;
+}
+
+.selected{
+	
+	background-color:#08088A !important;
+	color:white;
+	
+}
+
+.Update{
+	
+	    background-color: #F0B200 !important;
+}
+

@@ -53,4 +53,9 @@ public class HibernateUtil {
 		System.out.println("Initialization hibernate utils");
 	}
 	
+	public static void push() {
+		getSession().getTransaction().commit();
+		restartSession();
+	}
+	
 }
