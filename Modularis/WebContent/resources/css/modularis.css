@@ -155,12 +155,17 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 
 /*-- SM ------------------------------------------------------------------------------------------------------------*/
 @media (min-width: 768px) and (max-width: 991px) {
+	.dataTables_wrapper .dataTables_filter {top: -40px;}	
+	.dataTables_wrapper .dataTables_filter label {font-size: 14px}
 
 }
   
 /*-- XS ------------------------------------------------------------------------------------------------------------*/
 @media screen and (max-width: 767px) {
-	.dataTables_wrapper .dataTables_filter input {max-width: 20%}
+	.dataTables_wrapper .dataTables_filter {top: -40px;}	
+	.dataTables_wrapper .dataTables_filter label {font-size: 14px}
+	.dataTables_wrapper .dataTables_info {bottom: -20px;text-align: left !important; width: 100%}
+	
 }
 
 @media screen and (max-width: 644px) {
@@ -172,12 +177,12 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 }
 
 @media screen and (max-width: 460px) {
-
+	.dataTables_wrapper .dataTables_info {bottom: -35px;}
 }
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav a {font-size: 18px;}  
 }
 
 

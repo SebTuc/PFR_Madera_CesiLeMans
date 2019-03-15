@@ -50,7 +50,6 @@ public class AjoutGamme extends HttpServlet {
 				gammeService.editGamme(gamme);
 								
 				// Retour de l'objet modifier sous format json
-
 				response.setStatus(200);
 				response.setContentType("application/json");
 				response.getWriter().print("{ \"id\": \""+gamme.getGammeId()+"\", \"valeur\": \""+gamme.getNom()+"\" }");

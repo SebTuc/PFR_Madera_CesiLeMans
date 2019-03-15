@@ -49,19 +49,26 @@ public class AjoutFamilleComposant extends HttpServlet {
 				familleComposant.setNom(valeur);
 				familleComposantService.editFamilleComposant(familleComposant);
 				
+				// Retour de l'objet modifier sous format json
+				response.setStatus(200);
+				response.setContentType("application/json");
+				response.getWriter().print("{ \"id\": \""+familleComposant.getFamilleComposantId()+"\", \"valeur\": \""+familleComposant.getNom()+"\" }");
+				response.getWriter().flush();
+				
 			}
 		}else if (familleComposantNom != null) {						
 			if (familleComposantNom.trim() != null) {				
 				familleComposantService.addFamilleComposant(familleComposantNom);
+
+				//Definit la reponse comme "See Other" et redirige
+				//Evite la multi-insertion après un refresh de l'utilsateur		
+				response.setStatus(303);	
+				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutFamilleComposant");
 			}
 		}else {
 			//Post de null part
 		}
 						
-		//Definit la reponse comme "See Other" et redirige
-		//Evite la multi-insertion après un refresh de l'utilsateur		
-		response.setStatus(303);	
-		response.sendRedirect(request.getContextPath()+"/Configuration/AjoutFamilleComposant");
 	}
 
 }

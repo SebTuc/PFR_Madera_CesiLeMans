@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="ISO-8859-1">
-  <title>Edition Unite Mesure</title>
+  <title>Edition Gamme</title>
   <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
 
 </head>
@@ -25,7 +25,9 @@
 		<input id="search_table" type="text" class="form-control card-search" placeholder="Rechercher..." />
 	</div> -->
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
-		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important;" column-defs='[{"data": "id","title": "","type": "hidden","visible": false},{"data":"valeur","title": "Gamme"}]' data-set='[<c:forEach var="Gamme" items="${ListGamme}">{"id":"${fn:escapeXml(Gamme.gammeId)}","valeur":"${fn:escapeXml(Gamme.nom)}"},</c:forEach>]'>
+		<table id="Edition" class="table table-edition table-striped table-bordered" cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important;" 
+			column-defs='[{"data": "id","title": "","type": "hidden","visible": false},{"data":"valeur","title": "Gamme"}]' 
+			data-set='[<c:forEach var="Gamme" items="${ListGamme}">{"id":"${fn:escapeXml(Gamme.gammeId)}","valeur":"${fn:escapeXml(Gamme.nom)}"},</c:forEach>]'>
 <%-- 			<thead>
 				<tr style="text-align: center">
 			  		<th>Gamme</th>
@@ -45,7 +47,7 @@
 <div id="new_table_paginate" class="d-flex justify-content-center"></div>	
   
   	<div class="row">
-		<div class="col-4">
+		<div class="col-xs-6 col-sm-4">
 		    <form method="post" class="form-inline">
 		      <div class="form-group">
 		        <input id="gammeNom" class="form-control" name="gammeNom" placeholder="Nouvel Gamme" required />

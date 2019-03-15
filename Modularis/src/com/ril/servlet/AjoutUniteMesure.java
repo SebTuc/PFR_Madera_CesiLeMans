@@ -46,20 +46,27 @@ public class AjoutUniteMesure extends HttpServlet {
 				UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(idValeur));
 				uniteMesure.setNomUnite(valeur);
 				uniteMesureService.editUniteMesure(uniteMesure);
+								
+				// Retour de l'objet modifier sous format json
+				response.setStatus(200);
+				response.setContentType("application/json");
+				response.getWriter().print("{ \"id\": \""+uniteMesure.getUniteId()+"\", \"valeur\": \""+uniteMesure.getNomUnite()+"\" }");
+				response.getWriter().flush();
 				
 			}
 		}else if (uniteMesureNom != null) {						
 			if (uniteMesureNom.trim() != null) {				
 				uniteMesureService.addUniteMesure(uniteMesureNom);
+				
+				//Definit la reponse comme "See Other" et redirige
+				//Evite la multi-insertion après un refresh de l'utilsateur		
+				response.setStatus(303);	
+				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutUniteMesure");
 			}
 		}else {
 			//Post de null part
 		}
 						
-		//Definit la reponse comme "See Other" et redirige
-		//Evite la multi-insertion après un refresh de l'utilsateur		
-		response.setStatus(303);	
-		response.sendRedirect(request.getContextPath()+"/Configuration/AjoutUniteMesure");
 	}
 
 }
