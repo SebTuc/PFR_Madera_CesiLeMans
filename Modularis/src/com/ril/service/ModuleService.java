@@ -7,16 +7,17 @@ import com.ril.model.Angle;
 import com.ril.model.Gamme;
 import com.ril.model.Module;
 import com.ril.model.Piece;
+import com.ril.model.UniteMesure;
 
 public class ModuleService {
 
-	public int addModule(Angle angle, Gamme gamme, Piece piece, String nom) {
+	public int addModule(Angle angle, Gamme gamme, Piece piece, String nom , UniteMesure uniteMesure) {
 		
 		ModuleHome dao = new ModuleHome();
 		
 		if(angle != null && gamme != null && piece != null && nom != null) {
 			
-			Module module = new Module(angle, gamme, piece, nom);
+			Module module = new Module(angle, gamme, piece, nom , uniteMesure);
 			
 			dao.persist(module);
 			

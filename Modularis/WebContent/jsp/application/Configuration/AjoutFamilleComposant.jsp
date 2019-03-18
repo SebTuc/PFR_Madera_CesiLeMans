@@ -19,25 +19,12 @@
 <br>
 <a href="/Modularis/Configuration" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
 <div class="card card-edition">
-	<!-- <div class="card-header">
-		<input id="search_table" type="text" class="form-control card-search" placeholder="Rechercher..." />
-	</div> -->
+
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
-		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; "
+		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important;text-align: center; "
 			column-defs='[{"data": "id","title": "","type": "hidden","visible": false},{"data":"valeur","title": "Famille de composant"}]' 
 			data-set='[<c:forEach var="FamilleComposant" items="${ListFamilleComposant}">{"id":"${fn:escapeXml(FamilleComposant.familleComposantId)}","valeur":"${fn:escapeXml(FamilleComposant.nom)}"},</c:forEach>]'>
-			<%-- <thead>
-				<tr style="text-align: center">
-			  		<th>Famille Composant</th>
-			  	</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="FamilleComposant" items="${ListFamilleComposant}">
-					<tr style="text-align: center">
-				    	<td id="${fn:escapeXml(FamilleComposant.familleComposantId) }"> ${fn:escapeXml(FamilleComposant.nom) } </td>
-				    </tr>
-				</c:forEach>
-			</tbody> --%>
+
 		</table> 
 	</div>
 </div>	
@@ -53,22 +40,10 @@
 		      </div>
 		    </form>
 		</div>
-<!-- 		<div class="col-4">
-			<div id="modification" class="row">
-				<button id="buttonEditRow" class="btn btn-warning btn-block">Edit selected row</button>
-				<div id="update_bouton" class="col-6" style="display: none;"><button id="button_update" class="btn btn-warning btn-block" data-toggle="modal" data-target="#ModalConfirmation" >Update</button></div>
-				<div id="return_button" class="col-6" style="display: none;"><button id="button_retour" class="btn btn-default btn-block" >Return</button></div>
-			</div>
-			
-		</div>
-		<div class="col-4">
-			<button id="buttonDeleteRow" class="btn btn-danger btn-block" data-toggle="modal" data-target="#ModalConfirmationSuppression">Delete row</button>
-		</div> -->
 	</div>
 </div>
 	
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
-  <jsp:include page="/jsp/common/confirmModal.jsp" />
 </body>
 
 </html>

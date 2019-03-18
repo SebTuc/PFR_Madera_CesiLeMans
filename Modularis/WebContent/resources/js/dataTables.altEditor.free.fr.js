@@ -141,8 +141,8 @@
                 var dt = this.s.dt;
                 var modal_id = 'altEditor-modal-' + ("" + Math.random()).replace(".", "");
                 this.modal_selector = '#' + modal_id;
-                var modal = '<div class="modal fade" id="' + modal_id + '" tabindex="-1" role="dialog">' +
-                    '<div class="modal-dialog">' +
+                var modal = '<div class="modal static fade" id="' + modal_id + '" tabindex="-1" role="dialog">' +
+                    '<div class="modal-dialog  modal-dialog-centered">' +
                     '<div class="modal-content">' +
                     '<div class="modal-header">' +
                     '<h4 style="padding-top: 1rem;padding-left: 1rem;" class="modal-title"></h4>' +

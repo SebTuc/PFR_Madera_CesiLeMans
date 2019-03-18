@@ -26,20 +26,22 @@ public class Module implements java.io.Serializable {
 	private Gamme gamme;
 	private Piece piece;
 	private String nom;
+	private UniteMesure uniteMesure;
 	private Integer valeurAngle;
 	private Set<ModuleXComposant> moduleXComposants = new HashSet<ModuleXComposant>(0);
 
 	public Module() {
 	}
 
-	public Module(Angle angle, Gamme gamme, Piece piece, String nom) {
+	public Module(Angle angle, Gamme gamme, Piece piece, String nom,UniteMesure uniteMesure) {
 		this.angle = angle;
 		this.gamme = gamme;
 		this.piece = piece;
 		this.nom = nom;
+		this.uniteMesure = uniteMesure;
 	}
 
-	public Module(Angle angle, Gamme gamme, Piece piece, String nom, Integer valeurAngle,
+	public Module(Angle angle, Gamme gamme, Piece piece, String nom, Integer valeurAngle,UniteMesure uniteMesure,
 			Set<ModuleXComposant> moduleXComposants) {
 		this.angle = angle;
 		this.gamme = gamme;
@@ -47,11 +49,11 @@ public class Module implements java.io.Serializable {
 		this.nom = nom;
 		this.valeurAngle = valeurAngle;
 		this.moduleXComposants = moduleXComposants;
+		this.uniteMesure = uniteMesure;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "MODULE_ID", unique = true, nullable = false)
 	public Integer getModuleId() {
 		return this.moduleId;
@@ -61,6 +63,20 @@ public class Module implements java.io.Serializable {
 		this.moduleId = moduleId;
 	}
 
+	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "UNITE_ID", nullable = false)
+	public UniteMesure getUniteMesure() {
+		return this.uniteMesure;
+	}
+
+	public void setUniteMesure(UniteMesure uniteMesure) {
+		this.uniteMesure = uniteMesure;
+	}
+
+	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ANGLE_ID", nullable = false)
 	public Angle getAngle() {

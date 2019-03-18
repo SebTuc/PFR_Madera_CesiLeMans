@@ -78,6 +78,22 @@
     <servlet-name>AjoutEntrepot</servlet-name>
     <url-pattern>/Configuration/AjoutEntrepot</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutAngle</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutAngle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutAngle</servlet-name>
+    <url-pattern>/Configuration/AjoutAngle</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListComposant</servlet-name>
+    <servlet-class>com.ril.servlet.ListComposant</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListComposant</servlet-name>
+    <url-pattern>/Configuration/ListComposant</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>

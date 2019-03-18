@@ -15,6 +15,7 @@
     <div role="main" class="container">
 		<p class="lead">Configuration</p>
     <a href="/Modularis" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
+   		 <p class="lead">Edition des ressource basique</p>
 	    <div class="d-flex align-items-center justify-content-around flex-wrap">
 			
 				<a href="Configuration/AjoutGamme" class="p-2 col-md-4 menu-link">
@@ -36,6 +37,20 @@
 				</a>
 				<a href="Configuration/AjoutMateriaux" class="p-2 col-md-4 menu-link">
 					Materiaux
+				</a>
+				<a href="Configuration/AjoutAngle" class="p-2 col-md-4 menu-link">
+					Angle
+				</a>
+    	</div>
+    	<p class="lead">Edition Module/Composant</p>
+    	<div class="d-flex align-items-center justify-content-around flex-wrap">
+			
+				<a href="Configuration/ListComposant" class="p-2 col-md-4 menu-link">
+					Composant
+				</a>
+			
+				<a href="Configuration/ListModule" class="p-2 col-md-4 menu-link">
+					Module
 				</a>
     	</div>
      </div>

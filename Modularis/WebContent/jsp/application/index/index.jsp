@@ -23,16 +23,23 @@
     
 	    <div class="d-flex align-items-center justify-content-around flex-wrap">
 			
-				<a href="/Modularis/Devis" class="p-2 col-md-4 menu-link">
-					Devis
+				<a href="Catalogue" class="p-2 col-md-4 menu-link">
+					Catalogue (Visionner / Editer)
 				</a>
 			
-				<a href="/Modularis/Configuration" class="p-2 col-md-4 menu-link">
+				<a href="Configuration" class="p-2 col-md-4 menu-link">
 					Configuration
 				</a>
 			
-				<a href="/Modularis/Paiement" class="p-2 col-md-4 menu-link">
-					Modalit&eacute;s de paiement
+				<a href="Devis" class="p-2 col-md-4 menu-link">
+					Devis / Facture
+				</a>
+				
+				<a href="GestionUtilisateur" class="p-2 col-md-4 menu-link">
+					Gestion Utilisateur / Client / Fournisseur
+				</a>
+				<a href="Gestion Stock" class="p-2 col-md-4 menu-link">
+					Gestion Stock
 				</a>
     	</div>
      </div>

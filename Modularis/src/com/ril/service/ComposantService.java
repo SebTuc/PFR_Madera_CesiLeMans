@@ -22,7 +22,6 @@ public int addComposant(FamilleComposant familleComposant, Fournisseur fournisse
 			composant.setFamilleComposant(familleComposant);
 			composant.setFournisseur(fournisseur);
 			composant.setMateriaux(materiaux);
-			composant.setUniteMesure(uniteMesure);
 			composant.setNom(nom);
 			composant.setPrixUnitaire(prixUnitaire);			
 			

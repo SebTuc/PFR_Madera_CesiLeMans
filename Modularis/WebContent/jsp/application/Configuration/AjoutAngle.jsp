@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="ISO-8859-1">
-  <title>Edition Materiaux</title>
+  <title>Edition Angle</title>
   <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
 
 </head>
@@ -22,9 +22,9 @@
 
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
 		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important;text-align: center; "
-			column-defs='[{"data": "id","title": "","type": "hidden","visible": false},{"data":"valeur","title": "Materiaux"}]' 
-			data-set='[<c:forEach var="Materiaux" items="${ListMateriaux}">{"id":"${fn:escapeXml(Materiaux.materiauxId)}","valeur":"${fn:escapeXml(Materiaux.nom)}"},</c:forEach>]'>
-
+				column-defs='[{"data": "id","title": "","type": "hidden","visible": false},{"data":"typeAngle","title": "Type angle"},{"data":"prixUnitaire","title": "Prix angle"}]' 
+				data-set='[<c:forEach var="Angle" items="${ListAngle}">{"id":"${fn:escapeXml(Angle.angleId)}","typeAngle":"${fn:escapeXml(Angle.typeAngle)}","prixUnitaire":"${fn:escapeXml(Angle.prixUnitaire)}"},</c:forEach>]'>
+			
 		</table>
 	</div>
 </div>	
@@ -35,11 +35,13 @@
 		<div class="col-xs-6 col-sm-4">
 		    <form method="post" class="form-inline">
 		      <div class="form-group">
-		        <input id="materiauxNom" class="form-control" name="materiauxNom" placeholder="Nouveau Materiaux" required />
+		        <input id="angleNom" class="form-control" name="angleNom" placeholder="Type d'angle" required />
+		         <input id="anglePrix" class="form-control" name="anglePrix" placeholder="Prix angle" required />
 		        <button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
 		      </div>
 		    </form>
 		</div>
+		
 	</div>
 </div>
 	

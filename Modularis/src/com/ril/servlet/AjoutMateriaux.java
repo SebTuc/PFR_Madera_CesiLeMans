@@ -22,8 +22,8 @@ public class AjoutMateriaux extends HttpServlet {
 	private MateriauxService materiauxService = new MateriauxService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Materiaux> ListMaterieaux = materiauxService.getAllMateriauxs();
-		request.setAttribute("ListMateriaux", ListMaterieaux);
+		List<Materiaux> ListMateriaux = materiauxService.getAllMateriauxs();
+		request.setAttribute("ListMateriaux", ListMateriaux);
 		
 		request.getRequestDispatcher("/jsp/application/Configuration/AjoutMateriaux.jsp").forward(request, response);
 	}

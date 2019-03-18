@@ -21,7 +21,7 @@ public class UniteMesure implements java.io.Serializable {
 
 	private Integer uniteId;
 	private String nomUnite;
-	private Set<Composant> composants = new HashSet<Composant>(0);
+	private Set<Module> module = new HashSet<Module>(0);
 
 	public UniteMesure() {
 	}
@@ -30,9 +30,9 @@ public class UniteMesure implements java.io.Serializable {
 		this.nomUnite = nomUnite;
 	}
 
-	public UniteMesure(String nomUnite, Set<Composant> composants) {
+	public UniteMesure(String nomUnite, Set<Module> module) {
 		this.nomUnite = nomUnite;
-		this.composants = composants;
+		this.module = module;
 	}
 
 	@Id
@@ -57,12 +57,12 @@ public class UniteMesure implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "uniteMesure")
-	public Set<Composant> getComposants() {
-		return this.composants;
+	public Set<Module> getModules() {
+		return this.module;
 	}
 
-	public void setComposants(Set<Composant> composants) {
-		this.composants = composants;
+	public void setModules(Set<Module> module) {
+		this.module = module;
 	}
 
 }
