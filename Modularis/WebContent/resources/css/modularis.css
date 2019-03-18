@@ -75,11 +75,11 @@
 .seminor-login-modal-body .close:focus, .seminor-login-modal-body .close:hover { color: #39e8b0; opacity: 1; text-decoration: none; outline:0; }
 .seminor-login-modal .modal-dialog .modal-content{ border-radius:0px; }
 
+.seminor-login-form { padding: 2em 0 0; }
 .seminor-login-form .form-group { position: relative; margin-bottom: 1.5em !important; }
 .seminor-login-form .form-control{ border: 0px solid #ced4da !important; border-bottom:1px solid #adadad !important; border-radius:0 !important; }
 .seminor-login-form .form-control:focus, .seminor-login-form .form-control:active{ outline:none !important; outline-width: 0; border-color: #adadad !important; box-shadow: 0 0 0 0.2rem transparent; }
 .seminor-login-form  *:focus { outline: none; }
-.seminor-login-form{ padding: 2em 0 0; }
 
 .form-control-placeholder { position: absolute; top: 0; padding: 7px 0 0 13px; transition: all 200ms; opacity: 0.5; border-top: 0px; border-left: 0; border-right: 0; }
 .form-control:focus + .form-control-placeholder,
@@ -135,10 +135,32 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 }
 
 /*-----Surcharge classes datatables par défaut-----*/
-.dataTables_wrapper .dt-buttons{ display: flex; justify-content: flex-start; align-items: flex-start;padding: 7px 5px }
-.dataTables_wrapper .dataTables_filter {position: absolute; top: 0; right: 0; padding: 7px 5px; }
+
+
+/* Button Add/Edit/Delete */
+.dataTables_wrapper .dt-buttons {max-width: 6%;display: flex; justify-content: space-between;}
+.dataTables_wrapper .dt-buttons .dt-button.buttons-selected {background: transparent; position: relative; display: inline-block;color: #333333;text-align: center}
+.dataTables_wrapper .dt-buttons .dt-button.buttons-selected.disabled{opacity: 0.38}
+.dataTables_wrapper .dt-buttons .dt-button.buttons-selected span {font-size: 0px}
+.dataTables_wrapper .dt-buttons .dt-button.buttons-selected::after {font-family: 'Material Icons'; font-size: 2em;line-height: 2em;text-align: center;}
+.dataTables_wrapper .dt-buttons .dt-button.buttons-selected:first-child::after {content: '\e3c9'}
+.dataTables_wrapper .dt-buttons .dt-button.buttons-selected:nth-child(2)::after {content: '\e872'}
+.dataTables_wrapper .dt-buttons .dt-button.buttons-selected:hover {text-decoration: none; cursor: pointer;}
+
+/* Search */
+.dataTables_wrapper .dataTables_filter {position: absolute;top:10px; right: 0; padding: 7px 5px;color: #333333;text-align: left;}
+.dataTables_wrapper .dataTables_filter label { font-size: 0;color: #333333; }
+.dataTables_wrapper .dataTables_filter::before {font-family: 'Material Icons'; font-size: 2em;line-height: 2em;content: '\e8b6'; top: -10px; left: -25px;position: absolute;}
+
+/* Info lignes bas de tableau */
 .dataTables_wrapper .dataTables_info {    position: absolute; bottom: 0; padding: 10px 15px; font-size: 14px; color: #777;}
 
+/* Fleche de changement de page du tableau */
+.dataTables_wrapper .pagination .page-item a {height: 100%; line-height: 2.5em; padding: 0;}
+.dataTables_wrapper .pagination .page-item.active a {height: 100%;background: var(--blue);font-size: 1.1em; opacity: 0.85;padding: 0 0.3rem}
+.dataTables_wrapper .pagination .page-item.next a i,
+.dataTables_wrapper .pagination .page-item.previous a i {padding: 0.7rem 0 0 0; font-size: 1.5em;}
+.dataTables_wrapper .pagination .page-item.disabled {opacity: 0.38}
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
@@ -155,15 +177,15 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 
 /*-- SM ------------------------------------------------------------------------------------------------------------*/
 @media (min-width: 768px) and (max-width: 991px) {
-	.dataTables_wrapper .dataTables_filter {top: -40px;}	
-	.dataTables_wrapper .dataTables_filter label {font-size: 14px}
+	/* .dataTables_wrapper .dataTables_filter {top: -40px;}	 */
+	/* .dataTables_wrapper .dataTables_filter label {font-size: 14px} */
 
 }
   
 /*-- XS ------------------------------------------------------------------------------------------------------------*/
 @media screen and (max-width: 767px) {
-	.dataTables_wrapper .dataTables_filter {top: -40px;}	
-	.dataTables_wrapper .dataTables_filter label {font-size: 14px}
+	/* .dataTables_wrapper .dataTables_filter {top: -40px;}	 */
+	/* .dataTables_wrapper .dataTables_filter label {font-size: 14px} */
 	.dataTables_wrapper .dataTables_info {bottom: -20px;text-align: left !important; width: 100%}
 	
 }

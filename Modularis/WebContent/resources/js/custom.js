@@ -260,8 +260,8 @@ function loadAltDataTable(idTable) {
 				}
 			},
 			"paginate": {
-				"next": "Suivant",
-				"previous": "Pr&eacute;c&eacute;dent"
+				"previous": "<i class=\"material-icons\">keyboard_arrow_left</i>",
+				"next": "<i class=\"material-icons\">keyboard_arrow_right</i>"
 			}
 		},
 		buttons: [
@@ -269,13 +269,12 @@ function loadAltDataTable(idTable) {
 				extend: 'selected', 			// Definit que l'action s'execute sur la ligne selectionné
 				text: 'Edition',
 				name: 'edit',        			// Ne pas changer le nom
-				className: "btn btn-warning col-4"
+
 			},
 			{
 				extend: 'selected', 			// Definit que l'action s'execute sur la ligne selectionné
 				text: 'Suppression',
 				name: 'delete',     				// Ne pas changer le nom
-				className: "btn btn-danger col-4"
 			}],
 		onDeleteRow: function (datatable, rowdata, success, error) {
 			var request = formatAjaxRequest(rowdata);
