@@ -317,11 +317,11 @@ function formatAjaxRequest(rowJsonData) {
 		if (rowDataLength !== 0) {
 			if (rowDataLength > 1) {
 				for (var i = 0; i < rowDataLength - 1; i++) {
-					request += rowData[i][0] + "=" + rowData[i][1] + "&";
+					request += rowData[i][0] + "=" + encodeURIComponent(rowData[i][1]) + "&";
 				}
 			}
 
-			request += rowData[rowDataLength - 1][0] + "=" + rowData[rowDataLength - 1][1];
+			request += rowData[rowDataLength - 1][0] + "=" + encodeURIComponent(rowData[rowDataLength - 1][1]);
 			return request;
 
 		} else {

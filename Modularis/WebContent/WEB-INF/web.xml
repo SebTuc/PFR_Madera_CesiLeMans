@@ -94,6 +94,14 @@
     <servlet-name>ListComposant</servlet-name>
     <url-pattern>/Configuration/ListComposant</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>AjoutEtat</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutEtat</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutEtat</servlet-name>
+    <url-pattern>/Configuration/AjoutEtat</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>
