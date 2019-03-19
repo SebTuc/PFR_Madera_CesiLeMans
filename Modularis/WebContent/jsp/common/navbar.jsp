@@ -5,6 +5,7 @@
 <div id="mySidenav" class="sidenav">
   <a class ="closebtn" id="close-btn">&times;</a>
   <a href="Configuration">Configuration</a>
+  <a href="Annuaire">Annuaire</a>
 </div>
 
 <!-- NAVBAR -->

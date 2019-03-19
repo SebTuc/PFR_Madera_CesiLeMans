@@ -39,7 +39,10 @@
 					Materiaux
 				</a>
 				<a href="Configuration/AjoutAngle" class="p-2 col-md-4 menu-link">
-					Angle
+					Type Angle
+				</a>
+				<a href="Configuration/AjoutEtat" class="p-2 col-md-4 menu-link">
+					Etat devis
 				</a>
     	</div>
     	<p class="lead">Edition Module/Composant</p>

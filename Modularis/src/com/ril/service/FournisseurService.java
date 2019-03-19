@@ -13,7 +13,7 @@ public class FournisseurService {
 		
 		if(nom != null && adresse != null && codePostal != null && telephone != null && email != null) {
 			
-			Fournisseur fournisseur = new Fournisseur();
+			Fournisseur fournisseur = new Fournisseur(nom,adresse,codePostal,telephone,email);
 			
 			dao.persist(fournisseur);
 			

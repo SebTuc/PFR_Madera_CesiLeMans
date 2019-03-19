@@ -101,6 +101,18 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 .list-group-item-light:first-child{border-top: 0;}
 
 
+/*----Listing bouton add au bout*/
+.material-icons-btn-add-lg{
+	color: var(--green);
+    font-size: 60px;
+}
+.label-lg{
+	font-size: 150% !important
+}
+.not-inline{
+	display: initial !important;
+}
+
 /*----EDITION----*/
 .card-edition{
 	border: none;

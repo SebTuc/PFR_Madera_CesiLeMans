@@ -31,8 +31,45 @@ public class ListFournisseur extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String nomFournisseur = request.getParameter("nomFournisseur");
+		String idValeur = request.getParameter("id");
+		String adresseFournisseur = request.getParameter("adresseFournisseur");
+		String codePostalFournisseur = request.getParameter("codePostalFournisseur");
+		String telephoneFournisseur = request.getParameter("telephoneFournisseur");
+		String emailFournisseur = request.getParameter("emailFournisseur");
+		String action = request.getParameter("action");
+		
+		if(action != null) {
+			if(action.equals("Delete")) {
+				
+				fournisseurService.removeFournisseurById(Integer.valueOf(idValeur));
+				
+			}else if(action.equals("Edition")) {
+				
+				Fournisseur fournisseur = fournisseurService.getFournisseurById(Integer.valueOf(idValeur));
+
+				//pour le reste c'est une erreur ! 
+				if(telephoneFournisseur == null) telephoneFournisseur = "";
+				if(emailFournisseur == null) emailFournisseur = "";
+				
+				fournisseur.setNom(nomFournisseur);
+				fournisseur.setAdresse(adresseFournisseur);
+				fournisseur.setCodePostal(codePostalFournisseur);
+				
+				fournisseur.setTelephone(telephoneFournisseur);
+				fournisseur.setEmail(emailFournisseur);
+
+				fournisseurService.editFournisseur(fournisseur);
+				
+				// Retour de l'objet modifier sous format json
+				response.setStatus(200);
+				response.setContentType("application/json");
+				response.getWriter().print("{ \"id\": \""+fournisseur.getFournisseurId()+"\", \"nomFournisseur\": \""+fournisseur.getNom()+"\", \"adresseFournisseur\": \""+fournisseur.getAdresse()+"\", \"codePostalFournisseur\": \""+fournisseur.getCodePostal()+"\", \"telephoneFournisseur\": \""+fournisseur.getTelephone()+"\", \"emailFournisseur\": \""+fournisseur.getEmail()+"\" }");
+				response.getWriter().flush();
+				
+			}
+		}
 	}
 
 }

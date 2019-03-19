@@ -35,7 +35,7 @@ public class AjoutFournisseur extends HttpServlet {
 		String telephone = request.getParameter("telephone");	
 		String email = request.getParameter("email");	
 		
-		if (nom != null) {						
+		if (nom != null && adresse != null && codePostal != null) {						
 			if (nom.trim() != null) {	
 				if(telephone == null) {
 					telephone = "";
@@ -48,7 +48,7 @@ public class AjoutFournisseur extends HttpServlet {
 
 				//Definit la reponse comme "See Other" et redirige
 				//Evite la multi-insertion après un refresh de l'utilsateur		
-				response.sendRedirect("Annuaire/ListFournisseur");
+				response.sendRedirect("/Modularis/Annuaire/ListFournisseur");
 			}
 		}
 	}

@@ -103,6 +103,14 @@
     <url-pattern>/Configuration/ListComposant</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AjoutComposant</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutComposant</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutComposant</servlet-name>
+    <url-pattern>/Configuration/AjoutComposant</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ListFournisseur</servlet-name>
     <servlet-class>com.ril.servlet.ListFournisseur</servlet-class>
   </servlet>
@@ -118,7 +126,7 @@
     <servlet-name>AjoutFournisseur</servlet-name>
     <url-pattern>/Annuaire/AjoutFournisseur</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>AjoutEtat</servlet-name>
     <servlet-class>com.ril.servlet.AjoutEtat</servlet-class>
   </servlet>
