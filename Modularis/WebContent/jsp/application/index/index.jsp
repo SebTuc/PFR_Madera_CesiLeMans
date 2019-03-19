@@ -35,8 +35,8 @@
 					Devis / Facture
 				</a>
 				
-				<a href="GestionUtilisateur" class="p-2 col-md-4 menu-link">
-					Gestion Utilisateur / Client / Fournisseur
+				<a href="Annuaire" class="p-2 col-md-4 menu-link">
+					Annuaire
 				</a>
 				<a href="Gestion Stock" class="p-2 col-md-4 menu-link">
 					Gestion Stock
