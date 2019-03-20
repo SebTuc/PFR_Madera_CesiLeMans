@@ -134,6 +134,14 @@
     <servlet-name>AjoutEtat</servlet-name>
     <url-pattern>/Configuration/AjoutEtat</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>EditComposant</servlet-name>
+    <servlet-class>com.ril.servlet.EditComposant</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditComposant</servlet-name>
+    <url-pattern>/Configuration/EditComposant</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>

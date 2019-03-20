@@ -18,7 +18,7 @@
   
 <br>
 
-<a href="/Modularis/Configuration" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
+<a href="/Modularis/Configuration/ListComposant" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
 <br><br>
 	<form method="post">
 	  <div class="form-row">

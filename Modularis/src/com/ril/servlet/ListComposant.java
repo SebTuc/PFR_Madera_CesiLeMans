@@ -20,6 +20,7 @@ public class ListComposant extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ComposantService composantService = new ComposantService();
+
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Composant> ListComposant= composantService.getAllComposants();
@@ -32,7 +33,19 @@ public class ListComposant extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String composantId = request.getParameter("id");
+		
+		if( composantId != null) {
+			
+			composantService.removeComposantById(Integer.valueOf(composantId));
+			doGet(request, response);
+			
+		}else {
+			
+			doGet(request, response);
+		}
+		
+		
 	}
 
 }
