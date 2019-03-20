@@ -13,34 +13,30 @@
 <body>
 
 	<!-- INDEX -->
-	
-	
 	<jsp:include page="/jsp/common/navbar.jsp" />
 	
-
     <div role="main" class="container">
-		<p class="lead">Bienvenue sur l'application Modularis</p>
-    
-	    <div class="d-flex align-items-center justify-content-around flex-wrap">
-			
-				<a href="Catalogue" class="p-2 col-md-4 menu-link">
-					Catalogue (Visionner / Editer)
-				</a>
-			
-				<a href="Configuration" class="p-2 col-md-4 menu-link">
-					Configuration
-				</a>
-			
-				<a href="Devis" class="p-2 col-md-4 menu-link">
-					Devis / Facture
-				</a>
-				
-				<a href="Annuaire" class="p-2 col-md-4 menu-link">
-					Annuaire
-				</a>
-				<a href="Gestion Stock" class="p-2 col-md-4 menu-link">
-					Gestion Stock
-				</a>
+   		 <br />
+		 <div class="col-lg-12 text-center">
+        	<h1>Bienvenue sur l'application Modularis !</h1>
+        	<br />
+      	</div>
+	     <div class="row">
+			<div class="col-sm-3 col-md-4">
+				<button onclick="window.location.href = 'Catalogue';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">shopping_cart</i> <br/>Catalogue (Visionner / Editer)</button>
+			</div>
+			<div class="col-sm-3 col-md-4">
+				<button onclick="window.location.href = 'Devis';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">library_books</i> <br/>Devis / Facture</button>
+			</div>
+			<div class="col-sm-3 col-md-4">
+				<button onclick="window.location.href = 'Annuaire';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">people</i> <br/>Annuaire</button>
+			</div>
+			<div class="col-sm-3 col-md-4">
+				<button onclick="window.location.href = 'Gestion Stock';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">search</i> <br/>Gestion Stock</button>
+			</div>
+			<div class="col-sm-3 col-md-4">
+				<button onclick="window.location.href = 'Configuration';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">settings</i> <br/> Configuration</button>
+			</div>
     	</div>
      </div>
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />

@@ -46,10 +46,10 @@
 .material-icons-btn{ background: transparent; border: none; } 
 .material-icons-btn:hover{ cursor: pointer}
 .material-icons-btn-add { color: var(--green); font-size: 40px; line-height: 0; text-align: left; border-radius: 40px; width: 40px; height: 40px; padding-left: 0px; padding-bottom: 5px; }
-
+.material-icons.md-48 { font-size: 80px; }
 
 /*----NAVBAR----*/
-.navbar-modularis { background: var(--blue) }
+.navbar-modularis { background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed); }
 .navbar-modularis .navbar-logo{ color: #fff; font-family: 'Montserrat', sans-serif; }
 .navbar-modularis .btn-menu{ background: transparent; color: #fff; font-size: 22px; border: none; padding:0 10px 4px 0; }
 
@@ -224,4 +224,56 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 
 }
 
+.wrapper > div {
+    border: 2px solid #ffa94d;
+    border-radius: 5px;
+    background-color: #ffd8a8;
+    padding: 1em;
+    color: #d9480f;
+}
 
+.wrapper {
+  display: grid;
+  grid-template-columns: 200px 300px 300px;
+  grid-gap: 100px;
+  background-color: #fff;
+  color: #444;
+}
+
+.btn-modularis {
+    margin: 10%;
+    text-align: center;
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+.btn-modularis-hover {
+	width: 300px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 200px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    
+	border-radius:10px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-modularis-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-modularis-hover:focus {
+    outline: none;
+}
