@@ -68,7 +68,7 @@ public class ListComposant extends HttpServlet {
 			
 			request.setAttribute("ListComposant", list);
 		}else {
-			if(ListComposant.size() == 0) {
+			if(ListComposant == null) {
 				
 				request.setAttribute("isEmptyList", true);
 			}else {
