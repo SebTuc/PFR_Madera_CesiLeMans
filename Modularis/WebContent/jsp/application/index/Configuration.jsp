@@ -11,10 +11,10 @@
 <body>
 	<jsp:include page="/jsp/common/navbar.jsp" />
 	
-
+<a href="/Modularis" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
     <div role="main" class="container">
 		<p class="lead">Configuration</p>
-    <a href="/Modularis" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
+
    		 <p class="lead">Edition des ressource basique</p>
 	    <div class="d-flex align-items-center justify-content-around flex-wrap">
 			

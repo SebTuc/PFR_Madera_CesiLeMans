@@ -14,10 +14,9 @@
 
   <jsp:include page="/jsp/common/navbar.jsp" />
 
+<a href="/Modularis/Configuration" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 <div role="main" class="container-fluid">
-  
-<br>
-<a href="/Modularis/Configuration" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
+
 <br>
 <!-- Faire une collapse et un bouton pour l'ouvrir avec critere de recherche ou un truc comme sa , ensuite faire dans le get un trie sur la list selon les parametre recu en get -->
 <div class="row justify-content-center">
@@ -59,16 +58,25 @@
 <form id="List" method="post">
 	<div class="row justify-content-center">
 		<ul class="list-group" style="max-height: 500px;overflow: auto;">
-			<c:forEach var="Composant" items="${ListComposant}" >
+			<c:choose>
+				<c:when test="${isEmptyList == true }">
 				<li class="list-group-item">
-					<div class="form-check form-check-inline not-inline">
-						<input class="form-check-input" type="radio" name="radio" id="${fn:escapeXml(Composant.composantId)}" value="${fn:escapeXml(Composant.composantId)}">
-						<label class="form-check-label label-lg" for="${fn:escapeXml(Composant.composantId)}">
-						${fn:escapeXml(Composant.nom)} <span class="badge badge-primary" style="font-size: 60%">${fn:escapeXml(Composant.prixUnitaire)} &euro; /u</span> | Materiaux : ${fn:escapeXml(Composant.materiaux.nom)} | Famille Compsoant : ${fn:escapeXml(Composant.familleComposant.nom)} 
-						</label>
-					</div>
+					Aucune valeur trouver !
 				</li>
-			</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="Composant" items="${ListComposant}" >
+						<li class="list-group-item">
+							<div class="form-check form-check-inline not-inline">
+								<input class="form-check-input" type="radio" name="radio" id="${fn:escapeXml(Composant.composantId)}" value="${fn:escapeXml(Composant.composantId)}">
+								<label class="form-check-label label-lg" for="${fn:escapeXml(Composant.composantId)}">
+								${fn:escapeXml(Composant.nom)} <span class="badge badge-primary" style="font-size: 60%">${fn:escapeXml(Composant.prixUnitaire)} &euro; /u</span> | Materiaux : ${fn:escapeXml(Composant.materiaux.nom)} | Famille Compsoant : ${fn:escapeXml(Composant.familleComposant.nom)} 
+								</label>
+							</div>
+						</li>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 		<div class="row justify-content-center">

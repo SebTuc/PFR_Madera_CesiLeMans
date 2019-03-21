@@ -298,3 +298,9 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 .btn-modularis-hover:focus {
     outline: none;
 }
+
+.return-btn{
+	margin-top: 15px;
+    margin-left: 15px;
+	
+}

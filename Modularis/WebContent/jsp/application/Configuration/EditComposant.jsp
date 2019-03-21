@@ -14,11 +14,9 @@
 
   <jsp:include page="/jsp/common/navbar.jsp" />
 
+<a href="/Modularis/Configuration/ListComposant" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 <div role="main" class="container">
   
-<br>
-
-<a href="/Modularis/Configuration/ListComposant" class="btn btn-outline-dark"><span aria-hidden="true">&larr;</span> Retour</a>
 <br><br>
 	<form method="post">
 	  <div class="form-row">

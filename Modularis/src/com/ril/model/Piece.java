@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -83,7 +84,7 @@ public class Piece implements java.io.Serializable {
 		this.surface = surface;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "piece")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pieces")
 	public Set<Module> getModules() {
 		return this.modules;
 	}

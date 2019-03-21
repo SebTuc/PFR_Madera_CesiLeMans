@@ -60,13 +60,24 @@ public class ListComposant extends HttpServlet {
 				}
 				
 			}
+			if(list.size() == 0) {
+				request.setAttribute("isEmptyList", true);
+			}else {
+				request.setAttribute("isEmptyList", false);
+			}
 			
 			request.setAttribute("ListComposant", list);
 		}else {
-			
+			if(ListComposant.size() == 0) {
+				
+				request.setAttribute("isEmptyList", true);
+			}else {
+				request.setAttribute("isEmptyList", false);
+			}
 			request.setAttribute("ListComposant", ListComposant);
 			
 		}
+		
 		
 		request.setAttribute("ListFamilleComposant", ListFamilleComposant);
 		request.setAttribute("ListFournisseur", ListFournisseur);
