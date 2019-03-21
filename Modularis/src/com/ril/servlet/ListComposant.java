@@ -1,6 +1,7 @@
 package com.ril.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,13 +37,41 @@ public class ListComposant extends HttpServlet {
 		List<FamilleComposant> ListFamilleComposant = familleComposantService.getAllFamilleComposant();
 		List<Fournisseur> ListFournisseur = fournisseurService.getAllFournisseurs();
 		List<Materiaux> ListMateriaux = materiauxService.getAllMateriauxs();
+		List<Composant> list = new ArrayList<Composant>();
 		
+		String familleComposant = request.getParameter("familleComposant");
+		String materiaux = request.getParameter("materiaux");
+		//Trie par critere
+		if(familleComposant != null && familleComposant != "-1" || materiaux != null && materiaux != "-1") {
+			for(Composant composant : ListComposant) {
+				if(familleComposant != "-1") {
+					if(Integer.valueOf(familleComposant) == composant.getFamilleComposant().getFamilleComposantId()){
+						
+						list.add(composant);
+						
+					}
+				}
+				if(materiaux != "-1") {
+					if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
+
+						list.add(composant);
+						
+					}
+				}
+				
+			}
+			
+			request.setAttribute("ListComposant", list);
+		}else {
+			
+			request.setAttribute("ListComposant", ListComposant);
+			
+		}
 		
 		request.setAttribute("ListFamilleComposant", ListFamilleComposant);
 		request.setAttribute("ListFournisseur", ListFournisseur);
 		request.setAttribute("ListMateriaux", ListMateriaux);
 		
-		request.setAttribute("ListComposant", ListComposant);
 		request.getRequestDispatcher("/jsp/application/Configuration/ListComposant.jsp").forward(request, response);
 	}
 

@@ -35,12 +35,14 @@
 				<br>
 				<label for="familleComposant">Famille Compopsant</label>
 				<select id="familleComposant" class="custom-select" name="familleComposant" required>
+					<option value="-1" selected></option>
 			   		<c:forEach var="FamilleComposant" items="${ListFamilleComposant }">
 			   			<option value="${fn:escapeXml(FamilleComposant.familleComposantId) }">${fn:escapeXml(FamilleComposant.nom) } </option>
 			   		</c:forEach>
 				</select>
 				<label for="materiaux">Materiaux</label>
 				<select id="materiaux" class="custom-select" name="materiaux" required>
+					<option value="-1" selected></option>
 			   		<c:forEach var="Materiaux" items="${ListMateriaux }">
 			   			<option value="${fn:escapeXml(Materiaux.materiauxId) }">${fn:escapeXml(Materiaux.nom) } </option>
 			   		</c:forEach>
@@ -62,7 +64,7 @@
 					<div class="form-check form-check-inline not-inline">
 						<input class="form-check-input" type="radio" name="radio" id="${fn:escapeXml(Composant.composantId)}" value="${fn:escapeXml(Composant.composantId)}">
 						<label class="form-check-label label-lg" for="${fn:escapeXml(Composant.composantId)}">
-						${fn:escapeXml(Composant.nom)} <span class="badge badge-primary" style="font-size: 50%">${fn:escapeXml(Composant.prixUnitaire)} &euro; /u</span> | Materiaux : ${fn:escapeXml(Composant.materiaux.nom)} | Famille Compsoant : ${fn:escapeXml(Composant.familleComposant.nom)} 
+						${fn:escapeXml(Composant.nom)} <span class="badge badge-primary" style="font-size: 60%">${fn:escapeXml(Composant.prixUnitaire)} &euro; /u</span> | Materiaux : ${fn:escapeXml(Composant.materiaux.nom)} | Famille Compsoant : ${fn:escapeXml(Composant.familleComposant.nom)} 
 						</label>
 					</div>
 				</li>

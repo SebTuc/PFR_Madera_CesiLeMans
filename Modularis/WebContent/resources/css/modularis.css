@@ -93,9 +93,30 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 .select-form-control-placeholder{ font-size: 100%; padding: 7px 0 0 13px; margin: 0; }
 
 /*----MENU----*/
-.menu-link {background: var(--blue);font-size: 25px; color:#fff;text-align: center;transition: all 0.3s;border: 5px solid #fff}
-.menu-link:hover{background: var(--dark-blue);color: #fff; text-decoration: none}
-
+.menu-link { 
+	background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+	font-size: 25px; 
+	color:#fff;
+	text-align: center;
+	transition: all .4s ease-in-out;
+	border: 5px solid #fff;
+	background-size: 300% 100%;
+	
+	border-radius:10px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    
+}
+.menu-link:hover{
+	color: #fff;
+	background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    text-decoration: none;
+}
 /*----LISTING-----*/
 .list-group-item-light{border-left: 0; border-right: 0;}
 .list-group-item-light:first-child{border-top: 0;}
