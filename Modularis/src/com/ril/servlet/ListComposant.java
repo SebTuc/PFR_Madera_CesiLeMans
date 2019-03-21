@@ -33,9 +33,17 @@ public class ListComposant extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String composantId = request.getParameter("id");
+		String composantId = request.getParameter("radio");
+		String btnEditer = request.getParameter("btnEditer");
+		String btnSupprimer = request.getParameter("btnSupprimer");
 		
-		if( composantId != null) {
+		
+
+		if( btnEditer != null && composantId != null) {
+
+			response.sendRedirect(request.getContextPath()+ "/Configuration/EditComposant?id="+composantId);
+			
+		}else if( btnSupprimer != null && composantId != null) {
 			
 			composantService.removeComposantById(Integer.valueOf(composantId));
 			doGet(request, response);

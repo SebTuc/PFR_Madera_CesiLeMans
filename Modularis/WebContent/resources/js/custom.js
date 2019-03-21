@@ -5,201 +5,42 @@ $(document).ready(function () {
 	$("#open-btn").click(e => { $("#mySidenav").css('width', '250px') });
 	$("#close-btn").click(e => { $("#mySidenav").css('width', '0px') });
 
+	
+	//BtnSupprimer confirmation 
+	
+//	$("#btnSupprimer").click(function(event){
+//		
+//		
+//		event.preventDefault();
+//		var $form = $( this ),
+//		 url = $form.attr( 'action' );
+//		$("#ModalConfirmationSuppresion").show();
+//		$("#btnModalSupprNon").click(function(){
+//			
+//			$("#ModalConfirmationSuppresion").hide();
+//			
+//		});
+//		$("#btnModalSupprOui").click(function(){
+//			
+//			
+//	       
+//			var radioValue = $("input[name='radio']:checked").val();
+//			if(radioValue != null){
+//				/* Send the data using post with element id name and name2*/
+//				$.ajax({
+//					  type: "POST",
+//					  data: "radio="+radioValue,
+//					  async:false
+//				});
+//			}
+//			
+//		});
+//		
+//	});
+	
+	
 	loadAltDataTable("Edition");
-	/*
-	 * Initialisation de la dataTable
-	 */
-	//   var table = $('#Edition').DataTable({
-	// 		"paging":   true,
-	// 		"ordering": true,
-	// 		"sDom": '<"searchBox">rtip',
-	// 		"info":     false,
-	// 		"autoWidth": false,	
-	//   });
-
-	//   // sert a placer la pagination et la serch table où l'on veut
-	//   var table_paginate = $('#Edition_paginate');
-	// $('#new_table_paginate').html(table_paginate);
-
-	//   $('#search_table').on( 'keyup', function () {
-	//       table.search( this.value ).draw();
-	//   } );
-
-	//   //Selection item
-	//   $('#Edition tbody').on( 'click', 'tr', function () {
-	//       if ( $(this).hasClass('selected') ) {
-	//           $(this).removeClass('selected');
-	//       }
-	//       else {
-	//           table.$('tr.selected').removeClass('selected');
-	//           $(this).addClass('selected');
-	//       }
-	//   } );
-
-	//   //-------------------   Delete select item  -----------------------
-	//  $('#btnModalSupprOui').click(function(){
-	//    //Ici executer le code pour supprimer
-	//    	var idValue= "";
-	//    	$('.selected').each(function(index){
-
-	//    		var data = this;
-	//    		for(var test in data.cells){
-	//    			var tdValue = data.cells[test].innerText
-	//    			if (tdValue != undefined){
-	//    				idValue = data.cells[test].attributes[0].value
-	//    			}
-	//    		}
-
-	//    	});
-
-	//    	$.ajax({ // fonction permettant de faire de l'ajax
-	//    		type: "POST",
-	//    		data: "id="+idValue+"&action=Delete", // données à transmettre
-	//    		success: function(msg){ // si l'appel a bien fonctionné
-	//    			if(msg==1) // si a fonctionnée
-	//    			{
-
-	//    			}
-	//    			else // si n'a pas fonctionnée
-	//    			{
-
-	//    			}
-	//    		}
-	//    	});
-	//    	//On supprime pour le visuel (cette methode ne supprime pas en base
-	//    	table.row('.selected').remove().draw( false );
-	//    	$('#ModalConfirmationSuppression').modal('hide');
-
-	//  });
-
-
-
-
-	//   //------------------  Edition select item  ----------------------------
-	//   $('#buttonEditRow').click(function edit() {
-	//   	//Voir a la limite pour enlever l'ajout classique
-	//       var nbSelection = $('.selected').length;
-	//       if(nbSelection != 0){
-	//         $('.selected').each(function(index){
-
-	//         	var data = this;
-	//         	$(this).removeClass('selected');
-	//         	var newTr = '<tr class="Update" >';
-	//         	for(var test in data.cells){
-	//         		var tdValue = data.cells[test].innerText
-	//         		if (tdValue != undefined){
-	//         			var idValue = data.cells[test].attributes[0].value
-	//         			newTr += '<td><input id="'+idValue+'" type="text" style="text-align: center" class="form-control" value="'+tdValue+'"></td>';
-	//         		}
-	//         	}
-	//         	newTr += '</tr>'
-	//         	$(this).replaceWith(newTr);
-	//         });
-
-	//         $('#buttonEditRow').hide();
-	//         $('#update_bouton').show();
-	//         $('#return_button').show();
-
-	//         $('#button_retour').click( function() {
-
-	// 			$('.Update').each(function(index){
-
-	// 				var data = $(this).find('input');
-
-	// 				$(this).removeClass('Update');
-
-	// 				if (($(this).rowIndex) % 2 != 1){
-
-	// 					var newTr = '<tr style="text-align: center" role ="row" class="odd">';
-
-	// 				}else{
-
-	// 					var newTr = '<tr style="text-align: center" role ="row" class="even">';
-
-	// 				}
-	// 				for(var test in data){
-	// 					var tdValue = data[test].defaultValue;
-	// 					if (tdValue != undefined){
-	// 						var idValue = data[test].attributes[0].value					
-	// 						newTr += '<td id="'+idValue+'">'+tdValue+'</td>';
-	// 					}
-	// 				}
-
-	// 				newTr += '</tr>'
-
-	// 				$(this).replaceWith(newTr);
-	// 			});
-
-	// 			$('#return_button').hide();
-	// 			$('#update_bouton').hide();
-	// 			$('#buttonEditRow').show();
-
-	//         });
-
-	//         	$('#btnModalOui').click(function(){
-	//         		//On mes a jour ou non selon confirmation ou non
-	//         		var idValue= "";
-	// 				 var valueSend= "";
-	// 				 $('.Update').each(function(index){
-	// 					 var data = $(this).find('input');
-	// 					 for(var test in data){
-	// 							var tdValue = data[test].value;
-	// 							if (tdValue != undefined){
-	// 								if(tdValue == ""){
-	// 									continue;
-	// 								}
-	// 								idValue = data[test].attributes[0].value;					
-	// 								valueSend = tdValue;
-	// 							}
-	// 					}
-	// 				 });
-
-	// 				 $.ajax({ // fonction permettant de faire de l'ajax
-	// 					   type: "POST",
-	// 					   data: "id="+idValue+"&valeur="+valueSend+"&action=Edition", // données à transmettre
-	// 				 });
-	// 				 $('#ModalConfirmation').modal('hide');
-	// 				 //faire de l'asynchrone pur pour pas avoir besoin de refresh la page
-	// 				 $('.Update').each(function(index){
-
-	// 						var data = $(this).find('input');
-
-	// 						$(this).removeClass('Update');
-
-	// 						if (($(this).rowIndex) % 2 != 1){
-
-	// 							var newTr = '<tr style="text-align: center" role ="row" class="odd">';
-
-	// 						}else{
-
-	// 							var newTr = '<tr style="text-align: center" role ="row" class="even">';
-
-	// 						}
-	// 						for(var test in data){
-	// 							var tdValue = data[test].value;
-	// 							if (tdValue != undefined){
-	// 								var idValue = data[test].attributes[0].value					
-	// 								newTr += '<td id="'+idValue+'">'+tdValue+'</td>';
-	// 							}
-	// 						}
-
-	// 						newTr += '</tr>'
-
-	// 						$(this).replaceWith(newTr);
-	// 					});
-
-	// 					$('#return_button').hide();
-	// 					$('#update_bouton').hide();
-	// 					$('#buttonEditRow').show();
-
-
-	//         	});
-
-	//       }
-
-	//   });
-
-
+	
 
 });
 
