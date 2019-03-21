@@ -46,11 +46,21 @@
 				</select>
 				<br><br>
 				<div class="row justify-content-center">
-					<button class="btn btn-primary" name="btnCritere" id="btnCritere">Appliquer</button>
+					<div class="col-6 justify-content-center">
+						<div class="row justify-content-center">
+							<button class="btn btn-primary" name="btnCritere" id="btnCritere">Appliquer</button>
+						</div>
+					</div>
+					<div class="col-6 justify-content-center">
+						<div class="row justify-content-center">
+							<a href="/Modularis/Configuration/ListComposant" class="btn btn-primary">Refresh</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+	
 </div>
 <br>
 <form id="List" method="post">

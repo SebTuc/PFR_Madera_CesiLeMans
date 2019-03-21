@@ -43,22 +43,24 @@ public class ListComposant extends HttpServlet {
 		String materiaux = request.getParameter("materiaux");
 		//Trie par critere
 		if(familleComposant != null && familleComposant != "-1" || materiaux != null && materiaux != "-1") {
-			for(Composant composant : ListComposant) {
-				if(familleComposant != "-1") {
-					if(Integer.valueOf(familleComposant) == composant.getFamilleComposant().getFamilleComposantId()){
-						
-						list.add(composant);
-						
+			if(ListComposant != null) {
+				for(Composant composant : ListComposant) {
+					if(familleComposant != "-1") {
+						if(Integer.valueOf(familleComposant) == composant.getFamilleComposant().getFamilleComposantId()){
+							
+							list.add(composant);
+							
+						}
 					}
-				}
-				if(materiaux != "-1") {
-					if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
-
-						list.add(composant);
-						
+					if(materiaux != "-1") {
+						if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
+	
+							list.add(composant);
+							
+						}
 					}
+					
 				}
-				
 			}
 			if(list.size() == 0) {
 				request.setAttribute("isEmptyList", true);
