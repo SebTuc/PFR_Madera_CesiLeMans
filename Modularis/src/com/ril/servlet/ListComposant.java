@@ -10,7 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ril.model.Composant;
+import com.ril.model.FamilleComposant;
+import com.ril.model.Fournisseur;
+import com.ril.model.Materiaux;
 import com.ril.service.ComposantService;
+import com.ril.service.FamilleComposantService;
+import com.ril.service.FournisseurService;
+import com.ril.service.MateriauxService;
 
 /**
  * Servlet implementation class ListComposant
@@ -20,10 +26,22 @@ public class ListComposant extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ComposantService composantService = new ComposantService();
+	private FamilleComposantService familleComposantService = new FamilleComposantService();
+	private FournisseurService fournisseurService = new FournisseurService();
+	private MateriauxService materiauxService = new MateriauxService();
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Composant> ListComposant= composantService.getAllComposants();
+		List<FamilleComposant> ListFamilleComposant = familleComposantService.getAllFamilleComposant();
+		List<Fournisseur> ListFournisseur = fournisseurService.getAllFournisseurs();
+		List<Materiaux> ListMateriaux = materiauxService.getAllMateriauxs();
+		
+		
+		request.setAttribute("ListFamilleComposant", ListFamilleComposant);
+		request.setAttribute("ListFournisseur", ListFournisseur);
+		request.setAttribute("ListMateriaux", ListMateriaux);
+		
 		request.setAttribute("ListComposant", ListComposant);
 		request.getRequestDispatcher("/jsp/application/Configuration/ListComposant.jsp").forward(request, response);
 	}
