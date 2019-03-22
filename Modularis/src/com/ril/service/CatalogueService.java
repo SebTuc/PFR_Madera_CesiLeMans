@@ -7,13 +7,15 @@ import com.ril.model.Catalogue;
 
 public class CatalogueService {
 
-	public int addCatalogue(Integer annee) {
+	public int addCatalogue(String nom, Integer annee) {
 
 		CatalogueHome dao = new CatalogueHome();
 
 		if(annee != null) {
 
 			Catalogue catalogue = new Catalogue();
+			
+			catalogue.setCatalogueNom(nom);
 
 			catalogue.setAnnee(annee);
 
