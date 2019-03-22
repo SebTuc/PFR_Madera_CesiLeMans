@@ -27,7 +27,6 @@ public class Composant implements java.io.Serializable {
 	private FamilleComposant familleComposant;
 	private Fournisseur fournisseur;
 	private Materiaux materiaux;
-	private UniteMesure uniteMesure;
 	private String nom;
 	private float prixUnitaire;
 	private Set<Stock> stocks = new HashSet<Stock>(0);
@@ -41,7 +40,6 @@ public class Composant implements java.io.Serializable {
 		this.familleComposant = familleComposant;
 		this.fournisseur = fournisseur;
 		this.materiaux = materiaux;
-		this.uniteMesure = uniteMesure;
 		this.nom = nom;
 		this.prixUnitaire = prixUnitaire;
 	}
@@ -52,7 +50,6 @@ public class Composant implements java.io.Serializable {
 		this.familleComposant = familleComposant;
 		this.fournisseur = fournisseur;
 		this.materiaux = materiaux;
-		this.uniteMesure = uniteMesure;
 		this.nom = nom;
 		this.prixUnitaire = prixUnitaire;
 		this.stocks = stocks;
@@ -99,16 +96,6 @@ public class Composant implements java.io.Serializable {
 
 	public void setMateriaux(Materiaux materiaux) {
 		this.materiaux = materiaux;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UNITE_ID", nullable = false)
-	public UniteMesure getUniteMesure() {
-		return this.uniteMesure;
-	}
-
-	public void setUniteMesure(UniteMesure uniteMesure) {
-		this.uniteMesure = uniteMesure;
 	}
 
 	@Column(name = "NOM", nullable = false, length = 100)

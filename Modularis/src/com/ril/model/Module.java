@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,34 +26,43 @@ public class Module implements java.io.Serializable {
 	private Integer moduleId;
 	private Angle angle;
 	private Gamme gamme;
-	private Piece piece;
+	private Set<Piece> pieces = new HashSet<Piece>(0);
 	private String nom;
+	private UniteMesure uniteMesure;
 	private Integer valeurAngle;
 	private Set<ModuleXComposant> moduleXComposants = new HashSet<ModuleXComposant>(0);
 
 	public Module() {
 	}
 
-	public Module(Angle angle, Gamme gamme, Piece piece, String nom) {
+	public Module(Angle angle, Gamme gamme, String nom,UniteMesure uniteMesure) {
 		this.angle = angle;
 		this.gamme = gamme;
-		this.piece = piece;
 		this.nom = nom;
+		this.uniteMesure = uniteMesure;
+	}
+	
+	public Module(Angle angle, Gamme gamme, Set<Piece> pieces, String nom,UniteMesure uniteMesure) {
+		this.angle = angle;
+		this.gamme = gamme;
+		this.pieces = pieces;
+		this.nom = nom;
+		this.uniteMesure = uniteMesure;
 	}
 
-	public Module(Angle angle, Gamme gamme, Piece piece, String nom, Integer valeurAngle,
+	public Module(Angle angle, Gamme gamme, Set<Piece> pieces, String nom, Integer valeurAngle,UniteMesure uniteMesure,
 			Set<ModuleXComposant> moduleXComposants) {
 		this.angle = angle;
 		this.gamme = gamme;
-		this.piece = piece;
+		this.pieces = pieces;
 		this.nom = nom;
 		this.valeurAngle = valeurAngle;
 		this.moduleXComposants = moduleXComposants;
+		this.uniteMesure = uniteMesure;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "MODULE_ID", unique = true, nullable = false)
 	public Integer getModuleId() {
 		return this.moduleId;
@@ -61,6 +72,20 @@ public class Module implements java.io.Serializable {
 		this.moduleId = moduleId;
 	}
 
+	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "UNITE_ID", nullable = false)
+	public UniteMesure getUniteMesure() {
+		return this.uniteMesure;
+	}
+
+	public void setUniteMesure(UniteMesure uniteMesure) {
+		this.uniteMesure = uniteMesure;
+	}
+
+	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ANGLE_ID", nullable = false)
 	public Angle getAngle() {
@@ -81,14 +106,16 @@ public class Module implements java.io.Serializable {
 		this.gamme = gamme;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PIECE_ID", nullable = false)
-	public Piece getPiece() {
-		return this.piece;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "piece_x_module", catalog = "modularisbdd", joinColumns = {
+			@JoinColumn(name = "MODULE_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "PIECE_ID", nullable = false, updatable = false) })
+	public Set<Piece> getPieces() {
+		return this.pieces;
 	}
 
-	public void setPiece(Piece piece) {
-		this.piece = piece;
+	public void setPieces(Set<Piece> pieces) {
+		this.pieces = pieces;
 	}
 
 	@Column(name = "NOM", nullable = false, length = 25)

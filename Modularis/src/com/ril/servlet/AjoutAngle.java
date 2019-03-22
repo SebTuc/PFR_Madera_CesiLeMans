@@ -1,0 +1,76 @@
+package com.ril.servlet;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ril.model.Angle;
+import com.ril.service.AngleService;
+
+/**
+ * Servlet implementation class AjoutAngle
+ */
+@WebServlet("/AjoutAngle")
+public class AjoutAngle extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	private AngleService angleService = new AngleService();
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		List<Angle> ListAngle = angleService.getAllAngles();
+		request.setAttribute("ListAngle", ListAngle);
+		request.getRequestDispatcher("/jsp/application/Configuration/AjoutAngle.jsp").forward(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String angleNom = request.getParameter("angleNom");	
+		String anglePrix = request.getParameter("anglePrix");
+		String action = request.getParameter("action");
+		String idValeur = request.getParameter("id");
+		String typeAngle = request.getParameter("typeAngle");
+		String prixUnitaire = request.getParameter("prixUnitaire");
+		
+				
+		// Ajout ou Delete
+		if(action != null) {
+			if(action.equals("Delete")) {
+				
+				angleService.removeAngleById(Integer.valueOf(idValeur));
+				
+			}else if(action.equals("Edition")) {
+				
+				Angle angle = angleService.getAngleById(Integer.valueOf(idValeur));
+				angle.setTypeAngle(typeAngle);
+				angle.setPrixUnitaire(Float.valueOf(prixUnitaire));
+				angleService.editAngle(angle);
+				
+				// Retour de l'objet modifier sous format json
+				response.setStatus(200);
+				response.setContentType("application/json");
+				response.getWriter().print("{ \"id\": \""+angle.getAngleId()+"\", \"typeAngle\": \""+angle.getTypeAngle()+"\" , \"prixUnitaire\": \""+angle.getPrixUnitaire()+"\" }");
+				response.getWriter().flush();
+				
+			}
+		}else if (angleNom != null && anglePrix !=null) {						
+			if (angleNom.trim() != null && anglePrix.trim() != null) {				
+				angleService.addAngle(angleNom,Float.valueOf(anglePrix));
+
+				//Definit la reponse comme "See Other" et redirige
+				//Evite la multi-insertion après un refresh de l'utilsateur		
+				response.setStatus(303);	
+				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutAngle");
+			}
+		}else {
+			//Post de null part
+		}
+	}
+
+}

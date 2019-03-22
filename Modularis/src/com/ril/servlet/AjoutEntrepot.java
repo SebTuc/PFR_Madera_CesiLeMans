@@ -50,19 +50,26 @@ public class AjoutEntrepot extends HttpServlet {
 				entrepot.setLieux(valeur);
 				entrepotService.editEntrepot(entrepot);
 				
+				// Retour de l'objet modifier sous format json
+				response.setStatus(200);
+				response.setContentType("application/json");
+				response.getWriter().print("{ \"id\": \""+entrepot.getEntrepotId()+"\", \"valeur\": \""+entrepot.getLieux()+"\" }");
+				response.getWriter().flush();
+				
 			}
 		}else if (entrepotNom != null) {						
 			if (entrepotNom.trim() != null) {				
 				entrepotService.addEntrepot(entrepotNom);
+
+				//Definit la reponse comme "See Other" et redirige
+				//Evite la multi-insertion après un refresh de l'utilsateur		
+				response.setStatus(303);	
+				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutEntrepot");
 			}
 		}else {
 			//Post de null part
 		}
 						
-		//Definit la reponse comme "See Other" et redirige
-		//Evite la multi-insertion après un refresh de l'utilsateur		
-		response.setStatus(303);	
-		response.sendRedirect(request.getContextPath()+"/Configuration/AjoutEntrepot");
 	}
 
 }

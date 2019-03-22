@@ -22,8 +22,8 @@ public class AjoutMateriaux extends HttpServlet {
 	private MateriauxService materiauxService = new MateriauxService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Materiaux> ListMaterieaux = materiauxService.getAllMateriauxs();
-		request.setAttribute("ListMateriaux", ListMaterieaux);
+		List<Materiaux> ListMateriaux = materiauxService.getAllMateriauxs();
+		request.setAttribute("ListMateriaux", ListMateriaux);
 		
 		request.getRequestDispatcher("/jsp/application/Configuration/AjoutMateriaux.jsp").forward(request, response);
 	}
@@ -49,19 +49,26 @@ public class AjoutMateriaux extends HttpServlet {
 				materiaux.setNom(valeur);
 				materiauxService.editMateriaux(materiaux);
 				
+				// Retour de l'objet modifier sous format json
+				response.setStatus(200);
+				response.setContentType("application/json");
+				response.getWriter().print("{ \"id\": \""+materiaux.getMateriauxId()+"\", \"valeur\": \""+materiaux.getNom()+"\" }");
+				response.getWriter().flush();
+				
 			}
 		}else if (materiauxNom != null) {						
 			if (materiauxNom.trim() != null) {				
 				materiauxService.addMateriaux(materiauxNom);
+				
+				//Definit la reponse comme "See Other" et redirige
+				//Evite la multi-insertion après un refresh de l'utilsateur		
+				response.setStatus(303);	
+				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutMateriaux");
 			}
 		}else {
 			//Post de null part
 		}
 						
-		//Definit la reponse comme "See Other" et redirige
-		//Evite la multi-insertion après un refresh de l'utilsateur		
-		response.setStatus(303);	
-		response.sendRedirect(request.getContextPath()+"/Configuration/AjoutMateriaux");
 	}
 
 }

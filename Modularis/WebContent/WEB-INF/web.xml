@@ -23,12 +23,28 @@
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>Connexion</servlet-name>
+    <servlet-class>com.ril.servlet.Connexion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Connexion</servlet-name>
+    <url-pattern>/Connexion</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Configuration</servlet-name>
     <servlet-class>com.ril.servlet.Configuration</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Configuration</servlet-name>
     <url-pattern>/Configuration</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Annuaire</servlet-name>
+    <servlet-class>com.ril.servlet.Annuaire</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Annuaire</servlet-name>
+    <url-pattern>/Annuaire</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>AjoutMetier</servlet-name>
@@ -77,6 +93,79 @@
   <servlet-mapping>
     <servlet-name>AjoutEntrepot</servlet-name>
     <url-pattern>/Configuration/AjoutEntrepot</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutAngle</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutAngle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutAngle</servlet-name>
+    <url-pattern>/Configuration/AjoutAngle</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListComposant</servlet-name>
+    <servlet-class>com.ril.servlet.ListComposant</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListComposant</servlet-name>
+    <url-pattern>/Configuration/ListComposant</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutComposant</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutComposant</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutComposant</servlet-name>
+    <url-pattern>/Configuration/AjoutComposant</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListFournisseur</servlet-name>
+    <servlet-class>com.ril.servlet.ListFournisseur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListFournisseur</servlet-name>
+    <url-pattern>/Annuaire/ListFournisseur</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutFournisseur</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutFournisseur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutFournisseur</servlet-name>
+    <url-pattern>/Annuaire/AjoutFournisseur</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutEtat</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutEtat</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutEtat</servlet-name>
+    <url-pattern>/Configuration/AjoutEtat</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditComposant</servlet-name>
+    <servlet-class>com.ril.servlet.EditComposant</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditComposant</servlet-name>
+    <url-pattern>/Configuration/EditComposant</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>AjoutUtilisateur</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutUtilisateur</servlet-name>
+    <url-pattern>/Annuaire/AjoutUtilisateur</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>ListUtilisateur</servlet-name>
+    <servlet-class>com.ril.servlet.ListUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListUtilisateur</servlet-name>
+    <url-pattern>/Annuaire/ListUtilisateur</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>

@@ -4,7 +4,8 @@
 <!-- SIDEBAR -->
 <div id="mySidenav" class="sidenav">
   <a class ="closebtn" id="close-btn">&times;</a>
-  <a href="Configuration">Configuration</a>
+  <a href="/Modularis/Configuration">Configuration</a>
+  <a href="/Modularis/Annuaire">Annuaire</a>
 </div>
 
 <!-- NAVBAR -->

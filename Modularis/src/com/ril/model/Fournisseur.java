@@ -35,6 +35,15 @@ public class Fournisseur implements java.io.Serializable {
 		this.adresse = adresse;
 		this.codePostal = codePostal;
 	}
+	
+	public Fournisseur(String nom, String adresse, String codePostal,String telephone,String email) {
+		this.nom = nom;
+		this.adresse = adresse;
+		this.codePostal = codePostal;
+		this.telephone = telephone;
+		this.email = email;
+	}
+
 
 	public Fournisseur(String nom, String adresse, String codePostal, String telephone, String email,
 			Set<Composant> composants) {

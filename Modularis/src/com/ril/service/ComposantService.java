@@ -11,18 +11,17 @@ import com.ril.model.UniteMesure;
 
 public class ComposantService {
 
-public int addComposant(FamilleComposant familleComposant, Fournisseur fournisseur, Materiaux materiaux, UniteMesure uniteMesure, String nom, Float prixUnitaire) {
+public int addComposant(FamilleComposant familleComposant, Fournisseur fournisseur, Materiaux materiaux, String nom, Float prixUnitaire) {
 		
 		ComposantHome dao = new ComposantHome();
 		
-		if(familleComposant != null && fournisseur != null && materiaux != null && uniteMesure != null && nom != null && prixUnitaire != null) {
+		if(familleComposant != null && fournisseur != null && materiaux != null  && nom != null && prixUnitaire != null) {
 			
 			Composant composant = new Composant();
 			
 			composant.setFamilleComposant(familleComposant);
 			composant.setFournisseur(fournisseur);
 			composant.setMateriaux(materiaux);
-			composant.setUniteMesure(uniteMesure);
 			composant.setNom(nom);
 			composant.setPrixUnitaire(prixUnitaire);			
 			
