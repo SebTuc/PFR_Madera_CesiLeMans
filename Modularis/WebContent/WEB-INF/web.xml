@@ -142,6 +142,23 @@
     <servlet-name>EditComposant</servlet-name>
     <url-pattern>/Configuration/EditComposant</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>AjoutUtilisateur</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutUtilisateur</servlet-name>
+    <url-pattern>/Annuaire/AjoutUtilisateur</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>ListUtilisateur</servlet-name>
+    <servlet-class>com.ril.servlet.ListUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListUtilisateur</servlet-name>
+    <url-pattern>/Annuaire/ListUtilisateur</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>
