@@ -20,22 +20,15 @@ import com.ril.service.UtilisateurService;
 @WebServlet("/Connexion")
 public class Connexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Connexion() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    private UtilisateurService user = new UtilisateurService();
-    private String wok;
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-    public String getwOK() {
-        return wok;
-    }
+	public Connexion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	private UtilisateurService user = new UtilisateurService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -47,29 +40,34 @@ public class Connexion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Utilisateur> ListUser = user.getAllUtilisateurs();
-		
+
 		String login = request.getParameter("login");
 		String pw	= request.getParameter("password");
-		
-		for(Utilisateur utilisateur : ListUser) {
-			if(login != "") {
-				if(login == utilisateur.getLogin()){
-					if(pw != "") {
-						if(pw == utilisateur.getPassword()){
-							wok = "Connexion réussie.";
+
+		String valeurRetour = "";
+		if(!login.equals("") && login != null) {
+			if(!pw.equals("") && pw != null) {
+				for(Utilisateur utilisateur : ListUser) {
+					if(login.equals(utilisateur.getLogin())){
+						if(pw.equals(utilisateur.getPassword())){
 							response.sendRedirect("/Modularis");
 						}else {
-							wok = "Mauvais mot de passe pour cet utilisateur.";
+							valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";
 						}
 					}else{
-						wok = "Veuillez saisir un mot de passe.";
+						valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";
 					}
 				}
 			}else{
-				wok = "Veuillez saisir un login.";
+				valeurRetour = "Veuillez saisir un login.";
 			}
+		}else {
+			valeurRetour = "Veuillez saisir un mot de passe.";
 		}
-		System.out.println(wok);
+
+		//Creer une session connecter et empecher l'ouverture des autre page si pas connecter /!\
+		request.setAttribute("Erreur", valeurRetour);
+		
 		doGet(request, response);
 	}
 }

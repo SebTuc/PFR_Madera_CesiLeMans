@@ -1,40 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <meta charset="ISO-8859-1">
-  <title>Connexion</title>
-  <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
+<meta charset="ISO-8859-1">
+<title>Connexion</title>
+<jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
 
 </head>
 
 <body>
 
-  <jsp:include page="/jsp/common/navbar.jsp" />
+	<jsp:include page="/jsp/common/navbar.jsp" />
 
-<div role="main" class="container">
-		<form method="post">
-            <fieldset>
-                <legend>Connexion</legend>
-                <p>Vous pouvez vous connecter via ce formulaire.</p>
+	<div class="container-fluid h-100">
+		<div class="row justify-content-center align-items-center">
+			<form method="post">
+				<div class="row justify-content-center">
+					<h3>Connexion</h3>
+				</div>
+				<c:choose>
+					<c:when test="${Erreur != null }">
+						<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+					</c:when>
+				</c:choose>
+				<div class="form-group">
+					<input id="login" class="form-control" name="login"
+						placeholder="Entrer login" required />
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" id="password"
+						name="password" placeholder="Entrer mot de passe" required />
+				</div>
 
-                <label for="login">Utilisateur<span class="requis">*</span></label>
-                <input id="login" name="login" size="20" maxlength="60" />
-                <br />
-
-                <label for="password">Mot de passe <span class="requis">*</span></label>
-                <input type="password" id="password" name="password" size="20" maxlength="20" />
-                <br />
-
-                <input type="submit" value="Connexion" class="sansLabel" />
-                <br />
-                
-            </fieldset>
-        </form>
-</div>
-  <jsp:include page="/jsp/common/defaultScripts.jsp" />
+				<button class="btn btn-primary btn-block">Connexion</button>
+			</form>
+		</div>
+	</div>
+	<jsp:include page="/jsp/common/defaultScripts.jsp" />
 </body>
 
 </html>

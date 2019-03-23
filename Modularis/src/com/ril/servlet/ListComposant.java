@@ -47,12 +47,17 @@ public class ListComposant extends HttpServlet {
 				for(Composant composant : ListComposant) {
 					if(familleComposant != "-1") {
 						if(Integer.valueOf(familleComposant) == composant.getFamilleComposant().getFamilleComposantId()){
-							
-							list.add(composant);
-							
+							if(materiaux != "-1") {
+								if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
+			
+									list.add(composant);
+									
+								}
+							}else {
+								list.add(composant);
+							}	
 						}
-					}
-					if(materiaux != "-1") {
+					}else if(materiaux != "-1") {
 						if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
 	
 							list.add(composant);

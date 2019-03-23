@@ -38,7 +38,7 @@ public class UniteMesure implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "UNITE_ID", unique = true, nullable = false)
+	@Column(name = "UNITE_MESURE_ID", unique = true, nullable = false)
 	public Integer getUniteId() {
 		return this.uniteId;
 	}
@@ -47,7 +47,7 @@ public class UniteMesure implements java.io.Serializable {
 		this.uniteId = uniteId;
 	}
 
-	@Column(name = "NOM_UNITE", nullable = false, length = 25)
+	@Column(name = "NOM", nullable = false, length = 25)
 	public String getNomUnite() {
 		return this.nomUnite;
 	}

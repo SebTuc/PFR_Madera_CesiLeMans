@@ -192,6 +192,22 @@
     <servlet-name>EditCatalogue</servlet-name>
     <url-pattern>/Catalogue/EditCatalogue</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ListModule</servlet-name>
+    <servlet-class>com.ril.servlet.ListModule</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListModule</servlet-name>
+    <url-pattern>/Configuration/ListModule</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutModule</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutModule</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutModule</servlet-name>
+    <url-pattern>/Configuration/AjoutModule</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>

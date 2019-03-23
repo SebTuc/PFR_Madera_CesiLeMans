@@ -15,6 +15,10 @@
    Texte blanc : #FFFFFF
 */
 
+body{
+	background-image:url(resources/img/background.jpg);
+}
+
 :root {
    --dark-blue: #012A57;
    --blue: #08088A;
