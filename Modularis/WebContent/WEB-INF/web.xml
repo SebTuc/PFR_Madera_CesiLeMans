@@ -30,6 +30,14 @@
     <servlet-name>Connexion</servlet-name>
     <url-pattern>/Connexion</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>Deconnexion</servlet-name>
+    <servlet-class>com.ril.servlet.Deconnexion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/Deconnexion</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Configuration</servlet-name>
     <servlet-class>com.ril.servlet.Configuration</servlet-class>
@@ -54,7 +62,6 @@
     <servlet-name>Annuaire</servlet-name>
     <url-pattern>/Annuaire</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AjoutMetier</servlet-name>
     <servlet-class>com.ril.servlet.AjoutMetier</servlet-class>
@@ -159,8 +166,7 @@
     <servlet-name>EditComposant</servlet-name>
     <url-pattern>/Configuration/EditComposant</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>AjoutUtilisateur</servlet-name>
     <servlet-class>com.ril.servlet.AjoutUtilisateur</servlet-class>
   </servlet>
@@ -168,7 +174,7 @@
     <servlet-name>AjoutUtilisateur</servlet-name>
     <url-pattern>/Annuaire/AjoutUtilisateur</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>ListUtilisateur</servlet-name>
     <servlet-class>com.ril.servlet.ListUtilisateur</servlet-class>
   </servlet>

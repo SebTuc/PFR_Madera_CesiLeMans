@@ -57,7 +57,7 @@ public class AjoutUtilisateur extends HttpServlet {
 				if(!password.equals(confirmPassword)) {
 					
 					//retour sur la meme page mais remettre les valeur saisie et signaler que la saisie est incorrect
-					
+					request.setAttribute("Erreur", "Le mot de passe ne correspont pas.");
 					doGet(request, response);
 					
 				}else {

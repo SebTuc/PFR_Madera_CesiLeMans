@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ril.model.Composant;
 import com.ril.model.Gamme;
 import com.ril.model.Module;
+import com.ril.service.ComposantService;
 import com.ril.service.GammeService;
 import com.ril.service.ModuleService;
 
@@ -24,6 +26,7 @@ public class ListModule extends HttpServlet {
 
 	private ModuleService moduleService = new ModuleService();
 	private GammeService gammeService = new GammeService();	
+	private ComposantService composantService = new ComposantService();
 	
 	private boolean findContains(String value, String moduleValue) {
 		
@@ -46,6 +49,7 @@ public class ListModule extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<Module> ListModule = moduleService.getAllModules();
 		List<Gamme> ListGamme = gammeService.getAllGammes();
+		List<Composant> ListComposant = composantService.getAllComposants();
 		
 		List<Module> list = new ArrayList<Module>();
 		
@@ -98,6 +102,7 @@ public class ListModule extends HttpServlet {
 		
 		
 		request.setAttribute("ListGamme", ListGamme);
+		request.setAttribute("ListComposant", ListComposant);
 		request.setAttribute("ListModule", ListModule);
 		
 		request.getRequestDispatcher("/jsp/application/Configuration/ListModule.jsp").forward(request, response);
