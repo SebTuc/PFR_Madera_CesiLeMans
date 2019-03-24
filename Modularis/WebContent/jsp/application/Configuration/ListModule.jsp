@@ -37,13 +37,8 @@
 			   			<option value="${fn:escapeXml(FamilleComposant.familleComposantId) }">${fn:escapeXml(FamilleComposant.nom) } </option>
 			   		</c:forEach>
 				</select>
-				<label for="materiaux">Materiaux</label>
-				<select id="materiaux" class="custom-select" name="materiaux" required>
-					<option value="-1" selected></option>
-			   		<c:forEach var="Materiaux" items="${ListMateriaux }">
-			   			<option value="${fn:escapeXml(Materiaux.materiauxId) }">${fn:escapeXml(Materiaux.nom) } </option>
-			   		</c:forEach>
-				</select>
+				<label for="materiaux">Module contenant :</label>
+				<input class="form-control" type="text" id="nomModule" name="nomModule" placeholder="Module contenant le mot..."/>
 				<br><br>
 				<div class="row justify-content-center">
 					<div class="col-6 justify-content-center">
@@ -53,7 +48,7 @@
 					</div>
 					<div class="col-6 justify-content-center">
 						<div class="row justify-content-center">
-							<a href="/Modularis/Configuration/ListComposant" class="btn btn-primary">Refresh</a>
+							<a href="/Modularis/Configuration/ListModule" class="btn btn-primary">Refresh</a>
 						</div>
 					</div>
 				</div>
