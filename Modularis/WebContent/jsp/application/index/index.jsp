@@ -11,7 +11,6 @@
 
 </head>
 <body>
-
 	<!-- INDEX -->
 	<jsp:include page="/jsp/common/navbar.jsp" />
 	

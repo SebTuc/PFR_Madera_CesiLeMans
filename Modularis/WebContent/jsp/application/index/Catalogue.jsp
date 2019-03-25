@@ -12,20 +12,19 @@
 	<jsp:include page="/jsp/common/navbar.jsp" />
 	
 <a href="/Modularis" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
-    <div role="main" class="container">
-		<p class="lead">Gestion des catalogues</p>
-    <br>
-	    <div class="d-flex align-items-center justify-content-around flex-wrap">
-			
-				<a href="Catalogue/AjoutCatalogue" class="p-2 col-md-4 menu-link">
-					Ajout Catalogue
-				</a>
-			
-				<a href="Catalogue/EditCatalogue" class="p-2 col-md-4 menu-link">
-					Edition Catalogue
-				</a>
-
+<div role="main" class="container">
+		<div class="col-lg-12 text-center">
+	        <h1>Gestion des catalogues</h1>
+	        <br />
+	    </div>
+		<div class="row">
+			<div class="col-sm-6 col-md-4">
+				<button onclick="window.location.href = 'Catalogue/AjoutCatalogue';" class="menu-link"><i class="material-icons" style="float:left">library_add</i>Ajouter un catalogue</button>
 			</div>
+			<div class="col-sm-6 col-md-4">
+				<button onclick="window.location.href = 'Catalogue/EditCatalogue';" class="menu-link"><i class="material-icons" style="float:left">edit</i>Editer les catalogues</button>
+			</div>
+	     </div>
      </div>
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />
 </body>
