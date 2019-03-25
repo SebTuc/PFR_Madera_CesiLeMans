@@ -75,7 +75,7 @@ public class Module implements java.io.Serializable {
 	
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UNITE_ID", nullable = false)
+	@JoinColumn(name = "UNITE_MESURE_ID", nullable = false)
 	public UniteMesure getUniteMesure() {
 		return this.uniteMesure;
 	}

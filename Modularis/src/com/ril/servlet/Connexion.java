@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ril.model.Composant;
-import com.ril.model.Fournisseur;
 import com.ril.model.Utilisateur;
 import com.ril.service.UtilisateurService;
 
@@ -45,29 +43,32 @@ public class Connexion extends HttpServlet {
 		String pw	= request.getParameter("password");
 
 		String valeurRetour = "";
-		if(!login.equals("") && login != null) {
-			if(!pw.equals("") && pw != null) {
-				for(Utilisateur utilisateur : ListUser) {
-					if(login.equals(utilisateur.getLogin())){
-						if(pw.equals(utilisateur.getPassword())){
-							response.sendRedirect("/Modularis");
-						}else {
+		if(ListUser != null) {
+			if(!login.equals("") && login != null) {
+				if(!pw.equals("") && pw != null) {
+					for(Utilisateur utilisateur : ListUser) {
+						if(login.equals(utilisateur.getLogin())){
+							if(pw.equals(utilisateur.getPassword())){
+								response.sendRedirect("/Modularis");
+							}else {
+								valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";
+							}
+						}else{
 							valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";
 						}
-					}else{
-						valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";
 					}
+				}else{
+					valeurRetour = "Veuillez saisir un login.";
 				}
-			}else{
-				valeurRetour = "Veuillez saisir un login.";
+			}else {
+				valeurRetour = "Veuillez saisir un mot de passe.";
 			}
 		}else {
-			valeurRetour = "Veuillez saisir un mot de passe.";
+			valeurRetour = "Contacter le support, aucun compte existant.";
 		}
-
 		//Creer une session connecter et empecher l'ouverture des autre page si pas connecter /!\
 		request.setAttribute("Erreur", valeurRetour);
-		
+
 		doGet(request, response);
 	}
 }
