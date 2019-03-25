@@ -41,12 +41,9 @@ public class EditCatalogue extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nom = request.getParameter("nom");
-		String ComposantId = request.getParameter("ComposantId");
-		String prixUnitaire = request.getParameter("prixUnitaire");
-		String familleComposant = request.getParameter("familleComposant");
-		String materiaux = request.getParameter("materiaux");
-		String fournisseur = request.getParameter("fournisseur");
+		String idProjet = request.getParameter("idProjet");
+		String idCatalogue = request.getParameter("idCatalogue");
+		String action = request.getParameter("action");
 	}
 
 	private String getJsonSerializedProjets() {

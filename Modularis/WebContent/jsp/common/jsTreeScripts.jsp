@@ -11,10 +11,8 @@
 
     var withdrawBtnStruct = '<button class="material-icons material-icons-button material-icon-delete delete-project" onclick="withdrawItem(this,' + idItemsList + ',' + idCategoryTree + ')"></button>'; // Structure du button de withdraw
 
+
     /* Initialisation des trees */
-    if (dataItemList.length == 0) {
-      $(itemList).html("<p class=\"h4 font-weight-light text-muted\">Aucun item disponible</p>")
-    }
 
     $(itemList).jstree({
       "core": {
@@ -46,17 +44,45 @@
         "animation": 0,
         'check_callback': function (operation, node, node_parent, node_position, more) {
 
+
           // Operation : 'create_node', 'rename_node', 'delete_node', 'move_node', 'copy_node', 'edit'
-          console.log(operation);
           switch (operation) {
+
+            // REQUETE AJAX ADD                 
             case "create_node":
+              if (node != undefined && node_parent != undefined) {
 
-              // REQUETE AJAX ADD                 
-              return true;
+                var rowData = { 'idProjet': node.original.metadata.id, 'idCatalogue': node_parent.original.metadata.id }
+                var request = formatAjaxRequest(rowData);
+                request += "&action=Push";
 
+                $.ajax({
+                  url: "",
+                  type: 'POST',
+                  data: request, 					// Données à transmettre
+                  success: function () { return true },
+                  error: function () { return false }
+                });
+              }
+
+              return false;
+
+            // REQUETE AJAX DELETE
             case "delete_node":
+              if (node != undefined && node_parent != undefined) {
 
-              // REQUETE AJAX DELETE
+                var rowData = { 'idProjet': node.original.metadata.id, 'idCatalogue': node_parent.original.metadata.id }
+                var request = formatAjaxRequest(rowData);
+                request += "&action=Withdraw";
+
+                $.ajax({
+                  url: "",
+                  type: 'POST',
+                  data: request, 					// Données à transmettre
+                  success: function () { return true },
+                  error: function () { return false }
+                });
+              }
               return true;
 
             default:
@@ -98,11 +124,6 @@
       ]
     });
 
-    if (dataCategoryTree.length == 0) {
-      $(categoryTree).html("<p class=\"h4 font-weight-light text-muted\">Aucune cat&eacute;gorie disponible</p>")
-    }
-
-
 
     /* Methodes de gestion d'ajout */
 
@@ -129,11 +150,11 @@
           $(categoryTree).jstree("create_node", categoryTreeSel, {
             "text": itemListSelNode.text + withdrawBtnStruct,
             "metadata": {
-              id: itemListSelNode.id
+              id: itemListSelNode.original.metadata.id
             },
             "type": "item"
           }, 'last');
-          $(itemList).jstree("delete_node", itemListSel);
+          $(pushButton).attr("disabled", true);
         }
 
       }
@@ -155,8 +176,24 @@
         var categoryTreeNodeSelected = $(categoryTree).jstree("get_node", $(categoryTree).jstree(true).get_selected()[0]);
 
 
-        if (itemListNodeSelected != null && categoryTreeNodeSelected != null) {
-          if (categoryTreeNodeSelected.type == "category") {
+        if (itemListNodeSelected != undefined && categoryTreeNodeSelected != undefined) {
+
+          var alreadyIn = false;
+          $(categoryTree).jstree("redraw_node", categoryTreeNodeSelected, true, false, true);
+          var childrenNodes = $(categoryTree).jstree("get_children_dom", categoryTreeNodeSelected)
+
+
+          for (let index = 0; index < childrenNodes.length; index++) {
+            const element = childrenNodes[index];
+            var node = $(categoryTree).jstree("get_node", element)
+
+            if (node.original.metadata.id == itemListNodeSelected.original.metadata.id) {
+              alreadyIn = true;
+            }
+
+          }
+
+          if (categoryTreeNodeSelected.type == "category" && !alreadyIn) {
             $(pushButton).removeAttr('disabled');
           }
         }
@@ -165,7 +202,7 @@
   }
 
   function withdrawItem(event, items, categ) {
-    console.log(event)
+
     // Items selectionnes le tree
     var categoryTreeSelId = $(event.parentNode).parent('li').attr('id');
 
@@ -175,18 +212,9 @@
 
       if (categoryTreeSelNode != null) {
 
-        // Ajout en tant qu'enfant d'une category
-        $(items).jstree("create_node", '#', {
-          "text": $('<div>' + categoryTreeSelNode.text + '</div>').text(),
-          "metadata": {
-            id: categoryTreeSelNode.id
-          },
-          "type": "item"
-        }, 'last');
         $(categ).jstree("delete_node", categoryTreeSelNode);
+        $(categ).jstree("deselect_all");
       }
     }
   }
-
-
 </script>
