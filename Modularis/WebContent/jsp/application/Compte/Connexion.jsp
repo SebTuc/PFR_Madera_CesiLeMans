@@ -7,34 +7,35 @@
 <meta charset="ISO-8859-1">
 <title>Connexion</title>
 <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
-
 </head>
 
-<body>
+<body class="bg">
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand navbar-dark navbar-modularis">
+		<a class="navbar-brand navbar-logo" style="color:#FFF">MODULARIS</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-	<jsp:include page="/jsp/common/navbar.jsp" />
-
-	<div class="container-fluid h-100">
-		<div class="row justify-content-center align-items-center">
-			<form method="post">
-				<div class="row justify-content-center">
-					<h3>Connexion</h3>
-				</div>
-				<c:choose>
-					<c:when test="${Erreur != null }">
-						<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
-					</c:when>
-				</c:choose>
-				<div class="form-group">
-					<input id="login" class="form-control" name="login"
-						placeholder="Entrer login" required />
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" id="password"
-						name="password" placeholder="Entrer mot de passe" required />
-				</div>
-
-				<button class="btn btn-primary btn-block">Connexion</button>
+	</nav>
+	<div class="login-page">
+		<div class="form">
+			<h2 style="color:white">CONNEXION</h2> <br>
+			<form method="post" class="login-form">
+			    <c:choose>
+			      <c:when test="${Erreur != null }">
+			        <div class="alert" role="alert">${fn:escapeXml(Erreur)}</div>
+			      </c:when>
+			    </c:choose>
+			      <div class="flex-row">
+			        <input id="login" class="lf--input" name="login"
+			               placeholder="Login" required />
+			      </div>
+			      <div class="flex-row">
+			        <input type="password" class="lf--input" id="password"
+			               name="password" placeholder="Mot de passe" required />
+			      </div>
+			         <button class="login-btn" type='submit'>SE CONNECTER</button>
 			</form>
 		</div>
 	</div>
