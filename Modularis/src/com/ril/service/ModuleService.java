@@ -10,13 +10,31 @@ import com.ril.model.UniteMesure;
 
 public class ModuleService {
 
-	public int addModule(Angle angle, Gamme gamme, String nom , UniteMesure uniteMesure) {
+	public int addModule(Gamme gamme, String nom , UniteMesure uniteMesure) {
 		
 		ModuleHome dao = new ModuleHome();
 		
-		if(angle != null && gamme != null && nom != null) {
+		if( gamme != null && nom != null) {
 			
-			Module module = new Module(angle, gamme, nom , uniteMesure);
+			Module module = new Module(gamme, nom , uniteMesure);
+			
+			dao.persist(module);
+			
+			return module.getModuleId();
+			
+		} else {
+			
+			return -1;
+		}
+	}
+	
+	public int addModule(Angle angle ,Gamme gamme, String nom , UniteMesure uniteMesure) {
+		
+		ModuleHome dao = new ModuleHome();
+		
+		if(angle!= null && gamme != null && nom != null) {
+			
+			Module module = new Module(angle,gamme, nom , uniteMesure);
 			
 			dao.persist(module);
 			

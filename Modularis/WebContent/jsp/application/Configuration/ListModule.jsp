@@ -34,7 +34,7 @@
 				<select id="gamme" class="custom-select" name="gamme" required>
 					<option value="-1" selected></option>
 			   		<c:forEach var="Gamme" items="${ListGamme }">
-			   			<option value="${fn:escapeXml(FamilleComposant.familleComposantId) }">${fn:escapeXml(FamilleComposant.nom) } </option>
+			   			<option value="${fn:escapeXml(Gamme.gammeId) }">${fn:escapeXml(Gamme.nom) } </option>
 			   		</c:forEach>
 				</select>
 				<label for="materiaux">Module contenant :</label>
@@ -73,7 +73,7 @@
 							<div class="form-check form-check-inline not-inline">
 								<input class="form-check-input" type="radio" name="radio" id="${fn:escapeXml(Module.moduleId)}" value="${fn:escapeXml(Module.moduleId)}">
 								<label class="form-check-label label-lg" for="${fn:escapeXml(Module.moduleId)}">
-								${fn:escapeXml(Module.nom)} | Gamme : ${fn:escapeXml(Module.gamme.nom)} | Unite mesure : ${fn:escapeXml(Module.uniteMesure.nom)} 
+								${fn:escapeXml(Module.nom)} | Gamme : ${fn:escapeXml(Module.gamme.nom)} | Unite mesure : ${fn:escapeXml(Module.uniteMesure.nomUnite)} 
 								</label>
 							</div>
 						</li>

@@ -1,14 +1,16 @@
 package com.ril.model;
 // Generated 9 janv. 2019 10:36:15 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,6 +26,7 @@ import javax.persistence.TemporalType;
 @Table(name = "devis", catalog = "modularisbdd")
 public class Devis implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer devisId;
 	private Client client;
 	private Etat etat;

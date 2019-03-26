@@ -24,6 +24,7 @@ import javax.persistence.Table;
 @Table(name = "projet", catalog = "modularisbdd")
 public class Projet implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer projetId;
 	private Set<Catalogue> catalogue = new HashSet<Catalogue>(0);
 	

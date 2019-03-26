@@ -1,13 +1,15 @@
 package com.ril.model;
 // Generated 9 janv. 2019 13:51:31 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -23,6 +25,7 @@ import javax.persistence.Table;
 @Table(name = "composant", catalog = "modularisbdd")
 public class Composant implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer composantId;
 	private FamilleComposant familleComposant;
 	private Fournisseur fournisseur;

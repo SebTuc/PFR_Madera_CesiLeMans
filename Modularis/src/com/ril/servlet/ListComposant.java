@@ -42,12 +42,12 @@ public class ListComposant extends HttpServlet {
 		String familleComposant = request.getParameter("familleComposant");
 		String materiaux = request.getParameter("materiaux");
 		//Trie par critere
-		if(familleComposant != null && familleComposant != "-1" || materiaux != null && materiaux != "-1") {
+		if(familleComposant != null && !(familleComposant.equals("-1")) || materiaux != null && !(materiaux.equals("-1"))) {
 			if(ListComposant != null) {
 				for(Composant composant : ListComposant) {
-					if(familleComposant != "-1") {
+					if(!familleComposant.equals("-1")) {
 						if(Integer.valueOf(familleComposant) == composant.getFamilleComposant().getFamilleComposantId()){
-							if(materiaux != "-1") {
+							if(!materiaux.equals("-1")) {
 								if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
 			
 									list.add(composant);
@@ -57,7 +57,7 @@ public class ListComposant extends HttpServlet {
 								list.add(composant);
 							}	
 						}
-					}else if(materiaux != "-1") {
+					}else if(!materiaux.equals("-1")) {
 						if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
 	
 							list.add(composant);

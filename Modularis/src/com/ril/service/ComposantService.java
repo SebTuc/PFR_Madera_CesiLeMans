@@ -7,7 +7,6 @@ import com.ril.model.Composant;
 import com.ril.model.FamilleComposant;
 import com.ril.model.Fournisseur;
 import com.ril.model.Materiaux;
-import com.ril.model.UniteMesure;
 
 public class ComposantService {
 

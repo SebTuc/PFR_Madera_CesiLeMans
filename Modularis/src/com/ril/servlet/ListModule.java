@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.ril.model.Composant;
 import com.ril.model.Gamme;
 import com.ril.model.Module;
+import com.ril.model.ModuleXComposant;
 import com.ril.service.ComposantService;
 import com.ril.service.GammeService;
 import com.ril.service.ModuleService;
+import com.ril.service.ModuleXComposantService;
 
 /**
  * Servlet implementation class ListModule
@@ -27,6 +29,7 @@ public class ListModule extends HttpServlet {
 	private ModuleService moduleService = new ModuleService();
 	private GammeService gammeService = new GammeService();	
 	private ComposantService composantService = new ComposantService();
+	private ModuleXComposantService moduleXComposantService = new ModuleXComposantService();
 	
 	private boolean findContains(String value, String moduleValue) {
 		
@@ -56,12 +59,12 @@ public class ListModule extends HttpServlet {
 		String gamme = request.getParameter("gamme");
 		String nomModule = request.getParameter("nomModule");
 		//Trie par critere
-		if(gamme != null && gamme != "-1" || nomModule != null && nomModule != "") {
+		if(gamme != null && !(gamme != "-1") || nomModule != null && !(nomModule.equals(""))) {
 			if(ListModule != null) {
 				for(Module module : ListModule) {
-					if(gamme != "-1") {
+					if(!gamme.equals("-1")) {
 						if(Integer.valueOf(gamme) == module.getGamme().getGammeId()){
-							if(nomModule != "-1") {
+							if(!nomModule.equals("")) {
 								if(findContains(nomModule,module.getNom())){
 			
 									list.add(module);
@@ -71,7 +74,7 @@ public class ListModule extends HttpServlet {
 								list.add(module);
 							}	
 						}
-					}else if(nomModule != "-1") {
+					}else if(!nomModule.equals("")) {
 						if(findContains(nomModule,module.getNom())){
 	
 							list.add(module);
@@ -103,14 +106,40 @@ public class ListModule extends HttpServlet {
 		
 		request.setAttribute("ListGamme", ListGamme);
 		request.setAttribute("ListComposant", ListComposant);
-		request.setAttribute("ListModule", ListModule);
 		
 		request.getRequestDispatcher("/jsp/application/Configuration/ListModule.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String moduleId = request.getParameter("radio");
+		String btnEditer = request.getParameter("btnEditer");
+		String btnSupprimer = request.getParameter("btnSupprimer");
+		
+		
+
+		if( btnEditer != null && moduleId != null) {
+
+			response.sendRedirect(request.getContextPath()+ "/Configuration/EditModule?id="+moduleId);
+			
+		}else if( btnSupprimer != null && moduleId != null) {
+			Module module = moduleService.getModuleById(Integer.valueOf(moduleId));
+			//On supprime d'abord les liaison
+//			List<ModuleXComposant> list = moduleXComposantService.getAllModuleXComposantByModule(module);
+//			for(ModuleXComposant mXc : list) {
+//				
+//				moduleXComposantService.removeModuleXComposant(mXc);;
+//				
+//			}
+			
+			moduleService.removeModule(module);
+			
+			doGet(request, response);
+			
+		}else {
+			
+			doGet(request, response);
+		}
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ModuleXComposantId implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int composantId;
 	private int moduleId;
 

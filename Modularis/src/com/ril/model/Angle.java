@@ -23,6 +23,7 @@ import javax.persistence.Table;
 @Table(name = "angle", catalog = "modularisbdd")
 public class Angle implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer angleId;
 	private String typeAngle;
 	private float prixUnitaire;

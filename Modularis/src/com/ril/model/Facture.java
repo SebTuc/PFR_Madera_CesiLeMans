@@ -1,11 +1,12 @@
 package com.ril.model;
 // Generated 9 janv. 2019 10:36:15 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 @Table(name = "facture", catalog = "modularisbdd")
 public class Facture implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer factureId;
 	private Devis devis;
 	private String etape;

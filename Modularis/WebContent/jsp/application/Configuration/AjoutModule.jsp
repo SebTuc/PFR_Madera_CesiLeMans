@@ -5,7 +5,8 @@
 
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Ajout Composant</title>
 <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
 
@@ -19,18 +20,47 @@
 		Retour</a>
 	<div role="main" class="container">
 
-		<br> <br>
+		<br>
+		<c:choose>
+			<c:when test="${Erreur != null }">
+				<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+			</c:when>
+		</c:choose>
 		<form method="post">
-			<div class="form-group justify-content-center">
-				<label for="nom">Nom Module</label> <input type="text"
-					class="form-control" name="nom" id="nom"
-					placeholder="Nom du composant" required>
+			<div class="form-row justify-content-center">
+				<div class="form-group col-6">
+					<label for="nom">Nom Module</label> <input type="text"
+						class="form-control" name="nom" id="nom"
+						placeholder="Nom du module" required>
+				</div>
+				<div class="form-group col-6">
+					<label for="uniteMesure">Unite mesure</label> <select
+						id="uniteMesure" name="uniteMesure" class="custom-select" required>
+						<option value=""></option>
+						<c:forEach var="UniteMesure" items="${ListUniteMesure }">
+							<option value="${fn:escapeXml(UniteMesure.uniteId) }">${fn:escapeXml(UniteMesure.nomUnite) }
+							</option>
+						</c:forEach>
+					</select>
+				</div>
 			</div>
-			<ul class="list-group list-group-flush" id="ListComposant">
+			<ul class="list-group" id="ListComposant"
+				style="text-align: center; max-height: 400px; overflow: auto; margin-bottom: 20px;">
 				<li class="list-group-item">
+					<div class="form-check-inline">Ajout Composant</div>
 					<button type="button" id="addComposant" data-toggle="modal"
 						data-target="#ModalAddComposant"
 						class="btn material-icons material-icons-btn material-icons-btn-add-lg ml-2">add_circle</button>
+				</li>
+				<li class="list-group-item">
+					<div class="row">
+						<div class="col-8">
+							<h3 style="text-align: center;">Nom Composant</h3>
+						</div>
+						<div class="col-4">
+							<h3 style="text-align: center;">Quantite</h3>
+						</div>
+					</div>
 				</li>
 			</ul>
 			<div class="form-row">
@@ -45,7 +75,7 @@
 					</select>
 				</div>
 				<div class="form-group col-md-4">
-					<div class="form-check form-check-inline">
+					<div class="form-check form-check-inline alignCheckAngle">
 						<input class="form-check-input" data-toggle="collapse"
 							data-target="#collapseAngle" type="checkbox" id="Angle"
 							value="Angle"> <label class="form-check-label"
@@ -66,8 +96,16 @@
 					</div>
 				</div>
 			</div>
+			<br> <br>
 			<div class="row justify-content-center">
-				<button class="btn btn-primary btn-lg ">Ajouter Module</button>
+				<div class="col-4">
+					<button class="btn btn-primary btn-block" type="button"
+						id="submitModule">Ajouter Module</button>
+				</div>
+				<div class="col-4">
+					<button class="btn btn-danger btn-block" type="button"
+						id="supprLastComposant">Supprimer dernier composant de la liste</button>
+				</div>
 			</div>
 		</form>
 	</div>
@@ -79,14 +117,14 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="ModalAddComposantTitle">Ajouter un
-						composant</h5>
+					<h5 class="modal-title" id="ModalAddComposantTitle">Ajouter un composant</h5>
 				</div>
 				<div class="modal-body">
-					<label for="Composant">Composant</label> 
-<!-- 					<select id="Composant" name="Composant" class="selectpicker" data-live-search="true" required> -->
-						<select id="Composant" name="Composant" class="custom-select" required>
-							<option value=""></option>
+					<label for="Composant">Composant</label>
+					<!-- 					<select id="Composant" name="Composant" class="selectpicker" data-live-search="true" required> -->
+					<select id="Composant" name="Composant" class="custom-select"
+						required>
+						<option value=""></option>
 						<c:forEach var="Composant" items="${ListComposant}">
 							<option value="${fn:escapeXml(Composant.composantId) }">${fn:escapeXml(Composant.nom) } | ${fn:escapeXml(Composant.materiaux.nom) } | ${fn:escapeXml(Composant.familleComposant.nom) }</option>
 						</c:forEach>
@@ -110,7 +148,7 @@
 		src='<%=request.getContextPath()%>/resources/js/ajoutComposantInModule.js'></script>
 	<script type='text/javascript'
 		src='<%=request.getContextPath()%>/resources/js/bootstrap-select.min.js'></script>
-		
+
 </body>
 
 </html>

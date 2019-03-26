@@ -348,6 +348,11 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
     outline: none;
 }
 
+.alignCheckAngle{
+	margin-top:40px;
+	margin-left:100px;
+}
+
 .return-btn{
 	margin-top: 15px;
     margin-left: 15px;

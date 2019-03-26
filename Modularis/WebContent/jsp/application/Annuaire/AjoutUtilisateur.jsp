@@ -21,7 +21,6 @@
 	<div role="main" class="container">
 
 		<br>
-		<br>
 		<form method="post">
 			<c:choose>
 				<c:when test="${Erreur != null }">

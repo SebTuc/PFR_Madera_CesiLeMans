@@ -3,7 +3,6 @@ package com.ril.service;
 import java.util.List;
 
 import com.ril.daoHibernate.ProjetHome;
-import com.ril.model.Catalogue;
 import com.ril.model.Projet;
 
 public class ProjetService {
