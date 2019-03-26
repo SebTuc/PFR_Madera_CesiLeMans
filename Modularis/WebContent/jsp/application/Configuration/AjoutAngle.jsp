@@ -18,6 +18,11 @@
 <div role="main" class="container">
 
 <br>
+		<c:choose>
+			<c:when test="${Erreur != null }">
+				<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+			</c:when>
+		</c:choose>
 <div class="card card-edition">
 
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
@@ -35,7 +40,7 @@
 		<div class="col-xs-6 col-sm-4">
 		    <form method="post" class="form-inline">
 		      <div class="form-group">
-		        <input id="angleNom" class="form-control" name="angleNom" placeholder="Type d'angle" required />
+		        <input id="angleNom" class="form-control" maxlength="25" name="angleNom" placeholder="Type d'angle" required />
 		         <input id="anglePrix" class="form-control" name="anglePrix" placeholder="Prix angle" required />
 		        <button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
 		      </div>

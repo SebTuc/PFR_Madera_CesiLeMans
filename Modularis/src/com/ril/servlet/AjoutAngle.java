@@ -21,6 +21,18 @@ public class AjoutAngle extends HttpServlet {
        
 	private AngleService angleService = new AngleService();
 
+	private static boolean isFloat(String s) {
+	    try { 
+	        Float.parseFloat(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		List<Angle> ListAngle = angleService.getAllAngles();
@@ -47,6 +59,8 @@ public class AjoutAngle extends HttpServlet {
 				
 			}else if(action.equals("Edition")) {
 				
+				//Faire les verifs :)
+				
 				Angle angle = angleService.getAngleById(Integer.valueOf(idValeur));
 				angle.setTypeAngle(typeAngle);
 				angle.setPrixUnitaire(Float.valueOf(prixUnitaire));
@@ -60,16 +74,27 @@ public class AjoutAngle extends HttpServlet {
 				
 			}
 		}else if (angleNom != null && anglePrix !=null) {						
-			if (angleNom.trim() != null && anglePrix.trim() != null) {				
-				angleService.addAngle(angleNom,Float.valueOf(anglePrix));
+			if (angleNom.trim() != null && anglePrix.trim() != null) {	
+				if(isFloat(anglePrix)) {
+					
+					angleService.addAngle(angleNom,Float.valueOf(anglePrix));
 
-				//Definit la reponse comme "See Other" et redirige
-				//Evite la multi-insertion après un refresh de l'utilsateur		
-				response.setStatus(303);	
-				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutAngle");
+					//Definit la reponse comme "See Other" et redirige
+					//Evite la multi-insertion après un refresh de l'utilsateur		
+					response.setStatus(303);	
+					response.sendRedirect(request.getContextPath()+"/Configuration/AjoutAngle");
+				}else {
+				
+					request.setAttribute("Erreur" , "Veuillez saisir un chiffre.");
+					doGet(request ,response);
+					
+				}
+			}else {
+				request.setAttribute("Erreur" , "Veuillez saisir toutes les informations.");
+				doGet(request ,response);
 			}
 		}else {
-			//Post de null part
+			
 		}
 	}
 

@@ -17,13 +17,19 @@
 <a href="/Modularis/Configuration/ListComposant" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 <div role="main" class="container">
   
-<br><br>
+<br>
+<c:choose>
+			<c:when test="${Erreur != null }">
+				<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+			</c:when>
+		</c:choose>
+<br>
 	<form method="post">
 	  <div class="form-row">
 		  <input type="text" value="${fn:escapeXml(Composant.composantId) }" id="ComposantId" name="ComposantId" hidden/>
 		  <div class="form-group col-md-6">
 		   	<label for="nom">Nom Composant</label>
-	    	<input type="text" class="form-control" name="nom" id="nom" placeholder="Nom du composant" value="${fn:escapeXml(Composant.nom) }" required>
+	    	<input type="text" class="form-control" maxlength="50" name="nom" id="nom" placeholder="Nom du composant" value="${fn:escapeXml(Composant.nom) }" required>
 		  </div>
 		  <div class="form-group col-md-6">
 			<label for="prixUnitaire">Prix unitaire</label>

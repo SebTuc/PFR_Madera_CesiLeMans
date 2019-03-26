@@ -15,13 +15,17 @@ $(document).ready(function () {
 		if( quantite != null && quantite != "" && quantite > 0){
 			if(idComposant != null && nomComposant != null && nomComposant != ""){
 				if(!ComposantExistInModule(idComposant)){
+
 					$("#ListComposant").append('<li class="list-group-item list-composant">'+
 							'<div class="row">'+
 								'<div class="col-8">'+
 									'<input class="form-control" idComposant="'+idComposant+'" value="'+nomComposant+'" style="text-align:center" disabled>'+
 								'</div>'+
-								'<div class="col-4">'+
+								'<div class="col-3">'+
 									'<input class="form-control" quantiteComposant="'+quantite+'" value="'+quantite+'" style="text-align:center" disabled>'+
+								'</div>'+
+								'<div class="col-1">'+
+									'<input class="form-check-input" type="radio" name="selectItems" style="margin-top: 13px;margin-left: 0px;">'+
 								'</div>'+
 							'</div>'+
 							'</li>');
@@ -53,12 +57,10 @@ $(document).ready(function () {
 	
 	$("#supprLastComposant").click(function(){
 		
-		var numItems = $('.list-composant').length;
+		var data =$("input[name='selectItems']:checked")[0].parentNode.parentNode.parentNode;
 		//Voir pour selectionner via un chiffre genre le 2eme a la place de numItems
-		if (numItems != 0){
-			var data = $("#ListComposant")[0].childNodes[numItems + 4];
+		if (data != null && data != undefined){
 			data.remove();
-			
 		}
 	});
 	
@@ -123,9 +125,7 @@ $(document).ready(function () {
 					  dataType:'json',
 					  async: false,
 					  success: function(data){
-						  var request = new XMLHttpRequest();
-						  request.open('GET', data.html, false);  //"false" makes the request synchronous
-						  request.send(null);
+						  returnHtml = data;
 				      } 
 				});
 			}else{
@@ -136,15 +136,16 @@ $(document).ready(function () {
 					  dataType:'json',
 					  async: false,
 					  success: function(data){
-						  var request = new XMLHttpRequest();
-						  request.open('GET', data.html, false);  //"false" makes the request synchronous
-						  request.send(null);
+						  returnHtml = data;
 				      }
 				});
 				
 			}
+			//on ajoute la value au form hidden
+			$("#sendSubmit").val(returnHtml.retour);
 			
-			
+			//On submit
+			$("#formSubmit").submit();
 		}else{
 			
 			alert("Verifier les saisies !")

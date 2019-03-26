@@ -31,6 +31,30 @@ public class ListComposant extends HttpServlet {
 	private FournisseurService fournisseurService = new FournisseurService();
 	private MateriauxService materiauxService = new MateriauxService();
 
+	private static boolean isFloat(String s) {
+	    try { 
+	        Float.parseFloat(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
+	private static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Composant> ListComposant= composantService.getAllComposants();
@@ -41,30 +65,35 @@ public class ListComposant extends HttpServlet {
 		
 		String familleComposant = request.getParameter("familleComposant");
 		String materiaux = request.getParameter("materiaux");
+		
+		
+		
 		//Trie par critere
 		if(familleComposant != null && !(familleComposant.equals("-1")) || materiaux != null && !(materiaux.equals("-1"))) {
 			if(ListComposant != null) {
-				for(Composant composant : ListComposant) {
-					if(!familleComposant.equals("-1")) {
-						if(Integer.valueOf(familleComposant) == composant.getFamilleComposant().getFamilleComposantId()){
-							if(!materiaux.equals("-1")) {
-								if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
-			
+				if(isInteger(materiaux) && isInteger(familleComposant)) {
+					for(Composant composant : ListComposant) {
+						if(!familleComposant.equals("-1")) {
+							if(Integer.valueOf(familleComposant) == composant.getFamilleComposant().getFamilleComposantId()){
+								if(!materiaux.equals("-1")) {
+									if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
+				
+										list.add(composant);
+										
+									}
+								}else {
 									list.add(composant);
-									
-								}
-							}else {
+								}	
+							}
+						}else if(!materiaux.equals("-1")) {
+							if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
+		
 								list.add(composant);
-							}	
+								
+							}
 						}
-					}else if(!materiaux.equals("-1")) {
-						if(Integer.valueOf(materiaux) == composant.getMateriaux().getMateriauxId()){
-	
-							list.add(composant);
-							
-						}
+						
 					}
-					
 				}
 			}
 			if(list.size() == 0) {
@@ -85,6 +114,12 @@ public class ListComposant extends HttpServlet {
 			
 		}
 		
+		if(familleComposant != null && !(familleComposant.equals("")) && materiaux != null && !(materiaux.equals(""))) {
+			if(isInteger(materiaux) && isInteger(familleComposant)) {
+				request.setAttribute("familleComposantId", familleComposant);
+				request.setAttribute("materiauxId", materiaux);
+			}
+		}
 		
 		request.setAttribute("ListFamilleComposant", ListFamilleComposant);
 		request.setAttribute("ListFournisseur", ListFournisseur);

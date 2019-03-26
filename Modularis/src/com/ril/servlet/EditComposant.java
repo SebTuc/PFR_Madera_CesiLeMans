@@ -30,6 +30,30 @@ public class EditComposant extends HttpServlet {
 	private FournisseurService fournisseurService = new FournisseurService();
 	private MateriauxService materiauxService = new MateriauxService();
 	
+	private static boolean isFloat(String s) {
+	    try { 
+	        Float.parseFloat(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
+	private static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String composantId = request.getParameter("id");
@@ -61,27 +85,52 @@ public class EditComposant extends HttpServlet {
 		String fournisseur = request.getParameter("fournisseur");	
 		
 		if (nom != null && prixUnitaire != null && familleComposant != null && materiaux != null && fournisseur != null) {						
-			if (nom.trim() != null && prixUnitaire.trim() != null && familleComposant.trim() != null && materiaux.trim() != null && fournisseur.trim() != null) {	
-				
-				//Ajout verif /!\
-				FamilleComposant familleCompo = familleComposantService.getFamilleComposantById(Integer.valueOf(familleComposant));
-				Fournisseur fourni = fournisseurService.getFournisseurById(Integer.valueOf(fournisseur));
-				Materiaux mater = materiauxService.getMateriauxById(Integer.valueOf(materiaux));
-				
-				Composant composant =composantService.getComposantById(Integer.valueOf(ComposantId));
-				
-				composant.setFamilleComposant(familleCompo);
-				composant.setFournisseur(fourni);
-				composant.setMateriaux(mater);
-				composant.setNom(nom);
-				composant.setPrixUnitaire(Float.valueOf(prixUnitaire));
-				
-				composantService.editComposant(composant);
-
-				//Definit la reponse comme "See Other" et redirige
-				//Evite la multi-insertion après un refresh de l'utilsateur		
-				response.sendRedirect("/Modularis/Configuration/ListComposant");
+			if (!(nom.equals("")) && !(prixUnitaire.equals(""))&& !(familleComposant.equals("")) && !(materiaux.equals("")) && !(fournisseur.equals(""))) {	
+				if(isFloat(prixUnitaire)) {
+					if(isInteger(materiaux) && isInteger(fournisseur) && isInteger(familleComposant)) {
+						//Ajout verif /!\
+						FamilleComposant familleCompo = familleComposantService.getFamilleComposantById(Integer.valueOf(familleComposant));
+						Fournisseur fourni = fournisseurService.getFournisseurById(Integer.valueOf(fournisseur));
+						Materiaux mater = materiauxService.getMateriauxById(Integer.valueOf(materiaux));
+						
+						Composant composant =composantService.getComposantById(Integer.valueOf(ComposantId));
+						
+						composant.setFamilleComposant(familleCompo);
+						composant.setFournisseur(fourni);
+						composant.setMateriaux(mater);
+						composant.setNom(nom);
+						composant.setPrixUnitaire(Float.valueOf(prixUnitaire));
+						
+						composantService.editComposant(composant);
+	
+						//Definit la reponse comme "See Other" et redirige
+						//Evite la multi-insertion après un refresh de l'utilsateur		
+						response.sendRedirect("/Modularis/Configuration/ListComposant");
+					}else {
+						
+						request.setAttribute("Erreur", "Saisie incorrect.");
+						request.setAttribute("NomComposant", nom);
+						request.setAttribute("PrixUnitaire", prixUnitaire);
+						doGet(request , response);
+					}
+				}else {
+					request.setAttribute("Erreur", "Saisie incorrect (prix).");
+					request.setAttribute("NomComposant", nom);
+					if(isInteger(materiaux) && isInteger(fournisseur) && isInteger(familleComposant)) {
+						request.setAttribute("FamilleComposantId", familleComposant);
+						request.setAttribute("MateriauxId", materiaux);
+						request.setAttribute("FournisseurId", fournisseur);
+					}
+					doGet(request , response);
+					
+				}
+			}else {
+				request.setAttribute("Erreur", "Veillez saisir toute les informations.");
+				doGet(request , response);
 			}
+		}else {
+			request.setAttribute("Erreur", "Veillez saisir toute les informations.");
+			doGet(request , response);
 		}
 	}
 

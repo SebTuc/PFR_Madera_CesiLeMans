@@ -31,6 +31,19 @@ public class ListModule extends HttpServlet {
 	private ComposantService composantService = new ComposantService();
 	private ModuleXComposantService moduleXComposantService = new ModuleXComposantService();
 	
+	
+	private static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
 	private boolean findContains(String value, String moduleValue) {
 		
 		String valueUpper = value.toUpperCase();
@@ -61,27 +74,29 @@ public class ListModule extends HttpServlet {
 		//Trie par critere
 		if(gamme != null && !(gamme != "-1") || nomModule != null && !(nomModule.equals(""))) {
 			if(ListModule != null) {
-				for(Module module : ListModule) {
-					if(!gamme.equals("-1")) {
-						if(Integer.valueOf(gamme) == module.getGamme().getGammeId()){
-							if(!nomModule.equals("")) {
-								if(findContains(nomModule,module.getNom())){
-			
+				if(isInteger(gamme)) {
+					for(Module module : ListModule) {
+						if(!gamme.equals("-1")) {
+							if(Integer.valueOf(gamme) == module.getGamme().getGammeId()){
+								if(!nomModule.equals("")) {
+									if(findContains(nomModule,module.getNom())){
+				
+										list.add(module);
+										
+									}
+								}else {
 									list.add(module);
-									
-								}
-							}else {
+								}	
+							}
+						}else if(!nomModule.equals("")) {
+							if(findContains(nomModule,module.getNom())){
+		
 								list.add(module);
-							}	
+								
+							}
 						}
-					}else if(!nomModule.equals("")) {
-						if(findContains(nomModule,module.getNom())){
-	
-							list.add(module);
-							
-						}
+						
 					}
-					
 				}
 			}
 			if(list.size() == 0) {
@@ -102,6 +117,12 @@ public class ListModule extends HttpServlet {
 			
 		}
 		
+		if(nomModule != null && gamme != null && !(gamme.equals(""))) {
+			if(isInteger(gamme)) {
+				request.setAttribute("gammeId", gamme);
+				request.setAttribute("nomModule", nomModule);
+			}
+		}
 		
 		
 		request.setAttribute("ListGamme", ListGamme);
@@ -124,14 +145,7 @@ public class ListModule extends HttpServlet {
 			
 		}else if( btnSupprimer != null && moduleId != null) {
 			Module module = moduleService.getModuleById(Integer.valueOf(moduleId));
-			//On supprime d'abord les liaison
-//			List<ModuleXComposant> list = moduleXComposantService.getAllModuleXComposantByModule(module);
-//			for(ModuleXComposant mXc : list) {
-//				
-//				moduleXComposantService.removeModuleXComposant(mXc);;
-//				
-//			}
-			
+
 			moduleService.removeModule(module);
 			
 			doGet(request, response);

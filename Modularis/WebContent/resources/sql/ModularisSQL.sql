@@ -30,7 +30,7 @@ CREATE TABLE PLAN(
 
 CREATE TABLE MODULE(
         MODULE_ID       int (11) Auto_increment  NOT NULL ,
-        NOM             Varchar (25) NOT NULL ,
+        NOM             Varchar (50) NOT NULL ,
         ANGLE_ID        Int ,
         GAMME_ID        Int NOT NULL ,
         UNITE_MESURE_ID Int NOT NULL ,
@@ -39,7 +39,7 @@ CREATE TABLE MODULE(
 
 CREATE TABLE COMPOSANT(
         COMPOSANT_ID         int (11) Auto_increment  NOT NULL ,
-        NOM                  Varchar (100) NOT NULL ,
+        NOM                  Varchar (50) NOT NULL ,
         PRIX_UNITAIRE        Float NOT NULL ,
         FAMILLE_COMPOSANT_ID Int NOT NULL ,
         FOURNISSEUR_ID       Int NOT NULL ,

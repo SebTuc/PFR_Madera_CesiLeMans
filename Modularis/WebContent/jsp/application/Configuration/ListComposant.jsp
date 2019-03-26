@@ -34,14 +34,28 @@
 				<select id="familleComposant" class="custom-select" name="familleComposant" required>
 					<option value="-1" selected></option>
 			   		<c:forEach var="FamilleComposant" items="${ListFamilleComposant }">
-			   			<option value="${fn:escapeXml(FamilleComposant.familleComposantId) }">${fn:escapeXml(FamilleComposant.nom) } </option>
+			   			<c:choose>
+						    <c:when test="${FamilleComposant.familleComposantId == familleComposantId }">
+						       <option selected value="${fn:escapeXml(FamilleComposant.familleComposantId) }">${fn:escapeXml(FamilleComposant.nom) } </option>
+						    </c:when>    
+						    <c:otherwise>
+								<option value="${fn:escapeXml(FamilleComposant.familleComposantId) }">${fn:escapeXml(FamilleComposant.nom) } </option>
+						    </c:otherwise>
+						</c:choose>
 			   		</c:forEach>
 				</select>
 				<label for="materiaux">Materiaux</label>
 				<select id="materiaux" class="custom-select" name="materiaux" required>
 					<option value="-1" selected></option>
 			   		<c:forEach var="Materiaux" items="${ListMateriaux }">
-			   			<option value="${fn:escapeXml(Materiaux.materiauxId) }">${fn:escapeXml(Materiaux.nom) } </option>
+			   			<c:choose>
+							    <c:when test="${Materiaux.materiauxId == materiauxId}">
+							       <option selected value="${fn:escapeXml(Materiaux.materiauxId) }">${fn:escapeXml(Materiaux.nom) } </option>
+							    </c:when>    
+							    <c:otherwise>
+									<option value="${fn:escapeXml(Materiaux.materiauxId) }">${fn:escapeXml(Materiaux.nom) } </option>
+							    </c:otherwise>
+							</c:choose>
 			   		</c:forEach>
 				</select>
 				<br><br>

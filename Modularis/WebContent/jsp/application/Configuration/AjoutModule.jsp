@@ -26,12 +26,16 @@
 				<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
 			</c:when>
 		</c:choose>
-		<form method="post">
+		<form method="post" id="formSubmit">
+		
+			<input type="hidden" class="form-control" name="sendSubmit" id="sendSubmit" value="" >
+		
+		</form>
 			<div class="form-row justify-content-center">
 				<div class="form-group col-6">
 					<label for="nom">Nom Module</label> <input type="text"
 						class="form-control" name="nom" id="nom"
-						placeholder="Nom du module" required>
+						placeholder="Nom du module" maxlength="50" required>
 				</div>
 				<div class="form-group col-6">
 					<label for="uniteMesure">Unite mesure</label> <select
@@ -57,7 +61,7 @@
 						<div class="col-8">
 							<h3 style="text-align: center;">Nom Composant</h3>
 						</div>
-						<div class="col-4">
+						<div class="col-3">
 							<h3 style="text-align: center;">Quantite</h3>
 						</div>
 					</div>
@@ -104,10 +108,9 @@
 				</div>
 				<div class="col-4">
 					<button class="btn btn-danger btn-block" type="button"
-						id="supprLastComposant">Supprimer dernier composant de la liste</button>
+						id="supprLastComposant">Supprimer composant selectionn&eacute;</button>
 				</div>
 			</div>
-		</form>
 	</div>
 
 

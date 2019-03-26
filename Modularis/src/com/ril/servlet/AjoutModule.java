@@ -76,86 +76,102 @@ public class AjoutModule extends HttpServlet {
 		String typeAngle = request.getParameter("typeAngle");
 		String uniteMesureId = request.getParameter("uniteMesure");
 		String[] ListQuantite = request.getParameterValues("ListQuantite[]");
+		String sendSubmit = request.getParameter("sendSubmit");
+		String returnValue = "Ok"; 
 		
-		
-		
-		if(gammeId != null && nomModule != null && uniteMesureId != null) {
-			if(ListComposant.length == ListQuantite.length && ListComposant.length > 0) {
-				if(typeAngle != null) {
-					//Verifier que gamme type angle et unite mesure sont bien des Integer
-					if(isInteger(gammeId) && isInteger(uniteMesureId) && isInteger(typeAngle)) {
-						Angle angle = angleService.getAngleById(Integer.valueOf(typeAngle));
-						UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(uniteMesureId));
-						Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
-						Integer moduleId = moduleSerivce.addModule(angle, gamme, nomModule, uniteMesure);
-						
-						Module module = moduleSerivce.getModuleById(moduleId);
-						
-						for(int i=0 ; i < ListComposant.length ; i++) {
-							//Verifier que se sois bien des integer
-							String composantId = ListComposant[i];
-							String quantites = ListQuantite[i];
-							if(isInteger(composantId) && isInteger(quantites)) {
-								
-								Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
-								Integer quantite = Integer.valueOf(quantites);
-								
-								moduleXComposantSerivce.addModuleXComposant(quantite, module, composant);
-								
-							}else {
-								//on remove le module et les liaison
-								moduleSerivce.removeModule(module);
-								request.setAttribute("Erreur", "Erreur lors de la mise en place des composants.");
-								doGet(request, response);
-								
+		if(sendSubmit != null) {
+			if(sendSubmit.equals("Ok")) {
+				
+				response.sendRedirect("/Modularis/Configuration/ListModule");
+				
+			}else {
+				
+				request.setAttribute("Erreur", sendSubmit);
+				doGet(request, response);
+				
+			}
+			
+			
+		}else {
+			if(gammeId != null && nomModule != null && uniteMesureId != null) {
+				if(ListComposant.length == ListQuantite.length && ListComposant.length > 0) {
+					if(typeAngle != null) {
+						//Verifier que gamme type angle et unite mesure sont bien des Integer
+						if(isInteger(gammeId) && isInteger(uniteMesureId) && isInteger(typeAngle)) {
+							Angle angle = angleService.getAngleById(Integer.valueOf(typeAngle));
+							UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(uniteMesureId));
+							Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
+							Integer moduleId = moduleSerivce.addModule(angle, gamme, nomModule, uniteMesure);
+							
+							Module module = moduleSerivce.getModuleById(moduleId);
+							
+							for(int i=0 ; i < ListComposant.length ; i++) {
+								//Verifier que se sois bien des integer
+								String composantId = ListComposant[i];
+								String quantites = ListQuantite[i];
+								if(isInteger(composantId) && isInteger(quantites)) {
+									
+									Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
+									Integer quantite = Integer.valueOf(quantites);
+									
+									moduleXComposantSerivce.addModuleXComposant(quantite, module, composant);
+									
+								}else {
+									//on remove le module et les liaison
+									moduleSerivce.removeModule(module);
+									returnValue = "Erreur lors de la mise en place des composants.";
+									
+									
+								}
 							}
 						}
+					}else {
+						//Verifier que gamme et unite mesure sont bien des Integer
+						if(isInteger(gammeId) && isInteger(uniteMesureId)) {
+							UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(uniteMesureId));
+							Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
+							Integer moduleId = moduleSerivce.addModule(gamme, nomModule, uniteMesure);
+							
+							//Après on ajoute les liaison
+							Module module = moduleSerivce.getModuleById(moduleId);
+							
+							for(int i=0 ; i < ListComposant.length ; i++) {
+								//Verifier que se sois bien des integer
+								String composantId = ListComposant[i];
+								String quantites = ListQuantite[i];
+								if(isInteger(composantId) && isInteger(quantites)) {
+									
+									Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
+									Integer quantite = Integer.valueOf(quantites);
+									
+									moduleXComposantSerivce.addModuleXComposant(quantite, module, composant);
+									
+								}else {
+									//on remove le module et les liaison
+									moduleSerivce.removeModule(module);
+									returnValue = "Erreur lors de la mise en place des composants.";
+									
+									
+								}
+							}
+						}
+						
+						
 					}
 				}else {
-					//Verifier que gamme et unite mesure sont bien des Integer
-					if(isInteger(gammeId) && isInteger(uniteMesureId)) {
-						UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(uniteMesureId));
-						Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
-						Integer moduleId = moduleSerivce.addModule(gamme, nomModule, uniteMesure);
-						
-						//Après on ajoute les liaison
-						Module module = moduleSerivce.getModuleById(moduleId);
-						
-						for(int i=0 ; i < ListComposant.length ; i++) {
-							//Verifier que se sois bien des integer
-							String composantId = ListComposant[i];
-							String quantites = ListQuantite[i];
-							if(isInteger(composantId) && isInteger(quantites)) {
-								
-								Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
-								Integer quantite = Integer.valueOf(quantites);
-								
-								moduleXComposantSerivce.addModuleXComposant(quantite, module, composant);
-								
-							}else {
-								//on remove le module et les liaison
-								moduleSerivce.removeModule(module);
-								request.setAttribute("Erreur", "Erreur lors de la mise en place des composants.");
-								doGet(request, response);
-								
-							}
-						}
-					}
-					
+					returnValue = "List quantite et composant ne sont pas identique.";
 					
 				}
 			}else {
-				request.setAttribute("Erreur", "List quantite et composant ne sont pas identique.");
-				doGet(request, response);
+				returnValue = "Vous n'avez pas saisie toute les valeurs.";
+				
 			}
-		}else {
-			request.setAttribute("Erreur", "Vous n'avez pas saisie toute les valeurs.");
-			doGet(request, response);
+			response.setStatus(200);
+			response.setContentType("application/json");
+			response.getWriter().print("{ \"retour\": \""+returnValue+"\"}");
+			response.getWriter().flush();
 		}
-		response.setStatus(200);
-		response.setContentType("application/json");
-		response.getWriter().print("{ \"html\": \"/Modularis/Configuration/ListModule\"}");
-		response.getWriter().flush();
+		
 	}
 
 }

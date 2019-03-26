@@ -34,11 +34,18 @@
 				<select id="gamme" class="custom-select" name="gamme" required>
 					<option value="-1" selected></option>
 			   		<c:forEach var="Gamme" items="${ListGamme }">
-			   			<option value="${fn:escapeXml(Gamme.gammeId) }">${fn:escapeXml(Gamme.nom) } </option>
+			   			<c:choose>
+							    <c:when test="${Gamme.gammeId == gammeId}">
+							       <option selected value="${fn:escapeXml(Gamme.gammeId) }">${fn:escapeXml(Gamme.nom) } </option>
+							    </c:when>    
+							    <c:otherwise>
+									<option value="${fn:escapeXml(Gamme.gammeId) }">${fn:escapeXml(Gamme.nom) } </option>
+							    </c:otherwise>
+							</c:choose>
 			   		</c:forEach>
 				</select>
-				<label for="materiaux">Module contenant :</label>
-				<input class="form-control" type="text" id="nomModule" name="nomModule" placeholder="Module contenant le mot..."/>
+				<label for="materiaux">Nom Module :</label>
+				<input class="form-control" type="text" id="nomModule" name="nomModule" placeholder="Module contenant le mot..." value="${fn:escapeXml(nomModule) }"/>
 				<br><br>
 				<div class="row justify-content-center">
 					<div class="col-6 justify-content-center">
