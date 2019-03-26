@@ -24,7 +24,7 @@
 			<form method="post" class="login-form">
 			    <c:choose>
 			      <c:when test="${Erreur != null }">
-			        <div class="alert" role="alert">${fn:escapeXml(Erreur)}</div>
+			        <div class="alert-login" role="alert">${fn:escapeXml(Erreur)}</div>
 			      </c:when>
 			    </c:choose>
 			      <div class="flex-row">

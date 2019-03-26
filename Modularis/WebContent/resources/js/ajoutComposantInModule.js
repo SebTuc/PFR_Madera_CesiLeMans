@@ -2,7 +2,9 @@ $(document).ready(function () {
 	
 
 	var nbComposant = 0;
-	
+	/*******************************************************************************
+	 *									Ajout Composant 
+	 ******************************************************************************/
 	
 	$("#btnAjouter").click(function(){
 		
@@ -53,9 +55,11 @@ $(document).ready(function () {
 		
 			
 	});
+	/*******************************************************************************
+	 *							Suppression Composant 
+	 ******************************************************************************/
 	
-	
-	$("#supprLastComposant").click(function(){
+	$("#supprComposant").click(function(){
 		
 		var data =$("input[name='selectItems']:checked")[0].parentNode.parentNode.parentNode;
 		//Voir pour selectionner via un chiffre genre le 2eme a la place de numItems
@@ -63,6 +67,104 @@ $(document).ready(function () {
 			data.remove();
 		}
 	});
+	
+	
+	/*******************************************************************************
+	 *									Edition 
+	 ******************************************************************************/
+	
+	$("#editModule").click(function(){
+		
+		var nomModule = $("#nom").val() ;
+		var moduleId = $("#moduleId").val();
+		var gamme = $("#gamme").val();
+		var checkedAngle;
+		
+		var typeAngle = $("#typeAngle").val();
+		
+		if(($("#Angle").is(":checked"))){
+			checkedAngle = true;
+		}else{
+			checkedAngle = false;
+			var typeAngle = null;
+		}
+		
+		
+		var uniteMesure = $("#uniteMesure").val();
+		var ListComposant = [];
+		var ListQuantite = [];
+		
+		$(".list-composant").each(function(){
+			var data = this;
+			var idComposant = data.lastElementChild.children[0].children[0].attributes[1].value;
+			var quantiteComposant = data.lastElementChild.children[1].children[0].attributes[1].value;
+			
+			ListComposant.push(idComposant);
+			ListQuantite.push(quantiteComposant)
+			
+		});
+		
+		var flag = false;
+		if(nomModule != null && nomModule != "" && moduleId != null && moduleId != ""){
+			if(gamme != null && gamme != ""){
+				if(uniteMesure != null && uniteMesure != ""){
+					if(checkedAngle){
+						if(typeAngle != null && typeAngle != ""){
+							if(ListComposant.length != 0 && ListQuantite.length != 0){
+								flag = true;
+							}
+							
+						}
+					}else{
+						if(ListComposant.length != 0 && ListQuantite.length != 0){
+							typeAngle = "";
+							flag = true;
+						}
+					}
+				}
+			}
+		}
+		
+		if(flag == true){
+			var returnHtml = '';
+			if (checkedAngle){
+				$.ajax({
+					  method: "POST",
+					  data: {ListComposant:ListComposant, nomModule:nomModule, ListQuantite:ListQuantite , gamme:gamme , typeAngle:typeAngle , uniteMesure:uniteMesure , moduleId:moduleId},
+					  dataType:'json',
+					  async: false,
+					  success: function(data){
+						  returnHtml = data;
+				      } 
+				});
+			}else{
+				
+				$.ajax({
+					  method: "POST",
+					  data: {ListComposant:ListComposant, nomModule:nomModule, ListQuantite:ListQuantite , gamme:gamme , uniteMesure:uniteMesure , moduleId:moduleId},
+					  dataType:'json',
+					  async: false,
+					  success: function(data){
+						  returnHtml = data;
+				      }
+				});
+				
+			}
+			//on ajoute la value au form hidden
+			$("#sendSubmit").val(returnHtml.retour);
+			
+			//On submit
+			$("#formSubmit").submit();
+		}else{
+			
+			alert("Verifier les saisies !")
+			
+		}
+	});
+	
+	/*******************************************************************************
+	 *									Ajout 
+	 ******************************************************************************/
 	
 	$("#submitModule").click(function(){
 		
@@ -83,10 +185,10 @@ $(document).ready(function () {
 		var ListQuantite = [];
 		
 		$(".list-composant").each(function(){
-			//sa serais mieux une map
+			
 			var data = this;
-			var idComposant = data.lastElementChild.childNodes[0].childNodes[0].attributes[1].value;
-			var quantiteComposant = data.lastElementChild.childNodes[1].childNodes[0].attributes[1].value;
+			var idComposant = data.lastElementChild.children[0].children[0].attributes[1].value;
+			var quantiteComposant = data.lastElementChild.children[1].children[0].attributes[1].value;
 			
 			ListComposant.push(idComposant);
 			ListQuantite.push(quantiteComposant)
@@ -154,12 +256,16 @@ $(document).ready(function () {
 		
 	});
 	
+	
+	/*******************************************************************************
+	 *									Function
+	 ******************************************************************************/
 	function ComposantExistInModule(id){
 		var flag = false;
 		$(".list-composant").each(function(){
 			
 			var data = this;
-			var idComposant = data.lastElementChild.childNodes[0].childNodes[0].attributes[1].value;
+			var idComposant = data.lastElementChild.children[0].children[0].attributes[1].value;
 			if(idComposant == id){
 				flag = true;
 			}

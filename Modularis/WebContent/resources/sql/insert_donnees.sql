@@ -39,35 +39,6 @@ INSERT INTO `catalogue` (`CATALOGUE_ID`, `ANNEE`, `CATALOGUE_NOM`) VALUES
 (5, 2019, 'Maison familial');
 
 --
--- Contenu de la table `composant`
---
-
-INSERT INTO `composant` (`COMPOSANT_ID`, `NOM`, `PRIX_UNITAIRE`, `FAMILLE_COMPOSANT_ID`, `FOURNISSEUR_ID`, `MATERIAUX_ID`) VALUES
-(1, 'Montants lisses en bois de hêtre', 50, 1, 1, 3),
-(2, 'Montants contrefort en bois de chêne', 75, 1, 1, 2),
-(3, 'Sabot métallique', 3, 24, 2, 6),
-(4, 'Boulons 35mm', 1, 24, 2, 6),
-(5, 'Goujons d''ancrage', 1.5, 24, 2, 6),
-(6, 'Panneau d''isolation thermique', 10, 27, 5, 37),
-(7, 'Panneau pare-pluie', 35, 27, 5, 38),
-(8, 'Panneau mural interieur en bois composite', 35, 3, 3, 1),
-(9, 'Parquet en chêne massif', 49.99, 25, 3, 2),
-(10, 'Tuiles plates simple en terre cuite', 0.8, 26, 1, 21),
-(11, 'Tuile romane simple en terre cuite', 2, 26, 2, 21),
-(12, 'Panneau contreplaqué extérieur en bois de peuplier', 70, 28, 1, 4),
-(13, 'Panneau exterieur en inox', 110, 28, 2, 40),
-(14, 'Panneau mural interieur en bois recyclé', 40, 3, 3, 41),
-(15, 'Montants lisse en acier', 105, 1, 5, 6),
-(16, 'Entrait de charpente en peuplier brute', 69.99, 29, 4, 39),
-(17, 'Contrefiche de charpente en peuplier brute', 60, 29, 4, 39),
-(18, 'Poinçon de charpente en peuplier brute', 40, 29, 4, 39),
-(19, 'Arbalètrier de charpente en bois de peuplier brute', 45, 29, 4, 39),
-(20, 'Echantignolle de charpente en bois de peuplier brute', 65, 29, 4, 39),
-(21, 'Chevron de charpente en bois de peuplier brute', 10, 29, 4, 39),
-(22, 'Panne de charpente en bois de peuplier brute', 60, 29, 4, 39),
-(23, 'Ardoise de couverture', 1, 26, 3, 28);
-
---
 -- Contenu de la table `donnees_personelle`
 --
 
@@ -200,6 +171,36 @@ INSERT INTO `unite_mesure` (`UNITE_MESURE_ID`, `NOM`) VALUES
 (9, 'unité(s)'),
 (10, 'gramme(s)'),
 (11, 'kg');
+
+--
+-- Contenu de la table `composant`
+--
+
+INSERT INTO `composant` (`COMPOSANT_ID`, `NOM`, `PRIX_UNITAIRE`, `FAMILLE_COMPOSANT_ID`, `FOURNISSEUR_ID`, `MATERIAUX_ID`) VALUES
+(1, 'Montants lisses en bois de hêtre', 50, 1, 1, 3),
+(2, 'Montants contrefort en bois de chêne', 75, 1, 1, 2),
+(3, 'Sabot métallique', 3, 24, 2, 6),
+(4, 'Boulons 35mm', 1, 24, 2, 6),
+(5, 'Goujons d''ancrage', 1.5, 24, 2, 6),
+(6, 'Panneau d''isolation thermique', 10, 27, 5, 37),
+(7, 'Panneau pare-pluie', 35, 27, 5, 38),
+(8, 'Panneau mural interieur en bois composite', 35, 3, 3, 1),
+(9, 'Parquet en chêne massif', 49.99, 25, 3, 2),
+(10, 'Tuiles plates simple en terre cuite', 0.8, 26, 1, 21),
+(11, 'Tuile romane simple en terre cuite', 2, 26, 2, 21),
+(12, 'Panneau contreplaqué extérieur en bois de peuplier', 70, 28, 1, 4),
+(13, 'Panneau exterieur en inox', 110, 28, 2, 40),
+(14, 'Panneau mural interieur en bois recyclé', 40, 3, 3, 41),
+(15, 'Montants lisse en acier', 105, 1, 5, 6),
+(16, 'Entrait de charpente en peuplier brute', 69.99, 29, 4, 39),
+(17, 'Contrefiche de charpente en peuplier brute', 60, 29, 4, 39),
+(18, 'Poinçon de charpente en peuplier brute', 40, 29, 4, 39),
+(19, 'Arbalètrier de charpente en bois de peuplier brute', 45, 29, 4, 39),
+(20, 'Echantignolle de charpente en bois de peuplier brute', 65, 29, 4, 39),
+(21, 'Chevron de charpente en bois de peuplier brute', 10, 29, 4, 39),
+(22, 'Panne de charpente en bois de peuplier brute', 60, 29, 4, 39),
+(23, 'Ardoise de couverture', 1, 26, 3, 28);
+
 
 --
 -- Contenu de la table `utilisateur`

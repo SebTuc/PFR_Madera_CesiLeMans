@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Ajout Module</title>
+<title>Edit Module</title>
 <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
 
 </head>
@@ -32,18 +32,25 @@
 		
 		</form>
 			<div class="form-row justify-content-center">
+			<input type="text" id="moduleId" value="${fn:escapeXml(Module.moduleId) }" name="moduleId" hidden>
 				<div class="form-group col-6">
 					<label for="nom">Nom Module</label> <input type="text"
 						class="form-control" name="nom" id="nom"
-						placeholder="Nom du module" maxlength="50" required>
+						placeholder="Nom du module" value="${fn:escapeXml(Module.nom) }" maxlength="50" required>
 				</div>
 				<div class="form-group col-6">
 					<label for="uniteMesure">Unite mesure</label> <select
 						id="uniteMesure" name="uniteMesure" class="custom-select" required>
 						<option value=""></option>
 						<c:forEach var="UniteMesure" items="${ListUniteMesure }">
-							<option value="${fn:escapeXml(UniteMesure.uniteId) }">${fn:escapeXml(UniteMesure.nomUnite) }
-							</option>
+							<c:choose>
+								<c:when test="${Module.uniteMesure.uniteId == UniteMesure.uniteId }">
+									<option selected value="${fn:escapeXml(UniteMesure.uniteId) }">${fn:escapeXml(UniteMesure.nomUnite) } </option>
+								</c:when>
+								<c:otherwise>
+									<option value="${fn:escapeXml(UniteMesure.uniteId) }">${fn:escapeXml(UniteMesure.nomUnite) } </option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</select>
 				</div>
@@ -66,6 +73,21 @@
 						</div>
 					</div>
 				</li>
+				<c:forEach var="ModuleXComposant" items="${Module.moduleXComposants }">
+					<li class="list-group-item list-composant">
+						<div class="row">
+							<div class="col-8">
+								<input class="form-control" idComposant="${fn:escapeXml(ModuleXComposant.composant.composantId) }" value="${fn:escapeXml(ModuleXComposant.composant.nom) } | ${fn:escapeXml(ModuleXComposant.composant.materiaux.nom) } | ${fn:escapeXml(ModuleXComposant.composant.familleComposant.nom) }" style="text-align:center" disabled>
+							</div>
+							<div class="col-3">
+								<input class="form-control" quantiteComposant="${fn:escapeXml(ModuleXComposant.quantite) }" value="${fn:escapeXml(ModuleXComposant.quantite) }" style="text-align:center" disabled>
+							</div>
+							<div class="col-1">
+								<input class="form-check-input" type="radio" name="selectItems" style="margin-top: 13px;margin-left: 0px;">
+							</div>
+						</div>
+					</li>
+				</c:forEach>
 			</ul>
 			<div class="form-row">
 				<div class="form-group col-md-4">
@@ -73,28 +95,52 @@
 						name="gamme" class="custom-select" required>
 						<option value=""></option>
 						<c:forEach var="Gamme" items="${ListGamme }">
-							<option value="${fn:escapeXml(Gamme.gammeId) }">${fn:escapeXml(Gamme.nom) }
-							</option>
+							<c:choose>
+								<c:when test="${Module.gamme.gammeId == Gamme.gammeId }">
+									<option selected value="${fn:escapeXml(Gamme.gammeId) }">${fn:escapeXml(Gamme.nom) } </option>
+								</c:when>
+								<c:otherwise>
+									<option value="${fn:escapeXml(Gamme.gammeId) }">${fn:escapeXml(Gamme.nom) } </option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</select>
 				</div>
 				<div class="form-group col-md-4">
 					<div class="form-check form-check-inline alignCheckAngle">
-						<input class="form-check-input" data-toggle="collapse"
-							data-target="#collapseAngle" type="checkbox" id="Angle"
-							value="Angle"> <label class="form-check-label"
-							for="inlineCheckbox1">Contient un angle</label>
+						<c:choose>
+							<c:when test="${Module.angle == null }">
+								<input class="form-check-input" data-toggle="collapse" data-target="#collapseAngle" type="checkbox" id="Angle" value="Angle"> 
+							</c:when>
+							<c:otherwise>
+								<input class="form-check-input collapsed" data-toggle="collapse" data-target="#collapseAngle" type="checkbox" id="Angle" value="Angle" checked>
+							</c:otherwise>
+						</c:choose>
+						<label class="form-check-label" for="inlineCheckbox1">Contient un angle</label>
 					</div>
 				</div>
 
 				<div class="form-group col-md-4">
-					<div class="collapse" id="collapseAngle">
+				<c:choose>
+					<c:when test="${Module.angle == null }">
+						<div class="collapse" id="collapseAngle">
+					</c:when>
+					<c:otherwise>
+						<div class="collapse show" id="collapseAngle">
+					</c:otherwise>
+				</c:choose>
 						<label for="materiaux">Type d'angle</label> <select id="typeAngle"
 							name="typeAngle" class="custom-select">
 							<option value=""></option>
 							<c:forEach var="Angle" items="${ListAngle}">
-								<option value="${fn:escapeXml(Angle.angleId) }">${fn:escapeXml(Angle.typeAngle) }
-								</option>
+								<c:choose>
+									<c:when test="${Module.angle.angleId == Angle.angleId }">
+										<option selected value="${fn:escapeXml(Angle.angleId) }">${fn:escapeXml(Angle.typeAngle) }</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${fn:escapeXml(Angle.angleId) }">${fn:escapeXml(Angle.typeAngle) }</option>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</select>
 					</div>
@@ -103,8 +149,8 @@
 			<br> <br>
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<button class="btn btn-primary btn-block" type="button"
-						id="submitModule">Ajouter Module</button>
+					<button class="btn btn-warning btn-block" type="button"
+						id="editModule">Editer Module</button>
 				</div>
 				<div class="col-4">
 					<button class="btn btn-danger btn-block" type="button"
@@ -112,7 +158,6 @@
 				</div>
 			</div>
 	</div>
-
 
 	<div class="modal static fade" id="ModalAddComposant" tabindex="-1"
 		role="dialog" aria-labelledby="ModalAddComposantTitle"
@@ -143,7 +188,6 @@
 			</div>
 		</div>
 	</div>
-
 
 
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />

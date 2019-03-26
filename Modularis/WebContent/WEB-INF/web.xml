@@ -30,7 +30,7 @@
     <servlet-name>Connexion</servlet-name>
     <url-pattern>/Connexion</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>com.ril.servlet.Deconnexion</servlet-class>
   </servlet>
@@ -213,6 +213,14 @@
   <servlet-mapping>
     <servlet-name>AjoutModule</servlet-name>
     <url-pattern>/Configuration/AjoutModule</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditModule</servlet-name>
+    <servlet-class>com.ril.servlet.EditModule</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditModule</servlet-name>
+    <url-pattern>/Configuration/EditModule</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
