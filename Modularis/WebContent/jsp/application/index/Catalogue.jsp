@@ -14,15 +14,18 @@
 <a href="/Modularis" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 <div role="main" class="container">
 		<div class="col-lg-12 text-center">
-	        <h1>Gestion des catalogues</h1>
+	        <h1>Catalogues</h1>
 	        <br />
 	    </div>
 		<div class="row">
 			<div class="col-sm-6 col-md-4">
-				<button onclick="window.location.href = 'Catalogue/AjoutCatalogue';" class="menu-link"><i class="material-icons" style="float:left">library_add</i>Ajouter un catalogue</button>
+				<button onclick="window.location.href = 'Catalogue/AjoutCatalogue';" class="menu-link"><i class="material-icons" style="float:left">library_add</i>Gestion des catalogues</button>
 			</div>
 			<div class="col-sm-6 col-md-4">
 				<button onclick="window.location.href = 'Catalogue/EditCatalogue';" class="menu-link"><i class="material-icons" style="float:left">edit</i>Editer les catalogues</button>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<button onclick="window.location.href = 'Catalogue/ListCatalogue';" class="menu-link"><i class="material-icons" style="float:left">view_list</i>Voir les catalogues</button>
 			</div>
 	     </div>
      </div>

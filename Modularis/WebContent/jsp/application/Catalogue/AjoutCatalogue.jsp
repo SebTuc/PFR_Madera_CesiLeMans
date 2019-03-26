@@ -5,7 +5,7 @@
 
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Ajout Catalogue</title>
+	<title>Gestion Catalogue</title>
 	<jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
 
 </head>

@@ -198,6 +198,22 @@
     <servlet-name>EditCatalogue</servlet-name>
     <url-pattern>/Catalogue/EditCatalogue</url-pattern>
   </servlet-mapping>
+     <servlet>
+    <servlet-name>ListCatalogue</servlet-name>
+    <servlet-class>com.ril.servlet.ListCatalogue</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>ListCatalogue</servlet-name>
+    <url-pattern>/Catalogue/ListCatalogue</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>ListCatalogueProjet</servlet-name>
+    <servlet-class>com.ril.servlet.ListCatalogueProjet</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>ListCatalogueProjet</servlet-name>
+    <url-pattern>/Catalogue/ListCatalogueProjet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>ListModule</servlet-name>
     <servlet-class>com.ril.servlet.ListModule</servlet-class>
@@ -218,10 +234,20 @@
     <servlet-name>EditModule</servlet-name>
     <servlet-class>com.ril.servlet.EditModule</servlet-class>
   </servlet>
-  <servlet-mapping>
+   <servlet-mapping>
     <servlet-name>EditModule</servlet-name>
     <url-pattern>/Configuration/EditModule</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Photo</servlet-name>
+    <servlet-class>com.ril.servlet.Photo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Photo</servlet-name>
+    <url-pattern>/Photo</url-pattern>
+  </servlet-mapping>
+
+ 
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>

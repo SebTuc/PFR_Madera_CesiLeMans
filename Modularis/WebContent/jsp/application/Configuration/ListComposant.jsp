@@ -30,7 +30,7 @@
 			<div class="jumbotron" style="padding: 2rem 2rem">
 				<h5>selectionner les critere de recherche et valider :</h5>
 				<br>
-				<label for="familleComposant">Famille Compopsant</label>
+				<label for="familleComposant">Famille Composant</label>
 				<select id="familleComposant" class="custom-select" name="familleComposant" required>
 					<option value="-1" selected></option>
 			   		<c:forEach var="FamilleComposant" items="${ListFamilleComposant }">
