@@ -73,8 +73,6 @@ public class AjoutUtilisateur extends HttpServlet {
 					response.sendRedirect("/Modularis/Annuaire/ListUtilisateur");
 					
 				}
-				
-				
 			}
 		}
 	}

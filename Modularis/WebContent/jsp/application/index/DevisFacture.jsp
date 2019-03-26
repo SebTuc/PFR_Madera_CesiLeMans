@@ -14,15 +14,18 @@
 <a href="/Modularis" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 <div role="main" class="container">
 		<div class="col-lg-12 text-center">
-	        <h1>Gestion des catalogues</h1>
+	        <h1>Gestion des devis/projet/facture</h1>
 	        <br />
 	    </div>
 		<div class="row">
 			<div class="col-sm-12 col-md-4">
-				<button onclick="window.location.href = 'Catalogue/AjoutCatalogue';" class="menu-link"><i class="material-icons" style="float:left">library_add</i>Ajouter un catalogue</button>
+				<button onclick="window.location.href = 'DevisFacture/CreerProjet';" class="menu-link"><i class="material-icons" style="float:left">library_add</i>Creer un projet</button>
 			</div>
 			<div class="col-sm-12 col-md-4">
-				<button onclick="window.location.href = 'Catalogue/EditCatalogue';" class="menu-link"><i class="material-icons" style="float:left">edit</i>Editer les catalogues</button>
+				<button onclick="window.location.href = 'DevisFacture/ListDevis';" class="menu-link"><i class="material-icons" style="float:left">edit</i>Liste des devis</button>
+			</div>
+			<div class="col-sm-12 col-md-4">
+				<button onclick="window.location.href = 'DevisFacture/ListFacture';" class="menu-link"><i class="material-icons" style="float:left">edit</i>Liste des facture</button>
 			</div>
 	     </div>
      </div>
