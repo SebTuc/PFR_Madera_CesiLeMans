@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,9 +28,10 @@ public class EditCatalogue extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		request.setAttribute("JsonProjet", this.getJsonSerializedProjets());
-		request.setAttribute("JsonCatalogue", this.getJsonSerializedCatalogues());
+				
+		
+		request.setAttribute("JsonProjet", this.getJsonSerializedProjets().toString());
+		request.setAttribute("JsonCatalogue", this.getJsonSerializedCatalogues().toString());
 		request.getRequestDispatcher("/jsp/application/Catalogue/EditCatalogue.jsp").forward(request, response);
 	}
 
@@ -45,85 +47,64 @@ public class EditCatalogue extends HttpServlet {
 		String action = request.getParameter("action");
 	}
 
-	private String getJsonSerializedProjets() {
-		List<Projet> listProjet = projetService.getAllProjets();
+	private JsonArray getJsonSerializedProjets() {
+		
+		// Recuperation des projets sans catalogue
+		List<Projet> listProjet = 
+				projetService.getAllProjets().stream()
+								.filter(p -> p.getCatalogue() == null).collect(Collectors.toList());
 
-		String jsonData = "[";
-
-		if (listProjet != null) {
-			int listProjetSize = listProjet.size();
-
-			if (listProjetSize > 0) {
-				for (int i = 0; i < listProjetSize - 1; i++) {
-					Projet projet = listProjet.get(i);
-					jsonData += "{\"text\": \"" + projet.getNom() + "\"," + "\"metadata\": { id: \""
-							+ projet.getProjetId() + "\" }," + "\"type\": \"item\"},";
-				}
-
-				Projet projet = listProjet.get(listProjetSize - 1);
-				jsonData += "{\"text\": \"" + projet.getNom() + "\"," + "\"metadata\": { id: \"" + projet.getProjetId()
-						+ "\" }," + "\"type\": \"item\"}";
-
-			}
+		JsonArrayBuilder jsonProjets = Json.createArrayBuilder();
+		
+		if (listProjet != null && listProjet.size() > 0) {			
+			for (Projet projet : listProjet) {
+				jsonProjets
+					.add(Json.createObjectBuilder()
+							.add("text", projet.getNom())
+							.add("metadata", Json.createObjectBuilder()
+									.add("id", projet.getProjetId()))
+							.add("type","item"));
+			}					
 		}
-		jsonData += "]";
-		return jsonData;
-
+		
+		return jsonProjets.build();
 	}
 
-	private String getJsonSerializedCatalogues() {
+	private JsonArray getJsonSerializedCatalogues() {
 		List<Catalogue> listCatalogue = catalogueService.getAllCatalogues();
-
-		String jsonData = "[";
-
-		if (listCatalogue != null) {
-			int listCatalogueSize = listCatalogue.size();
-
-			if (listCatalogueSize > 0) {
-				for (int i = 0; i < listCatalogueSize - 1; i++) {
-					Catalogue catalogue = listCatalogue.get(i);
-					List<Projet> projetsCatalogue = catalogue.getProjets().stream().collect(Collectors.toList());
-					int listProjetCatalogueSize = projetsCatalogue.size();
-					jsonData += "{\"text\": \"" + catalogue.getCatalogueNom() + " - " + catalogue.getAnnee() + "\"," + "\"metadata\": { id: \""
-							+ catalogue.getCatalogueId() + "\" }," + "\"type\": \"category\"," + "\"children\":"
-							+ this.getJsonSerializedProjetsOfCatalogue(catalogue) + "},";
-				}
-
-				Catalogue catalogue = listCatalogue.get(listCatalogueSize - 1);
-				jsonData += "{\"text\": \"" + catalogue.getCatalogueNom() + " - " + catalogue.getAnnee() + "\"," + "\"metadata\": { id: \""
-						+ catalogue.getCatalogueId() + "\" }," + "\"type\": \"category\"," + "\"children\":"
-						+ this.getJsonSerializedProjetsOfCatalogue(catalogue) + "}";
-
+		JsonArrayBuilder jsonCatalogues = Json.createArrayBuilder();
+		
+		if (listCatalogue != null && listCatalogue.size() > 0) {
+			for (Catalogue catalogue : listCatalogue) {
+				jsonCatalogues
+				.add(Json.createObjectBuilder()
+						.add("text", catalogue.getCatalogueNom() + " - " + catalogue.getAnnee())
+						.add("metadata", Json.createObjectBuilder()
+								.add("id", catalogue.getCatalogueId()))
+						.add("type","category")
+						.add("children", this.getJsonSerializedProjetsOfCatalogue(catalogue)));
 			}
 		}
-
-		jsonData += "]";
-		return jsonData;
+		
+		return jsonCatalogues.build();
 	}
 
-	private String getJsonSerializedProjetsOfCatalogue(Catalogue catalogue) {
-		List<Projet> projetsCatalogue = catalogue.getProjets().stream().collect(Collectors.toList());
-
-		String jsonData = "[";
-
-		if (projetsCatalogue != null) {
-			int listProjetCatalogueSize = projetsCatalogue.size();
-
-			if (listProjetCatalogueSize > 0) {
-				for (int j = 0; j < listProjetCatalogueSize - 1; j++) {
-					Projet projetCatalogue = projetsCatalogue.get(j);
-					jsonData += "{ \"text\": \"" + projetCatalogue.getNom() + "\"," + "\"metadata\": {\"id\": \""
-							+ projetCatalogue.getProjetId() + "\" }," + "\"type\": \"item\"},";
-				}
-
-				Projet projetCatalogue = projetsCatalogue.get(listProjetCatalogueSize - 1);
-				jsonData += "{ \"text\": \"" + projetCatalogue.getNom() + "\"," + "\"metadata\": {\"id\": \""
-						+ projetCatalogue.getProjetId() + "\" }," + "\"type\": \"item\"}";
-
+	private JsonArray getJsonSerializedProjetsOfCatalogue(Catalogue catalogue) {
+		List<Projet> listProjetsCatalogue = catalogue.getProjets().stream().collect(Collectors.toList());
+		JsonArrayBuilder jsonProjetsCatalogue = Json.createArrayBuilder();
+		
+		if(listProjetsCatalogue != null && listProjetsCatalogue.size() > 0) {
+			for (Projet projetCatalogue : listProjetsCatalogue) {
+				jsonProjetsCatalogue
+				.add(Json.createObjectBuilder()
+						.add("text", projetCatalogue.getNom())
+						.add("metadata", Json.createObjectBuilder()
+								.add("id", projetCatalogue.getProjetId()))
+						.add("type","item"));
 			}
 		}
-		jsonData += "]";
-		return jsonData;
+		
+		return jsonProjetsCatalogue.build();				
 	}
 
 }

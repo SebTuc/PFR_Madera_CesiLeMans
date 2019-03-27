@@ -33,7 +33,7 @@ public class Image {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "PROJET_ID", unique = true, nullable = false)
+	@Column(name = "IMAGE_ID", unique = true, nullable = false)
 	public Integer getImageId() {
 		return imageId;
 	}

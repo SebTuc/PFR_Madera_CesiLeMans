@@ -176,7 +176,7 @@
         var categoryTreeNodeSelected = $(categoryTree).jstree("get_node", $(categoryTree).jstree(true).get_selected()[0]);
 
 
-        if (itemListNodeSelected != undefined && categoryTreeNodeSelected != undefined) {
+        if (itemListNodeSelected && categoryTreeNodeSelected) {
 
           var alreadyIn = false;
           $(categoryTree).jstree("redraw_node", categoryTreeNodeSelected, true, false, true);

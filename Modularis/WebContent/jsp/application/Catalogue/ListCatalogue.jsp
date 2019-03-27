@@ -48,12 +48,6 @@
 		</section>
 	</div>
 
-	<br> <br>
-
-
-
-	</div>
-
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />
 </body>
 
