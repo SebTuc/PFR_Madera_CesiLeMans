@@ -278,6 +278,7 @@
     <servlet-name>Photo</servlet-name>
     <url-pattern>/Photo</url-pattern>
   </servlet-mapping>
+
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>
