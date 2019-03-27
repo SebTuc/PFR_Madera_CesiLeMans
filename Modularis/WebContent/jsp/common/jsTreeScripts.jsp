@@ -50,9 +50,11 @@
 
             // REQUETE AJAX ADD                 
             case "create_node":
+              console.log(node);
+              console.log(node_parent);
               if (node != undefined && node_parent != undefined) {
 
-                var rowData = { 'idProjet': node.original.metadata.id, 'idCatalogue': node_parent.original.metadata.id }
+                var rowData = { 'idProjet': node.metadata.id, 'idCatalogue': node_parent.original.metadata.id }
                 var request = formatAjaxRequest(rowData);
                 request += "&action=Push";
 
@@ -64,8 +66,7 @@
                   error: function () { return false }
                 });
               }
-
-              return false;
+              break;
 
             // REQUETE AJAX DELETE
             case "delete_node":
@@ -83,7 +84,7 @@
                   error: function () { return false }
                 });
               }
-              return true;
+              break;
 
             default:
               break;

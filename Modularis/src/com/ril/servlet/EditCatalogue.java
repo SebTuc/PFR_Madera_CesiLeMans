@@ -25,10 +25,16 @@ public class EditCatalogue extends HttpServlet {
 
 	private CatalogueService catalogueService = new CatalogueService();
 	private ProjetService projetService = new ProjetService();
+	
+	private List<Catalogue> listCatalogue;
+	private List<Projet> listProjet;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-				
+		
+		// Premierer recuperation de tous les projets et catalogues
+		this.listCatalogue =  catalogueService.getAllCatalogues();
+		this.listProjet = projetService.getAllProjets();
 		
 		request.setAttribute("JsonProjet", this.getJsonSerializedProjets().toString());
 		request.setAttribute("JsonCatalogue", this.getJsonSerializedCatalogues().toString());
@@ -45,19 +51,63 @@ public class EditCatalogue extends HttpServlet {
 		String idProjet = request.getParameter("idProjet");
 		String idCatalogue = request.getParameter("idCatalogue");
 		String action = request.getParameter("action");
+		String error = null;
+		
+		if (action != null && action != "" ) {
+			if(isInteger(idProjet)) {
+				if(isInteger(idCatalogue)) {
+															
+					// Recuperation du catalogue et du projet puis link du projet dans catalogue
+					Catalogue catalogue = catalogueService.getCatalogueById(Integer.parseInt(idCatalogue));
+					Projet projet = projetService.getProjetById(Integer.parseInt(idProjet));
+	
+					if(projet != null) {
+						if (catalogue != null) {
+												
+							switch (action) {
+								case "Push":
+									
+									catalogueService.addProjetToCatalogue(catalogue, projet);
+									break;
+									
+								case "Withdraw":					
+									
+									catalogueService.removeProjetFromCatalogue(catalogue, projet);
+									break;
+					
+								default:
+									break;
+							}
+						}else {error = "Aucun catalogue trouvé avec l'id "+idCatalogue;}
+					}else {error = "Aucun projet trouvé avec l'id "+idProjet;}
+						
+					// Retour des projets
+					response.setStatus(200);
+					response.setContentType("application/json");
+					response.getWriter().print(this.getJsonSerializedProjets().toString());
+					response.getWriter().flush();	
+					
+				} else {error = "l'id du catalogue non n'est pas un entier";}
+			} else {error = "l'id du projet non n'est pas un entier";}
+		} else {error = "Action inconnue";}
+
+		
+		// Renvoir d'une erreur
+		if (error != null) {			
+			response.setStatus(400);
+			response.setContentType("application/json");
+			response.getWriter().print("[{ \"error\": \""+error+"\"}]");
+			response.getWriter().flush();
+		}
 	}
 
 	private JsonArray getJsonSerializedProjets() {
 		
 		// Recuperation des projets sans catalogue
-		List<Projet> listProjet = 
-				projetService.getAllProjets().stream()
-								.filter(p -> p.getCatalogue() == null).collect(Collectors.toList());
-
 		JsonArrayBuilder jsonProjets = Json.createArrayBuilder();
 		
-		if (listProjet != null && listProjet.size() > 0) {			
-			for (Projet projet : listProjet) {
+		if (this.listProjet != null && this.listProjet.size() > 0) {			
+			for (Projet projet : this.listProjet) {
 				jsonProjets
 					.add(Json.createObjectBuilder()
 							.add("text", projet.getNom())
@@ -71,7 +121,6 @@ public class EditCatalogue extends HttpServlet {
 	}
 
 	private JsonArray getJsonSerializedCatalogues() {
-		List<Catalogue> listCatalogue = catalogueService.getAllCatalogues();
 		JsonArrayBuilder jsonCatalogues = Json.createArrayBuilder();
 		
 		if (listCatalogue != null && listCatalogue.size() > 0) {
@@ -105,6 +154,18 @@ public class EditCatalogue extends HttpServlet {
 		}
 		
 		return jsonProjetsCatalogue.build();				
+	}
+	
+	private static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
 	}
 
 }
