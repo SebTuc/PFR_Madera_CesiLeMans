@@ -23,6 +23,10 @@ public class Image {
 	
 	private Set<Projet> projet = new HashSet<Projet>();
 	
+	public Image() {
+	}
+
+	
 	public Image(byte[] photo) {
 		this.photo = photo;
 	}

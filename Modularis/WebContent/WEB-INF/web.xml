@@ -239,6 +239,38 @@
     <url-pattern>/Configuration/EditModule</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AjoutClient</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutClient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutClient</servlet-name>
+    <url-pattern>/Annuaire/AjoutClient</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListClient</servlet-name>
+    <servlet-class>com.ril.servlet.ListClient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListClient</servlet-name>
+    <url-pattern>/Annuaire/ListClient</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DevisFacture</servlet-name>
+    <servlet-class>com.ril.servlet.DevisFacture</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DevisFacture</servlet-name>
+    <url-pattern>/DevisFacture</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CreerProjet</servlet-name>
+    <servlet-class>com.ril.servlet.CreerProjet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreerProjet</servlet-name>
+    <url-pattern>/DevisFacture/CreerProjet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Photo</servlet-name>
     <servlet-class>com.ril.servlet.Photo</servlet-class>
   </servlet>
