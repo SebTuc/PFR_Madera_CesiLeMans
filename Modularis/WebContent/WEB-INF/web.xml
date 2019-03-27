@@ -31,6 +31,14 @@
     <url-pattern>/Connexion</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DetailDevis</servlet-name>
+    <servlet-class>com.ril.servlet.DetailDevis</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailDevis</servlet-name>
+    <url-pattern>/DevisFacture/DetailDevis</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>com.ril.servlet.Deconnexion</servlet-class>
   </servlet>
@@ -198,19 +206,19 @@
     <servlet-name>EditCatalogue</servlet-name>
     <url-pattern>/Catalogue/EditCatalogue</url-pattern>
   </servlet-mapping>
-     <servlet>
+  <servlet>
     <servlet-name>ListCatalogue</servlet-name>
     <servlet-class>com.ril.servlet.ListCatalogue</servlet-class>
   </servlet>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>ListCatalogue</servlet-name>
     <url-pattern>/Catalogue/ListCatalogue</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>ListCatalogueProjet</servlet-name>
     <servlet-class>com.ril.servlet.ListCatalogueProjet</servlet-class>
   </servlet>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>ListCatalogueProjet</servlet-name>
     <url-pattern>/Catalogue/ListCatalogueProjet</url-pattern>
   </servlet-mapping>
@@ -234,7 +242,7 @@
     <servlet-name>EditModule</servlet-name>
     <servlet-class>com.ril.servlet.EditModule</servlet-class>
   </servlet>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>EditModule</servlet-name>
     <url-pattern>/Configuration/EditModule</url-pattern>
   </servlet-mapping>
@@ -278,7 +286,6 @@
     <servlet-name>Photo</servlet-name>
     <url-pattern>/Photo</url-pattern>
   </servlet-mapping>
-
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>
