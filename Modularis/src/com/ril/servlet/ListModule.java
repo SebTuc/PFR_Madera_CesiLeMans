@@ -72,7 +72,7 @@ public class ListModule extends HttpServlet {
 		String gamme = request.getParameter("gamme");
 		String nomModule = request.getParameter("nomModule");
 		//Trie par critere
-		if(gamme != null && !(gamme != "-1") || nomModule != null && !(nomModule.equals(""))) {
+		if(gamme != null && !(gamme.equals("-1")) || nomModule != null && !(nomModule.equals(""))) {
 			if(ListModule != null) {
 				if(isInteger(gamme)) {
 					for(Module module : ListModule) {

@@ -25,7 +25,7 @@
 				<button onclick="window.location.href = 'Catalogue';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">shopping_cart</i> <br/>Catalogue (Visionner / Editer)</button>
 			</div>
 			<div class="col-sm-6 col-md-4">
-				<button onclick="window.location.href = 'Devis';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">library_books</i> <br/>Devis / Facture</button>
+				<button onclick="window.location.href = 'DevisFacture';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">library_books</i> <br/>Devis / Facture</button>
 			</div>
 			<div class="col-sm-6 col-md-4">
 				<button onclick="window.location.href = 'Annuaire';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">people</i> <br/>Annuaire</button>

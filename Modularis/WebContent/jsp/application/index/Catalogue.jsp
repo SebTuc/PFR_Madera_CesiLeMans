@@ -20,8 +20,10 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-4">
 				<button onclick="window.location.href = 'Catalogue/AjoutCatalogue';" class="menu-link"><i class="material-icons" style="float:left">library_add</i>Gestion des catalogues</button>
+			<div class="col-sm-12 col-md-4">
+				<button onclick="window.location.href = 'Catalogue/AjoutCatalogue';" class="menu-link"><i class="material-icons" style="float:left">library_add</i>Ajouter un catalogue</button>
 			</div>
-			<div class="col-sm-6 col-md-4">
+			<div class="col-sm-12 col-md-4">
 				<button onclick="window.location.href = 'Catalogue/EditCatalogue';" class="menu-link"><i class="material-icons" style="float:left">edit</i>Editer les catalogues</button>
 			</div>
 			<div class="col-sm-6 col-md-4">
