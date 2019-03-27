@@ -13,6 +13,7 @@ import org.jboss.logging.Logger;
 
 import com.ril.hibernate.HibernateUtil;
 import com.ril.model.Catalogue;
+import com.ril.model.Projet;
 
 /**
  * Home object for domain model class Catalogue.
@@ -35,6 +36,24 @@ public class CatalogueHome {
 			throw re;
 		}
 	}
+	
+	public void persistJoin(Catalogue firstPersistentJoinedInstance, Projet secondPersistentJoinedInstance) {
+		log.debug("removing join beetween Projet and Catalogue instances");
+		try {
+			
+			Session session = HibernateUtil.getSession();
+			firstPersistentJoinedInstance.getProjets().add(secondPersistentJoinedInstance);			
+			secondPersistentJoinedInstance.getCatalogue().add(firstPersistentJoinedInstance);
+			session.merge(secondPersistentJoinedInstance);
+			session.merge(firstPersistentJoinedInstance);	
+			
+			HibernateUtil.push();
+			log.debug("join remove successful");
+		} catch (RuntimeException re) {
+			log.error("join remove failed", re);
+			throw re;
+		}
+	}
 
 	public void remove(Catalogue persistentInstance) {
 		log.debug("removing Catalogue instance");
@@ -44,6 +63,24 @@ public class CatalogueHome {
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
 			log.error("remove failed", re);
+			throw re;
+		}
+	}
+	
+	public void removeJoin(Catalogue firstPersistentJoinedInstance, Projet secondPersistentJoinedInstance) {
+		log.debug("removing join beetween Projet and Catalogue instances");
+		try {
+			
+			Session session = HibernateUtil.getSession();
+			firstPersistentJoinedInstance.getProjets().remove(secondPersistentJoinedInstance);			
+			secondPersistentJoinedInstance.getCatalogue().remove(firstPersistentJoinedInstance);
+			session.merge(secondPersistentJoinedInstance);
+			session.merge(firstPersistentJoinedInstance);	
+			
+			HibernateUtil.push();
+			log.debug("join remove successful");
+		} catch (RuntimeException re) {
+			log.error("join remove failed", re);
 			throw re;
 		}
 	}

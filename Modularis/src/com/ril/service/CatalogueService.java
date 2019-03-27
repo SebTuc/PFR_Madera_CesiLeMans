@@ -3,7 +3,9 @@ package com.ril.service;
 import java.util.List;
 
 import com.ril.daoHibernate.CatalogueHome;
+import com.ril.daoHibernate.ProjetHome;
 import com.ril.model.Catalogue;
+import com.ril.model.Projet;
 
 public class CatalogueService {
 
@@ -72,5 +74,29 @@ public class CatalogueService {
 		CatalogueHome dao = new CatalogueHome();
 
 		return dao.findAll();
+	}
+	
+	public void addProjetToCatalogue(Catalogue catalogue, Projet projet) {
+
+		CatalogueHome dao = new CatalogueHome();
+
+		if(catalogue != null && projet !=null) 
+		{
+			if(!catalogue.getProjets().contains(projet) && !projet.getCatalogue().contains(catalogue)) {				
+				dao.persistJoin(catalogue, projet);
+			}
+		}
+	}
+	
+	public void removeProjetFromCatalogue(Catalogue catalogue, Projet projet) {
+
+		CatalogueHome dao = new CatalogueHome();
+
+		if(catalogue != null && projet !=null) 
+		{
+			if(catalogue.getProjets().contains(projet) && projet.getCatalogue().contains(catalogue)) {	
+				dao.removeJoin(catalogue, projet);
+			}
+		}
 	}
 }
