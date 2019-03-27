@@ -50,8 +50,9 @@ INSERT INTO `donnees_personelle` (`DONNEES_PERSONELLE_ID`, `NOM`, `PRENOM`, `EMA
 (5, 'Malone', 'Kevin', 'kevin.malone@madera.fr', '3bis, Rue du chocolat', '0654785513', '74150'),
 (6, 'Scott', 'Mickael', 'mickael.scott', '2bis, Boulevard des enfants', '0254778953', '59000'),
 (7, 'Beesly', 'Pamela', 'pamela.beesly@madera', '8, Quartier des promesses', '0623445877', '74000'),
-(8, 'Philbin', 'Daryl', 'daryl.philbin@madera.fr', '12 Résidence du ruisseaux', '0699845125', '40100');
-(9, 'administrateur', 'Master', 'admin.master@madera.fr', '', '4100', '');
+(8, 'Philbin', 'Daryl', 'daryl.philbin@madera.fr', '12 Résidence du ruisseaux', '0699845125', '40100'),
+(9, 'administrateur', 'Master', 'admin.master@madera.fr', '', '', '');
+
 
 --
 -- Contenu de la table `entrepot`
@@ -154,7 +155,7 @@ INSERT INTO `metier` (`METIER_ID`, `NOM`) VALUES
 (3, 'Comptabilité'),
 (4, 'Responsable de Bureau d''études'),
 (5, 'Dessinateur'),
-(6, 'Logisticien');
+(6, 'Logisticien'),
 (7, 'Moderateur');
 
 --
@@ -216,7 +217,7 @@ INSERT INTO `utilisateur` (`UTILISATEUR_ID`, `LOGIN`, `PASSWORD`, `METIER_ID`, `
 (5, 'kmalone', 'kmalone', 3, 5),
 (6, 'mscott', 'mscott', 4, 6),
 (7, 'pbeesly', 'pbeesly', 5, 7),
-(8, 'dphilbin', 'dphilbin', 6, 8);
+(8, 'dphilbin', 'dphilbin', 6, 8),
 (9, 'admin', 'admin', 7, 9);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
