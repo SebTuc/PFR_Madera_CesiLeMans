@@ -6,6 +6,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -86,7 +87,7 @@ public class Piece implements java.io.Serializable {
 		this.surface = surface;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pieces")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pieces" , cascade = CascadeType.ALL)
 	public Set<Module> getModules() {
 		return this.modules;
 	}

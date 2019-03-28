@@ -13,11 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.ril.model.Composant;
 import com.ril.model.Gamme;
 import com.ril.model.Module;
-import com.ril.model.ModuleXComposant;
 import com.ril.service.ComposantService;
 import com.ril.service.GammeService;
 import com.ril.service.ModuleService;
-import com.ril.service.ModuleXComposantService;
 
 /**
  * Servlet implementation class ListModule
@@ -29,7 +27,6 @@ public class ListModule extends HttpServlet {
 	private ModuleService moduleService = new ModuleService();
 	private GammeService gammeService = new GammeService();	
 	private ComposantService composantService = new ComposantService();
-	private ModuleXComposantService moduleXComposantService = new ModuleXComposantService();
 	
 	
 	private static boolean isInteger(String s) {
@@ -144,12 +141,17 @@ public class ListModule extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+ "/Configuration/EditModule?id="+moduleId);
 			
 		}else if( btnSupprimer != null && moduleId != null) {
-			Module module = moduleService.getModuleById(Integer.valueOf(moduleId));
+			if(isInteger(moduleId)) {
+				Module module = moduleService.getModuleById(Integer.valueOf(moduleId));
 
-			moduleService.removeModule(module);
-			
-			doGet(request, response);
-			
+				moduleService.removeModule(module);
+				
+				doGet(request, response);
+			}else{
+				request.setAttribute("Erreur", "Module ID n'est pas un nombre, si le probleme persiste contacter le support.");
+				doGet(request, response);
+				
+			}
 		}else {
 			
 			doGet(request, response);

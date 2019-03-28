@@ -16,8 +16,12 @@
 
 <a href="/Modularis/Configuration" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 <div role="main" class="container-fluid">
-<!-- Faire une collapse et un bouton pour l'ouvrir avec critere de recherche ou un truc comme sa , ensuite faire dans le get un trie sur la list selon les parametre recu en get -->
-<div class="row justify-content-center">
+		<c:choose>
+			<c:when test="${Erreur != null }">
+				<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+			</c:when>
+		</c:choose>
+		<div class="row justify-content-center">
 	<h3>Liste des Modules</h3>
 </div>
 <div class="row justify-content-center">
@@ -67,7 +71,7 @@
 <br>
 <form id="List" method="post">
 	<div class="row justify-content-center">
-		<ul class="list-group" style="max-height: 300px;overflow: auto;">
+		<ul class="list-group list-radio">
 			<c:choose>
 				<c:when test="${isEmptyList == true }">
 				<li class="list-group-item">

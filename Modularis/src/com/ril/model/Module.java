@@ -113,7 +113,7 @@ public class Module implements java.io.Serializable {
 		this.gamme = gamme;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@JoinTable(name = "piece_x_module", catalog = "modularisbdd", joinColumns = {
 			@JoinColumn(name = "MODULE_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "PIECE_ID", nullable = false, updatable = false) })

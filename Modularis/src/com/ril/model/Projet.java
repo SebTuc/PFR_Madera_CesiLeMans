@@ -6,6 +6,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,6 +41,12 @@ public class Projet implements java.io.Serializable {
 	public Projet( String nom) {
 		this.nom = nom;
 	}
+	
+	public Projet( String nom,Image image) {
+		this.nom = nom;
+		this.image = image;
+	}
+	
 	public Projet(Set<Catalogue> catalogue, String nom) {
 		this.catalogue = catalogue;
 		this.nom = nom;
@@ -91,7 +98,7 @@ public class Projet implements java.io.Serializable {
 		this.devises = devises;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projet")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projet", cascade = CascadeType.ALL)
 	public Set<Plan> getPlans() {
 		return this.plans;
 	}

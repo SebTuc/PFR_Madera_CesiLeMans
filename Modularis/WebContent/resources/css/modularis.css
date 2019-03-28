@@ -364,6 +364,12 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 	margin-left:100px;
 }
 
+.list-radio{
+	max-height: 400px;
+	overflow: auto; 
+	width: 80%;
+}
+
 .return-btn{
 	margin-top: 15px;
     margin-left: 15px;

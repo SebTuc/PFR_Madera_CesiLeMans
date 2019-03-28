@@ -17,13 +17,13 @@ CREATE TABLE DEVIS(
 CREATE TABLE PROJET(
         PROJET_ID int (11) Auto_increment  NOT NULL ,
         NOM       Varchar (255) NOT NULL ,
-        IMAGE_ID  Int NOT NULL ,
+        IMAGE_ID  Int ,
         PRIMARY KEY (PROJET_ID )
 )ENGINE=InnoDB;
 
 CREATE TABLE PLAN(
         PLAN_ID   int (11) Auto_increment  NOT NULL ,
-        NOM       Varchar (255) NOT NULL ,
+        NOM       Varchar (100) NOT NULL ,
         PROJET_ID Int NOT NULL ,
         PRIMARY KEY (PLAN_ID )
 )ENGINE=InnoDB;
@@ -55,7 +55,7 @@ CREATE TABLE MATERIAUX(
 
 CREATE TABLE PIECE(
         PIECE_ID int (11) Auto_increment  NOT NULL ,
-        NOM      Varchar (255) NOT NULL ,
+        NOM      Varchar (100) NOT NULL ,
         SURFACE  Float NOT NULL ,
         PLAN_ID  Int NOT NULL ,
         PRIMARY KEY (PIECE_ID )
@@ -164,7 +164,7 @@ CREATE TABLE UNITE_MESURE(
 
 CREATE TABLE IMAGE(
         IMAGE_ID int (11) Auto_increment  NOT NULL ,
-        PHOTO    Blob NOT NULL ,
+        PHOTO    LongBlob NOT NULL ,
         PRIMARY KEY (IMAGE_ID )
 )ENGINE=InnoDB;
 

@@ -2,11 +2,108 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+  <meta charset="ISO-8859-1">
+  <title>List projet</title>
+  <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
+
 </head>
+
 <body>
 
+  <jsp:include page="/jsp/common/navbar.jsp" />
+
+<a href="/Modularis/DevisFacture" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
+<div role="main" class="container-fluid">
+
+		<c:choose>
+			<c:when test="${Erreur != null }">
+				<div class="row justify-content-center">
+					<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+				</div>
+			</c:when>
+		</c:choose>
+
+<div class="row justify-content-center">
+	<h3>Liste des Projet</h3>
+</div>
+<br>
+<form id="List" method="post">
+	<div class="row justify-content-center">
+		<ul class="list-group list-radio" >
+			<c:choose>
+				<c:when test="${isEmptyList == true }">
+				<li class="list-group-item">
+					Aucun projet trouver !
+				</li>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="Projet" items="${ListProjet}" >
+						<li class="list-group-item">
+							<div class="form-check form-check-inline not-inline">
+								<div class="media">
+  									<div class="media-body">
+										<input class="form-check-input" type="radio" name="radio" id="${fn:escapeXml(Projet.projetId)}" value="${fn:escapeXml(Projet.projetId)}">
+										<label class="form-check-label label-lg" for="${fn:escapeXml(Projet.projetId)}">${fn:escapeXml(Projet.nom)} </label>
+									</div>
+									<c:choose>
+										<c:when test="${Projet.image.imageId != null}">
+										<img src="/Modularis/Photo?id=${Projet.image.imageId }" class="ml-3" alt="miniature ${fn:escapeXml(Projet.nom)}" style="max-height: 60px;" />
+										</c:when>
+									</c:choose>
+								</div>
+							</div>
+						</li>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</ul>
+	</div>
+		<div class="row justify-content-center">
+		 	<a href="/Modularis/DevisFacture/CreerProjet" class="btn material-icons material-icons-btn material-icons-btn-add-lg ml-2">add_circle</a>
+		</div>	
+		<br> <br>
+	
+	<div class="row justify-content-center">
+		<div class="col-6">
+			<div class="row justify-content-center">
+				<div class="col-md-4 col-sm-12">
+					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Editer</button>
+				</div>
+				<br>
+				<div class="col-md-4 col-sm-12">
+					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
+				</div>
+				<br>
+				<div class="col-md-4 col-sm-12">
+					<button class="btn btn-success btn-block btn-lg" name="btnGenerateDevis" id="btnGenerateDevis">Generer un devis</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+</div>
+
+<div class="modal static fade" id="ModalConfirmationSuppression" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationSuppressionTitle" aria-hidden="true">
+	  	<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="ModalConfirmationSuppressionTitle">Suppression</h5>
+		      </div>
+		      <div class="modal-body">
+		        Etez-vous sur de vouloir continuer ?
+		      </div>
+			      <div class="modal-footer">
+			        <button type="button" id="btnModalSupprNon" class="btn btn-primary" data-dismiss="modal">Non</button>
+			    	<button type="button" id="btnModalSupprOui" class="btn btn-danger">Oui</button>
+		    	</div>
+		   	</div>
+		</div>
+	</div>
+
+  <jsp:include page="/jsp/common/defaultScripts.jsp" />
 </body>
+
 </html>

@@ -27,6 +27,9 @@
 			<div class="col-sm-12 col-md-4">
 				<button onclick="window.location.href = 'DevisFacture/ListFacture';" class="menu-link"><i class="material-icons" style="float:left">edit</i>Liste des facture</button>
 			</div>
+			<div class="col-sm-12 col-md-4">
+				<button onclick="window.location.href = 'DevisFacture/ListProjet';" class="menu-link"><i class="material-icons" style="float:left">edit</i>Liste des projets</button>
+			</div>
 	     </div>
      </div>
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />

@@ -3,17 +3,36 @@ package com.ril.service;
 import java.util.List;
 
 import com.ril.daoHibernate.ProjetHome;
+import com.ril.model.Image;
 import com.ril.model.Projet;
 
 public class ProjetService {
 
-public int addProjet(String nom) {
+	public int addProjet(String nom) {
 		
 		ProjetHome dao = new ProjetHome();
 		
 		if(nom != null) {
 			
 			Projet projet = new Projet(nom);
+			
+			dao.persist(projet);
+			
+			return projet.getProjetId();
+			
+		} else {
+			
+			return -1;
+		}
+	}
+	
+	public int addProjet(String nom,Image image) {
+		
+		ProjetHome dao = new ProjetHome();
+		
+		if(nom != null) {
+			
+			Projet projet = new Projet(nom,image);
 			
 			dao.persist(projet);
 			

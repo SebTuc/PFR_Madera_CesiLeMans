@@ -271,6 +271,38 @@
     <url-pattern>/DevisFacture</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ListProjet</servlet-name>
+    <servlet-class>com.ril.servlet.ListProjet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListProjet</servlet-name>
+    <url-pattern>/DevisFacture/ListProjet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditProjet</servlet-name>
+    <servlet-class>com.ril.servlet.EditProjet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProjet</servlet-name>
+    <url-pattern>/DevisFacture/EditProjet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditPlan</servlet-name>
+    <servlet-class>com.ril.servlet.EditPlan</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditPlan</servlet-name>
+    <url-pattern>/DevisFacture/EditPlan</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditPiece</servlet-name>
+    <servlet-class>com.ril.servlet.EditPiece</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditPiece</servlet-name>
+    <url-pattern>/DevisFacture/EditPiece</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>CreerProjet</servlet-name>
     <servlet-class>com.ril.servlet.CreerProjet</servlet-class>
   </servlet>

@@ -5,6 +5,7 @@ import java.util.List;
 import com.ril.daoHibernate.PieceHome;
 import com.ril.model.Piece;
 import com.ril.model.Plan;
+import com.ril.model.Module;
 
 public class PieceService {
 
@@ -47,6 +48,24 @@ public class PieceService {
 			dao.remove(piece);
 		}
 	}
+	/*
+	 * Return false si le module n'a pas etait supprimer ou n'exister pas
+	 */
+	public boolean removeModuleInPiece(Piece piece,Module module) {
+		boolean flag=false;
+		PieceHome dao = new PieceHome();
+		
+		if(piece != null && module != null) {
+			
+			if(moduleExistInPiece(piece,module)) {
+				piece.getModules().remove(module);
+				flag=true;
+			}
+			dao.merge(piece);
+		}
+		return flag;
+	}
+	
 	public void removePiece(Piece piece) {
 
 		PieceHome dao = new PieceHome();
@@ -62,6 +81,17 @@ public class PieceService {
 		PieceHome dao = new PieceHome();
 		
 		return dao.findById(id);
+	}
+	
+	public boolean moduleExistInPiece(Piece piece , Module module) {
+		
+		for(Module mod : piece.getModules()) {
+			if(mod.getModuleId() == module.getModuleId()) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	public List<Piece> getAllPieces(){

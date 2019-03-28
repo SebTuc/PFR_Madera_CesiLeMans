@@ -79,7 +79,7 @@
 <br>
 <form id="List" method="post">
 	<div class="row justify-content-center">
-		<ul class="list-group" style="max-height: 500px;overflow: auto;">
+		<ul class="list-group list-radio">
 			<c:choose>
 				<c:when test="${isEmptyList == true }">
 				<li class="list-group-item">

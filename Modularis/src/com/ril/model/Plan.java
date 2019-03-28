@@ -6,6 +6,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -75,7 +76,7 @@ public class Plan implements java.io.Serializable {
 		this.nom = nom;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plan")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plan", cascade = CascadeType.ALL)
 	public Set<Piece> getPieces() {
 		return this.pieces;
 	}
