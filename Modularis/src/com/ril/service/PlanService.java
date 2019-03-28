@@ -5,6 +5,22 @@ import com.ril.model.Plan;
 import com.ril.model.Projet;
 
 public class PlanService {
+	
+	public int addPlan(Plan plan) {
+		
+		PlanHome dao = new PlanHome();
+		
+		if(plan != null) {
+			
+			dao.persist(plan);
+			
+			return plan.getPlanId();
+			
+		} else {
+			
+			return -1;
+		}
+	}
 
 	public int addPlan(Projet projet, String nom) {
 		

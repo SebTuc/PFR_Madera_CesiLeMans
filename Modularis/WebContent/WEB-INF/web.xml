@@ -223,6 +223,14 @@
     <url-pattern>/Catalogue/ListCatalogueProjet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DetailCatalogueProjet</servlet-name>
+    <servlet-class>com.ril.servlet.DetailCatalogueProjet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailCatalogueProjet</servlet-name>
+    <url-pattern>/Catalogue/DetailCatalogueProjet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ListModule</servlet-name>
     <servlet-class>com.ril.servlet.ListModule</servlet-class>
   </servlet>

@@ -36,7 +36,7 @@
 									<h4>${fn:escapeXml(Projet.nom)}</h4>
 								</div>
 								<div class="media-right align-self-end">
-									<a href="ListCatalogueProjet" class="btn btn-default">En savoir plus</a>
+									<a href="DetailCatalogueProjet?idProjet=${Projet.projetId}" class="btn btn-default">En savoir plus</a>
 								</div>
 							</div>
 						</li>

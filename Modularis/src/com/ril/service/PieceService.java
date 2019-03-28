@@ -8,6 +8,22 @@ import com.ril.model.Plan;
 import com.ril.model.Module;
 
 public class PieceService {
+	
+	public int addPiece(Piece piece) {
+		
+		PieceHome dao = new PieceHome();
+		
+		if(piece != null) {
+			
+			dao.persist(piece);
+			
+			return piece.getPieceId();
+			
+		} else {
+			
+			return -1;
+		}
+	}
 
 	public int addPiece(Plan plan, String nom, Float surface) {
 		
