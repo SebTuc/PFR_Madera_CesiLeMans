@@ -22,6 +22,9 @@ import com.ril.service.CatalogueService;
 public class AjoutCatalogue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
+	private int actualYear = LocalDate.now().getYear();
+	private int[] availableYears = new int[] {actualYear+1,actualYear,actualYear-1,actualYear-2,actualYear-3,actualYear-4,actualYear-5};
+	
 	private CatalogueService catalogueService = new CatalogueService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,6 +32,7 @@ public class AjoutCatalogue extends HttpServlet {
 		List<Catalogue> listCatalogue = catalogueService.getAllCatalogues();
 		
 		request.setAttribute("ListCatalogue", listCatalogue);
+		request.setAttribute("years", availableYears);
 		
 		request.getRequestDispatcher("/jsp/application/Catalogue/AjoutCatalogue.jsp").forward(request, response);
 	}
@@ -36,9 +40,11 @@ public class AjoutCatalogue extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String catalogueNom = request.getParameter("catalogueNom");
+		String catalogueAnnee = request.getParameter("catalogueAnnee");
 		String action = request.getParameter("action");
 		String idValeur = request.getParameter("id");
 		String valeur = request.getParameter("valeur");
+		String year = request.getParameter("year");
 				
 		// Ajout ou Delete
 		if(action != null) {
@@ -48,20 +54,23 @@ public class AjoutCatalogue extends HttpServlet {
 				
 			}else if(action.equals("Edition")) {
 				
-				Catalogue catalogue = catalogueService.getCatalogueById(Integer.valueOf(idValeur));
-				catalogue.setCatalogueNom(valeur);
-				catalogueService.editCatalogue(catalogue);
-								
-				// Retour de l'objet modifier sous format json
-				response.setStatus(200);
-				response.setContentType("application/json");
-				response.getWriter().print("{ \"id\": \""+catalogue.getCatalogueId()+"\", \"valeur\": \""+catalogue.getCatalogueNom()+"\", \"year\": \""+catalogue.getAnnee()+"\" }");
-				response.getWriter().flush();
+				if (valeur != "" && isInteger(year)) {					
+					Catalogue catalogue = catalogueService.getCatalogueById(Integer.valueOf(idValeur));
+					catalogue.setCatalogueNom(valeur);
+					catalogue.setAnnee(Integer.parseInt(year));
+					catalogueService.editCatalogue(catalogue);
+					
+					// Retour de l'objet modifier sous format json
+					response.setStatus(200);
+					response.setContentType("application/json");
+					response.getWriter().print("{ \"id\": \""+catalogue.getCatalogueId()+"\", \"valeur\": \""+catalogue.getCatalogueNom()+"\", \"year\": \""+catalogue.getAnnee()+"\" }");
+					response.getWriter().flush();
+				}
 				
 			}
 		}else if (catalogueNom != null) {						
-			if (catalogueNom.trim() != null) {				
-				catalogueService.addCatalogue(catalogueNom, LocalDate.now().getYear());
+			if (catalogueNom.trim() != null && isInteger(catalogueAnnee)) {				
+				catalogueService.addCatalogue(catalogueNom, Integer.parseInt(catalogueAnnee));
 				
 				//Definit la reponse comme "See Other" et redirige
 				//Evite la multi-insertion apr�s un refresh de l'utilsateur		
@@ -73,6 +82,18 @@ public class AjoutCatalogue extends HttpServlet {
 		}
 						
 
+	}
+	
+	private static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
 	}
 
 }

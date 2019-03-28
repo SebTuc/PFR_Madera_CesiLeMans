@@ -23,7 +23,7 @@
 			<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
 				<table id="Edition" class="table table-edition table-striped table-bordered" cellspacing="0px"
 					style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; text-align: center;"
-					column-defs='[{"data": "id","title": "","type": "hidden","visible": false},{"data":"valeur","title": "Catalogue"},{"data":"year","title": "Ann&eacute;e","type": "readonly"}]'
+					column-defs='[{"data": "id","title": "","type": "hidden","visible": false},{"data":"valeur","title": "Catalogue", "required": "true"},{"data":"year","title": "Ann&eacute;e","type": "select","options" : [<c:forEach var="year" items="${years}" end = "6">"${fn:escapeXml(year)}",</c:forEach>"${fn:escapeXml(year[6])}"]}]'
 					data-set='[<c:forEach var="Catalogue" items="${ListCatalogue}">{"id":"${fn:escapeXml(Catalogue.catalogueId)}","valeur":"${fn:escapeXml(Catalogue.catalogueNom)}","year":"${fn:escapeXml(Catalogue.annee)}"},</c:forEach>]'>
 				</table>
 			</div>
@@ -37,6 +37,11 @@
 					<div class="form-group">
 						<input id="catalogueNom" class="form-control" name="catalogueNom" placeholder="Nouveau Catalogue"
 							required />
+						<select class="form-control" name="catalogueAnnee" required>
+							<c:forEach var="year" items="${years}">
+								<option value="${fn:escapeXml(year)}">${fn:escapeXml(year)}</option>
+							</c:forEach>
+						</select>							
 						<button class="btn material-icons material-icons-btn material-icons-btn-add ml-2">add_circle</button>
 					</div>
 				</form>
