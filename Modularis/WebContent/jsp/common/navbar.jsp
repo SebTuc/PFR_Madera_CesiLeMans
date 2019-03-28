@@ -6,6 +6,8 @@
   <a class ="closebtn" id="close-btn">&times;</a>
   <a href="/Modularis/Configuration">Configuration</a>
   <a href="/Modularis/Annuaire">Annuaire</a>
+  <a href="/Modularis/DevisFacture">Devis/Facture</a>
+  <a href="/Modularis/Catalogue">Catalogue</a>
 </div>
 
 <!-- NAVBAR -->

@@ -85,7 +85,7 @@ public class CreerProjet extends HttpServlet {
 
 
 					projetService.addProjet(nomProjet,image);
-					response.sendRedirect("/Modularis/DevisFacture");
+					response.sendRedirect("/Modularis/DevisFacture/ListProjet");
 
 				}else {
 					request.setAttribute("Erreur", "Taille de l'image supérieur a la limite maximal (1Go).");
