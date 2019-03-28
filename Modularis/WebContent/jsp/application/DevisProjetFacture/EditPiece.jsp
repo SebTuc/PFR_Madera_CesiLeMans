@@ -27,6 +27,46 @@
 	<h3>Liste piece du projet ${fn:escapeXml(Piece.plan.projet.nom)} - ${fn:escapeXml(Piece.plan.nom)} - ${fn:escapeXml(Piece.nom)} </h3>
 </div>
 <br>
+<div class="collapse" id="collapsedCritere">
+	<form method="get">
+		<input type="text" name="id" value="${fn:escapeXml(Piece.pieceId) }"style="display:none;">
+		<div class="row justify-content-center">
+			<div class="jumbotron" style="padding: 2rem 2rem">
+				<h5>selectionner les criteres de trie de module &agrave; selectionner :</h5>
+				<br>
+				<label for="gamme">Gamme</label>
+				<select id="gamme" class="custom-select" name="gamme" required>
+					<option value="-1" selected></option>
+			   		<c:forEach var="Gamme" items="${ListGamme }">
+			   			<c:choose>
+							    <c:when test="${Gamme.gammeId == gammeId}">
+							       <option selected value="${fn:escapeXml(Gamme.gammeId) }">${fn:escapeXml(Gamme.nom) } </option>
+							    </c:when>    
+							    <c:otherwise>
+									<option value="${fn:escapeXml(Gamme.gammeId) }">${fn:escapeXml(Gamme.nom) } </option>
+							    </c:otherwise>
+							</c:choose>
+			   		</c:forEach>
+				</select>
+				<label for="materiaux">Nom Module :</label>
+				<input class="form-control" type="text" id="nomModule" name="nomModule" placeholder="Module contenant le mot..." value="${fn:escapeXml(nomModule) }"/>
+				<br><br>
+				<div class="row justify-content-center">
+					<div class="col-6 justify-content-center">
+						<div class="row justify-content-center">
+							<button class="btn btn-primary" name="btnCritere" id="btnCritere">Appliquer</button>
+						</div>
+					</div>
+					<div class="col-6 justify-content-center">
+						<div class="row justify-content-center">
+							<a href="/Modularis/DevisFacture/EditPiece?id=${Piece.pieceId }" class="btn btn-primary">Refresh</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
 <form id="List" method="post">
 	<input type="text" name="idPiece" value="${fn:escapeXml(Piece.pieceId) }"style="display:none;">
 	<div class="row justify-content-center">
@@ -51,7 +91,10 @@
 		</ul>
 	</div>
 		<div class="form-row justify-content-center" style="margin-top: 20px;">
-			<div class="form-group col-md-6 col-8">
+		<div class="form-group col-md-2 col-4">
+		 		<button class="btn btn-info btn-lg" type="button" data-toggle="collapse" data-target="#collapsedCritere" aria-expanded="false" aria-controls="collapseExample" style="margin-top: 25px;" >Trie module selectionnable</button>
+		 	</div>
+			<div class="form-group col-md-4 col-6">
 				<label for="module">Selectionner le module a ajouter</label> 
 				<select id="module" name="module" class="custom-select">
 						<option value=""></option>
@@ -60,7 +103,7 @@
 					</c:forEach>
 				</select>
 			</div>
-		 	<div class="form-group col-md-4 col-2">
+		 	<div class="form-group col-md-2 col-4">
 		 		<button name="btnAjouter" id="btnAjouter" class="btn material-icons material-icons-btn material-icons-btn-add-lg ml-2" style="margin-top: 10px;">add_circle</button>
 		 	</div>
 		</div>	

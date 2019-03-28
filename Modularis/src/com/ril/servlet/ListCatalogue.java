@@ -26,7 +26,30 @@ public class ListCatalogue extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Catalogue> listCatalogue= catalogueService.getAllCatalogues();
 		
-		request.setAttribute("ListCatalogue", listCatalogue);
+		//N'afficher que les catalogue qui continne des projet.
+		List<Catalogue> list = new ArrayList<Catalogue>();
+		if(listCatalogue.size() != 0) {
+			for(Catalogue cat : listCatalogue) {
+				if(cat.getProjets().size()!=0) {
+					list.add(cat);
+				}
+			}
+			
+			if(list.size() == 0) {
+				request.setAttribute("isEmptyList", true);
+			}else {
+				request.setAttribute("isEmptyList", false);
+			}
+			request.setAttribute("ListCatalogue", list);
+		}else {
+			
+			request.setAttribute("isEmptyList", true);
+			
+		}
+		
+		
+		
+		
 		
 		request.getRequestDispatcher("/jsp/application/Catalogue/ListCatalogue.jsp").forward(request, response);
 	}
@@ -36,30 +59,6 @@ public class ListCatalogue extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	}
-	
-	private static boolean isFloat(String s) {
-	    try { 
-	        Float.parseFloat(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
 	}
 	
 

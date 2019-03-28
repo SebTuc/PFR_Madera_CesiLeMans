@@ -26,22 +26,34 @@
 				</div>				
 				<div class="col-md-10 offset-md-1 row-block">
 					<ul>
-						<c:forEach items="${ListCatalogue}" var="Catalogue">
-						<li>
-							<div class="media">
-								<!-- <div class="media-left align-self-center">
-									<img class="rounded-circle" src="https://randomuser.me/api/portraits/women/50.jpg">
-								</div> -->
-								<div class="media-body">
-									<h4>${fn:escapeXml(Catalogue.catalogueNom)}</h4>
-									<p>Ann&eacute;e ${fn:escapeXml(Catalogue.annee)}</p>
+						<c:choose>
+							<c:when test="${isEmptyList == true }">
+								<li>
+									<div class="media">
+										<div class="media-body">
+											<h4>Aucun catalogue</h4>
+											<p>Aucun catalogue n'existe ou ne contient de projet.</p>
+										</div>
+										
+									</div>
+								</li>
+							</c:when>
+							<c:otherwise>
+							<c:forEach items="${ListCatalogue}" var="Catalogue">
+							<li>
+								<div class="media">
+									<div class="media-body">
+										<h4>${fn:escapeXml(Catalogue.catalogueNom)}</h4>
+										<p>Ann&eacute;e ${fn:escapeXml(Catalogue.annee)}</p>
+									</div>
+									<div class="media-right align-self-end">
+										<a href="ListCatalogueProjet?idCatalogue=${fn:escapeXml(Catalogue.catalogueId)}" class="btn btn-default">En savoir plus</a>
+									</div>
 								</div>
-								<div class="media-right align-self-end">
-									<a href="ListCatalogueProjet?idCatalogue=${fn:escapeXml(Catalogue.catalogueId)}" class="btn btn-default">En savoir plus</a>
-								</div>
-							</div>
-						</li>
-						</c:forEach>
+							</li>
+							</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 				</div>
 			</div>

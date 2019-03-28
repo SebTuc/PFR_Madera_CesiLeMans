@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.jboss.logging.Logger;
 
 import com.ril.hibernate.HibernateUtil;
+import com.ril.model.Module;
 import com.ril.model.Piece;
 
 /**
@@ -69,6 +70,42 @@ public class PieceHome {
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
+			throw re;
+		}
+	}
+	
+	public void persistJoin(Module firstPersistentJoinedInstance, Piece secondPersistentJoinedInstance) {
+		log.debug("removing join beetween Projet and Catalogue instances");
+		try {
+			
+			Session session = HibernateUtil.getSession();
+			firstPersistentJoinedInstance.getPieces().add(secondPersistentJoinedInstance);			
+			secondPersistentJoinedInstance.getModules().add(firstPersistentJoinedInstance);
+			session.merge(secondPersistentJoinedInstance);
+			session.merge(firstPersistentJoinedInstance);	
+			
+			HibernateUtil.push();
+			log.debug("join remove successful");
+		} catch (RuntimeException re) {
+			log.error("join remove failed", re);
+			throw re;
+		}
+	}
+	
+	public void removeJoin(Module firstPersistentJoinedInstance, Piece secondPersistentJoinedInstance) {
+		log.debug("removing join beetween Projet and Catalogue instances");
+		try {
+			
+			Session session = HibernateUtil.getSession();
+			firstPersistentJoinedInstance.getPieces().remove(secondPersistentJoinedInstance);			
+			secondPersistentJoinedInstance.getModules().remove(firstPersistentJoinedInstance);
+			session.merge(secondPersistentJoinedInstance);
+			session.merge(firstPersistentJoinedInstance);	
+			
+			HibernateUtil.push();
+			log.debug("join remove successful");
+		} catch (RuntimeException re) {
+			log.error("join remove failed", re);
 			throw re;
 		}
 	}
