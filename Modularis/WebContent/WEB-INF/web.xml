@@ -311,6 +311,14 @@
     <url-pattern>/DevisFacture/CreerProjet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>EditProjetName</servlet-name>
+    <servlet-class>com.ril.servlet.EditProjetName</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProjetName</servlet-name>
+    <url-pattern>/DevisFacture/EditProjetName</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Photo</servlet-name>
     <servlet-class>com.ril.servlet.Photo</servlet-class>
   </servlet>

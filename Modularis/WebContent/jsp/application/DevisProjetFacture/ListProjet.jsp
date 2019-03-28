@@ -64,27 +64,57 @@
 		 	<a href="/Modularis/DevisFacture/CreerProjet" class="btn material-icons material-icons-btn material-icons-btn-add-lg ml-2">add_circle</a>
 		</div>	
 		<br> <br>
-	
-	<div class="row justify-content-center">
-		<div class="col-6">
+
+		<input type="text" value="" name="clientId" id="clientId" style="display:none;" >	
+
 			<div class="row justify-content-center">
-				<div class="col-md-4 col-sm-12">
-					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Editer</button>
+				<div class="col-md-3 col-sm-6">
+					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Editer plan projet selectionn&eacute;</button>
 				</div>
 				<br>
-				<div class="col-md-4 col-sm-12">
+				<div class="col-md-3 col-sm-6">
 					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
 				</div>
 				<br>
-				<div class="col-md-4 col-sm-12">
-					<button class="btn btn-success btn-block btn-lg" name="btnGenerateDevis" id="btnGenerateDevis">Generer un devis</button>
+				<div class="col-md-3 col-sm-6">
+					<button class="btn btn-success btn-block btn-lg" type="button" name="btnGenerateDevis" data-toggle="modal"
+						data-target="#ModalCreationDevis" id="btnGenerateDevis">Generer un devis</button>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<button class="btn btn-warning btn-block btn-lg" name="btnEditerProjet" id="btnEditerProjet">Editer projet</button>
+				</div>
+			</div>
+		
+</form>
+</div>
+<div class="modal static fade" id="ModalCreationDevis" tabindex="-1"
+		role="dialog" aria-labelledby="ModalCreationDevisTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ModalCreationDevisTitle">Selectionner client</h5>
+				</div>
+				<div class="modal-body">
+					<label for="Composant">Client</label>
+					<!-- 					<select id="Composant" name="Composant" class="selectpicker" data-live-search="true" required> -->
+					<select id="Client" name="Client" class="custom-select"
+						required>
+						<option value=""></option>
+						<c:forEach var="Client" items="${ListClient}">
+							<option value="${fn:escapeXml(Client.clientId) }">${fn:escapeXml(Client.donneePersonnelle.nom) }  {fn:escapeXml(Client.donneePersonnelle.prenom) }</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="btnQuitter" class="btn btn-primary"
+						data-dismiss="modal">Quitter</button>
+					<button type="button" id="btnCreer" class="btn btn-danger">Creer devis</button>
+					<a id="btnAjouter" href="/Modularis/Annuaire/AjoutClient" class="btn btn-success" >Creer un client</a>
 				</div>
 			</div>
 		</div>
 	</div>
-</form>
-
-</div>
 
 <div class="modal static fade" id="ModalConfirmationSuppression" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationSuppressionTitle" aria-hidden="true">
 	  	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -104,6 +134,8 @@
 	</div>
 
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
+  <script type='text/javascript'
+		src='<%=request.getContextPath()%>/resources/js/generateDevis.js'></script>
 </body>
 
 </html>

@@ -55,7 +55,7 @@
 		 		<input name="surface" id="surface" class="form-control" placeholder="Entrer la surface en m2" type="text" style="margin-top: 15px">
 		 	</div>
 			<div class="form-group col-md-3 col-5">
-		 		<input name="pieceNom" id="pieceNom" class="form-control" placeholder="Entrer le nom du plan" type="text" style="margin-top: 15px">
+		 		<input name="pieceNom" id="pieceNom" class="form-control" placeholder="Entrer le nom de la piece" type="text" style="margin-top: 15px">
 		 	</div>
 		 	<div class="form-group col-md-2 col-2">
 		 		<button name="btnAjouter" id="btnAjouter" class="btn material-icons material-icons-btn material-icons-btn-add-lg ml-2">add_circle</button>
@@ -67,7 +67,7 @@
 		<div class="col-6">
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-sm-12">
-					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Editer</button>
+					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Editer piece</button>
 				</div>
 				<div class="col-md-6 col-sm-12">
 					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
