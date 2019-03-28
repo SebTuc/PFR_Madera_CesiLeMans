@@ -2,12 +2,16 @@ $(document).ready(function () {
 
 	$("#btnCreer").click(function(){
 
+		var idClient;
 		//On ajout si correct le client selectionner
 
-		//A modifier comment on passe par la methode de generation de devis dans le java ou ici
-
-		//on lance le submit du form
-		$("#List").submit();
+		idClient = $("#Client").val();
+		if(idClient != null && idClient != ""){
+			$("#clientId").val(idClient);
+			$("#ModalCreationDevis").hide();
+			//on lance le submit du form
+			$("#List").submit();
+		}
+		
 	});
-
 });

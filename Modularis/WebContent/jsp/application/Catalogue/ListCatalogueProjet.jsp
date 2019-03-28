@@ -30,7 +30,7 @@
 						<li>
 							<div class="media">
 								<div class="media-left align-self-center">
-									<img class="rounded-circle" src="/Modularis/Photo?id=${fn:escapeXml(Projet.image.imageId)}">
+									<img style="height: 75px" class="rounded-circle" src="/Modularis/Photo?id=${fn:escapeXml(Projet.image.imageId)}">
 								</div>
 								<div class="media-body">
 									<h4>${fn:escapeXml(Projet.nom)}</h4>
@@ -48,10 +48,6 @@
 	</div>
 
 	<br> <br>
-
-
-
-	</div>
 
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />
 </body>

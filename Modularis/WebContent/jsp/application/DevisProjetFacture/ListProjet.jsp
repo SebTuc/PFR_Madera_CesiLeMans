@@ -49,7 +49,7 @@
 									</div>
 									<c:choose>
 										<c:when test="${Projet.image.imageId != null}">
-										<img src="/Modularis/Photo?id=${Projet.image.imageId }" class="ml-3" alt="miniature ${fn:escapeXml(Projet.nom)}" style="max-height: 60px;" />
+										<img src="/Modularis/Photo?id=${Projet.image.imageId }" class="ml-3 rounded-circle" alt="miniature ${fn:escapeXml(Projet.nom)}" style="width: 75px;height:75px" />
 										</c:when>
 									</c:choose>
 								</div>
@@ -102,7 +102,7 @@
 						required>
 						<option value=""></option>
 						<c:forEach var="Client" items="${ListClient}">
-							<option value="${fn:escapeXml(Client.clientId) }">${fn:escapeXml(Client.donneePersonnelle.nom) }  {fn:escapeXml(Client.donneePersonnelle.prenom) }</option>
+							<option value="${fn:escapeXml(Client.clientId) }">${fn:escapeXml(Client.donneesPersonelle.nom) }  ${fn:escapeXml(Client.donneesPersonelle.prenom) }</option>
 						</c:forEach>
 					</select>
 				</div>

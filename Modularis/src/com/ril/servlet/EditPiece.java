@@ -109,12 +109,7 @@ public class EditPiece extends HttpServlet {
 						
 						request.setAttribute("ListModule", list);
 					}else {
-						if(ListModule == null) {
-							
-							request.setAttribute("isEmptyList", true);
-						}else {
-							request.setAttribute("isEmptyList", false);
-						}
+						
 						request.setAttribute("ListModule", ListModule);
 						
 					}
