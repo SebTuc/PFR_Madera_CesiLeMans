@@ -1,17 +1,9 @@
 package com.ril.service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import com.ril.daoHibernate.DevisHome;
-import com.ril.daoHibernate.PieceHome;
-import com.ril.daoHibernate.PlanHome;
 import com.ril.daoHibernate.ProjetHome;
-import com.ril.model.Devis;
 import com.ril.model.Image;
-import com.ril.model.Piece;
-import com.ril.model.Plan;
 import com.ril.model.Projet;
 
 public class ProjetService {

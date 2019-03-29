@@ -47,6 +47,12 @@ public class Projet implements java.io.Serializable {
 		this.image = image;
 	}
 	
+	public Projet( String nom,Image image,Set<Plan> plans) {
+		this.nom = nom;
+		this.image = image;
+		this.plans = plans;
+	}
+	
 	public Projet(Set<Catalogue> catalogue, String nom) {
 		this.catalogue = catalogue;
 		this.nom = nom;

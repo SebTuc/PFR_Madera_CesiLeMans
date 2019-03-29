@@ -287,6 +287,14 @@
     <url-pattern>/DevisFacture/ListProjet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ListDevis</servlet-name>
+    <servlet-class>com.ril.servlet.ListDevis</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListDevis</servlet-name>
+    <url-pattern>/DevisFacture/ListDevis</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>EditProjet</servlet-name>
     <servlet-class>com.ril.servlet.EditProjet</servlet-class>
   </servlet>

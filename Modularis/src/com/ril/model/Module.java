@@ -113,7 +113,7 @@ public class Module implements java.io.Serializable {
 		this.gamme = gamme;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinTable(name = "piece_x_module", catalog = "modularisbdd", joinColumns = {
 			@JoinColumn(name = "MODULE_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "PIECE_ID", nullable = false, updatable = false) })
@@ -134,7 +134,7 @@ public class Module implements java.io.Serializable {
 		this.nom = nom;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module")
 	public Set<ModuleXComposant> getModuleXComposants() {
 		return this.moduleXComposants;
 	}

@@ -12,7 +12,7 @@
 
 	<jsp:include page="/jsp/common/navbar.jsp" />
 
-	<a href="/Modularis/DevisFacture"
+	<a href="/Modularis/DevisFacture/ListDevis"
 		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
 	<br />
 	<div class="col-lg-12 text-center">

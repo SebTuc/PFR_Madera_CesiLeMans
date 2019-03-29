@@ -418,7 +418,7 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 }
 
 .devisdetail li input:nth-of-type(1):checked ~ ul{
-	max-height: 1000px;
+	max-height: 10000px;
 }
 
 .devisdetail li label{

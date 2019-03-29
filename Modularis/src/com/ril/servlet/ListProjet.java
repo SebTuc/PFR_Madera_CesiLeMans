@@ -81,7 +81,8 @@ public class ListProjet extends HttpServlet {
 		List<Projet> ListProjet = projetService.getAllProjets();
 		List<Client> ListClient = clientService.getAllClients();
 		List<Projet> List = new ArrayList<Projet>();
-		if(ListProjet.size()!=0) {
+
+		if(ListProjet != null) {
 			for(Projet projet : ListProjet) {
 				//On ne prend que les projet qui ne sont pas en devis ou qui ne sont pas dans le catalogue
 				if(projet.getCatalogue().size() == 0) {
@@ -101,12 +102,7 @@ public class ListProjet extends HttpServlet {
 			request.setAttribute("ListProjet", List);
 		}else {
 			
-			if(ListProjet.size() == 0) {
-				request.setAttribute("isEmptyList", true);
-			}else {
-				request.setAttribute("isEmptyList", false);
-			}
-			
+			request.setAttribute("isEmptyList", true);
 			request.setAttribute("ListProjet", ListProjet);
 		}
 		
@@ -119,7 +115,6 @@ public class ListProjet extends HttpServlet {
 		String projetId = request.getParameter("radio");
 		String btnEditer = request.getParameter("btnEditer");
 		String btnSupprimer = request.getParameter("btnSupprimer");
-		String btnGenerateDevis = request.getParameter("btnGenerateDevis");
 		String btnEditerProjet = request.getParameter("btnEditerProjet");
 		String clientId = request.getParameter("clientId");
 		
@@ -145,7 +140,7 @@ public class ListProjet extends HttpServlet {
 			}
 			
 			
-		}else if( btnEditerProjet == null && projetId != null && clientId != null) {
+		}else if( btnSupprimer==null && btnEditer == null && btnEditerProjet == null && projetId != null && clientId != null) {
 			
 			//On Créer un devis pour sa on calcul le prix de tout HT et on recup la date du jour et bien sur le projet
 			if(isInteger(projetId) && isInteger(clientId)) {
