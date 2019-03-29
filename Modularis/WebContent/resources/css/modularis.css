@@ -235,14 +235,21 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 .dataTables_wrapper .pagination .page-item.disabled {opacity: 0.38}
 
 /* Customisation jsTree */
-.delete-project { position: absolute; right: 0; }
+.delete-project { position: absolute;height: 100%;top: 0;right: 0;}
 .delete-project { background: rgba(0, 0, 0, 0.1) }
 .delete-project:hover { background: rgba(0, 0, 0, 0.3) }
 .jstree-default a { width: 80% }
 
-.jstree-default .jstree-node > .jstree-ocl::before {font-family: 'Material Icons'; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased;}
-.jstree-default .jstree-closed > .jstree-ocl::before {content: "\e5cf"}
-.jstree-default .jstree-open > .jstree-ocl::before {content: "\e5cc"}
+.tree-container {width: 50%}
+
+.jstree-proton .jstree-leaf .jstree-anchor {width: calc(100%-50px) !important;padding-right: 50px;}
+.jstree-proton .jstree-node > .jstree-ocl::before {font-family: 'Material Icons'; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased;transition: color .05s ease-in}
+.jstree-proton .jstree-node[aria-selected=true] > .jstree-ocl::before,
+.jstree-proton .jstree-node .jstree-wholerow-hovered ~ .jstree-ocl::before {color: #fff;}
+
+.jstree-proton .jstree-closed > .jstree-ocl::before {content: "\e5cf"}
+
+.jstree-proton .jstree-open > .jstree-ocl::before {content: "\e5cc"}
 
 
 /* Listing Catalogue / Projets */
@@ -272,15 +279,17 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 @media (min-width: 768px) and (max-width: 991px) {
 	/* .dataTables_wrapper .dataTables_filter {top: -40px;}	 */
 	/* .dataTables_wrapper .dataTables_filter label {font-size: 14px} */
-
+		   
+		
 }
   
 /*-- XS ------------------------------------------------------------------------------------------------------------*/
 @media screen and (max-width: 767px) {
 	/* .dataTables_wrapper .dataTables_filter {top: -40px;}	 */
 	/* .dataTables_wrapper .dataTables_filter label {font-size: 14px} */
+	.tree-container {width: 100%};
 	.dataTables_wrapper .dataTables_info {bottom: -20px;text-align: left !important; width: 100%}
-	
+	/* .delete-project { height: 100%;padding-bottom: 0%;right: 5%;} */
 }
 
 @media screen and (max-width: 644px) {

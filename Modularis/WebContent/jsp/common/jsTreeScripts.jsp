@@ -19,9 +19,11 @@
         "animation": 0, // Definit le temps d'animation en ms
         'check_callback': true, // Prend en compte les modification crud apporte au tree
         "themes": {
-          "stripes": true
+       	  'name': 'proton',
+          "responsive": true,
+          "ellipsis": true
         }, // Change la couleur une ligne sur deux
-        "data": dataItemList // Donnees à prendre en compte pour le generation du tree
+        "data": dataItemList // Donnees à prendre en compte pour le generation du tree          
       },
       "types": {
         "#": {
@@ -91,12 +93,14 @@
           }
         },
         "themes": {
-          "stripes": true
+          'name': 'proton',
+          "responsive": true,
+          "ellipsis": true
         },
         "data": dataCategoryTree.map(function (item) {
           if (item.children != null) {
             item.children = item.children.map(function (children) {
-
+             
               // Ajout des buttons
               children.text += withdrawBtnStruct;
               return children;
@@ -156,6 +160,8 @@
             "type": "item"
           }, 'last');
           $(pushButton).attr("disabled", true);
+          $(categoryTree).jstree("open_node",categoryTreeSel)
+
         }
 
       }
