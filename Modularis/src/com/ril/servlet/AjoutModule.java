@@ -1,6 +1,7 @@
 package com.ril.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,33 +35,44 @@ public class AjoutModule extends HttpServlet {
 	private ComposantService composantService = new ComposantService();
 	private AngleService angleService = new AngleService();
 	private UniteMesureService uniteMesureService = new UniteMesureService();
-	
+
 	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
+		try { 
+			Integer.parseInt(s); 
+		} catch(NumberFormatException e) { 
+			return false; 
+		} catch(NullPointerException e) {
+			return false;
+		}
+		// only got here if we didn't return false
+		return true;
 	}
-	
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
 		List<Gamme> ListGamme = gammeService.getAllGammes();
-		List<Composant> ListComposant = composantService.getAllComposants();
 		List<Angle> ListAngle = angleService.getAllAngles();
 		List<UniteMesure> ListUniteMesure = uniteMesureService.getAllUniteMesures();
+		
+		List<Composant> ListCompo = composantService.getAllComposants();
+		List<Composant> ListComposant = new ArrayList<Composant>();
+		if(ListCompo!=null) {
+			for(Composant compo : ListCompo) {
+				Boolean flag = compo.isDisplay();
+				if(flag == null || flag != false) {
+					ListComposant.add(compo);
+				}
+			}
+		}
+		
 		
 		request.setAttribute("ListGamme", ListGamme);
 		request.setAttribute("ListUniteMesure", ListUniteMesure);
 		request.setAttribute("ListComposant", ListComposant);
 		request.setAttribute("ListAngle", ListAngle);
-		
+
 		request.getRequestDispatcher("/jsp/application/Configuration/AjoutModule.jsp").forward(request, response);
 	}
 
@@ -69,7 +81,7 @@ public class AjoutModule extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		String[] ListComposant = request.getParameterValues("ListComposant[]");
 		String gammeId = request.getParameter("gamme");
 		String nomModule = request.getParameter("nomModule");
@@ -78,100 +90,79 @@ public class AjoutModule extends HttpServlet {
 		String[] ListQuantite = request.getParameterValues("ListQuantite[]");
 		String sendSubmit = request.getParameter("sendSubmit");
 		String returnValue = "Ok"; 
-		
+
 		if(sendSubmit != null) {
 			if(sendSubmit.equals("Ok")) {
-				
+
 				response.sendRedirect("/Modularis/Configuration/ListModule");
-				
+
 			}else {
-				
+
 				request.setAttribute("Erreur", sendSubmit);
 				doGet(request, response);
-				
+
 			}
-			
-			
+
+
 		}else {
 			if(gammeId != null && nomModule != null && uniteMesureId != null) {
 				if(ListComposant.length == ListQuantite.length && ListComposant.length > 0) {
-					if(typeAngle != null) {
-						//Verifier que gamme type angle et unite mesure sont bien des Integer
-						if(isInteger(gammeId) && isInteger(uniteMesureId) && isInteger(typeAngle)) {
-							Angle angle = angleService.getAngleById(Integer.valueOf(typeAngle));
-							UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(uniteMesureId));
-							Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
-							Integer moduleId = moduleSerivce.addModule(angle, gamme, nomModule, uniteMesure);
-							
-							Module module = moduleSerivce.getModuleById(moduleId);
-							
-							for(int i=0 ; i < ListComposant.length ; i++) {
-								//Verifier que se sois bien des integer
-								String composantId = ListComposant[i];
-								String quantites = ListQuantite[i];
-								if(isInteger(composantId) && isInteger(quantites)) {
-									
-									Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
-									Integer quantite = Integer.valueOf(quantites);
-									
-									moduleXComposantSerivce.addModuleXComposant(quantite, module, composant);
-									
-								}else {
-									//on remove le module et les liaison
-									moduleSerivce.removeModule(module);
-									returnValue = "Erreur lors de la mise en place des composants.";
-									
-									
-								}
-							}
-						}
-					}else {
-						//Verifier que gamme et unite mesure sont bien des Integer
-						if(isInteger(gammeId) && isInteger(uniteMesureId)) {
-							UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(uniteMesureId));
-							Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
-							Integer moduleId = moduleSerivce.addModule(gamme, nomModule, uniteMesure);
-							
-							//Après on ajoute les liaison
-							Module module = moduleSerivce.getModuleById(moduleId);
-							
-							for(int i=0 ; i < ListComposant.length ; i++) {
-								//Verifier que se sois bien des integer
-								String composantId = ListComposant[i];
-								String quantites = ListQuantite[i];
-								if(isInteger(composantId) && isInteger(quantites)) {
-									
-									Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
-									Integer quantite = Integer.valueOf(quantites);
-									
-									moduleXComposantSerivce.addModuleXComposant(quantite, module, composant);
-									
-								}else {
-									//on remove le module et les liaison
-									moduleSerivce.removeModule(module);
-									returnValue = "Erreur lors de la mise en place des composants.";
-									
-									
-								}
-							}
+					//Verifier que gamme type angle et unite mesure sont bien des Integer
+					if(isInteger(gammeId) && isInteger(uniteMesureId)) {
+						
+						Angle angle=null;
+						if(typeAngle != null && isInteger(typeAngle)) {
+							angle = angleService.getAngleById(Integer.valueOf(typeAngle));	
 						}
 						
 						
+						UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(uniteMesureId));
+						Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
+						
+						Integer moduleId =null;
+						if(typeAngle != null && isInteger(typeAngle)) {
+							moduleId = moduleSerivce.addModule(angle, gamme, nomModule, uniteMesure);
+						}else {
+							moduleId = moduleSerivce.addModule(gamme, nomModule, uniteMesure);
+						}
+
+						Module module = moduleSerivce.getModuleById(moduleId);
+
+						for(int i=0 ; i < ListComposant.length ; i++) {
+							//Verifier que se sois bien des integer
+							String composantId = ListComposant[i];
+							String quantites = ListQuantite[i];
+							if(isInteger(composantId) && isInteger(quantites)) {
+
+								Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
+								Integer quantite = Integer.valueOf(quantites);
+
+								moduleXComposantSerivce.addModuleXComposant(quantite, module, composant);
+
+							}else {
+								//on remove le module et les liaison
+								moduleSerivce.removeModule(module);
+								returnValue = "Erreur lors de la mise en place des composants.";
+
+
+							}
+						}
+
 					}
 				}else {
-					returnValue = "List quantite et composant ne sont pas identique.";
-					
+					returnValue = "Liste quantite et composant ne sont pas identiques.";
+
 				}
 			}else {
-				returnValue = "Vous n'avez pas saisie toute les valeurs.";
-				
+				returnValue = "Vous n'avez pas saisie toutes les valeurs.";
+
 			}
 			response.setStatus(200);
 			response.setContentType("application/json");
 			response.getWriter().print("{ \"retour\": \""+returnValue+"\"}");
 			response.getWriter().flush();
 		}
-		
+
 	}
 
 }

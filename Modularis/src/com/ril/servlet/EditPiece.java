@@ -71,11 +71,22 @@ public class EditPiece extends HttpServlet {
 						request.setAttribute("isEmptyList", false);
 					}
 
-					List<Module> ListModule = moduleService.getAllModules();
+					List<Module> ListMod = moduleService.getAllModules();
 					List<Gamme> ListGamme = gammeService.getAllGammes();
 					List<Module> list = new ArrayList<Module>();
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+					//Ou alors on affiche quand meme tout
+					List<Module> ListModule = new ArrayList<Module>();
 
+					if(ListMod!=null) {
+						for(Module mod : ListMod) {
+							Boolean flag = mod.isDisplay();
+							if(flag == null || flag != false) {
+								ListModule.add(mod);
+							}
+						}
+					}
+					
 					String gamme = request.getParameter("gamme");
 					String nomModule = request.getParameter("nomModule");
 					//Trie par critere

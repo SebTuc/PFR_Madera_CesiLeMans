@@ -1,10 +1,13 @@
 package com.ril.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.json.*;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,8 +37,17 @@ public class EditCatalogue extends HttpServlet {
 		
 		// Premierer recuperation de tous les projets et catalogues
 		this.listCatalogue =  catalogueService.getAllCatalogues();
-		this.listProjet = projetService.getAllProjets();
-		
+		List<Projet> ListProjet = projetService.getAllProjets();
+		List<Projet> ListTemp = new ArrayList<Projet>();
+		//On affiche pas les projet clonner ? parce que c'est trop le bazar ou alors ceux qui on des nom different ?
+		for(Projet projet : ListProjet) {
+			Boolean flag = projet.isClone();
+			if(flag == null || flag != true) {
+				ListTemp.add(projet);
+			}
+			
+		}
+		this.listProjet = ListTemp;
 		request.setAttribute("JsonProjet", this.getJsonSerializedProjets().toString());
 		request.setAttribute("JsonCatalogue", this.getJsonSerializedCatalogues().toString());
 		request.getRequestDispatcher("/jsp/application/Catalogue/EditCatalogue.jsp").forward(request, response);

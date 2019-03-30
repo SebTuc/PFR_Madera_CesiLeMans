@@ -2,7 +2,6 @@
 CREATE DATABASE ModularisBDD;
 USE ModularisBDD;
 
-
 CREATE TABLE DEVIS(
         DEVIS_ID       int (11) Auto_increment  NOT NULL ,
         PRIX_HT        Float NOT NULL ,
@@ -16,14 +15,15 @@ CREATE TABLE DEVIS(
 
 CREATE TABLE PROJET(
         PROJET_ID int (11) Auto_increment  NOT NULL ,
-        NOM       Varchar (255) NOT NULL ,
+        NOM       Varchar (100) NOT NULL ,
+        IS_CLONE  Boolean ,
         IMAGE_ID  Int ,
         PRIMARY KEY (PROJET_ID )
 )ENGINE=InnoDB;
 
 CREATE TABLE PLAN(
         PLAN_ID   int (11) Auto_increment  NOT NULL ,
-        NOM       Varchar (100) NOT NULL ,
+        NOM       Varchar (255) NOT NULL ,
         PROJET_ID Int NOT NULL ,
         PRIMARY KEY (PLAN_ID )
 )ENGINE=InnoDB;
@@ -31,6 +31,7 @@ CREATE TABLE PLAN(
 CREATE TABLE MODULE(
         MODULE_ID       int (11) Auto_increment  NOT NULL ,
         NOM             Varchar (50) NOT NULL ,
+        DISPLAY         Boolean ,
         ANGLE_ID        Int ,
         GAMME_ID        Int NOT NULL ,
         UNITE_MESURE_ID Int NOT NULL ,
@@ -39,8 +40,9 @@ CREATE TABLE MODULE(
 
 CREATE TABLE COMPOSANT(
         COMPOSANT_ID         int (11) Auto_increment  NOT NULL ,
-        NOM                  Varchar (50) NOT NULL ,
+        NOM                  Varchar (100) NOT NULL ,
         PRIX_UNITAIRE        Float NOT NULL ,
+        DISPLAY              Boolean ,
         FAMILLE_COMPOSANT_ID Int NOT NULL ,
         FOURNISSEUR_ID       Int NOT NULL ,
         MATERIAUX_ID         Int NOT NULL ,
@@ -55,7 +57,7 @@ CREATE TABLE MATERIAUX(
 
 CREATE TABLE PIECE(
         PIECE_ID int (11) Auto_increment  NOT NULL ,
-        NOM      Varchar (100) NOT NULL ,
+        NOM      Varchar (255) NOT NULL ,
         SURFACE  Float NOT NULL ,
         PLAN_ID  Int NOT NULL ,
         PRIMARY KEY (PIECE_ID )

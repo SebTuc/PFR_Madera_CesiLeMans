@@ -32,6 +32,7 @@ public class Composant implements java.io.Serializable {
 	private Materiaux materiaux;
 	private String nom;
 	private float prixUnitaire;
+	private Boolean display;
 	private Set<Stock> stocks = new HashSet<Stock>(0);
 	private Set<ModuleXComposant> moduleXComposants = new HashSet<ModuleXComposant>(0);
 
@@ -101,6 +102,15 @@ public class Composant implements java.io.Serializable {
 		this.materiaux = materiaux;
 	}
 
+	@Column(name = "DISPLAY", nullable = true)
+	public Boolean isDisplay() {
+		return display;
+	}
+
+	public void setDisplay(Boolean display) {
+		this.display = display;
+	}
+	
 	@Column(name = "NOM", nullable = false, length = 100)
 	public String getNom() {
 		return this.nom;

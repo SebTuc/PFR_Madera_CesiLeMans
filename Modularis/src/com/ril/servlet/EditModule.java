@@ -1,6 +1,7 @@
 package com.ril.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,24 +55,47 @@ public class EditModule extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		List<Gamme> ListGamme = gammeService.getAllGammes();
-		List<Composant> ListComposant = composantService.getAllComposants();
 		List<Angle> ListAngle = angleService.getAllAngles();
 		List<UniteMesure> ListUniteMesure = uniteMesureService.getAllUniteMesures();
 		
-		String moduleId = request.getParameter("id");
-		
-		if(moduleId != null && isInteger(moduleId)) {
-			Module module = moduleSerivce.getModuleById(Integer.valueOf(moduleId));
-			request.setAttribute("Module", module);
-			
+		List<Composant> ListCompo = composantService.getAllComposants();
+		List<Composant> ListComposant = new ArrayList<Composant>();
+		if(ListCompo!=null) {
+			for(Composant compo : ListCompo) {
+				Boolean flag = compo.isDisplay();
+				if(flag == null || flag != false) {
+					ListComposant.add(compo);
+				}
+			}
 		}
 		
-		request.setAttribute("ListGamme", ListGamme);
-		request.setAttribute("ListUniteMesure", ListUniteMesure);
-		request.setAttribute("ListComposant", ListComposant);
-		request.setAttribute("ListAngle", ListAngle);
+		String moduleId = request.getParameter("id");
+
+		if(moduleId != null && isInteger(moduleId)) {
+			Module module = moduleSerivce.getModuleById(Integer.valueOf(moduleId));
+				Boolean flag = module.isDisplay();
+				if(flag == null || flag != false) {
+					request.setAttribute("ListGamme", ListGamme);
+					request.setAttribute("ListUniteMesure", ListUniteMesure);
+					request.setAttribute("ListComposant", ListComposant);
+					request.setAttribute("ListAngle", ListAngle);
+					request.setAttribute("Module", module);
+					
+					request.getRequestDispatcher("/jsp/application/Configuration/EditModule.jsp").forward(request, response);
+				
+				}else {
+					request.setAttribute("Erreur", "id incorrect.");
+					response.sendRedirect("/Modularis/Configuration/ListModule");
+					
+				}
+			
+				
+
+		}else {
+			response.sendRedirect("/Modularis/Configuration/ListModule");
+		}
 		
-		request.getRequestDispatcher("/jsp/application/Configuration/EditModule.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -104,116 +128,107 @@ public class EditModule extends HttpServlet {
 		}else {
 			if(gammeId != null && nomModule != null && uniteMesureId != null && moduleId != null) {
 				if(ListComposant.length == ListQuantite.length && ListComposant.length > 0) {
-					if(typeAngle != null) {
 						//Verifier que gamme type angle et unite mesure sont bien des Integer
-						if(isInteger(gammeId) && isInteger(uniteMesureId) && isInteger(typeAngle) && isInteger(moduleId)) {
-							Angle angle = angleService.getAngleById(Integer.valueOf(typeAngle));
+						if(isInteger(gammeId) && isInteger(uniteMesureId)  && isInteger(moduleId)) {
+							Angle angle=null;
+							if(typeAngle != null && isInteger(typeAngle)) {
+								angle = angleService.getAngleById(Integer.valueOf(typeAngle));
+							}
+							
 							UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(uniteMesureId));
 							Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
 
 							Module module = moduleSerivce.getModuleById(Integer.valueOf(moduleId));
 							
-							module.setAngle(angle);
-							module.setGamme(gamme);
-							module.setNom(nomModule);
-							module.setUniteMesure(uniteMesure);
-							
-							
-							
-							Set<ModuleXComposant> list = new HashSet<ModuleXComposant>();
-							Set<ModuleXComposant> ListForTest = module.getModuleXComposants();
-							
-							for(int i=0 ; i < ListComposant.length ; i++) {
-								//Verifier que se sois bien des integer
-								String composantId = ListComposant[i];
-								String quantites = ListQuantite[i];
-								if(isInteger(composantId) && isInteger(quantites)) {
-									
-									Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
-									Integer quantite = Integer.valueOf(quantites);
-									ModuleXComposantId moduleXComposantId = new ModuleXComposantId(composant.getComposantId(),module.getModuleId());
-									ModuleXComposant moduleXcompo = new ModuleXComposant(moduleXComposantId,composant,module,quantite);
-									list.add(moduleXcompo);
-									
-									
-								}else {
-									returnValue = "Erreur lors de la mise en place des composants.";
-								}
-							}
-							if(returnValue.equals("Ok")) {
+							if(moduleSerivce.moduleInDevisOrCatalogue(module)) {
+								//Empecher l'edition ???
 								
-								module.setModuleXComposants(list);
-								moduleSerivce.editModule(module);
-								//On supprime le surplus
-								for(ModuleXComposant mod : ListForTest) {
-									boolean test = false;
-									for(ModuleXComposant modXComp : list) {
-										if(modXComp.getId() == mod.getId()) {
-											test = true;
-										}
-									}
-									if(test != true) {
-										moduleXComposantService.removeModuleXComposant(mod);
+								Integer modId=null;
+								if(typeAngle != null && isInteger(typeAngle)) {
+									modId = moduleSerivce.addModule(angle, gamme, nomModule, uniteMesure);
+								}else {
+									modId = moduleSerivce.addModule(gamme, nomModule, uniteMesure);
+								}
+								
+								Module newModule = moduleSerivce.getModuleById(modId);
+								Set<ModuleXComposant> list = new HashSet<ModuleXComposant>();
+								
+								for(int i=0 ; i < ListComposant.length ; i++) {
+									//Verifier que se sois bien des integer
+									String composantId = ListComposant[i];
+									String quantites = ListQuantite[i];
+									if(isInteger(composantId) && isInteger(quantites)) {
+										
+										Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
+										Integer quantite = Integer.valueOf(quantites);
+										ModuleXComposantId moduleXComposantId = new ModuleXComposantId(composant.getComposantId(),newModule.getModuleId());
+										ModuleXComposant moduleXcompo = new ModuleXComposant(moduleXComposantId,composant,newModule,quantite);
+										list.add(moduleXcompo);
+										
+										
+									}else {
+										returnValue = "Erreur lors de la mise en place des composants.";
 									}
 								}
-							}
-						}
-					}else {
-						//Verifier que gamme et unite mesure sont bien des Integer
-						if(isInteger(gammeId) && isInteger(uniteMesureId)) {
-							UniteMesure uniteMesure = uniteMesureService.getUniteMesureById(Integer.valueOf(uniteMesureId));
-							Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
-							Module module = moduleSerivce.getModuleById(Integer.valueOf(moduleId));
-							
-							module.setGamme(gamme);
-							module.setNom(nomModule);
-							module.setUniteMesure(uniteMesure);
-							module.setAngle(null);
-							
-							Set<ModuleXComposant> list = new HashSet<ModuleXComposant>();
-							Set<ModuleXComposant> ListForTest = module.getModuleXComposants();
-							
-							for(int i=0 ; i < ListComposant.length ; i++) {
-								//Verifier que se sois bien des integer
-								String composantId = ListComposant[i];
-								String quantites = ListQuantite[i];
-								if(isInteger(composantId) && isInteger(quantites)) {
-									
-									Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
-									Integer quantite = Integer.valueOf(quantites);
-									ModuleXComposantId moduleXComposantId = new ModuleXComposantId(composant.getComposantId(),module.getModuleId());
-									ModuleXComposant moduleXcompo = new ModuleXComposant(moduleXComposantId,composant,module,quantite);
-									
-									list.add(moduleXcompo);
-									
-									
-									
+								if(returnValue.equals("Ok")) {
+									newModule.setModuleXComposants(list);
+									moduleSerivce.editModule(newModule);
+									module.setDisplay(false);
+									moduleSerivce.editModule(module);
 									
 								}else {
-									returnValue = "Erreur lors de la mise en place des composants.";
+									returnValue = "Erreur lors de l'edition.";
+									moduleSerivce.removeModule(newModule);
 								}
-							}
-							if(returnValue.equals("Ok")) {
-							
-								module.setModuleXComposants(list);
-								moduleSerivce.editModule(module);
-								//On supprime le surplus
-								for(ModuleXComposant mod : ListForTest) {
-									boolean test = false;
-									for(ModuleXComposant modXComp : list) {
-										if(modXComp.getId() == mod.getId()) {
-											test = true;
+								
+							}else {
+								//Edition classique
+								module.setAngle(angle);
+								module.setGamme(gamme);
+								module.setNom(nomModule);
+								module.setUniteMesure(uniteMesure);
+								
+								Set<ModuleXComposant> list = new HashSet<ModuleXComposant>();
+								Set<ModuleXComposant> ListForTest = module.getModuleXComposants();
+
+								for(int i=0 ; i < ListComposant.length ; i++) {
+									//Verifier que se sois bien des integer
+									String composantId = ListComposant[i];
+									String quantites = ListQuantite[i];
+									if(isInteger(composantId) && isInteger(quantites)) {
+										
+										Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
+										Integer quantite = Integer.valueOf(quantites);
+										ModuleXComposantId moduleXComposantId = new ModuleXComposantId(composant.getComposantId(),module.getModuleId());
+										ModuleXComposant moduleXcompo = new ModuleXComposant(moduleXComposantId,composant,module,quantite);
+										list.add(moduleXcompo);
+										
+										
+									}else {
+										returnValue = "Erreur lors de la mise en place des composants.";
+									}
+								}
+								if(returnValue.equals("Ok")) {
+									
+									module.setModuleXComposants(list);
+									moduleSerivce.editModule(module);
+									//On supprime le surplus
+									for(ModuleXComposant mod : ListForTest) {
+										boolean test = false;
+										for(ModuleXComposant modXComp : list) {
+											if(modXComp.getId() == mod.getId()) {
+												test = true;
+											}
+										}
+										if(test != true) {
+											moduleXComposantService.removeModuleXComposant(mod);
 										}
 									}
-									if(test != true) {
-										moduleXComposantService.removeModuleXComposant(mod);
-									}
 								}
+								
 							}
+							
 						}
-						
-						
-					}
 				}else {
 					returnValue = "List quantite et composant ne sont pas identique.";
 					

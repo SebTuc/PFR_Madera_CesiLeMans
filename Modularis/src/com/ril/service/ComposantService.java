@@ -7,6 +7,8 @@ import com.ril.model.Composant;
 import com.ril.model.FamilleComposant;
 import com.ril.model.Fournisseur;
 import com.ril.model.Materiaux;
+import com.ril.model.ModuleXComposant;
+import com.ril.model.Piece;
 
 public class ComposantService {
 
@@ -33,7 +35,25 @@ public int addComposant(FamilleComposant familleComposant, Fournisseur fournisse
 			return -1;
 		}
 	}
-	
+
+	public boolean composantInDevisOrCatalogue(Composant composant) {
+		boolean flag = false;
+		
+		for(ModuleXComposant modXComp : composant.getModuleXComposants()) {
+			if(flag!= true) {
+				for(Piece piece : modXComp.getModule().getPieces()) {
+					if(piece.getPlan().getProjet().getDevises().size()!=0 || piece.getPlan().getProjet().getCatalogue().size()!=0) {
+						
+						flag = true;
+						
+					}
+				}
+			}
+		}
+		
+		return flag;
+	}
+
 	public void editComposant(Composant composant) {
 		
 		ComposantHome dao = new ComposantHome();

@@ -32,6 +32,8 @@ public class Module implements java.io.Serializable {
 	private Set<Piece> pieces = new HashSet<Piece>(0);
 	private String nom;
 	private UniteMesure uniteMesure;
+	private Boolean display;
+
 	private Set<ModuleXComposant> moduleXComposants = new HashSet<ModuleXComposant>(0);
 
 	public Module() {
@@ -113,7 +115,7 @@ public class Module implements java.io.Serializable {
 		this.gamme = gamme;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "piece_x_module", catalog = "modularisbdd", joinColumns = {
 			@JoinColumn(name = "MODULE_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "PIECE_ID", nullable = false, updatable = false) })
@@ -133,8 +135,18 @@ public class Module implements java.io.Serializable {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
+	@Column(name = "DISPLAY", nullable = true)
+	public Boolean isDisplay() {
+		return display;
+	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module")
+	public void setDisplay(Boolean display) {
+		this.display = display;
+	}
+
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module" , cascade = CascadeType.ALL)
 	public Set<ModuleXComposant> getModuleXComposants() {
 		return this.moduleXComposants;
 	}

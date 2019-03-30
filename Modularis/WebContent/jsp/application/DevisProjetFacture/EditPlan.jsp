@@ -42,7 +42,7 @@
 						<li class="list-group-item">
 							<div class="form-check form-check-inline not-inline">
 								<input class="form-check-input" type="radio" name="radio" id="${fn:escapeXml(Piece.pieceId)}" value="${fn:escapeXml(Piece.pieceId)}">
-								<label class="form-check-label label-lg" for="${fn:escapeXml(Piece.pieceId)}">${fn:escapeXml(Piece.nom)}  |  Surface  :  ${fn:escapeXml(Piece.surface)}</label>
+								<label class="form-check-label label-lg" for="${fn:escapeXml(Piece.pieceId)}">${fn:escapeXml(Piece.nom)}  |  Surface  :  ${fn:escapeXml(Piece.surface)} m&sup2;</label>
 							</div>
 						</li>
 					</c:forEach>

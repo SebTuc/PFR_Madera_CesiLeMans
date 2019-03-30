@@ -32,8 +32,13 @@
 	    	<input type="text" class="form-control" maxlength="50" name="nom" id="nom" placeholder="Nom du composant" value="${fn:escapeXml(Composant.nom) }" required>
 		  </div>
 		  <div class="form-group col-md-6">
-			<label for="prixUnitaire">Prix unitaire</label>
-		    <input type="text" class="form-control" name="prixUnitaire" id="prixUnitaire" value="${fn:escapeXml(Composant.prixUnitaire) }" placeholder="Prix Unitaire" required>
+		    <label for="prixUnitaire">Prix unitaire</label> 
+					<div class="input-group-append">
+					<input type="text"
+						class="form-control" value="${fn:escapeXml(Composant.prixUnitaire) }" name="prixUnitaire" id="adresse"
+						placeholder="Prix Unitaire" aria-describedby="addonEuro" required>
+						<span class="input-group-text"  id="addonEuro">&euro;</span>
+					</div>
 		  </div>
 	  </div>
 	  <div class="form-row">

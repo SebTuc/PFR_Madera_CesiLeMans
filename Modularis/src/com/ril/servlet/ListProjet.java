@@ -131,6 +131,7 @@ public class ListProjet extends HttpServlet {
 		}else if( btnSupprimer != null && projetId != null) {
 			if(isInteger(projetId)) {
 
+				
 				projetService.removeProjetById(Integer.valueOf(projetId));
 				
 				doGet(request, response);

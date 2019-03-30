@@ -30,6 +30,9 @@ public class Projet implements java.io.Serializable {
 	private Set<Catalogue> catalogue = new HashSet<Catalogue>(0);
 	
 	private String nom;
+	
+	private Boolean isClone;
+	
 	private Set<Devis> devises = new HashSet<Devis>(0);
 	private Set<Plan> plans = new HashSet<Plan>(0);
 	
@@ -104,7 +107,7 @@ public class Projet implements java.io.Serializable {
 		this.devises = devises;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projet", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projet" , cascade = CascadeType.ALL)
 	public Set<Plan> getPlans() {
 		return this.plans;
 	}
@@ -112,6 +115,16 @@ public class Projet implements java.io.Serializable {
 	public void setPlans(Set<Plan> plans) {
 		this.plans = plans;
 	}
+	
+	@Column(name = "IS_CLONE", nullable = true)
+	public Boolean isClone() {
+		return isClone;
+	}
+
+	public void setClone(Boolean isClone) {
+		this.isClone = isClone;
+	}
+
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "IMAGE_ID", nullable = false)

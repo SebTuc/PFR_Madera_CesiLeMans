@@ -87,7 +87,7 @@ public class Piece implements java.io.Serializable {
 		this.surface = surface;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pieces" , cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pieces" )
 	public Set<Module> getModules() {
 		return this.modules;
 	}

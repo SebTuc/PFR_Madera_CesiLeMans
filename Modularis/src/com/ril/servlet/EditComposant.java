@@ -88,23 +88,31 @@ public class EditComposant extends HttpServlet {
 			if (!(nom.equals("")) && !(prixUnitaire.equals(""))&& !(familleComposant.equals("")) && !(materiaux.equals("")) && !(fournisseur.equals(""))) {	
 				if(isFloat(prixUnitaire)) {
 					if(isInteger(materiaux) && isInteger(fournisseur) && isInteger(familleComposant)) {
-						//Ajout verif /!\
 						FamilleComposant familleCompo = familleComposantService.getFamilleComposantById(Integer.valueOf(familleComposant));
 						Fournisseur fourni = fournisseurService.getFournisseurById(Integer.valueOf(fournisseur));
 						Materiaux mater = materiauxService.getMateriauxById(Integer.valueOf(materiaux));
 						
 						Composant composant =composantService.getComposantById(Integer.valueOf(ComposantId));
 						
-						composant.setFamilleComposant(familleCompo);
-						composant.setFournisseur(fourni);
-						composant.setMateriaux(mater);
-						composant.setNom(nom);
-						composant.setPrixUnitaire(Float.valueOf(prixUnitaire));
-						
-						composantService.editComposant(composant);
+						if(composantService.composantInDevisOrCatalogue(composant)) {
+							//On clone et display false l'autre
+							
+							//Ou on empeche l'edition ????
+							composant.setDisplay(false);
+							composantService.editComposant(composant);
+
+							composantService.addComposant(familleCompo, fourni, mater, nom, Float.valueOf(prixUnitaire));
+							
+						}else {
+							composant.setFamilleComposant(familleCompo);
+							composant.setFournisseur(fourni);
+							composant.setMateriaux(mater);
+							composant.setNom(nom);
+							composant.setPrixUnitaire(Float.valueOf(prixUnitaire));
+							
+							composantService.editComposant(composant);
+						}
 	
-						//Definit la reponse comme "See Other" et redirige
-						//Evite la multi-insertion après un refresh de l'utilsateur		
 						response.sendRedirect("/Modularis/Configuration/ListComposant");
 					}else {
 						

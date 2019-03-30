@@ -136,9 +136,9 @@
 						id="nombreComposant">
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="btnQuitter" class="btn btn-primary"
+					<button type="button" id="btnQuitter" class="btn btn-danger"
 						data-dismiss="modal">Quitter</button>
-					<button type="button" id="btnAjouter" class="btn btn-danger">Ajouter</button>
+					<button type="button" id="btnAjouter" class="btn btn-primary">Ajouter</button>
 				</div>
 			</div>
 		</div>

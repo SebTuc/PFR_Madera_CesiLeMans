@@ -80,7 +80,8 @@ public class DetailCatalogueProjet extends HttpServlet {
 			Integer projetId = projetService.addProjet(projetCloned);
 			
 			Projet newProjet = projetService.getProjetById(projetId);
-			
+			newProjet.setClone(true);
+			projetService.editProjet(newProjet);
 			for(Plan plan : projet.getPlans()) {
 				
 				Plan newPlan = new Plan(newProjet,plan.getNom());

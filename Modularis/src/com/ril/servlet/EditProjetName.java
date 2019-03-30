@@ -167,7 +167,15 @@ public class EditProjetName extends HttpServlet {
 
 					projet.setImage(image);
 				}
-
+				Boolean flag = projet.isClone();
+				if(flag == null || flag != false) {
+					if(!nomProjet.equals(projet.getNom())) {
+						//Si le nom est modifier on supprime le Is Clone
+						projet.setClone(null);
+					}
+					
+				}
+				
 				projet.setNom(nomProjet);
 
 				projetService.editProjet(projet);

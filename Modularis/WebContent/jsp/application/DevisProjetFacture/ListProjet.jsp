@@ -26,7 +26,7 @@
 		</c:choose>
 
 <div class="row justify-content-center">
-	<h3>Liste des Projet</h3>
+	<h3>Liste des projets</h3>
 </div>
 <br>
 <form id="List" method="post">
@@ -69,19 +69,19 @@
 
 			<div class="row justify-content-center">
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Editer plan projet selectionn&eacute;</button>
+					<button class="btn btn-warning btn-block btn-lg" name="btnEditerProjet" id="btnEditerProjet">Editer projet</button>
 				</div>
-				<br>
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
+					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Creer/editer plan projet</button>
 				</div>
 				<br>
 				<div class="col-md-3 col-sm-6">
 					<button class="btn btn-success btn-block btn-lg" type="button" name="btnGenerateDevis" data-toggle="modal"
 						data-target="#ModalCreationDevis" id="btnGenerateDevis">Generer un devis</button>
 				</div>
+					<br>
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-warning btn-block btn-lg" name="btnEditerProjet" id="btnEditerProjet">Editer projet</button>
+					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
 				</div>
 			</div>
 		
@@ -107,10 +107,10 @@
 					</select>
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="btnQuitter" class="btn btn-primary"
+					<button type="button" id="btnQuitter" class="btn btn-danger"
 						data-dismiss="modal">Quitter</button>
-					<button type="button" id="btnCreer" class="btn btn-danger">Creer devis</button>
-					<a id="btnAjouter" href="/Modularis/Annuaire/AjoutClient" class="btn btn-success" >Creer un client</a>
+					<button type="button" id="btnCreer" class="btn btn-success">Creer devis</button>
+					<a id="btnAjouter" href="/Modularis/Annuaire/AjoutClient" class="btn btn-primary" >Creer un client</a>
 				</div>
 			</div>
 		</div>
