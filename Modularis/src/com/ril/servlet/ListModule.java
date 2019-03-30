@@ -157,8 +157,13 @@ public class ListModule extends HttpServlet {
 
 				//Si le module est dans un catalogue ou devis on le supprime pas on le display false 
 				if(moduleService.moduleInDevisOrCatalogue(module)) {
+					
 					module.setDisplay(false);
 					moduleService.editModule(module);
+					//Supprimer le module des projet en cours de création.
+					moduleService.removeAllModuleInProjetEditableById(module.getModuleId());
+					
+					
 				}else {
 					moduleService.removeModule(module);
 				}

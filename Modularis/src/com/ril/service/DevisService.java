@@ -63,7 +63,7 @@ public int addDevis(Client client, Etat etat, Projet projet, Utilisateur utilisa
 				//Get the instance hibernate with the java instance object
 				Module mod = moduleService.getModuleById(module.getModuleId());
 				Boolean hidden = mod.isDisplay();
-				if(hidden == null || hidden != false) {
+				if(hidden != null) {
 					pieceService.removeModuleToPiece(mod, newPiece);
 					//reinstance piece
 					newPiece = pieceService.getPieceById(piece.getPieceId());

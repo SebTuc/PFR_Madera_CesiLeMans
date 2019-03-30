@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Utilisateur;
 import com.ril.service.UtilisateurService;
@@ -19,13 +20,7 @@ import com.ril.service.UtilisateurService;
 public class Connexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public Connexion() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 	private UtilisateurService user = new UtilisateurService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +44,12 @@ public class Connexion extends HttpServlet {
 					for(Utilisateur utilisateur : ListUser) {
 						if(login.equals(utilisateur.getLogin())){
 							if(pw.equals(utilisateur.getPassword())){
+								
+								HttpSession session = request.getSession();
+								session.setAttribute("Utilisateur", utilisateur);
 								response.sendRedirect("/Modularis");
+								
+								
 							}else {
 								valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";
 							}

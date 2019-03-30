@@ -72,6 +72,7 @@ public class ModuleService {
 		}
 	}
 	
+
 	private void removeListPieceToModule(List<Piece> list , Module module) {
 		if(list.size()!=0) {
 			//Get the instance hibernate with the java instance object
@@ -84,6 +85,30 @@ public class ModuleService {
 				newModule = getModuleById(module.getModuleId());
 			}
 		}
+	}
+	public void removeAllModuleInProjetEditableById(Integer id) {
+		ModuleHome dao = new ModuleHome();
+		
+		if(id != null) {
+			
+			Module module = getModuleById(id);
+			
+			List<Piece> ListPiece = new ArrayList<Piece>(module.getPieces());
+			List<Piece> list = new ArrayList<Piece>();
+			for(Piece piece : ListPiece) {
+				if(piece.getPlan().getProjet().getCatalogue().size()==0 && piece.getPlan().getProjet().getDevises().size() == 0) {
+					list.add(piece);
+				}
+			}
+			removeListPieceToModule(list,module);
+			
+			module = getModuleById(module.getModuleId());
+			
+			dao.merge(module);
+			
+			
+		}
+		
 	}
 	
 	public void removeModuleById(Integer id) {

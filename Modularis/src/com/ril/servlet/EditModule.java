@@ -176,6 +176,8 @@ public class EditModule extends HttpServlet {
 									module.setDisplay(false);
 									moduleSerivce.editModule(module);
 									
+									moduleSerivce.removeAllModuleInProjetEditableById(module.getModuleId());
+									
 								}else {
 									returnValue = "Erreur lors de l'edition.";
 									moduleSerivce.removeModule(newModule);

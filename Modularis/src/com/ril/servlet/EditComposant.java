@@ -97,11 +97,20 @@ public class EditComposant extends HttpServlet {
 						if(composantService.composantInDevisOrCatalogue(composant)) {
 							//On clone et display false l'autre
 							
+							request.setAttribute("Erreur", "Impossible d'éditer, le composant est utiliser dans 1 ou plusieur devis/catalogue.");
+							request.setAttribute("NomComposant", nom);
+							if(isInteger(materiaux) && isInteger(fournisseur) && isInteger(familleComposant)) {
+								request.setAttribute("FamilleComposantId", familleComposant);
+								request.setAttribute("MateriauxId", materiaux);
+								request.setAttribute("FournisseurId", fournisseur);
+							}
+							doGet(request , response);
+							return;
 							//Ou on empeche l'edition ????
-							composant.setDisplay(false);
-							composantService.editComposant(composant);
-
-							composantService.addComposant(familleCompo, fourni, mater, nom, Float.valueOf(prixUnitaire));
+//							composant.setDisplay(false);
+//							composantService.editComposant(composant);
+//
+//							composantService.addComposant(familleCompo, fourni, mater, nom, Float.valueOf(prixUnitaire));
 							
 						}else {
 							composant.setFamilleComposant(familleCompo);

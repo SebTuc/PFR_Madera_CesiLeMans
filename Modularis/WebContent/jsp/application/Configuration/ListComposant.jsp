@@ -16,7 +16,11 @@
 
 <a href="/Modularis/Configuration" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 <div role="main" class="container-fluid">
-<!-- Faire une collapse et un bouton pour l'ouvrir avec critere de recherche ou un truc comme sa , ensuite faire dans le get un trie sur la list selon les parametre recu en get -->
+	<c:choose>
+			<c:when test="${Erreur != null }">
+				<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+			</c:when>
+		</c:choose>
 <div class="row justify-content-center">
 	<h3>Liste des composants</h3>
 </div>

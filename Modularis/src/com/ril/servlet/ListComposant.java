@@ -139,8 +139,10 @@ public class ListComposant extends HttpServlet {
 					
 				}else {
 					//Empecher la suppresion ????
-					composant.setDisplay(false);
-					composantService.editComposant(composant);
+					request.setAttribute("Erreur", "Impossible de supprimer se composant, le composant est utilisé dans un ou plusieur devis/catalogue.");
+					doGet(request, response);
+//					composant.setDisplay(false);
+//					composantService.editComposant(composant);
 					
 				}
 				

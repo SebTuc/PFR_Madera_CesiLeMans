@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Client;
 import com.ril.model.Etat;
@@ -148,11 +149,10 @@ public class ListProjet extends HttpServlet {
 				Projet projet = projetService.getProjetById(Integer.valueOf(projetId));
 				Date date = new Date();
 				//On recuperer le nom/prenom de l'utilisateur connecter
-//				HttpSession session = request.getSession();
-//				Utilisateur utilisateur = utilisateurService.getUtilisateurById(Integer.valueOf(session.getAttribute("utilisateurId"));
+				HttpSession session = request.getSession();
+				Utilisateur utilisateur = (Utilisateur) session.getAttribute("Utilisateur");
 				//OU
 //				Utilisateur utilisateur = session.getAttribute("Utilisateur");
-				Utilisateur utilisateur = utilisateurService.getUtilisateurById(1);
 				Client client = clientService.getClientById(Integer.valueOf(clientId));
 				Float prixTotal = getPrixTotalDuProjet(projet);
 				//Letat devis on le met a brouillon au debut
