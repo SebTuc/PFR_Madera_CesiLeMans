@@ -109,7 +109,10 @@ public class DetailCatalogueProjet extends HttpServlet {
 			for(Module module : list){
 				//Get the instance hibernate with the java instance object
 				Module mod = moduleService.getModuleById(module.getModuleId());
-				pieceService.addModuleToPiece(mod, newPiece);
+				Boolean flag = mod.isDisplay();
+				if(flag == null || flag != false) {
+					pieceService.addModuleToPiece(mod, newPiece);
+				}
 				//reinstance piece
 				newPiece = pieceService.getPieceById(piece.getPieceId());
 			}
