@@ -15,6 +15,7 @@
 	<a href="/Modularis/DevisFacture/ListDevis"
 		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
 	<br />
+<div id="toPDF">
 	<div class="col-lg-12 text-center">
 		<h1>Détail du devis de
 			${fn:escapeXml(Devis.client.donneesPersonelle.nom)}
@@ -109,6 +110,23 @@
 				${Devis.prixHt}&euro;</div>
 		</div>
 	</div>
+	<div id="editor"></div>
+</div>
+	<br> <br>
+	
+		<form method="post">
+			<input type="text" name="devisId" id="devisId" value="${fn:escapeXml(Devis.devisId) }" style="display:none">
+			<div class="row justify-content-center">
+				<div class="col-md-3 col-sm-6">
+					<button class="btn btn-success btn-block btn-lg" name="btnFacture" id="btnFacture">Passer en facturation</button>
+				</div>
+				<br>
+				<div class="col-md-3 col-sm-6">
+					<button class="btn btn-primary btn-block btn-lg" type=button name="btnPDF" id="btnPDF">Generer PDF</button>
+				</div>
+				<br>
+			</div>
+		</form>
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />
 </body>
 </html>

@@ -22,16 +22,16 @@ public class Facture implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer factureId;
 	private Devis devis;
-	private String etape;
-	private int pourcentage;
+	private EtapeFacture etapeFacture;
+
+	
 
 	public Facture() {
 	}
 
-	public Facture(Devis devis, String etape, int pourcentage) {
+	public Facture(Devis devis, EtapeFacture etapeFacture) {
 		this.devis = devis;
-		this.etape = etape;
-		this.pourcentage = pourcentage;
+		this.etapeFacture = etapeFacture;
 	}
 
 	@Id
@@ -56,22 +56,15 @@ public class Facture implements java.io.Serializable {
 		this.devis = devis;
 	}
 
-	@Column(name = "ETAPE", nullable = false, length = 100)
-	public String getEtape() {
-		return this.etape;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ETAPE_FACTURE_ID", nullable = false)
+	public EtapeFacture getEtapeFacture() {
+		return etapeFacture;
 	}
 
-	public void setEtape(String etape) {
-		this.etape = etape;
+	public void setEtapeFacture(EtapeFacture etapeFacture) {
+		this.etapeFacture = etapeFacture;
 	}
-
-	@Column(name = "POURCENTAGE", nullable = false)
-	public int getPourcentage() {
-		return this.pourcentage;
-	}
-
-	public void setPourcentage(int pourcentage) {
-		this.pourcentage = pourcentage;
-	}
+	
 
 }

@@ -1,6 +1,7 @@
 package com.ril.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -35,8 +36,17 @@ public class ListDevis extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Devis> ListDevis = devisService.getAllDeviss();
-		if(ListDevis == null) {
+		List<Devis> ListDev = devisService.getAllDeviss();
+		//afficher que les devis en brouillon
+		List<Devis> ListDevis = new ArrayList<Devis>();
+		for(Devis devis : ListDev) {
+			if(devis.getEtat().getNom().equals("Brouillon")) {
+				ListDevis.add(devis);
+			}
+		}
+		
+		
+		if(ListDevis.size() == 0) {
 			
 			request.setAttribute("isEmptyList", true);
 		}else {

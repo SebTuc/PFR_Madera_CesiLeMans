@@ -1,11 +1,18 @@
 package com.ril.daoHibernate;
 // Generated 9 janv. 2019 13:13:58 by Hibernate Tools 4.3.5.Final
 
-import javax.ejb.Stateless;
+import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
 import org.jboss.logging.Logger;
 
 import com.ril.hibernate.HibernateUtil;
+import com.ril.model.Devis;
 import com.ril.model.Facture;
 
 /**
@@ -61,6 +68,34 @@ public class FactureHome {
 			Facture instance = HibernateUtil.getSession().find(Facture.class, id);
 			log.debug("get successful");
 			return instance;
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+	public List<Facture> findAll() {
+		log.debug("getting all Devis");
+		try {
+			Session session = HibernateUtil.getSession();
+	
+			CriteriaBuilder builder = HibernateUtil.getCriteriaBuilder();
+			
+			CriteriaQuery<Facture> crit = builder.createQuery(Facture.class);
+			
+			Root<Facture> FactureRoot = crit.from(Facture.class);
+			
+			crit.select(FactureRoot);
+			
+			List<Facture> list = session.createQuery(crit).getResultList();
+			
+			if(list.isEmpty()) {
+				log.debug("get successful, no instance found");
+				return null;
+				
+			}else {
+				log.debug("get successful");
+				return list;
+			}
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;

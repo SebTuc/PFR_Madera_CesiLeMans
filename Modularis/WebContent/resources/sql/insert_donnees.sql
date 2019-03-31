@@ -29,6 +29,20 @@ INSERT INTO `angle` (`ANGLE_ID`, `TYPE_ANGLE`, `PRIX_UNITAIRE`) VALUES
 (2, 'Angle sortant', 150);
 
 --
+-- Contenu de la table `angle`
+--
+
+INSERT INTO `etape_facture` (`ETAPE_FACTURE_ID`, `ETAPE`, `POURCENTAGE`, `N_ETAPE`) VALUES
+(1,'Devis accepter',3,1),
+(2,'Obtention du permis de construire',10,2),
+(3,'Ouverture du chantier',15,3),
+(4,'Achevement des fondation',25,4),
+(5,'Achevement des murs',40,5),
+(6,'Mise hors d''eau/hors d''air',75,6),
+(7,'Achèvement des travaux d''equipement',95,7),
+(8,'Remise des clés',100,8);
+
+--
 -- Contenu de la table `catalogue`
 --
 
@@ -97,6 +111,18 @@ INSERT INTO `gamme` (`GAMME_ID`, `NOM`) VALUES
 (2, 'Économie d''énergie'),
 (3, 'Luxe'),
 (4, 'Standard');
+
+
+--
+-- Contenu de la table `Etat`
+--
+
+INSERT INTO `etat` (`ETAT_ID`, `NOM`) VALUES
+(1, 'Brouillon'),
+(2, 'Accepter'),
+(3, 'En commande'),
+(4, 'En facturation');
+
 
 --
 -- Contenu de la table `materiaux`
@@ -202,8 +228,125 @@ INSERT INTO `composant` (`COMPOSANT_ID`, `NOM`, `PRIX_UNITAIRE`, `FAMILLE_COMPOS
 (20, 'Echantignolle de charpente en bois de peuplier brute', 65, 29, 4, 39),
 (21, 'Chevron de charpente en bois de peuplier brute', 10, 29, 4, 39),
 (22, 'Panne de charpente en bois de peuplier brute', 60, 29, 4, 39),
-(23, 'Ardoise de couverture', 1, 26, 3, 28);
+(23, 'Ardoise de couverture', 1, 26, 3, 28),
+(24, 'Panneau interieur en bois de peuplier brute', 200, 29, 4, 39);
 
+
+--
+-- Contenu de la table `module`
+--
+INSERT INTO `module` (`MODULE_ID`, `NOM`, `UNITE_MESURE_ID`, `GAMME_ID`, `ANGLE_ID`) VALUES
+(1,'Mur inox chambre de luxe nord 20x3',5,3,null),
+(2,'Mur inox chambre de luxe sud 20x3',5,3,null),
+(3,'Mur inox chambre de luxe est 25x3',5,3,null),
+(4,'Mur inox chambre de luxe ouest 25x3',5,3,null),
+(5,'Mur en bois chambre de ecologique nord/ouest 35x3',5,2,1),
+(6,'Mur en bois chambre de ecologique sud/est 35x3',5,2,1),
+(7,'Mur inox salle de bain luxe sud 15x3',5,3,null),
+(8,'Mur inox salle de bain luxe nord 15x3',5,3,null),
+(9,'Mur inox salle de bain luxe est 15x3',5,3,null),
+(10,'Mur inox salle de bain luxe ouest 15x3',5,3,null),
+(11,'Parquet luxe de 25x20 chambre',6,3,null),
+(12,'Parquet luxe de 15x15 salle de bain',6,3,null),
+(13,'Plafond luxe chambre 25x20',6,3,null),
+(14,'Plafond luxe salle de bain 25x20',6,3,null),
+(15,'Mur inox cuisine de luxe nord 35x3',5,3,null),
+(16,'Mur inox cuisine de luxe sud 35x3',5,3,null),
+(17,'Mur inox cuisine de luxe est 20x3',5,3,null),
+(18,'Mur inox cuisine de luxe ouest 20x3',5,3,null),
+(19,'Parquet luxe cuisine 35x20',6,3,null),
+(20,'Toiture maison inox de luxe',6,3,null),
+(21,'Plafond luxe cuisine 35x20',6,3,null);
+
+
+--
+-- Contenu de la table `module_x_composant`
+--
+INSERT INTO `module_x_composant` (`COMPOSANT_ID`,`MODULE_ID`,`QUANTITE`) VALUES
+(9,19,50),
+(9,11,35),
+(9,12,20),
+(22,20,10),
+(19,20,20),
+(15,20,8),
+(11,20,400),
+(16,20,10),
+(7,20,50),
+(21,21,8),
+(6,21,40),
+(2,21,4),
+(24,21,20),
+(21,13,4),
+(6,13,20),
+(2,13,2),
+(24,13,10),
+(21,14,4),
+(6,14,20),
+(2,14,2),
+(24,14,10),
+(3,11,15),
+(3,21,30),
+(9,21,15),
+(4,1,40),
+(6,1,20),
+(13,1,4),
+(7,1,20),
+(24,1,20),
+(4,2,40),
+(6,2,20),
+(13,2,4),
+(7,2,20),
+(24,2,20),
+(4,3,40),
+(6,3,20),
+(13,3,4),
+(7,3,20),
+(24,3,20),
+(4,4,40),
+(6,4,20),
+(13,4,4),
+(7,4,20),
+(24,4,20),
+(4,15,40),
+(6,15,20),
+(13,15,4),
+(7,15,20),
+(24,15,20),
+(4,16,40),
+(6,16,20),
+(13,16,4),
+(7,16,20),
+(24,16,20),
+(4,17,40),
+(6,17,20),
+(13,17,4),
+(7,17,20),
+(24,17,20),
+(4,18,40),
+(6,18,20),
+(13,18,4),
+(7,18,20),
+(24,18,20),
+(4,7,40),
+(6,7,20),
+(13,7,4),
+(7,7,20),
+(24,7,20),
+(4,8,40),
+(6,8,20),
+(13,8,4),
+(7,8,20),
+(24,8,20),
+(4,9,40),
+(6,9,20),
+(13,9,4),
+(7,9,20),
+(24,9,20),
+(4,10,40),
+(6,10,20),
+(13,10,4),
+(7,10,20),
+(24,10,20);
 
 --
 -- Contenu de la table `utilisateur`

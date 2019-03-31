@@ -16,3 +16,5 @@
 
 <!-- CUSTOM -->
 <script type='text/javascript' src='<%=request.getContextPath()%>/resources/js/custom.js'></script>
+<script type='text/javascript' src='<%=request.getContextPath()%>/resources/js/jspdf.min.js'></script>
+<script type='text/javascript' src='<%=request.getContextPath()%>/resources/js/ConvertPageToPDF.js'></script>
