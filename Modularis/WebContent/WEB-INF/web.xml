@@ -39,6 +39,14 @@
     <url-pattern>/DevisFacture/DetailDevis</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DetailFacture</servlet-name>
+    <servlet-class>com.ril.servlet.DetailFacture</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailFacture</servlet-name>
+    <url-pattern>/DevisFacture/DetailFacture</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>com.ril.servlet.Deconnexion</servlet-class>
   </servlet>
@@ -159,12 +167,12 @@
     <url-pattern>/Annuaire/AjoutFournisseur</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>AjoutEtat</servlet-name>
-    <servlet-class>com.ril.servlet.AjoutEtat</servlet-class>
+    <servlet-name>AjoutEtapeFacture</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutEtapeFacture</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AjoutEtat</servlet-name>
-    <url-pattern>/Configuration/AjoutEtat</url-pattern>
+    <servlet-name>AjoutEtapeFacture</servlet-name>
+    <url-pattern>/Configuration/AjoutEtapeFacture</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>EditComposant</servlet-name>
@@ -334,7 +342,6 @@
     <servlet-name>EditProjetName</servlet-name>
     <url-pattern>/DevisFacture/EditProjetName</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ListFacture</servlet-name>
     <servlet-class>com.ril.servlet.ListFacture</servlet-class>
@@ -343,7 +350,6 @@
     <servlet-name>ListFacture</servlet-name>
     <url-pattern>/DevisFacture/ListFacture</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Photo</servlet-name>
     <servlet-class>com.ril.servlet.Photo</servlet-class>

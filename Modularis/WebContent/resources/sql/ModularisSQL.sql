@@ -173,7 +173,7 @@ CREATE TABLE IMAGE(
 
 CREATE TABLE ETAPE_FACTURE(
         ETAPE_FACTURE_ID int (11) Auto_increment  NOT NULL ,
-        ETAPE            Varchar (25) NOT NULL ,
+        ETAPE            Varchar (150) NOT NULL ,
         POURCENTAGE      Int NOT NULL ,
         N_ETAPE          Int NOT NULL ,
         PRIMARY KEY (ETAPE_FACTURE_ID ) ,

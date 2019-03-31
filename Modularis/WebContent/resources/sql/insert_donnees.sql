@@ -236,27 +236,27 @@ INSERT INTO `composant` (`COMPOSANT_ID`, `NOM`, `PRIX_UNITAIRE`, `FAMILLE_COMPOS
 -- Contenu de la table `module`
 --
 INSERT INTO `module` (`MODULE_ID`, `NOM`, `UNITE_MESURE_ID`, `GAMME_ID`, `ANGLE_ID`) VALUES
-(1,'Mur inox chambre de luxe nord 20x3',5,3,null),
-(2,'Mur inox chambre de luxe sud 20x3',5,3,null),
-(3,'Mur inox chambre de luxe est 25x3',5,3,null),
-(4,'Mur inox chambre de luxe ouest 25x3',5,3,null),
-(5,'Mur en bois chambre de ecologique nord/ouest 35x3',5,2,1),
-(6,'Mur en bois chambre de ecologique sud/est 35x3',5,2,1),
-(7,'Mur inox salle de bain luxe sud 15x3',5,3,null),
-(8,'Mur inox salle de bain luxe nord 15x3',5,3,null),
-(9,'Mur inox salle de bain luxe est 15x3',5,3,null),
-(10,'Mur inox salle de bain luxe ouest 15x3',5,3,null),
-(11,'Parquet luxe de 25x20 chambre',6,3,null),
-(12,'Parquet luxe de 15x15 salle de bain',6,3,null),
-(13,'Plafond luxe chambre 25x20',6,3,null),
+(1,'Mur inox chambre de luxe nord 7x3',5,3,null),
+(2,'Mur inox chambre de luxe sud 7x3',5,3,null),
+(3,'Mur inox chambre de luxe est 8x3',5,3,null),
+(4,'Mur inox chambre de luxe ouest 8x3',5,3,null),
+(5,'Mur en bois chambre de ecologique nord/ouest 13x3',5,2,1),
+(6,'Mur en bois chambre de ecologique sud/est 13x3',5,2,1),
+(7,'Mur inox salle de bain luxe sud 8x3',5,3,null),
+(8,'Mur inox salle de bain luxe nord 8x3',5,3,null),
+(9,'Mur inox salle de bain luxe est 8x3',5,3,null),
+(10,'Mur inox salle de bain luxe ouest 8x3',5,3,null),
+(11,'Parquet luxe de 7x8 chambre',6,3,null),
+(12,'Parquet luxe de 8x8 salle de bain',6,3,null),
+(13,'Plafond luxe chambre 7x8',6,3,null),
 (14,'Plafond luxe salle de bain 25x20',6,3,null),
-(15,'Mur inox cuisine de luxe nord 35x3',5,3,null),
-(16,'Mur inox cuisine de luxe sud 35x3',5,3,null),
-(17,'Mur inox cuisine de luxe est 20x3',5,3,null),
-(18,'Mur inox cuisine de luxe ouest 20x3',5,3,null),
-(19,'Parquet luxe cuisine 35x20',6,3,null),
+(15,'Mur inox cuisine de luxe nord 13x3',5,3,null),
+(16,'Mur inox cuisine de luxe sud 13x3',5,3,null),
+(17,'Mur inox cuisine de luxe est 8x3',5,3,null),
+(18,'Mur inox cuisine de luxe ouest 8x3',5,3,null),
+(19,'Parquet luxe cuisine 13x8',6,3,null),
 (20,'Toiture maison inox de luxe',6,3,null),
-(21,'Plafond luxe cuisine 35x20',6,3,null);
+(21,'Plafond luxe cuisine 13x8',6,3,null);
 
 
 --

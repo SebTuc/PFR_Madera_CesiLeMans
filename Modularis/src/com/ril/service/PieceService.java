@@ -1,5 +1,6 @@
 package com.ril.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ril.daoHibernate.PieceHome;
@@ -8,6 +9,7 @@ import com.ril.model.Piece;
 import com.ril.model.Plan;
 
 public class PieceService {
+	
 	
 	public int addPiece(Piece piece) {
 		
@@ -61,16 +63,40 @@ public class PieceService {
 
 			Piece piece = getPieceById(id);
 			
+			List<Module> list = new ArrayList<Module>(piece.getModules());
+			
+			removeListModuleToPiece(list,piece);
+			
+			piece = getPieceById(piece.getPieceId());
+			
 			dao.remove(piece);
 		}
 	}
 	
+	private void removeListModuleToPiece(List<Module> list , Piece piece) {
+		if(list.size()!=0) {
+			//Get the instance hibernate with the java instance object
+			Piece newPiece = getPieceById(piece.getPieceId());
+			for(Module module : list){
+
+				removeModuleToPiece(module, newPiece);
+				//reinstance piece
+				newPiece = getPieceById(piece.getPieceId());
+			}
+		}
+	}
 	
 	public void removePiece(Piece piece) {
 
 		PieceHome dao = new PieceHome();
 		
 		if(piece != null) {
+			
+			List<Module> list = new ArrayList<Module>(piece.getModules());
+			
+			removeListModuleToPiece(list,piece);
+			
+			piece = getPieceById(piece.getPieceId());
 			
 			dao.remove(piece);
 		}

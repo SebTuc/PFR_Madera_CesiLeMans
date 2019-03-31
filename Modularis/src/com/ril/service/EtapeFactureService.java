@@ -7,12 +7,12 @@ import com.ril.model.EtapeFacture;
 
 public class EtapeFactureService {
 	
-public int addEtapeFacture(Integer nEtape , String etape , Integer pourcentage) {
+	public int addEtapeFacture(Integer nEtape , String etape , Integer pourcentage) {
 		
 		EtapeFactureHome dao = new EtapeFactureHome();
 		
 		if(nEtape != null && etape != null && pourcentage != null) {
-			if(!findIfEtapeExist(nEtape)) {
+			if(findifEtapeAndPercentageIsLogical(nEtape , pourcentage)) {
 				EtapeFacture etapeFacture = new EtapeFacture();
 				
 				etapeFacture.setEtape(etape);
@@ -32,8 +32,52 @@ public int addEtapeFacture(Integer nEtape , String etape , Integer pourcentage) 
 			return -1;
 		}
 	}
+	
 
-	public boolean findIfEtapeExist(Integer nEtape) {
+	private boolean findifEtapeAndPercentageIsLogical(Integer nEtape , Integer percentage) {
+		boolean flag = false;
+		if(!findIfEtapeExist(nEtape)) {
+			EtapeFacture etapeAfter = findNextEtapeBynEtape(nEtape);
+			EtapeFacture etapeBefore = findBeforeEtapeBynEtape(nEtape);
+			
+			if(etapeAfter != null && etapeBefore != null) {
+				//Millieu
+				if(etapeAfter.getPourcentage() > percentage && etapeBefore.getPourcentage() < percentage) {
+					flag = true;
+				}
+			}else if(etapeAfter != null) {
+				//Dernier
+				if(etapeAfter.getPourcentage() > percentage) {
+					flag = true;
+					
+				}
+				
+			}else if(etapeBefore != null) {
+				//Premier
+				if(etapeBefore.getPourcentage() < percentage) {
+					flag=true;
+				}
+				
+			}else {
+				//Aucune autre valeur donc c'est bon
+				flag = true;
+			}
+		}
+		
+		return flag;
+	}
+	
+	private boolean PercentageIsLogical(Integer nEtape , Integer percentage) {
+		boolean flag = false;
+		EtapeFacture etapeFacture = findNextEtapeBynEtape(nEtape);
+		if(etapeFacture.getPourcentage() > percentage) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	
+	private boolean findIfEtapeExist(Integer nEtape) {
 		boolean flag=false;
 		
 		for(EtapeFacture etapeFacture : getAllEtapeFacture()) {
@@ -46,11 +90,11 @@ public int addEtapeFacture(Integer nEtape , String etape , Integer pourcentage) 
 		return flag;
 	}
 	
-	public boolean findIfEtapeExist(EtapeFacture etapeFacture) {
+	private boolean findIfEtapeExistWithoutThisEtape(EtapeFacture etapeFacture) {
 		boolean flag=false;
 		
 		for(EtapeFacture etapeFact : getAllEtapeFacture()) {
-			if(etapeFact.getnEtape() == etapeFacture.getnEtape()) {
+			if(etapeFact.getnEtape() == etapeFacture.getnEtape() && etapeFact.getEtapeFactureId() != etapeFacture.getEtapeFactureId()) {
 				
 				flag = true;
 			}
@@ -58,18 +102,24 @@ public int addEtapeFacture(Integer nEtape , String etape , Integer pourcentage) 
 		}
 		return flag;
 	}
+	
 
 	public boolean editEtapeFacture(EtapeFacture etapeFacture) {
 		
 		EtapeFactureHome dao = new EtapeFactureHome();
 		
 		if(etapeFacture != null) {
-			if(!findIfEtapeExist(etapeFacture)) {
-				dao.merge(etapeFacture);
-				return true;
+			if(!findIfEtapeExistWithoutThisEtape(etapeFacture)) {
+				if(PercentageIsLogical(etapeFacture.getnEtape(),etapeFacture.getPourcentage())) {
+					dao.merge(etapeFacture);
+					return true;
+				}else {
+					return false;
+				}
 			}else {
 				return false;
 			}
+			
 		}else {
 			return false;
 		}
@@ -101,6 +151,48 @@ public int addEtapeFacture(Integer nEtape , String etape , Integer pourcentage) 
 		}
 		
 		return next;
+	}
+	
+	public EtapeFacture findNextEtapeBynEtape(Integer nEtape) {
+		
+		int minValue = 9999;
+		EtapeFacture next=null;
+		for(EtapeFacture etapeFact : getAllEtapeFacture()) {
+			if(etapeFact.getnEtape() < minValue && etapeFact.getnEtape() > nEtape && etapeFact.getnEtape() != nEtape) {
+				next = etapeFact;
+				minValue = etapeFact.getnEtape();
+			}
+		}
+		
+		return next;
+	}
+	
+	public EtapeFacture findBeforeEtape(EtapeFacture etapeFacture) {
+		
+		int maxValue = -9999;
+		EtapeFacture before=null;
+		for(EtapeFacture etapeFact : getAllEtapeFacture()) {
+			if(etapeFact.getnEtape() > maxValue && etapeFact.getnEtape() < etapeFacture.getnEtape() && etapeFact.getnEtape() != etapeFacture.getnEtape()) {
+				before = etapeFact;
+				maxValue = etapeFact.getnEtape();
+			}
+		}
+		
+		return before;
+	}
+	
+	public EtapeFacture findBeforeEtapeBynEtape(Integer nEtape) {
+		
+		int maxValue = -9999;
+		EtapeFacture before=null;
+		for(EtapeFacture etapeFact : getAllEtapeFacture()) {
+			if(etapeFact.getnEtape() > maxValue && etapeFact.getnEtape() < nEtape && etapeFact.getnEtape() != nEtape) {
+				before = etapeFact;
+				maxValue = etapeFact.getnEtape();
+			}
+		}
+		
+		return before;
 	}
 	
 	public void removeEtapeFactureById(Integer id) {

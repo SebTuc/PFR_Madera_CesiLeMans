@@ -113,7 +113,7 @@
 		<div class="col-6">
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-sm-12">
-					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
+					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
 				</div>
 			</div>
 		</div>

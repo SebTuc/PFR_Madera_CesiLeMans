@@ -63,11 +63,11 @@
 		<br> <br>
 			<div class="row justify-content-center">
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-success btn-block btn-lg" name="btnVisualiser" id="btnVisualiser">Visionner</button>
+					<button class="btn btn-success btn-block btn-block" name="btnVisualiser" id="btnVisualiser">Visionner</button>
 				</div>
 				<br>
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Passer en etat pay&eacute;</button>
+					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" id="btnSupprimer">Passer en etat pay&eacute;</button>
 				</div>
 				<br>
 			</div>

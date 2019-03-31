@@ -62,7 +62,7 @@
 									id="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}">
 									<label
 									for="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}">Pièce
-										: ${fn:escapeXml(Piece.nom)}</label>
+										: ${fn:escapeXml(Piece.nom)} - ${fn:escapeXml(Piece.surface)}m&sup2;</label>
 									<ul>
 										<c:forEach var="Module" items="${Piece.modules}">
 											<li><input type="checkbox"
@@ -118,11 +118,11 @@
 			<input type="text" name="devisId" id="devisId" value="${fn:escapeXml(Devis.devisId) }" style="display:none">
 			<div class="row justify-content-center">
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-success btn-block btn-lg" name="btnFacture" id="btnFacture">Passer en facturation</button>
+					<button class="btn btn-success btn-block btn-blok" name="btnFacture" id="btnFacture">Passer en facturation</button>
 				</div>
 				<br>
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-primary btn-block btn-lg" type=button name="btnPDF" id="btnPDF">Generer PDF</button>
+					<button class="btn btn-primary btn-block btn-block" type=button name="btnPDF" id="btnPDF">Generer PDF</button>
 				</div>
 				<br>
 			</div>

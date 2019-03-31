@@ -39,6 +39,9 @@
 				<div class="col-sm-6 col-md-4">
 					<button onclick="window.location.href = 'Configuration/AjoutAngle';" class="menu-link"><i class="material-icons" style="float:left">transform</i>Type Angle</button>
 				</div>
+				<div class="col-sm-6 col-md-4">
+					<button onclick="window.location.href = 'Configuration/AjoutEtapeFacture';" class="menu-link"><i class="material-icons" style="float:left">transform</i>Etape facture</button>
+				</div>
 			</div>
 		</div>
 		<br>

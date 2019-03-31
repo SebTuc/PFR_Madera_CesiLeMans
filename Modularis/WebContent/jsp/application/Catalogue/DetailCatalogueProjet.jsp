@@ -49,7 +49,7 @@
 									id="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}">
 									<label
 									for="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}">Pièce
-										: ${fn:escapeXml(Piece.nom)}</label>
+										: ${fn:escapeXml(Piece.nom)} - ${fn:escapeXml(Piece.surface)}m&sup2;</label>
 									<ul>
 										<c:forEach var="Module" items="${Piece.modules}">
 											<li><input type="checkbox"

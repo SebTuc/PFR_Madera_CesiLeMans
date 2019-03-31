@@ -69,19 +69,19 @@
 
 			<div class="row justify-content-center">
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-warning btn-block btn-lg" name="btnEditerProjet" id="btnEditerProjet">Editer projet</button>
+					<button class="btn btn-warning btn-block btn-block" name="btnEditerProjet" id="btnEditerProjet">Editer projet</button>
 				</div>
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Creer/editer plan projet</button>
+					<button class="btn btn-warning btn-block btn-block" name="btnEditer" id="btnEditer">Creer/editer plan projet</button>
 				</div>
 				<br>
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-success btn-block btn-lg" type="button" name="btnGenerateDevis" data-toggle="modal"
+					<button class="btn btn-success btn-block btn-block" type="button" name="btnGenerateDevis" data-toggle="modal"
 						data-target="#ModalCreationDevis" id="btnGenerateDevis">Generer un devis</button>
 				</div>
 					<br>
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
+					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
 				</div>
 			</div>
 		

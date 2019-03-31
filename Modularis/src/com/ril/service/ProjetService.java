@@ -13,7 +13,6 @@ import com.ril.model.Projet;
 public class ProjetService {
 	
 	private PieceService pieceService = new PieceService();
-	private PlanService planService = new PlanService();
 	private ModuleService moduleService = new ModuleService();
 	
 	public int addProjet(Projet projet) {

@@ -36,11 +36,17 @@ public class DetailDevis extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		String devisId = request.getParameter("id");
-        Devis devis = devisService.getDevisById(Integer.valueOf(devisId));
-        
-        request.setAttribute("Devis", devis);
-        
-		request.getRequestDispatcher("/jsp/application/DevisProjetFacture/Devis.jsp").forward(request, response);
+		if(MethodeUtile.isInteger(devisId)) {
+			 Devis devis = devisService.getDevisById(Integer.valueOf(devisId));
+		        
+		        request.setAttribute("Devis", devis);
+		        
+				request.getRequestDispatcher("/jsp/application/DevisProjetFacture/Devis.jsp").forward(request, response);
+		}else {
+			
+			response.sendRedirect("/Modularis/DevisFacture/ListDevis");
+		}
+       
 	}
 
 	/**
@@ -61,12 +67,19 @@ public class DetailDevis extends HttpServlet {
 				devis.setEtat(etat);
 				
 				factureService.addFacture(devis, firstEtape);
+				response.sendRedirect("/Modularis/DevisFacture/ListFacture");
+			}else {
+				request.setAttribute("Erreur", "Erreur lors du passage en facturation.");
+				doGet(request, response);
 			}
+		}else {
+			request.setAttribute("Erreur", "Erreur lors du passage en facturation.");
+			doGet(request, response);
 		}
 		
 		
 		
-		doGet(request, response);
+		
 	}
 
 }

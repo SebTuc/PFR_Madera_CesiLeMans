@@ -39,12 +39,13 @@ public class ListDevis extends HttpServlet {
 		List<Devis> ListDev = devisService.getAllDeviss();
 		//afficher que les devis en brouillon
 		List<Devis> ListDevis = new ArrayList<Devis>();
-		for(Devis devis : ListDev) {
-			if(devis.getEtat().getNom().equals("Brouillon")) {
-				ListDevis.add(devis);
+		if(ListDev!=null) {
+			for(Devis devis : ListDev) {
+				if(devis.getEtat().getNom().equals("Brouillon")) {
+					ListDevis.add(devis);
+				}
 			}
 		}
-		
 		
 		if(ListDevis.size() == 0) {
 			

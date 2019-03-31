@@ -40,13 +40,16 @@ public class EditCatalogue extends HttpServlet {
 		List<Projet> ListProjet = projetService.getAllProjets();
 		List<Projet> ListTemp = new ArrayList<Projet>();
 		//On affiche pas les projet clonner ? parce que c'est trop le bazar ou alors ceux qui on des nom different ?
-		for(Projet projet : ListProjet) {
-			Boolean flag = projet.isClone();
-			if(flag == null || flag != true) {
-				ListTemp.add(projet);
+		if(ListProjet!=null) {
+			for(Projet projet : ListProjet) {
+				Boolean flag = projet.isClone();
+				if(flag == null || flag != true) {
+					ListTemp.add(projet);
+				}
+				
 			}
-			
 		}
+		
 		this.listProjet = ListTemp;
 		request.setAttribute("JsonProjet", this.getJsonSerializedProjets().toString());
 		request.setAttribute("JsonCatalogue", this.getJsonSerializedCatalogues().toString());

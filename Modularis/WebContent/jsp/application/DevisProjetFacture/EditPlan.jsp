@@ -67,10 +67,10 @@
 		<div class="col-6">
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-sm-12">
-					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Editer piece</button>
+					<button class="btn btn-warning btn-block btn-block" name="btnEditer" id="btnEditer">Editer piece</button>
 				</div>
 				<div class="col-md-6 col-sm-12">
-					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
+					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
 				</div>
 			</div>
 		</div>
