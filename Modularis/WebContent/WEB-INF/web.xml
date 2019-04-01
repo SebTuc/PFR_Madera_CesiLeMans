@@ -47,6 +47,14 @@
     <url-pattern>/DevisFacture/DetailFacture</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ListEntrepot</servlet-name>
+    <servlet-class>com.ril.servlet.ListEntrepot</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListEntrepot</servlet-name>
+    <url-pattern>/GestionStock/ListEntrepot</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>com.ril.servlet.Deconnexion</servlet-class>
   </servlet>
