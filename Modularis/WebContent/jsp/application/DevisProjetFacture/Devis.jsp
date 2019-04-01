@@ -122,7 +122,7 @@
 				</div>
 				<br>
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-primary btn-block btn-block" type=button name="btnPDF" id="btnPDF">Generer PDF</button>
+					<a href="/Modularis/DevisFacture/Facture?id=${fn:escapeXml(Devis.devisId)}" class="btn btn-success">Générer PDF</a>
 				</div>
 				<br>
 			</div>

@@ -54,14 +54,7 @@
     <servlet-name>ListEntrepot</servlet-name>
     <url-pattern>/GestionStock/ListEntrepot</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>AjoutStock</servlet-name>
-    <servlet-class>com.ril.servlet.AjoutStock</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AjoutStock</servlet-name>
-    <url-pattern>/GestionStock/AjoutStock</url-pattern>
-  </servlet-mapping>
+  
   <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>com.ril.servlet.Deconnexion</servlet-class>
@@ -77,6 +70,14 @@
   <servlet-mapping>
     <servlet-name>Configuration</servlet-name>
     <url-pattern>/Configuration</url-pattern>
+  </servlet-mapping>
+ <servlet>
+    <servlet-name>Facture</servlet-name>
+    <servlet-class>com.ril.servlet.Facture</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Facture</servlet-name>
+    <url-pattern>/DevisFacture/Facture</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Annuaire</servlet-name>
