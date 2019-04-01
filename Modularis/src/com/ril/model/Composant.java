@@ -12,8 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,7 +31,7 @@ public class Composant implements java.io.Serializable {
 	private String nom;
 	private float prixUnitaire;
 	private Boolean display;
-	private Set<Stock> stocks = new HashSet<Stock>(0);
+	private Stock stock;
 	private Set<ModuleXComposant> moduleXComposants = new HashSet<ModuleXComposant>(0);
 
 	public Composant() {
@@ -49,14 +47,14 @@ public class Composant implements java.io.Serializable {
 	}
 
 	public Composant(FamilleComposant familleComposant, Fournisseur fournisseur, Materiaux materiaux,
-			UniteMesure uniteMesure, String nom, float prixUnitaire, Set<Stock> stocks,
+			UniteMesure uniteMesure, String nom, float prixUnitaire,Stock stock,
 			Set<ModuleXComposant> moduleXComposants) {
 		this.familleComposant = familleComposant;
 		this.fournisseur = fournisseur;
 		this.materiaux = materiaux;
 		this.nom = nom;
 		this.prixUnitaire = prixUnitaire;
-		this.stocks = stocks;
+		this.stock = stock;
 		this.moduleXComposants = moduleXComposants;
 	}
 
@@ -129,16 +127,13 @@ public class Composant implements java.io.Serializable {
 		this.prixUnitaire = prixUnitaire;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "composant_x_stock", catalog = "modularisbdd", joinColumns = {
-			@JoinColumn(name = "COMPOSANT_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "STOCK_ID", nullable = false, updatable = false) })
-	public Set<Stock> getStocks() {
-		return this.stocks;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "composant")
+	public Stock getStock() {
+		return this.stock;
 	}
 
-	public void setStocks(Set<Stock> stocks) {
-		this.stocks = stocks;
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "composant")

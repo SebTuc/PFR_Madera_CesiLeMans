@@ -3,16 +3,12 @@ package com.ril.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,7 +23,7 @@ public class Stock implements java.io.Serializable {
 	private Integer stockId;
 	private Entrepot entrepot;
 	private int quantite;
-	private Set<Composant> composants = new HashSet<Composant>(0);
+	private Composant composant;
 
 	public Stock() {
 	}
@@ -37,10 +33,10 @@ public class Stock implements java.io.Serializable {
 		this.quantite = quantite;
 	}
 
-	public Stock(Entrepot entrepot, int quantite, Set<Composant> composants) {
+	public Stock(Entrepot entrepot, int quantite, Composant composant) {
 		this.entrepot = entrepot;
 		this.quantite = quantite;
-		this.composants = composants;
+		this.composant = composant;
 	}
 
 	@Id
@@ -74,13 +70,15 @@ public class Stock implements java.io.Serializable {
 		this.quantite = quantite;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "stocks")
-	public Set<Composant> getComposants() {
-		return this.composants;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "COMPOSANT", nullable = false)
+	public Composant getComposant() {
+		return composant;
 	}
 
-	public void setComposants(Set<Composant> composants) {
-		this.composants = composants;
+	public void setComposant(Composant composant) {
+		this.composant = composant;
 	}
+
 
 }

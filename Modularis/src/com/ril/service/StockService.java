@@ -3,18 +3,19 @@ package com.ril.service;
 import java.util.List;
 
 import com.ril.daoHibernate.StockHome;
+import com.ril.model.Composant;
 import com.ril.model.Entrepot;
 import com.ril.model.Stock;
 
 public class StockService {
 	
-	public int addStock(Entrepot entrepot, Integer quantite) {
+	public int addStock(Entrepot entrepot, Integer quantite,Composant composant) {
 		
 		StockHome dao = new StockHome();
 		
 		if(entrepot != null && quantite != null) {
 			
-			Stock stock = new Stock(entrepot, quantite);
+			Stock stock = new Stock(entrepot, quantite , composant);
 			
 			dao.persist(stock);
 			
