@@ -172,6 +172,7 @@ public class EditModule extends HttpServlet {
 								}
 								if(returnValue.equals("Ok")) {
 									newModule.setModuleXComposants(list);
+									newModule.setDisplay(true);
 									moduleSerivce.editModule(newModule);
 									module.setDisplay(false);
 									moduleSerivce.editModule(module);

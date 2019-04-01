@@ -20,7 +20,6 @@
 
 	<div role="main" class="container">
 
-		<br>
 		<form method="post" id="formPost" encType="multipart/form-data">
 			<c:choose>
 				<c:when test="${Erreur != null }">
@@ -30,7 +29,7 @@
 			<div class="form-row justify-content-center">
 				<div class="form-group col-md-12 col-xl-6">
 					<label >Nom projet</label>
-					  <input type="text" class="form-control" id="nomProjet" name="nomProjet" placeholder="nom du projet..." required>
+					  <input type="text" class="form-control" id="nomProjet" name="nomProjet" placeholder="nom du projet..." autofocus required>
 
 				</div>
 				<div class="form-group col-md-12 col-xl-6">
@@ -41,8 +40,6 @@
 					</div>
 				</div>
 			</div>
-			
-			<br>
 			
 			<div id="previsualisation"style="display:none;">
 				<div class="row justify-content-center">

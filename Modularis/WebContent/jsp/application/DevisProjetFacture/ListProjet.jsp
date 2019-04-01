@@ -63,7 +63,7 @@
 		<div class="row justify-content-center">
 		 	<a href="/Modularis/DevisFacture/CreerProjet" class="btn material-icons material-icons-btn material-icons-btn-add-lg ml-2">add_circle</a>
 		</div>	
-		<br> <br>
+		<br>
 
 		<input type="text" value="" name="clientId" id="clientId" style="display:none;" >	
 

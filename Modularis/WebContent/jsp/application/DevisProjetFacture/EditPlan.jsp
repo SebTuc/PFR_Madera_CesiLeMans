@@ -52,10 +52,10 @@
 	</div>
 		<div class="form-row justify-content-center">
 			<div class="form-group col-md-3 col-5">
-		 		<input name="surface" id="surface" class="form-control" placeholder="Entrer la surface en m2" type="text" style="margin-top: 15px">
+		 		<input name="pieceNom" id="pieceNom" class="form-control" placeholder="Entrer le nom de la piece" type="text" style="margin-top: 15px" autofocus>
 		 	</div>
-			<div class="form-group col-md-3 col-5">
-		 		<input name="pieceNom" id="pieceNom" class="form-control" placeholder="Entrer le nom de la piece" type="text" style="margin-top: 15px">
+		 	<div class="form-group col-md-3 col-5">
+		 		<input name="surface" id="surface" class="form-control" placeholder="Entrer la surface en m2" type="text" style="margin-top: 15px">
 		 	</div>
 		 	<div class="form-group col-md-2 col-2">
 		 		<button name="btnAjouter" id="btnAjouter" class="btn material-icons material-icons-btn material-icons-btn-add-lg ml-2">add_circle</button>

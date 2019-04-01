@@ -52,7 +52,7 @@
 	</div>
 		<div class="form-row justify-content-center">
 			<div class="form-group col-md-4 col-8">
-		 		<input name="planNom" id="planNom" class="form-control" placeholder="Entrer le nom du plan" type="text" style="margin-top: 15px">
+		 		<input name="planNom" id="planNom" class="form-control" placeholder="Entrer le nom du plan" type="text" style="margin-top: 15px" autofocus>
 		 	</div>
 		 	<div class="form-group col-md-2 col-4">
 		 		<button name="btnAjouter" id="btnAjouter" class="btn material-icons material-icons-btn material-icons-btn-add-lg ml-2">add_circle</button>

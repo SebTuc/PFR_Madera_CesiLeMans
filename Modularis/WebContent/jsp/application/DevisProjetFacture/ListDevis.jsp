@@ -28,7 +28,6 @@
 <div class="row justify-content-center">
 	<h3>Liste des Devis en attente</h3>
 </div>
-<br>
 <form id="List" method="post">
 	<div class="row justify-content-center">
 		<ul class="list-group list-radio" >
@@ -60,7 +59,7 @@
 			</c:choose>
 		</ul>
 	</div>
-		<br> <br>
+		<br>
 			<div class="row justify-content-center">
 				<div class="col-md-3 col-sm-6">
 					<button class="btn btn-success btn-block btn-block" name="btnVisualiser" id="btnVisualiser">Visionner</button>

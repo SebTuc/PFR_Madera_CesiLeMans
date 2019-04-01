@@ -36,7 +36,7 @@
 				<div class="form-group col-6">
 					<label for="nom">Nom Module</label> <input type="text"
 						class="form-control" name="nom" id="nom"
-						placeholder="Nom du module" value="${fn:escapeXml(Module.nom) }" maxlength="50" required>
+						placeholder="Nom du module" value="${fn:escapeXml(Module.nom) }" maxlength="100" autofocus required>
 				</div>
 				<div class="form-group col-6">
 					<label for="uniteMesure">Unite mesure</label> <select

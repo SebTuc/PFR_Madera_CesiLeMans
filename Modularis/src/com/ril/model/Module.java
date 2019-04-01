@@ -32,7 +32,7 @@ public class Module implements java.io.Serializable {
 	private Set<Piece> pieces = new HashSet<Piece>(0);
 	private String nom;
 	private UniteMesure uniteMesure;
-	private Boolean display;
+	private boolean display;
 
 	private Set<ModuleXComposant> moduleXComposants = new HashSet<ModuleXComposant>(0);
 
@@ -58,6 +58,15 @@ public class Module implements java.io.Serializable {
 		this.pieces = pieces;
 		this.nom = nom;
 		this.uniteMesure = uniteMesure;
+	}
+	
+	public Module(Angle angle, Gamme gamme, Set<Piece> pieces, String nom,UniteMesure uniteMesure,boolean display) {
+		this.angle = angle;
+		this.gamme = gamme;
+		this.pieces = pieces;
+		this.nom = nom;
+		this.uniteMesure = uniteMesure;
+		this.display = display;
 	}
 
 	public Module(Angle angle, Gamme gamme, Set<Piece> pieces, String nom,UniteMesure uniteMesure,
@@ -136,12 +145,12 @@ public class Module implements java.io.Serializable {
 		this.nom = nom;
 	}
 	
-	@Column(name = "DISPLAY", nullable = true)
-	public Boolean isDisplay() {
+	@Column(name = "DISPLAY", nullable = false)
+	public boolean isDisplay() {
 		return display;
 	}
 
-	public void setDisplay(Boolean display) {
+	public void setDisplay(boolean display) {
 		this.display = display;
 	}
 

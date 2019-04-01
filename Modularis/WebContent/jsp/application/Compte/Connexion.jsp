@@ -29,7 +29,7 @@
 			    </c:choose>
 			      <div class="flex-row">
 			        <input id="login" class="lf--input" name="login"
-			               placeholder="Login" required />
+			               placeholder="Login" autofocus required />
 			      </div>
 			      <div class="flex-row">
 			        <input type="password" class="lf--input" id="password"

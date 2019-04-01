@@ -18,13 +18,11 @@
 		Retour</a>
 	<div role="main" class="container">
 
-		<br>
 		<c:choose>
 			<c:when test="${Erreur != null }">
 				<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
 			</c:when>
 		</c:choose>
-		<br>
 		<form method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">

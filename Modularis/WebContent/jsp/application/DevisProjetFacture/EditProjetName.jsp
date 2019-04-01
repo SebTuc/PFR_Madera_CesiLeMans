@@ -33,7 +33,7 @@
 						<div class="form-group col-md-12 col-xl-6">
 							<label>Nom projet</label> <input type="text" class="form-control"
 								id="nomProjet" value="${fn:escapeXml(Projet.nom) }"
-								name="nomProjet" placeholder="nom du projet..." required>
+								name="nomProjet" placeholder="nom du projet..." autofocus required>
 
 						</div>
 

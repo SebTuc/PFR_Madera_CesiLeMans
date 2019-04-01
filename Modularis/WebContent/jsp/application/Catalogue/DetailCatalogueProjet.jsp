@@ -52,7 +52,16 @@
 										: ${fn:escapeXml(Piece.nom)} - ${fn:escapeXml(Piece.surface)}m&sup2;</label>
 									<ul>
 										<c:forEach var="Module" items="${Piece.modules}">
-											<li><input type="checkbox"
+										<c:choose>
+											<c:when test="${Module.display == false }">
+												<li style="color:red;">
+											</c:when>
+											<c:otherwise>
+												<li>
+											</c:otherwise>
+										</c:choose>
+											
+											<input type="checkbox"
 												name="${fn:escapeXml(Module.nom)}${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}"
 												id="${fn:escapeXml(Module.nom)}${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}">
 												<label
@@ -81,7 +90,8 @@
 															</h4>
 														</li>
 													</c:forEach>
-												</ul></li>
+												</ul>
+											</li>
 										</c:forEach>
 									</ul></li>
 							</c:forEach>

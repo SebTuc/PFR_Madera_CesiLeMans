@@ -36,7 +36,7 @@
 				<form method="post" class="form-inline">
 					<div class="form-group">
 						<input id="catalogueNom" class="form-control" name="catalogueNom" placeholder="Nouveau Catalogue"
-							required />
+							required  autofocus/>
 						<select class="form-control" name="catalogueAnnee" required>
 							<c:forEach var="year" items="${years}">
 								<option value="${fn:escapeXml(year)}">${fn:escapeXml(year)}</option>

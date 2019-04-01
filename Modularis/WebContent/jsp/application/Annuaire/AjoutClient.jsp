@@ -31,7 +31,7 @@
 				<div class="form-group col-md-6">
 					<label for="nom">Nom</label> <input type="text"
 						class="form-control" name="nom" id="nom"
-						placeholder="Nom Utilisateur" required>
+						placeholder="Nom Utilisateur" autofocus required>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="prenom">Prenom</label> <input type="text"

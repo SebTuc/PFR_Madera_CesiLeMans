@@ -92,7 +92,7 @@
 	</div>
 		<div class="form-row justify-content-center" style="margin-top: 20px;">
 		<div class="form-group col-md-2 col-4">
-		 		<button class="btn btn-info btn-lg" type="button" data-toggle="collapse" data-target="#collapsedCritere" aria-expanded="false" aria-controls="collapseExample" style="margin-top: 25px;" >Trie module selectionnable</button>
+		 		<button class="btn btn-info btn-block" type="button" data-toggle="collapse" data-target="#collapsedCritere" aria-expanded="false" aria-controls="collapseExample" style="margin-top: 30px;" >Trie module selectionnable</button>
 		 	</div>
 			<div class="form-group col-md-4 col-6">
 				<label for="module">Selectionner le module a ajouter</label> 

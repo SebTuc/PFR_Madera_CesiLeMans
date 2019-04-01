@@ -23,7 +23,7 @@ public class AjoutCatalogue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 	private int actualYear = LocalDate.now().getYear();
-	private int[] availableYears = new int[] {actualYear+1,actualYear,actualYear-1,actualYear-2,actualYear-3,actualYear-4,actualYear-5};
+	private int[] availableYears = new int[] {actualYear+5,actualYear+4,actualYear+3,actualYear+2,actualYear+1,actualYear,actualYear-1,actualYear-2};
 	
 	private CatalogueService catalogueService = new CatalogueService();
 	
