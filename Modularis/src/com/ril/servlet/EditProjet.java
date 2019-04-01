@@ -7,11 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Plan;
 import com.ril.model.Projet;
+import com.ril.model.Utilisateur;
 import com.ril.service.PlanService;
 import com.ril.service.ProjetService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class EditProjet
@@ -41,6 +44,13 @@ private PlanService planService = new PlanService();
 
 		String projetId = request.getParameter("id");
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		//Verifier que l'on edit pas un projet qui n'est pas en catalogue ou en devis
 		if(isInteger(projetId)) {
 			Projet projet = projetService.getProjetById(Integer.valueOf(projetId));
@@ -82,6 +92,13 @@ private PlanService planService = new PlanService();
 		String idProjet = request.getParameter("idProjet");
 		
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		if( btnEditer != null && planId != null) {
 
 			response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditPlan?id="+planId);

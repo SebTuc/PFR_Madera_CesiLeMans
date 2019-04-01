@@ -20,7 +20,9 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	
-	<!-- Button Deconnexion -->
-	<a href="/Modularis/Deconnexion" class="btn btn-connect ml-auto">Deconnexion</a>
+	
+	<span class="navbar-text ml-auto" style="color:#fff" >${fn:escapeXml(Utilisateur.donneesPersonelle.nom)}  ${fn:escapeXml(Utilisateur.donneesPersonelle.prenom)}  |</span>
+	
+	<a href="/Modularis/Deconnexion" class="btn btn-connect">Deconnexion</a>
 	
 </nav>

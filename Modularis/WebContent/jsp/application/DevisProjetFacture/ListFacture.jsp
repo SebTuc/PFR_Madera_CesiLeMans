@@ -44,7 +44,7 @@
 								<div class="media">
   									<div class="media-body">
 										<input class="form-check-input" type="radio" name="radio" id="${fn:escapeXml(Facture.factureId)}" value="${fn:escapeXml(Facture.factureId)}">
-										<label class="form-check-label label-lg" for="${fn:escapeXml(Facture.factureId)}">${fn:escapeXml(Facture.devis.projet.nom)} </label>
+										<label class="form-check-label label-lg" for="${fn:escapeXml(Facture.factureId)}">${fn:escapeXml(Facture.devis.projet.nom)} | Client: ${fn:escapeXml(Facture.devis.client.donneesPersonelle.nom)}  ${fn:escapeXml(Facture.devis.client.donneesPersonelle.prenom)} </label>
 									</div>
 									<c:choose>
 										<c:when test="${Facture.devis.projet.image.imageId != null}">
@@ -64,11 +64,6 @@
 				<div class="col-md-3 col-sm-6">
 					<button class="btn btn-success btn-block btn-block" name="btnVisualiser" id="btnVisualiser">Visionner</button>
 				</div>
-				<br>
-				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" id="btnSupprimer">Passer en etat pay&eacute;</button>
-				</div>
-				<br>
 			</div>
 		
 </form>

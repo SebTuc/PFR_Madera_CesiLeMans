@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.EtapeFacture;
+import com.ril.model.Utilisateur;
 import com.ril.service.EtapeFactureService;
 import com.ril.utils.MethodeUtile;
 
@@ -24,6 +26,13 @@ public class AjoutEtapeFacture extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		List<EtapeFacture> ListEtapeFacture = etapeFactureService.getAllEtapeFacture();
 		request.setAttribute("ListEtapeFacture", ListEtapeFacture);
 		request.getRequestDispatcher("/jsp/application/Configuration/AjoutEtapeFacture.jsp").forward(request, response);
@@ -42,6 +51,13 @@ public class AjoutEtapeFacture extends HttpServlet {
 		String etape = request.getParameter("etape");
 		String pourcentage = request.getParameter("pourcentage");
 				
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		// Ajout ou Delete
 		if(action != null) {
 			if(action.equals("Delete")) {

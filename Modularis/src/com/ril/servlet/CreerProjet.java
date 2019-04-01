@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -18,8 +19,10 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.ril.model.Image;
+import com.ril.model.Utilisateur;
 import com.ril.service.ImageService;
 import com.ril.service.ProjetService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class CreerProjet
@@ -33,13 +36,26 @@ public class CreerProjet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		request.getRequestDispatcher("/jsp/application/DevisProjetFacture/CreerProjet.jsp").forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		String nomProjet=null;
 
 		if (!ServletFileUpload.isMultipartContent(request)) {

@@ -8,14 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.FamilleComposant;
 import com.ril.model.Fournisseur;
 import com.ril.model.Materiaux;
+import com.ril.model.Utilisateur;
 import com.ril.service.ComposantService;
 import com.ril.service.FamilleComposantService;
 import com.ril.service.FournisseurService;
 import com.ril.service.MateriauxService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutComposant
@@ -56,6 +59,14 @@ public class AjoutComposant extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
+		
 		List<FamilleComposant> ListFamilleComposant = familleComposantService.getAllFamilleComposant();
 		List<Fournisseur> ListFournisseur = fournisseurService.getAllFournisseurs();
 		List<Materiaux> ListMateriaux = materiauxService.getAllMateriauxs();
@@ -77,6 +88,14 @@ public class AjoutComposant extends HttpServlet {
 		String familleComposant = request.getParameter("familleComposant");
 		String materiaux = request.getParameter("materiaux");	
 		String fournisseur = request.getParameter("fournisseur");	
+		
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		
 		if (nom != null && prixUnitaire != null && familleComposant != null && materiaux != null && fournisseur != null) {						
 			if (!(nom.equals("")) && !(prixUnitaire.equals(""))&& !(familleComposant.equals("")) && !(materiaux.equals("")) && !(fournisseur.equals(""))) {	

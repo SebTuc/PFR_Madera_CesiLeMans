@@ -11,9 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Catalogue;
+import com.ril.model.Utilisateur;
 import com.ril.service.CatalogueService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutGamme
@@ -29,6 +32,13 @@ public class AjoutCatalogue extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		List<Catalogue> listCatalogue = catalogueService.getAllCatalogues();
 		
 		request.setAttribute("ListCatalogue", listCatalogue);
@@ -46,6 +56,13 @@ public class AjoutCatalogue extends HttpServlet {
 		String valeur = request.getParameter("valeur");
 		String year = request.getParameter("year");
 				
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		// Ajout ou Delete
 		if(action != null) {
 			if(action.equals("Delete")) {

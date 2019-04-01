@@ -25,6 +25,7 @@ import com.ril.service.DevisService;
 import com.ril.service.EtatService;
 import com.ril.service.ProjetService;
 import com.ril.service.UtilisateurService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class ListProjet
@@ -78,7 +79,13 @@ public class ListProjet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		List<Projet> ListProjet = projetService.getAllProjets();
 		List<Client> ListClient = clientService.getAllClients();
 		List<Projet> List = new ArrayList<Projet>();
@@ -119,7 +126,13 @@ public class ListProjet extends HttpServlet {
 		String btnEditerProjet = request.getParameter("btnEditerProjet");
 		String clientId = request.getParameter("clientId");
 		
-		
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 
 		if( btnEditer != null && projetId != null) {
 			if(isInteger(projetId)) {

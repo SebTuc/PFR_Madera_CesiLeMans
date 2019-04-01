@@ -7,11 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Piece;
 import com.ril.model.Plan;
+import com.ril.model.Utilisateur;
 import com.ril.service.PieceService;
 import com.ril.service.PlanService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class EditPlan
@@ -52,6 +55,13 @@ public class EditPlan extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String planId = request.getParameter("id");
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		//Verifier que l'on edit pas un projet/plan qui n'est pas en catalogue ou en devis
 		if(isInteger(planId)) {
 			Plan plan = planService.getPlanById(Integer.valueOf(planId));
@@ -90,7 +100,14 @@ public class EditPlan extends HttpServlet {
 		String pieceNom = request.getParameter("pieceNom");
 		String surface = request.getParameter("surface");
 		String idPlan = request.getParameter("idPlan");
-		
+
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 
 		if( btnEditer != null && pieceId != null) {
 

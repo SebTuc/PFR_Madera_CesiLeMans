@@ -9,18 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Angle;
 import com.ril.model.Module;
 import com.ril.model.Composant;
 import com.ril.model.Gamme;
 import com.ril.model.UniteMesure;
+import com.ril.model.Utilisateur;
 import com.ril.service.AngleService;
 import com.ril.service.ComposantService;
 import com.ril.service.GammeService;
 import com.ril.service.ModuleService;
 import com.ril.service.ModuleXComposantService;
 import com.ril.service.UniteMesureService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutModule
@@ -51,6 +54,13 @@ public class AjoutModule extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 
 		List<Gamme> ListGamme = gammeService.getAllGammes();
 		List<Angle> ListAngle = angleService.getAllAngles();
@@ -91,6 +101,13 @@ public class AjoutModule extends HttpServlet {
 		String sendSubmit = request.getParameter("sendSubmit");
 		String returnValue = "Ok"; 
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		if(sendSubmit != null) {
 			if(sendSubmit.equals("Ok")) {
 

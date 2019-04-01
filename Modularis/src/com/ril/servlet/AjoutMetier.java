@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Metier;
+import com.ril.model.Utilisateur;
 import com.ril.service.MetierService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutMetier
@@ -22,6 +25,13 @@ public class AjoutMetier extends HttpServlet {
 	private MetierService metierService = new MetierService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		List<Metier> metiers = metierService.getAllMetiers();
 		request.setAttribute("ListMetier", metiers);
 		
@@ -33,7 +43,13 @@ public class AjoutMetier extends HttpServlet {
 		String action = request.getParameter("action");
 		String idValeur = request.getParameter("id");
 		String valeur = request.getParameter("valeur");
-				
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		// Ajout ou Delete
 		if(action != null) {
 			if(action.equals("Delete")) {

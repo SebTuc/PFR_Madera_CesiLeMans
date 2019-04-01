@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ril.model.Materiaux;
 import com.ril.service.MateriauxService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutMateriaux
@@ -22,6 +23,10 @@ public class AjoutMateriaux extends HttpServlet {
 	private MateriauxService materiauxService = new MateriauxService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}
 		List<Materiaux> ListMateriaux = materiauxService.getAllMateriauxs();
 		request.setAttribute("ListMateriaux", ListMateriaux);
 		
@@ -36,7 +41,10 @@ public class AjoutMateriaux extends HttpServlet {
 		String action = request.getParameter("action");
 		String idValeur = request.getParameter("id");
 		String valeur = request.getParameter("valeur");
-				
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}	
 		// Ajout ou Delete
 		if(action != null) {
 			if(action.equals("Delete")) {

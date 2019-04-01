@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Utilisateur;
 import com.ril.service.UtilisateurService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class ListUtilisateur
@@ -22,6 +24,13 @@ public class ListUtilisateur extends HttpServlet {
 	public UtilisateurService utilisateurService = new UtilisateurService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		List<Utilisateur> ListUtilisateur = utilisateurService.getAllUtilisateurs();
 		request.setAttribute("ListUtilisateur", ListUtilisateur);
 		request.getRequestDispatcher("/jsp/application/Annuaire/ListUtilisateur.jsp").forward(request, response);
@@ -42,7 +51,13 @@ public class ListUtilisateur extends HttpServlet {
 		String loginUtilisateur = request.getParameter("loginUtilisateur");
 		String passwordUtilisateur = request.getParameter("passwordUtilisateur");
 		String action = request.getParameter("action");
-		
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		if(action != null) {
 			if(action.equals("Delete")) {
 				

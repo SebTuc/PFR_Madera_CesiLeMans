@@ -66,5 +66,10 @@ public class Facture implements java.io.Serializable {
 		this.etapeFacture = etapeFacture;
 	}
 	
+	
+	public int compareTo(Facture o) {
+		return getDevis().getDateCreation().compareTo(o.getDevis().getDateCreation());
+		
+	}
 
 }

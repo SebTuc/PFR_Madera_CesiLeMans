@@ -1,5 +1,9 @@
 package com.ril.utils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 public class MethodeUtile {
 	
 	public static boolean isFloat(String s) {
@@ -26,7 +30,7 @@ public class MethodeUtile {
 	    return true;
 	}
 	
-	private boolean findContains(String value, String valeur2) {
+	public static boolean findContains(String value, String valeur2) {
 
 		//A améliorer pour trouver les accent également
 		String valueUpper = value.toUpperCase();
@@ -42,6 +46,15 @@ public class MethodeUtile {
 
 		}
 
+	}
+	
+	public static boolean isConnected(HttpServletResponse response , HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("Utilisateur") == null) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 }

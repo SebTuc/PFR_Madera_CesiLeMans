@@ -10,7 +10,13 @@
 
 </head>
 <body>
-<jsp:include page="/jsp/common/navbar.jsp" />
+<nav class="navbar navbar-expand navbar-dark navbar-modularis">
+		<a class="navbar-brand navbar-logo" href="/Modularis/" style="color:#FFF">MODULARIS</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+	</nav>
 <br><br><br>
 			
 <div class="row">
