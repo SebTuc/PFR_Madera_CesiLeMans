@@ -31,7 +31,7 @@ body {
    --dark-blue: #012A57;
    --blue: #08088A;
    --green: #009522bd;
-   --red : #A10413;
+   --red : #A10413; 
 }
 
 /*-------------*/
@@ -42,7 +42,7 @@ body {
   text-align: center;
   color: white;
   font-size: 30px;
-  background-image: linear-gradient(to right, #093444, #0F749A);
+  background-color: #1c1c27;
 
 }
 
@@ -50,7 +50,7 @@ body {
   padding: 10px;
   text-align: center;
   color: white;
-  background-image: linear-gradient(to right, #093444, #0F749A);
+  background-image: linear-gradient(to right, #4facfe  0%, #00f2fe 100%);
 }
 
 /*-------------*/
@@ -86,7 +86,7 @@ body {
 .material-icon-build::before { content: '\e869'; }
 
 /*----NAVBAR----*/
-.navbar-modularis { background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed); }
+.navbar-modularis { background-image: linear-gradient(to right, #4facfe  0%, #00f2fe 100%);}
 .navbar-modularis .navbar-logo{ color: #fff; font-family: 'Montserrat', sans-serif; }
 .navbar-modularis .btn-menu{ background: transparent; color: #fff; font-size: 22px; border: none; padding:0 10px 4px 0; }
 
@@ -131,7 +131,7 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 
 /*----MENU----*/
 .menu-link { 
-	background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+	background-image: linear-gradient(to right, #4facfe  0%, #00f2fe 51%, #2af598 100%);
 	font-size: 25px; 
 	color:#fff;
 	text-align: center;
@@ -337,7 +337,7 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 .btn-modularis {
     margin: 10%;
     text-align: center;
-    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    background-image: linear-gradient(to right, #4facfe  0%, #00f2fe 51%, #2af598 100%);
     box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
 }
 
@@ -426,7 +426,7 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 }
 
 .devisdetail p{
-	font-size: 13px;
+	font-size: 10px;
 	text-align:center;
 }
 
@@ -437,23 +437,23 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 .devisdetail li label{
   padding: 16px;
   padding-left: 40px;
-  background-color: #3F51B5;
+  background-image: linear-gradient(to right, #4facfe  0%, #00f2fe 100%);
   color: white;
   cursor: pointer;
   height: 40px;
-  font-size: 25px;
+  font-size: 15px;
   display: flex;
   align-items: center;
 }
 
 .devisdetail li label:not(.child):before{
   transition: .3s ease;
-  position: absolute;
+  position: center;
 }
 .devisdetail li label:not(.child):before{
   font-family: 'Material Icons';
-  font-size: 40px;
-   margin-left: -35px;
+  font-size: 30px;
+  margin-left: -35px;
   content: "keyboard_arrow_right";
 }
 
