@@ -108,13 +108,13 @@ function loadAltDataTable(idTable) {
 		buttons: [
 			{
 				extend: 'selected', 			// Definit que l'action s'execute sur la ligne selectionné
-				text: 'Edition',
+				text: 'Edition ligne s&eacute;lectionn&eacute;e',
 				name: 'edit',        			// Ne pas changer le nom
 
 			},
 			{
 				extend: 'selected', 			// Definit que l'action s'execute sur la ligne selectionné
-				text: 'Suppression',
+				text: 'Suppression ligne s&eacute;lectionn&eacute;e',
 				name: 'delete',     				// Ne pas changer le nom
 			}],
 		onDeleteRow: function (datatable, rowdata, success, error) {

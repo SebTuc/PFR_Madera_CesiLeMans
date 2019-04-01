@@ -18,6 +18,7 @@
       "core": {
         "animation": 0, // Definit le temps d'animation en ms
         'check_callback': true, // Prend en compte les modification crud apporte au tree
+        'multiple': false,
         "themes": {
        	  'name': 'proton',
           "responsive": true,
@@ -44,6 +45,7 @@
     $(categoryTree).jstree({
       "core": {
         "animation": 0,
+        'multiple': false,
         'check_callback': function (operation, node, node_parent, node_position, more) {
 
 

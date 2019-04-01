@@ -18,22 +18,28 @@
 	<div role="main" class="container-fluid p2">
 
 		<br><br>
-		<div class="">
-
-			<div class="">				
-				<div class="d-xs-inline-flex d-md-flex flex-row justify-content-between align-items-center mb-3">
-					<div class="p-2 tree-container align-self-start bd-highlight" id='jqxProjects'> </div>
-
-					<div class="p-2 flex-shrink-1 bd-highlight">
-						<button class="material-icons material-icons-button add-project" id='Add'
-							disabled>forward</button>
-					</div>
-
-					<div class="p-2 tree-container align-self-start bd-highlight" id='jqxCatalogs'> </div>
-				</div>
-
+		
+		<div class="row d-none d-sm-flex">
+			<div class="col-6">
+				<p class="h4 text-center">Sélectionner projets</p>
+			</div>
+				
+			<div class="col-6">
+				<p class="h4 text-center">Sélectionner catalogues</p>
 			</div>
 		</div>
+			
+			<div class="d-xs-inline-flex d-md-flex flex-row justify-content-between align-items-center mb-3 mt-5">
+				<div class="p-2 tree-container align-self	-start bd-highlight" id='jqxProjects'></div>
+
+				<div class="p-2 flex-shrink-1 bd-highlight">
+					<button class="btn btn-light add-project" id='Add'
+						disabled>Transférer<br/><i class="material-icons">forward</i></button>
+				</div>
+
+				<div class="p-2 tree-container align-self-start bd-highlight" id='jqxCatalogs'></div>
+			</div>
+
 
 	</div>
 

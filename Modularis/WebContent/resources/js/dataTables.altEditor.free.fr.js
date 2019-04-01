@@ -353,7 +353,7 @@
                 $(selector).on('show.bs.modal', function () {
                     var btns = '<button type="button" data-content="remove" class="btn btn-default" data-dismiss="modal">Fermer</button>' +
                         '<button type="button" data-content="remove" class="btn btn-primary" id="editRowBtn">Editer</button>';
-                    $(selector).find('.modal-title').html('Edition');
+                    $(selector).find('.modal-title').html('Edition ligne s&eacute;lectionn&eacute;e');
                     $(selector).find('.modal-body').html(data);
                     $(selector).find('.modal-footer').html(btns);
                 });
