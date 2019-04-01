@@ -112,6 +112,9 @@ public class EditPlan extends HttpServlet {
 							Integer IdPieceAdd = pieceService.addPiece(plan, pieceNom, Float.valueOf(surface));
 							
 							response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditPiece?id="+IdPieceAdd);
+						}else {
+							request.setAttribute("Erreur", "Veuillez saisir un nom de pièce.");
+							doGet(request, response);
 						}
 					}catch(Exception e){
 						request.setAttribute("Erreur", "Une erreur est survenu.");

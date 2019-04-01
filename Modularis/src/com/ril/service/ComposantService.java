@@ -1,14 +1,17 @@
 package com.ril.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ril.daoHibernate.ComposantHome;
 import com.ril.model.Composant;
+import com.ril.model.Entrepot;
 import com.ril.model.FamilleComposant;
 import com.ril.model.Fournisseur;
 import com.ril.model.Materiaux;
 import com.ril.model.ModuleXComposant;
 import com.ril.model.Piece;
+import com.ril.model.Stock;
 
 public class ComposantService {
 
@@ -97,5 +100,24 @@ public int addComposant(FamilleComposant familleComposant, Fournisseur fournisse
 		ComposantHome dao = new ComposantHome();
 		
 		return dao.findAll();
+	}
+	
+	public List<Composant> getAllComposantNotInEntrepot(Entrepot entrepot){
+		List<Composant> List = getAllComposants();
+		List<Composant> ListComposant = new ArrayList<Composant>();
+		
+		for(Composant composant : List) {
+			boolean flag = false;
+			for(Stock stock : entrepot.getStocks()) {
+				if(stock.getComposant().getComposantId() == composant.getComposantId()) {
+					flag = true;
+				}
+			}
+			if(flag == false) {
+				ListComposant.add(composant);
+			}
+		}
+
+		return ListComposant;
 	}
 }

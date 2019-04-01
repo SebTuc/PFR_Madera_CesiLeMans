@@ -18,12 +18,23 @@
       	</div>
     <div role="main" class="container">
    		 <br />
-   		 <!--<div class="alert alert-danger" role="alert" style="text-align:center">Attention, le stock de certains composants est bientôt vide !</div>-->
+   		 <c:choose>
+			<c:when test="${MessageAlert == true}">
+				<div class="alert alert-danger" role="alert" style="text-align:center">Attention, le stock de certains composants sont vide !</div>
+			</c:when>
+		</c:choose>
 	     <div class="row">
 		     <c:forEach var="Entrepot" items="${ListEntrepot}">
 				<div class="col-sm-6 col-md-4">
-						<button onclick="window.location.href = 'AjoutStock?id=${fn:escapeXml(Entrepot.entrepotId)}';" data-badge="!" class="btn-modularis btn-modularis-hover badgeentrepot"><i class="material-icons md-48">home</i> <br/>${fn:escapeXml(Entrepot.lieux)}</button>
-				</div>
+						<c:choose>
+							<c:when test="${Entrepot.notification != 0}">
+								<button onclick="window.location.href = 'AjoutStock?id=${fn:escapeXml(Entrepot.entrepot.entrepotId)}';" data-badge="${fn:escapeXml(Entrepot.notification)}" class="btn-modularis btn-modularis-hover badgeentrepot"><i class="material-icons md-48">home</i> <br/>${fn:escapeXml(Entrepot.entrepot.lieux)}</button>
+							</c:when>
+							<c:otherwise>
+								<button onclick="window.location.href = 'AjoutStock?id=${fn:escapeXml(Entrepot.entrepot.entrepotId)}';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">home</i> <br/>${fn:escapeXml(Entrepot.entrepot.lieux)}</button>
+							</c:otherwise>
+						</c:choose>
+					</div>
 			</c:forEach>
     	</div>
      </div>

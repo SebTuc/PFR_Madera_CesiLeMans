@@ -40,6 +40,13 @@ public class AjoutEtapeFacture extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+		}
 		String insertNEtape = request.getParameter("insertNEtape");
 		String insertEtape = request.getParameter("insertEtape");
 		String insertPourcentage = request.getParameter("insertPourcentage");
@@ -51,13 +58,6 @@ public class AjoutEtapeFacture extends HttpServlet {
 		String etape = request.getParameter("etape");
 		String pourcentage = request.getParameter("pourcentage");
 				
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
-		}
 		// Ajout ou Delete
 		if(action != null) {
 			if(action.equals("Delete")) {

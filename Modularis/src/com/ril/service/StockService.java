@@ -13,7 +13,7 @@ public class StockService {
 		
 		StockHome dao = new StockHome();
 		
-		if(entrepot != null && quantite != null) {
+		if(entrepot != null && quantite != null && !findIfComposantExistInEntrepot(entrepot , composant)) {
 			
 			Stock stock = new Stock(entrepot, quantite , composant);
 			
@@ -25,6 +25,16 @@ public class StockService {
 			
 			return -1;
 		}
+	}
+	
+	private boolean findIfComposantExistInEntrepot(Entrepot entrepot , Composant composant) {
+		
+		for(Stock stock : entrepot.getStocks()) {
+			if(stock.getComposant().getComposantId() == composant.getComposantId()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void editStock(Stock stock) {
@@ -71,4 +81,5 @@ public class StockService {
 		
 		return dao.findAll();
 	}
+	
 }

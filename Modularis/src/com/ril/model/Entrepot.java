@@ -25,7 +25,9 @@ public class Entrepot implements java.io.Serializable {
 	private Integer entrepotId;
 	private String lieux;
 	private Set<Stock> stocks = new HashSet<Stock>(0);
+	private Set<Utilisateur> utilisateurs = new HashSet<Utilisateur>(0);
 
+	
 	public Entrepot() {
 	}
 
@@ -67,5 +69,15 @@ public class Entrepot implements java.io.Serializable {
 	public void setStocks(Set<Stock> stocks) {
 		this.stocks = stocks;
 	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entrepot")
+	public Set<Utilisateur> getUtilisateurs() {
+		return utilisateurs;
+	}
+
+	public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
+		this.utilisateurs = utilisateurs;
+	}
+
 
 }

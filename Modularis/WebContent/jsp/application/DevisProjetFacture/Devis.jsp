@@ -15,6 +15,13 @@
 	<a href="/Modularis/DevisFacture/ListDevis"
 		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
 	<br />
+	<c:choose>
+			<c:when test="${Erreur != null }">
+				<div class="row justify-content-center">
+					<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+				</div>
+			</c:when>
+		</c:choose>
 <div id="toPDF">
 	<div class="col-lg-12 text-center">
 		<h1>Détail du devis de
@@ -122,7 +129,7 @@
 				</div>
 				<br>
 				<div class="col-md-3 col-sm-6">
-					<a href="/Modularis/DevisFacture/Facture?id=${fn:escapeXml(Devis.devisId)}" class="btn btn-success">Générer PDF</a>
+					<a href="/Modularis/DevisFacture/Facture?id=${fn:escapeXml(Devis.devisId)}" class="btn btn-primary btn-block">Générer PDF</a>
 				</div>
 				<br>
 			</div>

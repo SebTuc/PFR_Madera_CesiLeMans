@@ -113,6 +113,9 @@ private PlanService planService = new PlanService();
 						
 						response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditPlan?id="+planIdAdd);
 						
+					}else {
+						request.setAttribute("Erreur", "Veuillez saisir un nom de plan.");
+						doGet(request, response);
 					}
 				}catch(Exception e){
 					request.setAttribute("Erreur", "Une erreur est survenu.");

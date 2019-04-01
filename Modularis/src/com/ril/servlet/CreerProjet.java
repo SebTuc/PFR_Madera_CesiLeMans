@@ -75,7 +75,7 @@ public class CreerProjet extends HttpServlet {
 					if(items.get(1).getSize() == 0) {
 						nomProjet = item.getString();
 						projetService.addProjet(nomProjet);
-						response.sendRedirect("/Modularis/DevisFacture");
+						response.sendRedirect("/Modularis/DevisFacture/ListProjet");
 						return;
 					}else {
 						nomProjet = item.getString();

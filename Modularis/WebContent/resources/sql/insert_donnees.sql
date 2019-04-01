@@ -352,16 +352,16 @@ INSERT INTO `module_x_composant` (`COMPOSANT_ID`,`MODULE_ID`,`QUANTITE`) VALUES
 -- Contenu de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`UTILISATEUR_ID`, `LOGIN`, `PASSWORD`, `METIER_ID`, `DONNEES_PERSONELLE_ID`) VALUES
-(1, 'dschrute', 'dschrute', 1, 1),
-(2, 'jhalpert', '74000', 1, 2),
-(3, 'abernard', 'abernard', 1, 3),
-(4, 'tflenderson', 'tflenderson', 2, 4),
-(5, 'kmalone', 'kmalone', 3, 5),
-(6, 'mscott', 'mscott', 4, 6),
-(7, 'pbeesly', 'pbeesly', 5, 7),
-(8, 'dphilbin', 'dphilbin', 6, 8),
-(9, 'admin', 'admin', 7, 9);
+INSERT INTO `utilisateur` (`UTILISATEUR_ID`, `LOGIN`, `PASSWORD`, `METIER_ID`, `DONNEES_PERSONELLE_ID`,`ENTREPOT_ID`) VALUES
+(1, 'dschrute', 'dschrute', 1, 1,1),
+(2, 'jhalpert', '74000', 1, 2,1),
+(3, 'abernard', 'abernard', 1, 3,3),
+(4, 'tflenderson', 'tflenderson', 2, 4,2),
+(5, 'kmalone', 'kmalone', 3, 5,2),
+(6, 'mscott', 'mscott', 4, 6,1),
+(7, 'pbeesly', 'pbeesly', 5, 7,3),
+(8, 'dphilbin', 'dphilbin', 6, 8,1),
+(9, 'admin', 'admin', 7, 9,1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
@@ -369,45 +369,43 @@ INSERT INTO `utilisateur` (`UTILISATEUR_ID`, `LOGIN`, `PASSWORD`, `METIER_ID`, `
 
 --
 -- Contenu de la table `stock`
-<<<<<<< Updated upstream
 --	
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '10', '1', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '25', '2', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '2', '3', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '19', '4', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '56', '5', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '45', '6', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '15', '7', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '28', '8', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '20', '9', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '12', '10', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '3', '11', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '72', '12', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '47', '13', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '33', '14', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '29', '15', '1');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '10', '1', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '25', '2', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '55', '23', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '19', '4', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '56', '5', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '45', '18', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '15', '21', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '28', '8', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '20', '9', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '12', '10', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '15', '11', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '72', '12', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '47', '13', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '33', '14', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '29', '15', '2');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '0', '1', '3');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '25', '2', '3');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '68', '23', '3');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '36', '4', '3');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '15', '5', '3');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '19', '18', '3');
-INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '87', '7', '3');
-=======
---
->>>>>>> Stashed changes
+INSERT INTO `stock` (`QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES 
+( '10', '1', '1'),
+( '25', '2', '1'),
+( '2', '3', '1'),
+( '19', '4', '1'),
+( '56', '5', '1'),
+( '45', '6', '1'),
+( '15', '7', '1'),
+( '28', '8', '1'),
+( '20', '9', '1'),
+( '12', '10', '1'),
+( '3', '11', '1'),
+( '72', '12', '1'),
+( '47', '13', '1'),
+( '33', '14', '1'),
+( '29', '15', '1'),
+( '10', '1', '2'),
+( '25', '2', '2'),
+( '55', '23', '2'),
+( '19', '4', '2'),
+( '56', '5', '2'),
+( '45', '18', '2'),
+( '15', '21', '2'),
+( '28', '8', '2'),
+( '20', '9', '2'),
+( '12', '10', '2'),
+( '15', '11', '2'),
+( '72', '12', '2'),
+( '47', '13', '2'),
+( '33', '14', '2'),
+( '29', '15', '2'),
+( '0', '1', '3'),
+( '25', '2', '3'),
+( '68', '23', '3'),
+( '36', '4', '3'),
+( '15', '5', '3'),
+( '19', '18', '3');
+( '87', '7', '3');
+

@@ -29,6 +29,7 @@ public class Utilisateur implements java.io.Serializable {
 	private Metier metier;
 	private String login;
 	private String password;
+	private Entrepot entrepot;
 	private Set<Devis> devises = new HashSet<Devis>(0);
 
 	public Utilisateur() {
@@ -52,7 +53,6 @@ public class Utilisateur implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "UTILISATEUR_ID", unique = true, nullable = false)
 	public Integer getUtilisateurId() {
 		return this.utilisateurId;
@@ -107,6 +107,15 @@ public class Utilisateur implements java.io.Serializable {
 
 	public void setDevises(Set<Devis> devises) {
 		this.devises = devises;
+	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ENTREPOT_ID", nullable = false)
+	public Entrepot getEntrepot() {
+		return entrepot;
+	}
+
+	public void setEntrepot(Entrepot entrepot) {
+		this.entrepot = entrepot;
 	}
 
 }
