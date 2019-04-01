@@ -26,6 +26,7 @@ public class Stock implements java.io.Serializable {
 	private Composant composant;
 
 	public Stock() {
+		
 	}
 
 	public Stock(Entrepot entrepot, int quantite) {
@@ -71,7 +72,7 @@ public class Stock implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "COMPOSANT", nullable = false)
+	@JoinColumn(name = "COMPOSANT_ID", nullable = false)
 	public Composant getComposant() {
 		return composant;
 	}

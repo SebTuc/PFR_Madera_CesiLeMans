@@ -127,11 +127,12 @@ public class Composant implements java.io.Serializable {
 		this.prixUnitaire = prixUnitaire;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "composant")
+	
 	public Stock getStock() {
 		return this.stock;
 	}
-
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "composant")
 	public void setStock(Stock stock) {
 		this.stock = stock;
 	}
