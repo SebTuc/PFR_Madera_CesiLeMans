@@ -31,7 +31,7 @@ public class Composant implements java.io.Serializable {
 	private String nom;
 	private float prixUnitaire;
 	private Boolean display;
-	private Stock stock;
+	private Set<Stock> stocks = new HashSet<Stock>(0);
 	private Set<ModuleXComposant> moduleXComposants = new HashSet<ModuleXComposant>(0);
 
 	public Composant() {
@@ -47,14 +47,14 @@ public class Composant implements java.io.Serializable {
 	}
 
 	public Composant(FamilleComposant familleComposant, Fournisseur fournisseur, Materiaux materiaux,
-			UniteMesure uniteMesure, String nom, float prixUnitaire,Stock stock,
+			UniteMesure uniteMesure, String nom, float prixUnitaire, Set<Stock> stocks,
 			Set<ModuleXComposant> moduleXComposants) {
 		this.familleComposant = familleComposant;
 		this.fournisseur = fournisseur;
 		this.materiaux = materiaux;
 		this.nom = nom;
 		this.prixUnitaire = prixUnitaire;
-		this.stock = stock;
+		this.stocks = stocks;
 		this.moduleXComposants = moduleXComposants;
 	}
 
@@ -128,19 +128,21 @@ public class Composant implements java.io.Serializable {
 	}
 
 	
-	public Stock getStock() {
-		return this.stock;
-	}
-	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "composant")
-	public void setStock(Stock stock) {
-		this.stock = stock;
+	public Set<Stock> getStocks() {
+		return stocks;
+	}
+
+	public void setStocks(Set<Stock> stocks) {
+		this.stocks = stocks;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "composant")
 	public Set<ModuleXComposant> getModuleXComposants() {
 		return this.moduleXComposants;
 	}
+
+	
 
 	public void setModuleXComposants(Set<ModuleXComposant> moduleXComposants) {
 		this.moduleXComposants = moduleXComposants;

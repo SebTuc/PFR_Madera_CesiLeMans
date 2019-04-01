@@ -22,12 +22,7 @@
 	     <div class="row">
 		     <c:forEach var="Entrepot" items="${ListEntrepot}">
 				<div class="col-sm-6 col-md-4">
-					<c:choose>
-					
-					<c:when test = "${salary <= 0}">
 						<button onclick="window.location.href = 'AjoutStock?id=${fn:escapeXml(Entrepot.entrepotId)}';" data-badge="!" class="btn-modularis btn-modularis-hover badgeentrepot"><i class="material-icons md-48">home</i> <br/>${fn:escapeXml(Entrepot.lieux)}</button>
-					</c:when>
-					</c:choose>
 				</div>
 			</c:forEach>
     	</div>

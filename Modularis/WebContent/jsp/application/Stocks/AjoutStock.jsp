@@ -20,7 +20,7 @@
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
 		<table id="Edition" class="table table-edition table-striped table-bordered" cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important; text-align: center;" 
 			column-defs='[{"data": "id","title": "","type": "hidden","visible": false},{"data":"nomComposant","title": "Nom du composant"},{"data":"stock","title": "Stocks"}]' 
-			data-set='[<c:forEach var="Stock" items="${Entrepot.stocks}">{"id":"${fn:escapeXml(Stock.stockId)}","nomComposant":"${fn:escapeXml(Stock.composants.nom)}","stock":"${fn:escapeXml(Stock.quantite)}"},</c:forEach>]'>
+			data-set='[<c:forEach var="Stock" items="${Entrepot.stocks}">{"id":"${fn:escapeXml(Stock.stockId)}","nomComposant":"${fn:escapeXml(Stock.composant.nom)}","stock":"${fn:escapeXml(Stock.quantite)}"},</c:forEach>]'>
 		</table>
 	</div>
 </div>	
