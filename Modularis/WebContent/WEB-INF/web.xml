@@ -55,6 +55,14 @@
     <url-pattern>/GestionStock/ListEntrepot</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AjoutStock</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutStock</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutStock</servlet-name>
+    <url-pattern>/GestionStock/AjoutStock</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>com.ril.servlet.Deconnexion</servlet-class>
   </servlet>

@@ -369,6 +369,7 @@ INSERT INTO `utilisateur` (`UTILISATEUR_ID`, `LOGIN`, `PASSWORD`, `METIER_ID`, `
 
 --
 -- Contenu de la table `stock`
+<<<<<<< Updated upstream
 --	
 INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '10', '1', '1');
 INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '25', '2', '1');
@@ -407,3 +408,6 @@ INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALU
 INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '15', '5', '3');
 INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '19', '18', '3');
 INSERT INTO `stock` (`STOCK_ID`, `QUANTITE`, `COMPOSANT_ID`, `ENTREPOT_ID`) VALUES (NULL, '87', '7', '3');
+=======
+--
+>>>>>>> Stashed changes
