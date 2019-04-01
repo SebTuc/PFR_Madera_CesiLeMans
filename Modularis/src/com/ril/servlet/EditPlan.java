@@ -26,31 +26,6 @@ public class EditPlan extends HttpServlet {
   
 	private PlanService planService = new PlanService();
 	private PieceService pieceService = new PieceService();
-
-	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
-	private static boolean isFloat(String s) {
-	    try { 
-	        Float.parseFloat(s) ;
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String planId = request.getParameter("id");
@@ -63,7 +38,7 @@ public class EditPlan extends HttpServlet {
 			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
 		}
 		//Verifier que l'on edit pas un projet/plan qui n'est pas en catalogue ou en devis
-		if(isInteger(planId)) {
+		if(MethodeUtile.isInteger(planId)) {
 			Plan plan = planService.getPlanById(Integer.valueOf(planId));
 			if(plan.getProjet().getCatalogue().size() == 0) {
 				if(plan.getProjet().getDevises().size() == 0) {
@@ -114,7 +89,7 @@ public class EditPlan extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditPiece?id="+pieceId);
 			
 		}else if( btnSupprimer != null && pieceId != null) {
-			if(isInteger(pieceId)) {
+			if(MethodeUtile.isInteger(pieceId)) {
 				Piece piece = pieceService.getPieceById(Integer.valueOf(pieceId));
 
 				pieceService.removePiece(piece);
@@ -127,8 +102,8 @@ public class EditPlan extends HttpServlet {
 			
 			
 		}else if( btnAjouter != null && pieceNom != null && surface != null) {
-			if(isInteger(idPlan)) {
-				if(isFloat(surface)) {
+			if(MethodeUtile.isInteger(idPlan)) {
+				if(MethodeUtile.isFloat(surface)) {
 					try {
 						
 						Plan plan = planService.getPlanById(Integer.valueOf(idPlan));

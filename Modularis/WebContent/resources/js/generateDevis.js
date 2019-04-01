@@ -14,4 +14,25 @@ $(document).ready(function () {
 		}
 		
 	});
+	
+	$("#btnModalSupprOui").click(function(e){
+		var input = $("<input>")
+        .attr("type", "hidden")
+        .attr("name", "btnSupprimer").val("true");
+		//On ajout si correct le client selectionner
+        $('#List').append(input);
+		$("#List").submit();
+		
+	});
+	
+	$("#btnModalSupprImageOui").click(function(e){
+		var input = $("<input>")
+        .attr("type", "hidden")
+        .attr("name", "supprImage");
+		//On ajout si correct le client selectionner
+        $('#formPost').append(input);
+		$("#formPost").submit();
+		
+	});
+		
 });

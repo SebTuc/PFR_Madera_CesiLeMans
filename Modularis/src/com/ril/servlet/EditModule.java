@@ -43,18 +43,6 @@ public class EditModule extends HttpServlet {
 	private UniteMesureService uniteMesureService = new UniteMesureService();
 	private ModuleXComposantService moduleXComposantService = new ModuleXComposantService();
 	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(!MethodeUtile.isConnected(response , request)) {
 			response.sendRedirect(request.getContextPath()+"/Connexion");
@@ -80,7 +68,7 @@ public class EditModule extends HttpServlet {
 		
 		String moduleId = request.getParameter("id");
 
-		if(moduleId != null && isInteger(moduleId)) {
+		if(moduleId != null && MethodeUtile.isInteger(moduleId)) {
 			Module module = moduleSerivce.getModuleById(Integer.valueOf(moduleId));
 				Boolean flag = module.isDisplay();
 				if(flag == null || flag != false) {
@@ -144,9 +132,9 @@ public class EditModule extends HttpServlet {
 			if(gammeId != null && nomModule != null && uniteMesureId != null && moduleId != null) {
 				if(ListComposant.length == ListQuantite.length && ListComposant.length > 0) {
 						//Verifier que gamme type angle et unite mesure sont bien des Integer
-						if(isInteger(gammeId) && isInteger(uniteMesureId)  && isInteger(moduleId)) {
+						if(MethodeUtile.isInteger(gammeId) && MethodeUtile.isInteger(uniteMesureId)  && MethodeUtile.isInteger(moduleId)) {
 							Angle angle=null;
-							if(typeAngle != null && isInteger(typeAngle)) {
+							if(typeAngle != null && MethodeUtile.isInteger(typeAngle)) {
 								angle = angleService.getAngleById(Integer.valueOf(typeAngle));
 							}
 							
@@ -159,7 +147,7 @@ public class EditModule extends HttpServlet {
 								//Empecher l'edition ???
 								
 								Integer modId=null;
-								if(typeAngle != null && isInteger(typeAngle)) {
+								if(typeAngle != null && MethodeUtile.isInteger(typeAngle)) {
 									modId = moduleSerivce.addModule(angle, gamme, nomModule, uniteMesure);
 								}else {
 									modId = moduleSerivce.addModule(gamme, nomModule, uniteMesure);
@@ -172,7 +160,7 @@ public class EditModule extends HttpServlet {
 									//Verifier que se sois bien des integer
 									String composantId = ListComposant[i];
 									String quantites = ListQuantite[i];
-									if(isInteger(composantId) && isInteger(quantites)) {
+									if(MethodeUtile.isInteger(composantId) && MethodeUtile.isInteger(quantites)) {
 										
 										Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
 										Integer quantite = Integer.valueOf(quantites);
@@ -213,7 +201,7 @@ public class EditModule extends HttpServlet {
 									//Verifier que se sois bien des integer
 									String composantId = ListComposant[i];
 									String quantites = ListQuantite[i];
-									if(isInteger(composantId) && isInteger(quantites)) {
+									if(MethodeUtile.isInteger(composantId) && MethodeUtile.isInteger(quantites)) {
 										
 										Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
 										Integer quantite = Integer.valueOf(quantites);

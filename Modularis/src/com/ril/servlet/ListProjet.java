@@ -1,6 +1,7 @@
 package com.ril.servlet;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,17 +41,6 @@ public class ListProjet extends HttpServlet {
 	private DevisService devisService = new DevisService();
 	private EtatService etatService = new EtatService();
 	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
 	
 	public float getPrixTotalDuProjet(Projet projet) {
 		
@@ -135,7 +125,7 @@ public class ListProjet extends HttpServlet {
 		}
 
 		if( btnEditer != null && projetId != null) {
-			if(isInteger(projetId)) {
+			if(MethodeUtile.isInteger(projetId)) {
 			response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditProjet?id="+projetId);
 			}else {
 				request.setAttribute("Erreur", "Projet ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
@@ -143,7 +133,7 @@ public class ListProjet extends HttpServlet {
 			}
 			
 		}else if( btnSupprimer != null && projetId != null) {
-			if(isInteger(projetId)) {
+			if(MethodeUtile.isInteger(projetId)) {
 
 				
 				projetService.removeProjetById(Integer.valueOf(projetId));
@@ -158,7 +148,7 @@ public class ListProjet extends HttpServlet {
 		}else if( btnSupprimer==null && btnEditer == null && btnEditerProjet == null && projetId != null && clientId != null) {
 			
 			//On Créer un devis pour sa on calcul le prix de tout HT et on recup la date du jour et bien sur le projet
-			if(isInteger(projetId) && isInteger(clientId)) {
+			if(MethodeUtile.isInteger(projetId) && MethodeUtile.isInteger(clientId)) {
 				Projet projet = projetService.getProjetById(Integer.valueOf(projetId));
 				Date date = new Date();
 				//On recuperer le nom/prenom de l'utilisateur connecter
@@ -189,7 +179,7 @@ public class ListProjet extends HttpServlet {
 			}
 			
 		}else if( btnEditerProjet != null && projetId != null) {
-			if(isInteger(projetId)) {
+			if(MethodeUtile.isInteger(projetId)) {
 			response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditProjetName?id="+projetId);
 			
 			}else {

@@ -71,7 +71,7 @@ public class AjoutCatalogue extends HttpServlet {
 				
 			}else if(action.equals("Edition")) {
 				
-				if (valeur != "" && isInteger(year)) {					
+				if (valeur != "" && MethodeUtile.isInteger(year)) {					
 					Catalogue catalogue = catalogueService.getCatalogueById(Integer.valueOf(idValeur));
 					catalogue.setCatalogueNom(valeur);
 					catalogue.setAnnee(Integer.parseInt(year));
@@ -86,7 +86,7 @@ public class AjoutCatalogue extends HttpServlet {
 				
 			}
 		}else if (catalogueNom != null) {						
-			if (catalogueNom.trim() != null && isInteger(catalogueAnnee)) {				
+			if (catalogueNom.trim() != null && MethodeUtile.isInteger(catalogueAnnee)) {				
 				catalogueService.addCatalogue(catalogueNom, Integer.parseInt(catalogueAnnee));
 				
 				//Definit la reponse comme "See Other" et redirige
@@ -100,17 +100,6 @@ public class AjoutCatalogue extends HttpServlet {
 						
 
 	}
-	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
+
 
 }

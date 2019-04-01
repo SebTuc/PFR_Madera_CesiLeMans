@@ -87,14 +87,32 @@
 				</div>
 				<div class="col-5">
 					<button class="btn btn-primary btn-block" name="supprImage"
-						id="supprImage">Supprimer image du projet</button>
+						id="supprImage" type="button" data-toggle="modal" data-target="#ModalConfirmationSuppression">Supprimer image du projet</button>
 				</div>
 			</div>
 			</form>
 	</div>
+	<div class="modal static fade" id="ModalConfirmationSuppression" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationSuppressionTitle" aria-hidden="true">
+	  	<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="ModalConfirmationSuppressionTitle">Suppression</h5>
+		      </div>
+		      <div class="modal-body">
+		        Etez-vous sur de vouloir continuer ?
+		      </div>
+			      <div class="modal-footer">
+			        <button type="button" id="btnModalSupprImageNon" class="btn btn-primary" data-dismiss="modal">Non</button>
+			    	<button type="button" id="btnModalSupprImageOui" class="btn btn-danger">Oui</button>
+		    	</div>
+		   	</div>
+		</div>
+	</div>
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />
 	<script type='text/javascript'
 		src='<%=request.getContextPath()%>/resources/js/CreationProjet.js'></script>
+		  <script type='text/javascript'
+		src='<%=request.getContextPath()%>/resources/js/generateDevis.js'></script>
 </body>
 
 </html>

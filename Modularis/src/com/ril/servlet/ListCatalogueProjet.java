@@ -37,7 +37,7 @@ public class ListCatalogueProjet extends HttpServlet {
 		}
 		String idCatalogue = request.getParameter("idCatalogue");
 		
-		if(idCatalogue != "" && isInteger(idCatalogue)) {
+		if(idCatalogue != "" && MethodeUtile.isInteger(idCatalogue)) {
 			Catalogue parentCatalogue = catalogueService.getCatalogueById(Integer.parseInt(idCatalogue));
 			List<Projet> listProjet = parentCatalogue.getProjets().stream().collect(Collectors.toList());
 			
@@ -68,31 +68,5 @@ public class ListCatalogueProjet extends HttpServlet {
 			HttpSession session = request.getSession();
 			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
 		}
-	}
-	
-	private static boolean isFloat(String s) {
-	    try { 
-	        Float.parseFloat(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
-
+	}	
 }

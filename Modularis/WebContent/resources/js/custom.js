@@ -4,44 +4,8 @@
 $(document).ready(function () {
 	$("#open-btn").click(e => { $("#mySidenav").css('width', '250px') });
 	$("#close-btn").click(e => { $("#mySidenav").css('width', '0px') });
-
-	
-	//BtnSupprimer confirmation 
-	
-//	$("#btnSupprimer").click(function(event){
-//		
-//		
-//		event.preventDefault();
-//		var $form = $( this ),
-//		 url = $form.attr( 'action' );
-//		$("#ModalConfirmationSuppresion").show();
-//		$("#btnModalSupprNon").click(function(){
-//			
-//			$("#ModalConfirmationSuppresion").hide();
-//			
-//		});
-//		$("#btnModalSupprOui").click(function(){
-//			
-//			
-//	       
-//			var radioValue = $("input[name='radio']:checked").val();
-//			if(radioValue != null){
-//				/* Send the data using post with element id name and name2*/
-//				$.ajax({
-//					  type: "POST",
-//					  data: "radio="+radioValue,
-//					  async:false
-//				});
-//			}
-//			
-//		});
-//		
-//	});
-	
-	
+		
 	loadAltDataTable("Edition");
-	
-
 });
 
 
@@ -50,9 +14,14 @@ $(document).ready(function () {
  * @param {String} idTable ID de l'element <table> à initialiser
  */
 function loadAltDataTable(idTable) {
+
+
 	var tableHtml, dataSet, columnDefs;
 
 	tableHtml = $('#' + idTable);
+
+	if (!tableHtml.length)
+		return;
 
 	// Recuperation des donnees envoyer par le serveur au format parsable en JSON
 	dataSet = $(tableHtml).attr("data-set");
@@ -199,31 +168,35 @@ function launchConfimModal(element) {
 	methodForm = $(element.target).attr("confirm-modal-method");
 	paramString = $(element.target).attr("confirm-modal-param");
 
-	title.length > 0 ? $("#confirm-modal-title").html(title) : $("#confirm-modal-title").html("Confirmation");
-	buttonName.length > 0 ? $("#confirm-modal-button").html(buttonName) : $("#confirm-modal-button").html("Confirmation");
-	actionForm.length > 0 ? $("#confirm-modal-form").attr("action", actionForm) : $("#confirm-modal-form").attr("action", '');
+	title != undefined && title.length > 0 ? $("#confirm-modal-title").html(title) : $("#confirm-modal-title").html("Confirmation");
+	buttonName != undefined && buttonName.length > 0 ? $("#confirm-modal-button").html(buttonName) : $("#confirm-modal-button").html("Confirmation");
+	actionForm != undefined && actionForm.length > 0 ? $("#confirm-modal-form").attr("action", actionForm) : $("#confirm-modal-form").attr("action", '');
 
-	if (methodForm.length > 0 && (methodForm.toUpperCase() === "POST" || methodForm.toUpperCase() === "GET")) {
+	if (methodForm != undefined && methodForm.length > 0 && (methodForm.toUpperCase() === "POST" || methodForm.toUpperCase() === "GET")) {
 		$("#confirm-modal-form").attr("method", methodForm.toUpperCase())
 	} else {
 		$("#confirm-modal-form").attr("method", 'get');
 	}
 
-	if (paramString.length > 0) {
+	if (paramString != undefined && paramString.length > 0) {
 		try {
 
 			// Parsing d'un objet JSON simple type {"name": "name", "value": "value"}
 			params = JSON.parse(paramString);
 
 			let confirmModalInputs = $("#confirm-modal-inputs");
+			$(confirmModalInputs).empty();
 
 			$.each(params, function (i, param) {
 				confirmModalInputs.append('<input type="hidden" name="' + param.name + '" value="' + param.value + '">');
 			});
 
+
 		} catch (error) {
 			console.log(error);
 		}
 	}
+	
+	$("#confirm-modal").modal();
 
 }

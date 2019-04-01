@@ -31,31 +31,6 @@ public class AjoutComposant extends HttpServlet {
 	private FamilleComposantService familleComposantService = new FamilleComposantService();
 	private FournisseurService fournisseurService = new FournisseurService();
 	private MateriauxService materiauxService = new MateriauxService();
-	
-	private static boolean isFloat(String s) {
-	    try { 
-	        Float.parseFloat(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -99,8 +74,8 @@ public class AjoutComposant extends HttpServlet {
 		
 		if (nom != null && prixUnitaire != null && familleComposant != null && materiaux != null && fournisseur != null) {						
 			if (!(nom.equals("")) && !(prixUnitaire.equals(""))&& !(familleComposant.equals("")) && !(materiaux.equals("")) && !(fournisseur.equals(""))) {	
-				if(isFloat(prixUnitaire)) {
-					if(isInteger(materiaux) && isInteger(fournisseur) && isInteger(familleComposant)) {
+				if(MethodeUtile.isFloat(prixUnitaire)) {
+					if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
 						//Ajout verif /!\
 						FamilleComposant familleCompo = familleComposantService.getFamilleComposantById(Integer.valueOf(familleComposant));
 						Fournisseur fourni = fournisseurService.getFournisseurById(Integer.valueOf(fournisseur));
@@ -121,7 +96,7 @@ public class AjoutComposant extends HttpServlet {
 				}else {
 					request.setAttribute("Erreur", "Saisie incorrect (prix).");
 					request.setAttribute("NomComposant", nom);
-					if(isInteger(materiaux) && isInteger(fournisseur) && isInteger(familleComposant)) {
+					if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
 						request.setAttribute("FamilleComposantId", familleComposant);
 						request.setAttribute("MateriauxId", materiaux);
 						request.setAttribute("FournisseurId", fournisseur);

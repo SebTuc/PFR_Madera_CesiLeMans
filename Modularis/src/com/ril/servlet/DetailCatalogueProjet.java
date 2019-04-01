@@ -46,7 +46,7 @@ public class DetailCatalogueProjet extends HttpServlet {
 		}
 		String idProjet = request.getParameter("idProjet");
 
-		if (idProjet != null && isInteger(idProjet)) {			
+		if (idProjet != null && MethodeUtile.isInteger(idProjet)) {			
 			Projet projet = projetService.getProjetById(Integer.valueOf(idProjet));
 			request.setAttribute("Projet", projet);			
 			request.getRequestDispatcher("/jsp/application/Catalogue/DetailCatalogueProjet.jsp").forward(request, response);			
@@ -69,7 +69,7 @@ public class DetailCatalogueProjet extends HttpServlet {
 			HttpSession session = request.getSession();
 			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
 		}
-		if (idProjet != null && isInteger(idProjet)) {
+		if (idProjet != null && MethodeUtile.isInteger(idProjet)) {
 
 			// Copie du projet en renvoie vers edition projet
 			Projet projet = projetService.getProjetById(Integer.valueOf(idProjet));
@@ -85,9 +85,9 @@ public class DetailCatalogueProjet extends HttpServlet {
 
 	/**
 	 * Clone l'ensemble d'un projet sauf les devis et les utilisateur
-	 * liés à celui-ci
-	 * @param projet Projet à cloner
-	 * @return id du projet cloné
+	 * liï¿½s ï¿½ celui-ci
+	 * @param projet Projet ï¿½ cloner
+	 * @return id du projet clonï¿½
 	 */
 	public void cloneProjet(Projet projet) {
 		if(projet != null) {
@@ -114,7 +114,7 @@ public class DetailCatalogueProjet extends HttpServlet {
 			
 			CopySameModuleProjetToProjet(projet,projetV2);
 		} else {
-			throw new NullPointerException("Le projet données est null");
+			throw new NullPointerException("Le projet donnï¿½es est null");
 		}
 	}
 
@@ -159,18 +159,6 @@ public class DetailCatalogueProjet extends HttpServlet {
 			}
 		}
 		
-	}
-
-	private static boolean isInteger(String s) {
-		try { 
-			Integer.parseInt(s); 
-		} catch(NumberFormatException e) { 
-			return false; 
-		} catch(NullPointerException e) {
-			return false;
-		}
-		// only got here if we didn't return false
-		return true;
 	}
 
 }

@@ -31,35 +31,6 @@ public class EditPiece extends HttpServlet {
 	private ModuleService moduleService = new ModuleService();
 	private GammeService gammeService = new GammeService();
 
-	private static boolean isInteger(String s) {
-		try { 
-			Integer.parseInt(s); 
-		} catch(NumberFormatException e) { 
-			return false; 
-		} catch(NullPointerException e) {
-			return false;
-		}
-		// only got here if we didn't return false
-		return true;
-	}
-	
-	private boolean findContains(String value, String moduleValue) {
-		
-		String valueUpper = value.toUpperCase();
-		String moduleValueUpper = moduleValue.toUpperCase();
-		
-		if(moduleValueUpper.contains(valueUpper)) {
-			
-			return true;
-			
-		}else {
-		 
-			return false;
-			
-		}
-		
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(!MethodeUtile.isConnected(response , request)) {
@@ -72,7 +43,7 @@ public class EditPiece extends HttpServlet {
 		String pieceId = request.getParameter("id");
 
 		//Verifier que l'on edit pas un projet/plan qui n'est pas en catalogue ou en devis
-		if(isInteger(pieceId)) {
+		if(MethodeUtile.isInteger(pieceId)) {
 			Piece piece = pieceService.getPieceById(Integer.valueOf(pieceId));
 			if(piece.getPlan().getProjet().getCatalogue().size() == 0) {
 				if(piece.getPlan().getProjet().getDevises().size() == 0) {
@@ -103,12 +74,12 @@ public class EditPiece extends HttpServlet {
 					//Trie par critere
 					if(gamme != null && !(gamme.equals("-1")) || nomModule != null && !(nomModule.equals(""))) {
 						if(ListModule != null) {
-							if(isInteger(gamme)) {
+							if(MethodeUtile.isInteger(gamme)) {
 								for(Module module : ListModule) {
 									if(!gamme.equals("-1")) {
 										if(Integer.valueOf(gamme) == module.getGamme().getGammeId()){
 											if(!nomModule.equals("")) {
-												if(findContains(nomModule,module.getNom())){
+												if(MethodeUtile.findContains(nomModule,module.getNom())){
 							
 													list.add(module);
 													
@@ -118,7 +89,7 @@ public class EditPiece extends HttpServlet {
 											}	
 										}
 									}else if(!nomModule.equals("")) {
-										if(findContains(nomModule,module.getNom())){
+										if(MethodeUtile.findContains(nomModule,module.getNom())){
 					
 											list.add(module);
 											
@@ -136,7 +107,7 @@ public class EditPiece extends HttpServlet {
 						
 					}
 					if(nomModule != null && gamme != null && !(gamme.equals(""))) {
-						if(isInteger(gamme)) {
+						if(MethodeUtile.isInteger(gamme)) {
 							request.setAttribute("gammeId", gamme);
 							request.setAttribute("nomModule", nomModule);
 						}
@@ -181,8 +152,8 @@ public class EditPiece extends HttpServlet {
 		}
 
 		if( btnSupprimer != null && moduleId != null) {
-			if(isInteger(moduleId)) {
-				if(isInteger(idPiece)) {
+			if(MethodeUtile.isInteger(moduleId)) {
+				if(MethodeUtile.isInteger(idPiece)) {
 					try {
 
 						Piece piece = pieceService.getPieceById(Integer.valueOf(idPiece));
@@ -203,8 +174,8 @@ public class EditPiece extends HttpServlet {
 
 			
 		}else if( btnAjouter != null && moduleSelectId != null && idPiece != null) {
-			if(isInteger(idPiece)) {
-				if(isInteger(moduleSelectId)) {
+			if(MethodeUtile.isInteger(idPiece)) {
+				if(MethodeUtile.isInteger(moduleSelectId)) {
 					try {
 
 						Piece piece = pieceService.getPieceById(Integer.valueOf(idPiece));
@@ -213,7 +184,7 @@ public class EditPiece extends HttpServlet {
 							Module module = moduleService.getModuleById(Integer.valueOf(moduleSelectId));
 							
 							if(!pieceService.addModuleToPiece(module, piece)) {
-								request.setAttribute("Erreur", "Module/piece incorrect ou module déjà existant.");
+								request.setAttribute("Erreur", "Module/piece incorrect ou module dï¿½jï¿½ existant.");
 							}
 						}
 					}catch(Exception e){

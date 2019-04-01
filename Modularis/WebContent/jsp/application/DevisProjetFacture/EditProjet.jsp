@@ -67,7 +67,7 @@
 					<button class="btn btn-warning btn-block btn-block" name="btnEditer" id="btnEditer">Editer</button>
 				</div>
 				<div class="col-md-6 col-sm-12">
-					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
+					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" id="btnSupprimer" type="button" data-toggle="modal" data-target="#ModalConfirmationSuppression" id="btnSupprimer">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -94,5 +94,7 @@
 
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
 </body>
+  <script type='text/javascript'
+		src='<%=request.getContextPath()%>/resources/js/generateDevis.js'></script>
 
 </html>

@@ -23,18 +23,6 @@ public class AjoutAngle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private AngleService angleService = new AngleService();
-
-	private static boolean isFloat(String s) {
-	    try { 
-	        Float.parseFloat(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -92,12 +80,12 @@ public class AjoutAngle extends HttpServlet {
 			}
 		}else if (angleNom != null && anglePrix !=null) {						
 			if (angleNom.trim() != null && anglePrix.trim() != null) {	
-				if(isFloat(anglePrix)) {
+				if(MethodeUtile.isFloat(anglePrix)) {
 					
 					angleService.addAngle(angleNom,Float.valueOf(anglePrix));
 
 					//Definit la reponse comme "See Other" et redirige
-					//Evite la multi-insertion après un refresh de l'utilsateur		
+					//Evite la multi-insertion aprï¿½s un refresh de l'utilsateur		
 					response.setStatus(303);	
 					response.sendRedirect(request.getContextPath()+"/Configuration/AjoutAngle");
 				}else {

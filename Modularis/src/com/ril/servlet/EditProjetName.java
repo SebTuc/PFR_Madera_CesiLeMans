@@ -35,18 +35,6 @@ public class EditProjetName extends HttpServlet {
 	private ProjetService projetService = new ProjetService();
 	private ImageService imageService = new ImageService();
 
-	private static boolean isInteger(String s) {
-		try { 
-			Integer.parseInt(s); 
-		} catch(NumberFormatException e) { 
-			return false; 
-		} catch(NullPointerException e) {
-			return false;
-		}
-		// only got here if we didn't return false
-		return true;
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(!MethodeUtile.isConnected(response , request)) {
@@ -58,7 +46,7 @@ public class EditProjetName extends HttpServlet {
 		}
 		String idProjet = request.getParameter("id");
 		if(idProjet != null) {
-			if(isInteger(idProjet)) {
+			if(MethodeUtile.isInteger(idProjet)) {
 				Projet projet = projetService.getProjetById(Integer.valueOf(idProjet));
 				request.setAttribute("Projet", projet);
 
@@ -125,7 +113,7 @@ public class EditProjetName extends HttpServlet {
 				}else if(item.getFieldName().equals("id")) {
 					//On recup l'id du projet
 					id=item.getString();
-					if(!isInteger(id)) {
+					if(!MethodeUtile.isInteger(id)) {
 						request.setAttribute("Erreur", "Id projet incorrect");
 						doGet(request, response);
 						return;
@@ -148,7 +136,7 @@ public class EditProjetName extends HttpServlet {
 
 							array = Files.readAllBytes(file.toPath());
 						}else {
-							request.setAttribute("Erreur", "Taille de l'image supérieur a la limite maximal (1Go).");
+							request.setAttribute("Erreur", "Taille de l'image supï¿½rieur a la limite maximal (1Go).");
 							doGet(request, response);
 
 						}
@@ -166,7 +154,7 @@ public class EditProjetName extends HttpServlet {
 
 			}
 		} catch (FileUploadException e) {
-			request.setAttribute("Erreur", "Erreur lors de l'ajout des données.");
+			request.setAttribute("Erreur", "Erreur lors de l'ajout des donnï¿½es.");
 			doGet(request, response);
 		} catch (Exception ex) {
 			request.setAttribute("Erreur", "Une erreur est survenue.");

@@ -32,35 +32,6 @@ public class ListModule extends HttpServlet {
 	private ComposantService composantService = new ComposantService();
 
 
-	private static boolean isInteger(String s) {
-		try { 
-			Integer.parseInt(s); 
-		} catch(NumberFormatException e) { 
-			return false; 
-		} catch(NullPointerException e) {
-			return false;
-		}
-		// only got here if we didn't return false
-		return true;
-	}
-
-	private boolean findContains(String value, String moduleValue) {
-
-		String valueUpper = value.toUpperCase();
-		String moduleValueUpper = moduleValue.toUpperCase();
-
-		if(moduleValueUpper.contains(valueUpper)) {
-
-			return true;
-
-		}else {
-
-			return false;
-
-		}
-
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		if(!MethodeUtile.isConnected(response , request)) {
@@ -92,12 +63,12 @@ public class ListModule extends HttpServlet {
 		//Trie par critere
 		if(gamme != null && !(gamme.equals("-1")) || nomModule != null && !(nomModule.equals(""))) {
 			if(ListModule != null) {
-				if(isInteger(gamme)) {
+				if(MethodeUtile.isInteger(gamme)) {
 					for(Module module : ListModule) {
 						if(!gamme.equals("-1")) {
 							if(Integer.valueOf(gamme) == module.getGamme().getGammeId()){
 								if(!nomModule.equals("")) {
-									if(findContains(nomModule,module.getNom())){
+									if(MethodeUtile.findContains(nomModule,module.getNom())){
 
 										list.add(module);
 
@@ -107,7 +78,7 @@ public class ListModule extends HttpServlet {
 								}	
 							}
 						}else if(!nomModule.equals("")) {
-							if(findContains(nomModule,module.getNom())){
+							if(MethodeUtile.findContains(nomModule,module.getNom())){
 
 								list.add(module);
 
@@ -136,7 +107,7 @@ public class ListModule extends HttpServlet {
 		}
 
 		if(nomModule != null && gamme != null && !(gamme.equals(""))) {
-			if(isInteger(gamme)) {
+			if(MethodeUtile.isInteger(gamme)) {
 				request.setAttribute("gammeId", gamme);
 				request.setAttribute("nomModule", nomModule);
 			}
@@ -169,7 +140,7 @@ public class ListModule extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+ "/Configuration/EditModule?id="+moduleId);
 
 		}else if( btnSupprimer != null && moduleId != null) {
-			if(isInteger(moduleId)) {
+			if(MethodeUtile.isInteger(moduleId)) {
 				Module module = moduleService.getModuleById(Integer.valueOf(moduleId));
 
 				//Si le module est dans un catalogue ou devis on le supprime pas on le display false 
@@ -177,7 +148,7 @@ public class ListModule extends HttpServlet {
 					
 					module.setDisplay(false);
 					moduleService.editModule(module);
-					//Supprimer le module des projet en cours de création.
+					//Supprimer le module des projet en cours de crï¿½ation.
 					moduleService.removeAllModuleInProjetEditableById(module.getModuleId());
 					
 					

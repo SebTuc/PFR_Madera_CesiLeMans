@@ -39,18 +39,6 @@ public class AjoutModule extends HttpServlet {
 	private AngleService angleService = new AngleService();
 	private UniteMesureService uniteMesureService = new UniteMesureService();
 
-	private static boolean isInteger(String s) {
-		try { 
-			Integer.parseInt(s); 
-		} catch(NumberFormatException e) { 
-			return false; 
-		} catch(NullPointerException e) {
-			return false;
-		}
-		// only got here if we didn't return false
-		return true;
-	}
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -125,10 +113,10 @@ public class AjoutModule extends HttpServlet {
 			if(gammeId != null && nomModule != null && uniteMesureId != null) {
 				if(ListComposant.length == ListQuantite.length && ListComposant.length > 0) {
 					//Verifier que gamme type angle et unite mesure sont bien des Integer
-					if(isInteger(gammeId) && isInteger(uniteMesureId)) {
+					if(MethodeUtile.isInteger(gammeId) && MethodeUtile.isInteger(uniteMesureId)) {
 						
 						Angle angle=null;
-						if(typeAngle != null && isInteger(typeAngle)) {
+						if(typeAngle != null && MethodeUtile.isInteger(typeAngle)) {
 							angle = angleService.getAngleById(Integer.valueOf(typeAngle));	
 						}
 						
@@ -137,7 +125,7 @@ public class AjoutModule extends HttpServlet {
 						Gamme gamme = gammeService.getGammeById(Integer.valueOf(gammeId));
 						
 						Integer moduleId =null;
-						if(typeAngle != null && isInteger(typeAngle)) {
+						if(typeAngle != null && MethodeUtile.isInteger(typeAngle)) {
 							moduleId = moduleSerivce.addModule(angle, gamme, nomModule, uniteMesure);
 						}else {
 							moduleId = moduleSerivce.addModule(gamme, nomModule, uniteMesure);
@@ -149,7 +137,7 @@ public class AjoutModule extends HttpServlet {
 							//Verifier que se sois bien des integer
 							String composantId = ListComposant[i];
 							String quantites = ListQuantite[i];
-							if(isInteger(composantId) && isInteger(quantites)) {
+							if(MethodeUtile.isInteger(composantId) && MethodeUtile.isInteger(quantites)) {
 
 								Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
 								Integer quantite = Integer.valueOf(quantites);

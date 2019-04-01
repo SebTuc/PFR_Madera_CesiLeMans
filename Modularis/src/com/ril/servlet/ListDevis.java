@@ -25,18 +25,6 @@ public class ListDevis extends HttpServlet {
        
 	private DevisService devisService = new DevisService();
 
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		if(!MethodeUtile.isConnected(response , request)) {
@@ -84,7 +72,7 @@ public class ListDevis extends HttpServlet {
 		
 
 		if( btnVisualiser != null && devisId != null) {
-			if(isInteger(devisId)) {
+			if(MethodeUtile.isInteger(devisId)) {
 			response.sendRedirect(request.getContextPath()+ "/DevisFacture/DetailDevis?id="+devisId);
 			}else {
 				request.setAttribute("Erreur", "Projet ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
@@ -92,7 +80,7 @@ public class ListDevis extends HttpServlet {
 			}
 			
 		}else if( btnSupprimer != null && devisId != null) {
-			if(isInteger(devisId)) {
+			if(MethodeUtile.isInteger(devisId)) {
 
 				devisService.removeDevisById(Integer.valueOf(devisId));
 				

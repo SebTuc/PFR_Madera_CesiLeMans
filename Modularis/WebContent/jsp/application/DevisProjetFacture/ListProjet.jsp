@@ -81,7 +81,7 @@
 				</div>
 					<br>
 				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
+					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" type="button" data-toggle="modal" data-target="#ModalConfirmationSuppression" id="btnSupprimer">Supprimer</button>
 				</div>
 			</div>
 		

@@ -33,30 +33,6 @@ public class EditComposant extends HttpServlet {
 	private FournisseurService fournisseurService = new FournisseurService();
 	private MateriauxService materiauxService = new MateriauxService();
 	
-	private static boolean isFloat(String s) {
-	    try { 
-	        Float.parseFloat(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(!MethodeUtile.isConnected(response , request)) {
@@ -102,8 +78,8 @@ public class EditComposant extends HttpServlet {
 		}
 		if (nom != null && prixUnitaire != null && familleComposant != null && materiaux != null && fournisseur != null) {						
 			if (!(nom.equals("")) && !(prixUnitaire.equals(""))&& !(familleComposant.equals("")) && !(materiaux.equals("")) && !(fournisseur.equals(""))) {	
-				if(isFloat(prixUnitaire)) {
-					if(isInteger(materiaux) && isInteger(fournisseur) && isInteger(familleComposant)) {
+				if(MethodeUtile.isFloat(prixUnitaire)) {
+					if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
 						FamilleComposant familleCompo = familleComposantService.getFamilleComposantById(Integer.valueOf(familleComposant));
 						Fournisseur fourni = fournisseurService.getFournisseurById(Integer.valueOf(fournisseur));
 						Materiaux mater = materiauxService.getMateriauxById(Integer.valueOf(materiaux));
@@ -113,9 +89,9 @@ public class EditComposant extends HttpServlet {
 						if(composantService.composantInDevisOrCatalogue(composant)) {
 							//On clone et display false l'autre
 							
-							request.setAttribute("Erreur", "Impossible d'éditer, le composant est utiliser dans 1 ou plusieur devis/catalogue.");
+							request.setAttribute("Erreur", "Impossible d'ï¿½diter, le composant est utiliser dans 1 ou plusieur devis/catalogue.");
 							request.setAttribute("NomComposant", nom);
-							if(isInteger(materiaux) && isInteger(fournisseur) && isInteger(familleComposant)) {
+							if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
 								request.setAttribute("FamilleComposantId", familleComposant);
 								request.setAttribute("MateriauxId", materiaux);
 								request.setAttribute("FournisseurId", fournisseur);
@@ -149,7 +125,7 @@ public class EditComposant extends HttpServlet {
 				}else {
 					request.setAttribute("Erreur", "Saisie incorrect (prix).");
 					request.setAttribute("NomComposant", nom);
-					if(isInteger(materiaux) && isInteger(fournisseur) && isInteger(familleComposant)) {
+					if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
 						request.setAttribute("FamilleComposantId", familleComposant);
 						request.setAttribute("MateriauxId", materiaux);
 						request.setAttribute("FournisseurId", fournisseur);

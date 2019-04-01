@@ -84,8 +84,8 @@ public class EditCatalogue extends HttpServlet {
 			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
 		}
 		if (action != null && action != "" ) {
-			if(isInteger(idProjet)) {
-				if(isInteger(idCatalogue)) {
+			if(MethodeUtile.isInteger(idProjet)) {
+				if(MethodeUtile.isInteger(idCatalogue)) {
 															
 					// Recuperation du catalogue et du projet puis link du projet dans catalogue
 					Catalogue catalogue = catalogueService.getCatalogueById(Integer.parseInt(idCatalogue));
@@ -108,8 +108,8 @@ public class EditCatalogue extends HttpServlet {
 								default:
 									break;
 							}
-						}else {error = "Aucun catalogue trouvé avec l'id "+idCatalogue;}
-					}else {error = "Aucun projet trouvé avec l'id "+idProjet;}
+						}else {error = "Aucun catalogue trouvï¿½ avec l'id "+idCatalogue;}
+					}else {error = "Aucun projet trouvï¿½ avec l'id "+idProjet;}
 						
 					// Retour des projets
 					response.setStatus(200);
@@ -184,18 +184,6 @@ public class EditCatalogue extends HttpServlet {
 		}
 		
 		return jsonProjetsCatalogue.build();				
-	}
-	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
 	}
 
 }

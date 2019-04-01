@@ -25,19 +25,6 @@ public class EditProjet extends HttpServlet {
     
 private ProjetService projetService = new ProjetService();
 private PlanService planService = new PlanService();
-
-	
-	private static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
-	}
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,7 +39,7 @@ private PlanService planService = new PlanService();
 			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
 		}
 		//Verifier que l'on edit pas un projet qui n'est pas en catalogue ou en devis
-		if(isInteger(projetId)) {
+		if(MethodeUtile.isInteger(projetId)) {
 			Projet projet = projetService.getProjetById(Integer.valueOf(projetId));
 			if(projet.getCatalogue().size() == 0) {
 				if(projet.getDevises().size() == 0) {
@@ -104,7 +91,7 @@ private PlanService planService = new PlanService();
 			response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditPlan?id="+planId);
 			
 		}else if( btnSupprimer != null && planId != null) {
-			if(isInteger(planId)) {
+			if(MethodeUtile.isInteger(planId)) {
 				Plan plan = planService.getPlanById(Integer.valueOf(planId));
 
 				planService.removePlan(plan);
@@ -117,7 +104,7 @@ private PlanService planService = new PlanService();
 			
 			
 		}else if( btnAjouter != null && planNom != null) {
-			if(isInteger(idProjet)) {
+			if(MethodeUtile.isInteger(idProjet)) {
 				try {
 					Projet projet = projetService.getProjetById(Integer.valueOf(idProjet));
 					if(!planNom.equals("")) {
