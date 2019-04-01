@@ -214,17 +214,17 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 
 
 /* Button Add/Edit/Delete */
-.dataTables_wrapper .dt-buttons {max-width: 6%;display: flex; justify-content: space-between;}
+.dataTables_wrapper .dt-buttons {max-width: 42%;display: flex; justify-content: space-between;margin-bottom: 15px}
 .dataTables_wrapper .dt-buttons .dt-button.buttons-selected {background: transparent; position: relative; display: inline-block;color: #333333;text-align: center}
 .dataTables_wrapper .dt-buttons .dt-button.buttons-selected.disabled{opacity: 0.38}
-.dataTables_wrapper .dt-buttons .dt-button.buttons-selected span {font-size: 0px}
-.dataTables_wrapper .dt-buttons .dt-button.buttons-selected::after {font-family: 'Material Icons'; font-size: 2em;line-height: 2em;text-align: center;}
+.dataTables_wrapper .dt-buttons .dt-button.buttons-selected span {padding-left:30px}
+.dataTables_wrapper .dt-buttons .dt-button.buttons-selected::after {font-family: 'Material Icons'; font-size: 1.2em;line-height: 2em;text-align: center;position: absolute;left: 10px;top:-7px}
 .dataTables_wrapper .dt-buttons .dt-button.buttons-selected:first-child::after {content: '\e3c9'}
 .dataTables_wrapper .dt-buttons .dt-button.buttons-selected:nth-child(2)::after {content: '\e872'}
 .dataTables_wrapper .dt-buttons .dt-button.buttons-selected:hover {text-decoration: none; cursor: pointer;}
 
 /* Search */
-.dataTables_wrapper .dataTables_filter {position: absolute;top:10px; right: 0; padding: 7px 5px;color: #333333;text-align: left;}
+.dataTables_wrapper .dataTables_filter {position: absolute;top:-15px; right: 0; padding: 7px 5px;color: #333333;text-align: left;}
 .dataTables_wrapper .dataTables_filter label { font-size: 0;color: #333333; }
 .dataTables_wrapper .dataTables_filter::before {font-family: 'Material Icons'; font-size: 2em;line-height: 2em;content: '\e8b6'; top: -10px; left: -25px;position: absolute;}
 
@@ -232,7 +232,7 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 .dataTables_wrapper .dataTables_info {    position: absolute; bottom: 0; padding: 10px 15px; font-size: 14px; color: #777;}
 
 /* Fleche de changement de page du tableau */
-.dataTables_wrapper .pagination .page-item a {height: 100%; line-height: 2.5em; padding: 0;}
+.dataTables_wrapper .pagination .page-item a {height: 100%; line-height: 2.5em; padding: 0;padding-left: 5px; padding-right: 5px}
 .dataTables_wrapper .pagination .page-item.active a {height: 100%;background: var(--blue);font-size: 1.1em; opacity: 0.85;padding: 0 0.3rem}
 .dataTables_wrapper .pagination .page-item.next a i,
 .dataTables_wrapper .pagination .page-item.previous a i {padding: 0.7rem 0 0 0; font-size: 1.5em;}
@@ -276,11 +276,12 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 }
 /*-- MD ------------------------------------------------------------------------------------------------------------*/
 @media (min-width: 992px) and (max-width: 1199px) {
-
+.dataTables_wrapper .dt-buttons {max-width: 55%;}
 }
 
 /*-- SM ------------------------------------------------------------------------------------------------------------*/
 @media (min-width: 768px) and (max-width: 991px) {
+	.dataTables_wrapper .dt-buttons {max-width: 67%;}
 	/* .dataTables_wrapper .dataTables_filter {top: -40px;}	 */
 	/* .dataTables_wrapper .dataTables_filter label {font-size: 14px} */
 		   
@@ -291,7 +292,10 @@ button.btn-check-login:hover { color: #fff; background-color: var(--dark-blue); 
 @media screen and (max-width: 767px) {
 	/* .dataTables_wrapper .dataTables_filter {top: -40px;}	 */
 	/* .dataTables_wrapper .dataTables_filter label {font-size: 14px} */
-	.tree-container {width: 100%};
+	.tree-container {width: 100%}
+	.dataTables_wrapper .dt-buttons {max-width: 100%;}
+	.dataTables_wrapper .dataTables_filter {top:-50px;}
+	
 	.dataTables_wrapper .dataTables_info {bottom: -20px;text-align: left !important; width: 100%}
 	/* .delete-project { height: 100%;padding-bottom: 0%;right: 5%;} */
 }
