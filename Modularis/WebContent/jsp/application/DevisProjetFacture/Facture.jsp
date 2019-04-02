@@ -64,7 +64,7 @@
         <table class="invoice-items" cellpadding="0" cellspacing="0">
         	 <tr class="heading">
         		<td><span class="t-item">Composant</span></td>
-				<td><span class="t-price">Prix U</span></td>
+				<td><span class="t-price">Prix U (HT | TTC)</span></td>
             </tr>    
             <c:forEach var="Plan" items="${Facture.devis.projet.plans}">
             	<c:forEach var="Piece" items="${Plan.pieces}">
@@ -73,13 +73,13 @@
 		            	<c:choose>
 							<c:when test="${Module.angle != null }">
 								<td>${fn:escapeXml(Module.angle.typeAngle)}</td>
-							    <td>${fn:escapeXml(Module.angle.prixUnitaire)}&euro;</td>
+							    <td>${fn:escapeXml(Module.angle.prixUnitaire)}&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Module.angle.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro;</td>
 							</c:when>
 						</c:choose>
 	            		<c:forEach var="ModuleXComposant" items="${Module.moduleXComposants}">
 	            			<tr>
 				                <td>${fn:escapeXml(ModuleXComposant.composant.nom)} (x${fn:escapeXml(ModuleXComposant.quantite)})</td>
-				                <td>${fn:escapeXml(ModuleXComposant.composant.prixUnitaire)}&euro;</td>
+				                <td>${fn:escapeXml(ModuleXComposant.composant.prixUnitaire)}&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ModuleXComposant.composant.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro;</td>
 			                </tr>
 		                </c:forEach>
 	                </c:forEach>
@@ -89,19 +89,19 @@
 				<c:when test="${PourcentageDejaPayer != 0}">
 						<tr>
 							<td><del> D&eacute;j&agrave; pay&eacute; (${fn:escapeXml(PourcentageDejaPayer)} %)</del></td>
-							<td><fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(DejaPayer)}" maxFractionDigits="2" />&euro;</td>
+							<td><fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(DejaPayer)}" maxFractionDigits="2" />&euro;  | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(DejaPayer * 1.2)}" maxFractionDigits="2" />&euro;</td>
 						</tr>
 						</c:when>
 					</c:choose>
 					<tr>
 						<td>> ${fn:escapeXml(Facture.etapeFacture.etape)} (${fn:escapeXml(Facture.etapeFacture.pourcentage)} %)</td>
-						<td><fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro;</td>
+						<td><fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro;  | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer * 1.2)}" maxFractionDigits="2" />&euro;</td>
 					</tr>
         </table>
         
         <div class="invoice-summary">
             <div class="invoice-total">TOTAL HT :
-				${fn:escapeXml(ResteAPayer)}&euro;</div>
+				${fn:escapeXml(ResteAPayer)}&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer * 1.2)}" maxFractionDigits="2" />&euro;</div>
             <div class="invoice-final"></div>
             <div class="invoice-exchange"></div>
         </div>

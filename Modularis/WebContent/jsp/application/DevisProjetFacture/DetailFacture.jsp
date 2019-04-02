@@ -98,9 +98,9 @@
 																> ${fn:escapeXml(ModuleXComposant.composant.nom)}
 																${fn:escapeXml(ModuleXComposant.composant.prixUnitaire)}&euro;
 																x${fn:escapeXml(ModuleXComposant.quantite)} | HT:
-																<fmt:formatNumber type="number" groupingUsed="false"
+																<fmt:formatNumber type="number" groupingUsed="false" var="PrixUHT"
 																	value="${fn:escapeXml(ModuleXComposant.quantite * ModuleXComposant.composant.prixUnitaire)}"
-																	maxFractionDigits="3" />
+																	maxFractionDigits="3" /> | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${PrixUHT * 1.2}" maxFractionDigits="2" />&euro; />
 																&euro;
 															</h4>
 														</li>
@@ -115,19 +115,19 @@
 					<c:choose>
 						<c:when test="${PourcentageDejaPayer != 0}">
 						<li>
-							<h5><del> D&eacute;j&agrave; pay&eacute; (${fn:escapeXml(PourcentageDejaPayer)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(DejaPayer)}" maxFractionDigits="2" />&euro;</del></h5>
+							<h5><del> D&eacute;j&agrave; pay&eacute; (${fn:escapeXml(PourcentageDejaPayer)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(DejaPayer)}" maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${DejaPayer * 1.2}" maxFractionDigits="2" />&euro;</del></h5>
 						</li>
 						</c:when>
 					</c:choose>
 					
 					
 					<li>
-						<h4>> ${fn:escapeXml(Facture.etapeFacture.etape)} (${fn:escapeXml(Facture.etapeFacture.pourcentage)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro;</h4>
+						<h4>> ${fn:escapeXml(Facture.etapeFacture.etape)} (${fn:escapeXml(Facture.etapeFacture.pourcentage)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${ResteAPayer * 1.2}" maxFractionDigits="2" />&euro;</h4>
 					</li>
 				</ul>
 				<br> <br>
 				<div class="row justify-content-end w-100"
-					style="color: red; font-size: 180%;">Prix total HT : ${fn:escapeXml(ResteAPayer)}&euro;</div>
+					style="color: red; font-size: 150%;">Prix total HT : <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro;  | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${ResteAPayer * 1.2}" maxFractionDigits="2" />&euro;</div>
 			</div>
 		</div>
 		<div id="editor"></div>

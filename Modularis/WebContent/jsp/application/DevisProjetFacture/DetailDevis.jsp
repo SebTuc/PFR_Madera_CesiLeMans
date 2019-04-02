@@ -84,7 +84,7 @@
 													<li>
 														<h4>
 															> ${fn:escapeXml(Module.angle.typeAngle)}
-																HT: ${fn:escapeXml(Module.angle.prixUnitaire)}&euro; 
+																HT: ${fn:escapeXml(Module.angle.prixUnitaire)}&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Module.angle.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro; 
 															</h4>
 													</li>
 												</c:when>
@@ -96,10 +96,9 @@
 																> ${fn:escapeXml(ModuleXComposant.composant.nom)}
 																${fn:escapeXml(ModuleXComposant.composant.prixUnitaire)}&euro;
 																x${fn:escapeXml(ModuleXComposant.quantite)} | HT:
-																<fmt:formatNumber type="number" groupingUsed="false"
+																<fmt:formatNumber type="number" groupingUsed="false" var="PrixUHT"
 																	value="${fn:escapeXml(ModuleXComposant.quantite * ModuleXComposant.composant.prixUnitaire)}"
-																	maxFractionDigits="3" />
-																&euro;
+																	maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(PrixUHT * 1.2)}" maxFractionDigits="2" />&euro;
 															</h4>
 														</li>
 													</c:forEach>
@@ -114,7 +113,7 @@
 			<br>
 			<div class="row justify-content-end w-100"
 				style="color: red; font-size: 180%;">Prix total HT :
-				${Devis.prixHt}&euro;</div>
+				<fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Devis.prixHt)}" maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Devis.prixHt * 1.2)}" maxFractionDigits="2" />&euro;</div>
 		</div>
 	</div>
 	<div id="editor"></div>
