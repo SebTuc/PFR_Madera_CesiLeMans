@@ -17,7 +17,11 @@
 <a href="/Modularis/Configuration" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 
 <div role="main" class="container">
-  
+  <c:choose>
+				<c:when test="${Erreur != null }">
+					<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+				</c:when>
+			</c:choose>
 <div class="card card-edition config-table">
 
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">

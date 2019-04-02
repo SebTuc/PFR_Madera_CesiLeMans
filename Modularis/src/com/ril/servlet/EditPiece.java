@@ -9,12 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Gamme;
 import com.ril.model.Module;
 import com.ril.model.Piece;
-import com.ril.model.Utilisateur;
 import com.ril.service.GammeService;
 import com.ril.service.ModuleService;
 import com.ril.service.PieceService;
@@ -32,14 +30,6 @@ public class EditPiece extends HttpServlet {
 	private GammeService gammeService = new GammeService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 		String pieceId = request.getParameter("id");
 
 		//Verifier que l'on edit pas un projet/plan qui n'est pas en catalogue ou en devis
@@ -56,7 +46,7 @@ public class EditPiece extends HttpServlet {
 					List<Module> ListMod = moduleService.getAllModules();
 					List<Gamme> ListGamme = gammeService.getAllGammes();
 					List<Module> list = new ArrayList<Module>();
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+					//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					//Ou alors on affiche quand meme tout
 					List<Module> ListModule = new ArrayList<Module>();
 
@@ -68,7 +58,7 @@ public class EditPiece extends HttpServlet {
 							}
 						}
 					}
-					
+
 					String gamme = request.getParameter("gamme");
 					String nomModule = request.getParameter("nomModule");
 					//Trie par critere
@@ -80,9 +70,9 @@ public class EditPiece extends HttpServlet {
 										if(Integer.valueOf(gamme) == module.getGamme().getGammeId()){
 											if(!nomModule.equals("")) {
 												if(MethodeUtile.findContains(nomModule,module.getNom())){
-							
+
 													list.add(module);
-													
+
 												}
 											}else {
 												list.add(module);
@@ -90,21 +80,21 @@ public class EditPiece extends HttpServlet {
 										}
 									}else if(!nomModule.equals("")) {
 										if(MethodeUtile.findContains(nomModule,module.getNom())){
-					
+
 											list.add(module);
-											
+
 										}
 									}
-									
+
 								}
 							}
 						}
-						
+
 						request.setAttribute("ListModule", list);
 					}else {
-						
+
 						request.setAttribute("ListModule", ListModule);
-						
+
 					}
 					if(nomModule != null && gamme != null && !(gamme.equals(""))) {
 						if(MethodeUtile.isInteger(gamme)) {
@@ -112,7 +102,7 @@ public class EditPiece extends HttpServlet {
 							request.setAttribute("nomModule", nomModule);
 						}
 					}
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					
+					//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					
 					request.setAttribute("ListGamme", ListGamme);
 					request.setAttribute("Piece", piece);
 					request.getRequestDispatcher("/jsp/application/DevisProjetFacture/EditPiece.jsp").forward(request, response);
@@ -143,14 +133,6 @@ public class EditPiece extends HttpServlet {
 		String moduleSelectId = request.getParameter("module");
 		String idPiece = request.getParameter("idPiece");
 
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
-
 		if( btnSupprimer != null && moduleId != null) {
 			if(MethodeUtile.isInteger(moduleId)) {
 				if(MethodeUtile.isInteger(idPiece)) {
@@ -158,7 +140,7 @@ public class EditPiece extends HttpServlet {
 
 						Piece piece = pieceService.getPieceById(Integer.valueOf(idPiece));
 						Module module = moduleService.getModuleById(Integer.valueOf(moduleId));
-						
+
 						if(!pieceService.removeModuleToPiece(module , piece)) {
 							request.setAttribute("Erreur", "Erreur lors de la suppression.");
 						}
@@ -172,7 +154,7 @@ public class EditPiece extends HttpServlet {
 				request.setAttribute("Erreur", "Module ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 			}
 
-			
+
 		}else if( btnAjouter != null && moduleSelectId != null && idPiece != null) {
 			if(MethodeUtile.isInteger(idPiece)) {
 				if(MethodeUtile.isInteger(moduleSelectId)) {
@@ -182,7 +164,7 @@ public class EditPiece extends HttpServlet {
 						if(!moduleSelectId.equals("")) {
 
 							Module module = moduleService.getModuleById(Integer.valueOf(moduleSelectId));
-							
+
 							if(!pieceService.addModuleToPiece(module, piece)) {
 								request.setAttribute("Erreur", "Module/piece incorrect ou module d�j� existant.");
 							}
@@ -196,16 +178,16 @@ public class EditPiece extends HttpServlet {
 					}else {
 						request.setAttribute("Erreur", "L'id du module est incorrect.");
 					}
-					
+
 				}
-				
+
 			}else {
 				request.setAttribute("Erreur", "L'id de la piece est incorrect.");
 			}
 		}else {
 			request.setAttribute("Erreur", "Veuillez Saisir un module.");
 		}
-		
+
 		doGet(request, response);
 	}
 

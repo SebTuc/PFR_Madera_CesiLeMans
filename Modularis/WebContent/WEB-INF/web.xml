@@ -12,6 +12,14 @@
     <servlet-class>com.ril.servlet.InitServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>com.ril.servlet.AuthentificationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>Index</servlet-name>
     <servlet-class>com.ril.servlet.Index</servlet-class>
@@ -399,7 +407,7 @@
     <url-pattern>/Photo</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>Index</welcome-file>
+    <welcome-file>Connexion</welcome-file>
   </welcome-file-list>
   <error-page>
     <location>/jsp/common/error.jsp</location>

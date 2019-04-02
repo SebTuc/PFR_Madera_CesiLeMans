@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.ril.model.Utilisateur;
 import com.ril.service.UtilisateurService;
-import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class ListUtilisateur
@@ -24,21 +23,18 @@ public class ListUtilisateur extends HttpServlet {
 	public UtilisateurService utilisateurService = new UtilisateurService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			Utilisateur utilisateur = (Utilisateur)session.getAttribute("SessionUtilisateur");
-			if(utilisateur != null) {			
-				if (!utilisateur.getMetier().getNom().equals("Moderateur")) {
-					response.sendRedirect(request.getContextPath()+"/Annuaire");
-					return;
-				}
-			}
 
-			request.setAttribute("Utilisateur", utilisateur);
+		HttpSession session = request.getSession(false);
+		Utilisateur utilisateur = (Utilisateur)session.getAttribute("SessionUtilisateur");
+		if(utilisateur != null) {			
+			if (!utilisateur.getMetier().getNom().equals("Moderateur")) {
+				response.sendRedirect(request.getContextPath()+"/Annuaire");
+				return;
+			}
 		}
+
+		request.setAttribute("Utilisateur", utilisateur);
+
 		List<Utilisateur> ListUtilisateur = utilisateurService.getAllUtilisateurs();
 		request.setAttribute("ListUtilisateur", ListUtilisateur);
 		request.getRequestDispatcher("/jsp/application/Annuaire/ListUtilisateur.jsp").forward(request, response);

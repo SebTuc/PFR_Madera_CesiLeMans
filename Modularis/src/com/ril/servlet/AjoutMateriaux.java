@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ril.model.Materiaux;
 import com.ril.service.MateriauxService;
-import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutMateriaux
@@ -23,10 +22,7 @@ public class AjoutMateriaux extends HttpServlet {
 	private MateriauxService materiauxService = new MateriauxService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}
+
 		List<Materiaux> ListMateriaux = materiauxService.getAllMateriauxs();
 		request.setAttribute("ListMateriaux", ListMateriaux);
 		
@@ -40,11 +36,7 @@ public class AjoutMateriaux extends HttpServlet {
 		String materiauxNom = request.getParameter("materiauxNom");	
 		String action = request.getParameter("action");
 		String idValeur = request.getParameter("id");
-		String valeur = request.getParameter("valeur");
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}	
+		String valeur = request.getParameter("valeur");	
 		// Ajout ou Delete
 		if(action != null) {
 			if(action.equals("Delete")) {
@@ -65,13 +57,16 @@ public class AjoutMateriaux extends HttpServlet {
 				
 			}
 		}else if (materiauxNom != null) {						
-			if (materiauxNom.trim() != null) {				
+			if (!materiauxNom.equals("")) {				
 				materiauxService.addMateriaux(materiauxNom);
 				
 				//Definit la reponse comme "See Other" et redirige
 				//Evite la multi-insertion après un refresh de l'utilsateur		
 				response.setStatus(303);	
 				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutMateriaux");
+			}else {
+				request.setAttribute("Erreur", "Veuillez saisir un nom.");
+				doGet(request,response);
 			}
 		}else {
 			//Post de null part

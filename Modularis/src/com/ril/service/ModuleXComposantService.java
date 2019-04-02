@@ -2,7 +2,6 @@ package com.ril.service;
 
 import java.util.List;
 
-import com.ril.daoHibernate.ModuleHome;
 import com.ril.daoHibernate.ModuleXComposantHome;
 import com.ril.model.Composant;
 import com.ril.model.Module;

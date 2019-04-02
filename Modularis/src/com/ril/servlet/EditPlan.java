@@ -7,11 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Piece;
 import com.ril.model.Plan;
-import com.ril.model.Utilisateur;
 import com.ril.service.PieceService;
 import com.ril.service.PlanService;
 import com.ril.utils.MethodeUtile;
@@ -22,21 +20,14 @@ import com.ril.utils.MethodeUtile;
 @WebServlet("/EditPlan")
 public class EditPlan extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-  
+
+
 	private PlanService planService = new PlanService();
 	private PieceService pieceService = new PieceService();
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String planId = request.getParameter("id");
 
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 		//Verifier que l'on edit pas un projet/plan qui n'est pas en catalogue ou en devis
 		if(MethodeUtile.isInteger(planId)) {
 			Plan plan = planService.getPlanById(Integer.valueOf(planId));
@@ -66,7 +57,7 @@ public class EditPlan extends HttpServlet {
 		}
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pieceId = request.getParameter("radio");
 		String btnEditer = request.getParameter("btnEditer");
@@ -76,41 +67,33 @@ public class EditPlan extends HttpServlet {
 		String surface = request.getParameter("surface");
 		String idPlan = request.getParameter("idPlan");
 
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
-
 		if( btnEditer != null && pieceId != null) {
 
 			response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditPiece?id="+pieceId);
-			
+
 		}else if( btnSupprimer != null && pieceId != null) {
 			if(MethodeUtile.isInteger(pieceId)) {
 				Piece piece = pieceService.getPieceById(Integer.valueOf(pieceId));
 
 				pieceService.removePiece(piece);
 				doGet(request, response);
-				
+
 			}else {
 				request.setAttribute("Erreur", "Projet ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 				doGet(request, response);
 			}
-			
-			
+
+
 		}else if( btnAjouter != null && pieceNom != null && surface != null) {
 			if(MethodeUtile.isInteger(idPlan)) {
 				if(MethodeUtile.isFloat(surface)) {
 					try {
-						
+
 						Plan plan = planService.getPlanById(Integer.valueOf(idPlan));
 						if(!pieceNom.equals("")) {
-							
+
 							Integer IdPieceAdd = pieceService.addPiece(plan, pieceNom, Float.valueOf(surface));
-							
+
 							response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditPiece?id="+IdPieceAdd);
 						}else {
 							request.setAttribute("Erreur", "Veuillez saisir un nom de pi�ce.");

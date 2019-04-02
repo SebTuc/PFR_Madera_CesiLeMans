@@ -14,19 +14,19 @@
 
 	<jsp:include page="/jsp/common/navbar.jsp" />
 
-	<a href="/Modularis/Annuaire/ListFournisseur"
+	<a href="/Modularis/Annuaire"
 		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>
 		Retour</a>
 
 	<div role="main" class="container">
 
-		<br>
-		<form method="post">
 			<c:choose>
 				<c:when test="${Erreur != null }">
 					<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
 				</c:when>
 			</c:choose>
+		<br>
+		<form method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="nom">Nom</label> <input type="text"

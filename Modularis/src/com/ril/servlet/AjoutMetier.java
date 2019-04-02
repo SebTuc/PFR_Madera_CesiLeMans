@@ -2,18 +2,16 @@ package com.ril.servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Metier;
-import com.ril.model.Utilisateur;
 import com.ril.service.MetierService;
-import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutMetier
@@ -25,14 +23,11 @@ public class AjoutMetier extends HttpServlet {
 	private MetierService metierService = new MetierService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
-		List<Metier> metiers = metierService.getAllMetiers();
+		//On prend tout les metier sauf le moderateur
+		List<Metier> metiers = metierService.getAllMetiers().stream()
+				.filter(e -> !e.getNom().equals("Moderateur"))
+				.collect(Collectors.toList());;
+		
 		request.setAttribute("ListMetier", metiers);
 		
 		request.getRequestDispatcher("/jsp/application/Configuration/AjoutMetier.jsp").forward(request, response);
@@ -43,13 +38,7 @@ public class AjoutMetier extends HttpServlet {
 		String action = request.getParameter("action");
 		String idValeur = request.getParameter("id");
 		String valeur = request.getParameter("valeur");
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+
 		// Ajout ou Delete
 		if(action != null) {
 			if(action.equals("Delete")) {
@@ -70,16 +59,19 @@ public class AjoutMetier extends HttpServlet {
 				
 			}
 		}else if (metierNom != null) {						
-			if (metierNom.trim() != null) {				
+			if (!metierNom.equals("")) {				
 				metierService.addMetier(metierNom);
 				
 				//Definit la reponse comme "See Other" et redirige
 				//Evite la multi-insertion apr�s un refresh de l'utilsateur		
 				response.setStatus(303);	
 				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutMetier");
+			}else {
+				request.setAttribute("Erreur", "Veuillez saisir un nom.");
+				doGet(request,response);
 			}
 		}else {
-			//Post de null part
+			doGet(request,response);
 		}
 						
 	}

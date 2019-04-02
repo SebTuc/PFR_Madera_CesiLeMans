@@ -13,11 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Catalogue;
 import com.ril.model.Projet;
-import com.ril.model.Utilisateur;
 import com.ril.service.CatalogueService;
 import com.ril.service.ProjetService;
 import com.ril.utils.MethodeUtile;
@@ -31,19 +29,13 @@ public class EditCatalogue extends HttpServlet {
 
 	private CatalogueService catalogueService = new CatalogueService();
 	private ProjetService projetService = new ProjetService();
-	
+
 	private List<Catalogue> listCatalogue;
 	private List<Projet> listProjet;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+
 		// Premierer recuperation de tous les projets et catalogues
 		this.listCatalogue =  catalogueService.getAllCatalogues();
 		List<Projet> ListProjet = projetService.getAllProjets();
@@ -55,10 +47,10 @@ public class EditCatalogue extends HttpServlet {
 				if(flag == null || flag != true) {
 					ListTemp.add(projet);
 				}
-				
+
 			}
 		}
-		
+
 		this.listProjet = ListTemp;
 		request.setAttribute("JsonProjet", this.getJsonSerializedProjets().toString());
 		request.setAttribute("JsonCatalogue", this.getJsonSerializedCatalogues().toString());
@@ -76,52 +68,46 @@ public class EditCatalogue extends HttpServlet {
 		String idCatalogue = request.getParameter("idCatalogue");
 		String action = request.getParameter("action");
 		String error = null;
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+
 		if (action != null && action != "" ) {
 			if(MethodeUtile.isInteger(idProjet)) {
 				if(MethodeUtile.isInteger(idCatalogue)) {
-															
+
 					// Recuperation du catalogue et du projet puis link du projet dans catalogue
 					Catalogue catalogue = catalogueService.getCatalogueById(Integer.parseInt(idCatalogue));
 					Projet projet = projetService.getProjetById(Integer.parseInt(idProjet));
-	
+
 					if(projet != null) {
 						if (catalogue != null) {
-												
+
 							switch (action) {
-								case "Push":
-									
-									catalogueService.addProjetToCatalogue(catalogue, projet);
-									break;
-									
-								case "Withdraw":					
-									
-									catalogueService.removeProjetFromCatalogue(catalogue, projet);
-									break;
-					
-								default:
-									break;
+							case "Push":
+
+								catalogueService.addProjetToCatalogue(catalogue, projet);
+								break;
+
+							case "Withdraw":					
+
+								catalogueService.removeProjetFromCatalogue(catalogue, projet);
+								break;
+
+							default:
+								break;
 							}
 						}else {error = "Aucun catalogue trouv� avec l'id "+idCatalogue;}
 					}else {error = "Aucun projet trouv� avec l'id "+idProjet;}
-						
+
 					// Retour des projets
 					response.setStatus(200);
 					response.setContentType("application/json");
 					response.getWriter().print(this.getJsonSerializedProjets().toString());
 					response.getWriter().flush();	
-					
+
 				} else {error = "l'id du catalogue non n'est pas un entier";}
 			} else {error = "l'id du projet non n'est pas un entier";}
 		} else {error = "Action inconnue";}
 
-		
+
 		// Renvoir d'une erreur
 		if (error != null) {			
 			response.setStatus(400);
@@ -132,27 +118,27 @@ public class EditCatalogue extends HttpServlet {
 	}
 
 	private JsonArray getJsonSerializedProjets() {
-		
+
 		// Recuperation des projets sans catalogue
 		JsonArrayBuilder jsonProjets = Json.createArrayBuilder();
-		
+
 		if (this.listProjet != null && this.listProjet.size() > 0) {			
 			for (Projet projet : this.listProjet) {
 				jsonProjets
-					.add(Json.createObjectBuilder()
-							.add("text", projet.getNom())
-							.add("metadata", Json.createObjectBuilder()
-									.add("id", projet.getProjetId()))
-							.add("type","item"));
+				.add(Json.createObjectBuilder()
+						.add("text", projet.getNom())
+						.add("metadata", Json.createObjectBuilder()
+								.add("id", projet.getProjetId()))
+						.add("type","item"));
 			}					
 		}
-		
+
 		return jsonProjets.build();
 	}
 
 	private JsonArray getJsonSerializedCatalogues() {
 		JsonArrayBuilder jsonCatalogues = Json.createArrayBuilder();
-		
+
 		if (listCatalogue != null && listCatalogue.size() > 0) {
 			for (Catalogue catalogue : listCatalogue) {
 				jsonCatalogues
@@ -164,14 +150,14 @@ public class EditCatalogue extends HttpServlet {
 						.add("children", this.getJsonSerializedProjetsOfCatalogue(catalogue)));
 			}
 		}
-		
+
 		return jsonCatalogues.build();
 	}
 
 	private JsonArray getJsonSerializedProjetsOfCatalogue(Catalogue catalogue) {
 		List<Projet> listProjetsCatalogue = catalogue.getProjets().stream().collect(Collectors.toList());
 		JsonArrayBuilder jsonProjetsCatalogue = Json.createArrayBuilder();
-		
+
 		if(listProjetsCatalogue != null && listProjetsCatalogue.size() > 0) {
 			for (Projet projetCatalogue : listProjetsCatalogue) {
 				jsonProjetsCatalogue
@@ -182,7 +168,7 @@ public class EditCatalogue extends HttpServlet {
 						.add("type","item"));
 			}
 		}
-		
+
 		return jsonProjetsCatalogue.build();				
 	}
 

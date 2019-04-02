@@ -9,12 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Composant;
 import com.ril.model.Gamme;
 import com.ril.model.Module;
-import com.ril.model.Utilisateur;
 import com.ril.service.ComposantService;
 import com.ril.service.GammeService;
 import com.ril.service.ModuleService;
@@ -33,14 +31,7 @@ public class ListModule extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+
 		List<Module> ListMod = moduleService.getAllModules();
 		List<Gamme> ListGamme = gammeService.getAllGammes();
 		List<Composant> ListComposant = composantService.getAllComposants();
@@ -126,15 +117,6 @@ public class ListModule extends HttpServlet {
 		String btnEditer = request.getParameter("btnEditer");
 		String btnSupprimer = request.getParameter("btnSupprimer");
 
-
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
-
 		if( btnEditer != null && moduleId != null) {
 
 			response.sendRedirect(request.getContextPath()+ "/Configuration/EditModule?id="+moduleId);
@@ -145,17 +127,17 @@ public class ListModule extends HttpServlet {
 
 				//Si le module est dans un catalogue ou devis on le supprime pas on le display false 
 				if(moduleService.moduleInDevisOrCatalogue(module)) {
-					
+
 					module.setDisplay(false);
 					moduleService.editModule(module);
 					//Supprimer le module des projet en cours de cr�ation.
 					moduleService.removeAllModuleInProjetEditableById(module.getModuleId());
-					
-					
+
+
 				}else {
 					moduleService.removeModule(module);
 				}
-				
+
 
 				doGet(request, response);
 			}else{

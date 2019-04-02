@@ -7,13 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.DonneesPersonelle;
-import com.ril.model.Utilisateur;
 import com.ril.service.ClientService;
 import com.ril.service.DonneesPersonelleService;
-import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutClient
@@ -26,14 +23,6 @@ public class AjoutClient extends HttpServlet {
     private DonneesPersonelleService donneeService = new DonneesPersonelleService(); 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 		request.getRequestDispatcher("/jsp/application/Annuaire/AjoutClient.jsp").forward(request, response);
 	}
 
@@ -49,13 +38,6 @@ public class AjoutClient extends HttpServlet {
 		String telephone = request.getParameter("telephone");	
 		String email = request.getParameter("email");
 		
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 		//rajouter verife du reste
 		if (nom != null && prenom != null) {						
 			if (!(nom.equals("")) && !(prenom.equals("")) ) {	

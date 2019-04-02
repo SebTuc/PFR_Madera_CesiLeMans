@@ -8,10 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Facture;
-import com.ril.model.Utilisateur;
 import com.ril.service.FactureService;
 import com.ril.utils.MethodeUtile;
 
@@ -21,23 +19,16 @@ import com.ril.utils.MethodeUtile;
 @WebServlet("/ListFacture")
 public class ListFacture extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-  
+
+
 	private FactureService factureService = new FactureService();
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 		List<Facture> ListFacture = factureService.getAllFacture();
 		//Trier par date
-		
+
 		if(ListFacture == null) {
-			
+
 			request.setAttribute("isEmptyList", true);
 		}else {
 			request.setAttribute("isEmptyList", false);
@@ -53,39 +44,31 @@ public class ListFacture extends HttpServlet {
 		String factureId = request.getParameter("radio");
 		String btnVisualiser = request.getParameter("btnVisualiser");
 		String btnSupprimer = request.getParameter("btnSupprimer");
-		
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 
 		if( btnVisualiser != null && factureId != null) {
 			if(MethodeUtile.isInteger(factureId)) {
-			response.sendRedirect(request.getContextPath()+ "/DevisFacture/DetailFacture?id="+factureId);
+				response.sendRedirect(request.getContextPath()+ "/DevisFacture/DetailFacture?id="+factureId);
 			}else {
 				request.setAttribute("Erreur", "Projet ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 				doGet(request, response);
 			}
-			
+
 		}else if( btnSupprimer != null && factureId != null) {
 			if(MethodeUtile.isInteger(factureId)) {
 
 				request.setAttribute("Erreur", "A voir se qu'il faut faire.");
-				
+
 				doGet(request, response);
 			}else {
 				request.setAttribute("Erreur", "Devis ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 				doGet(request, response);
 			}
-			
-			
+
+
 		}else {
 			request.setAttribute("Erreur", "Veuillez saisir un projet.");
 			doGet(request, response);
-			
+
 		}
 	}
 

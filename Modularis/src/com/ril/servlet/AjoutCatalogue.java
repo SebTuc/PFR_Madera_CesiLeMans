@@ -2,8 +2,6 @@ package com.ril.servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,10 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Catalogue;
-import com.ril.model.Utilisateur;
 import com.ril.service.CatalogueService;
 import com.ril.utils.MethodeUtile;
 
@@ -31,14 +27,7 @@ public class AjoutCatalogue extends HttpServlet {
 	private CatalogueService catalogueService = new CatalogueService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+		
 		List<Catalogue> listCatalogue = catalogueService.getAllCatalogues();
 		
 		request.setAttribute("ListCatalogue", listCatalogue);
@@ -55,14 +44,7 @@ public class AjoutCatalogue extends HttpServlet {
 		String idValeur = request.getParameter("id");
 		String valeur = request.getParameter("valeur");
 		String year = request.getParameter("year");
-				
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+
 		// Ajout ou Delete
 		if(action != null) {
 			if(action.equals("Delete")) {
@@ -86,16 +68,20 @@ public class AjoutCatalogue extends HttpServlet {
 				
 			}
 		}else if (catalogueNom != null) {						
-			if (catalogueNom.trim() != null && MethodeUtile.isInteger(catalogueAnnee)) {				
+			if (!catalogueNom.equals("") && MethodeUtile.isInteger(catalogueAnnee)) {				
+				
 				catalogueService.addCatalogue(catalogueNom, Integer.parseInt(catalogueAnnee));
 				
 				//Definit la reponse comme "See Other" et redirige
 				//Evite la multi-insertion aprï¿½s un refresh de l'utilsateur		
 				response.setStatus(303);	
 				response.sendRedirect(request.getContextPath()+"/Catalogue/AjoutCatalogue");
+			}else {
+				request.setAttribute("Erreur", "Veuillez vérifier les informations saisie.");
+				doGet(request,response);
 			}
 		}else {
-			//Post de null part
+			doGet(request,response);
 		}
 						
 

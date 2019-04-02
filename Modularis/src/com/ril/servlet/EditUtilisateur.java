@@ -2,7 +2,6 @@ package com.ril.servlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -12,11 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ril.model.DonneesPersonelle;
 import com.ril.model.Entrepot;
 import com.ril.model.Metier;
 import com.ril.model.Utilisateur;
-import com.ril.service.DonneesPersonelleService;
 import com.ril.service.EntrepotService;
 import com.ril.service.MetierService;
 import com.ril.service.UtilisateurService;
@@ -30,7 +27,6 @@ public class EditUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private UtilisateurService utilisateurService = new UtilisateurService();
-	private DonneesPersonelleService donneeService = new DonneesPersonelleService(); 
 	private MetierService metierService = new MetierService(); 
 	private EntrepotService entrepotService = new EntrepotService(); 
 
@@ -43,18 +39,16 @@ public class EditUtilisateur extends HttpServlet {
 		String error = "";
 		boolean isAdmin = false;
 
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
+		
+		HttpSession session = request.getSession(false);
+		if(session != null) {
 			utilisateurConnected = (Utilisateur)session.getAttribute("SessionUtilisateur");
 			if (utilisateurConnected.getMetier().getNom().equals("Moderateur"))	{
 				isAdmin = true;
 			}
-
-			request.setAttribute("Utilisateur", utilisateurConnected);
-		}
+		
+		request.setAttribute("Utilisateur", utilisateurConnected);
+		
 
 		if(idUtilisateur != null) {	
 			if(MethodeUtile.isInteger(idUtilisateur)) {
@@ -84,13 +78,15 @@ public class EditUtilisateur extends HttpServlet {
 					.collect(Collectors.toList());
 		}
 
-
+		
 		request.setAttribute("UtilisateurSelected", utilisateurToEdit);
 		request.setAttribute("ListMetier", ListMetier);
 		request.setAttribute("ListEntrepot", ListEntrepot);
 
 		request.getRequestDispatcher("/jsp/application/Annuaire/EditUtilisateur.jsp").forward(request, response);
-
+		}else {
+			response.sendRedirect(request.getContextPath()+"Modularis/");
+		}
 	}
 
 
@@ -110,13 +106,10 @@ public class EditUtilisateur extends HttpServlet {
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
 
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+
+		HttpSession session = request.getSession();
+		request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
+
 
 		if (MethodeUtile.isInteger(id)) {
 
@@ -129,7 +122,6 @@ public class EditUtilisateur extends HttpServlet {
 					if(codePostal == null)codePostal = "";
 					if(ville == null)ville = "";
 					if(login == null)login = "";
-					if(nom == null)nom = "";
 					if(prenom == null)prenom = "";
 
 					Utilisateur userToUpdate = utilisateurService.getUtilisateurById(Integer.parseInt(id));

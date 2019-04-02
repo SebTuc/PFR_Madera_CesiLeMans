@@ -11,7 +11,11 @@
 <body>
 
 	<jsp:include page="/jsp/common/navbar.jsp" />
-
+<c:choose>
+				<c:when test="${Erreur != null }">
+					<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+				</c:when>
+			</c:choose>
 	<a href="/Modularis/DevisFacture"
 		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
 	<br />
