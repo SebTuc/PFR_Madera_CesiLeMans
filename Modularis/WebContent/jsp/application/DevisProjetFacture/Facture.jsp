@@ -9,7 +9,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/Facture.css" rel="stylesheet">
 </head>
 <body>
-	<a href="/Modularis/DevisFacture/ListDevis"
+	<a href="/Modularis/DevisFacture/DetailFacture?id=${Facture.factureId }"
 		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
 	<br />
     <div class="invoice-box" id="section-to-print">
@@ -73,18 +73,24 @@
 		            	<c:choose>
 							<c:when test="${Module.angle != null }">
 								<td>${fn:escapeXml(Module.angle.typeAngle)}</td>
-							    <td>${fn:escapeXml(Module.angle.prixUnitaire)}&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Module.angle.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro;</td>
+							    <td>${fn:escapeXml(Module.angle.prixUnitaire)}&euro; | <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Module.angle.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro;</td>
 							</c:when>
 						</c:choose>
 	            		<c:forEach var="ModuleXComposant" items="${Module.moduleXComposants}">
 	            			<tr>
 				                <td>${fn:escapeXml(ModuleXComposant.composant.nom)} (x${fn:escapeXml(ModuleXComposant.quantite)})</td>
-				                <td>${fn:escapeXml(ModuleXComposant.composant.prixUnitaire)}&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ModuleXComposant.composant.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro;</td>
+				                <td>${fn:escapeXml(ModuleXComposant.composant.prixUnitaire)}&euro; | <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ModuleXComposant.composant.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro;</td>
 			                </tr>
 		                </c:forEach>
 	                </c:forEach>
                 </c:forEach>
             </c:forEach>
+            <tr>
+            	<td></td>
+            </tr>
+            <tr>
+            	<td>Etape de paiment :</td>
+            </tr>
             <c:choose>
 				<c:when test="${PourcentageDejaPayer != 0}">
 						<tr>
@@ -94,7 +100,7 @@
 						</c:when>
 					</c:choose>
 					<tr>
-						<td>> ${fn:escapeXml(Facture.etapeFacture.etape)} (${fn:escapeXml(Facture.etapeFacture.pourcentage)} %)</td>
+						<td style="font-weight: bold; font-size: 130%">> ${fn:escapeXml(Facture.etapeFacture.etape)} (${fn:escapeXml(Facture.etapeFacture.pourcentage)} %)</td>
 						<td><fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro;  | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer * 1.2)}" maxFractionDigits="2" />&euro;</td>
 					</tr>
         </table>

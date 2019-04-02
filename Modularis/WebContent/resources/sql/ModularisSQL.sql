@@ -79,7 +79,6 @@ CREATE TABLE STOCK(
         PRIMARY KEY (STOCK_ID )
 )ENGINE=InnoDB;
 
-
 CREATE TABLE ENTREPOT(
         ENTREPOT_ID int (11) Auto_increment  NOT NULL ,
         LIEUX       Varchar (255) NOT NULL ,
@@ -100,7 +99,7 @@ CREATE TABLE FACTURE(
         FACTURE_ID       int (11) Auto_increment  NOT NULL ,
         DEVIS_ID         Int NOT NULL ,
         ETAPE_FACTURE_ID Int NOT NULL ,
-        DATE_MODFICATION Date NOT NULL,
+        DATE_MODIFICATION Date NOT NULL,
         PRIMARY KEY (FACTURE_ID )
 )ENGINE=InnoDB;
 

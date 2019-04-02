@@ -9,7 +9,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/Facture.css" rel="stylesheet">
 </head>
 <body>
-	<a href="/Modularis/DevisFacture/ListDevis"
+	<a href="/Modularis/DevisFacture/DetailDevis?id=${fn:escapeXml(Devis.devisId)}"
 		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
 	<br />
     <div class="invoice-box" id="section-to-print">
@@ -46,7 +46,7 @@
                                 <span class="t-invoice-from"></span><br>
                                 <span id="company-name">MADERA</span><br>
                                 <span id="company-address">${fn:escapeXml(Devis.utilisateur.entrepot.lieux)}</span><br>
-                                <span id="company-country">FRANCE</span><br>
+                                <span id="company-town">FRANCE</span><br>
                             </td>
                             
                             <td class="information-client">
@@ -89,7 +89,7 @@
         
         <div class="invoice-summary">
             <div class="invoice-total">TOTAL HT :
-				${Devis.prixHt}&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Devis.prixHt * 1.2)}" maxFractionDigits="2" />&euro;</div>
+				<fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Devis.prixHt)}" maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Devis.prixHt * 1.2)}" maxFractionDigits="2" />&euro;</div>
             <div class="invoice-final"></div>
             <div class="invoice-exchange"></div>
         </div>

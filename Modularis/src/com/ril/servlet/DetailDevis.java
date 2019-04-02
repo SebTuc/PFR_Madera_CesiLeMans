@@ -61,6 +61,11 @@ public class DetailDevis extends HttpServlet {
 		String devisId = request.getParameter("id");
 		if(MethodeUtile.isInteger(devisId)) {
 			 Devis devis = devisService.getDevisById(Integer.valueOf(devisId));
+			 if(devis.getFactures().size() != 0) {
+				 request.setAttribute("hiddenBtn", true);
+			 }else {
+				 request.setAttribute("hiddenBtn", true);
+			 }
 		        
 		        request.setAttribute("Devis", devis);
 		        
@@ -92,7 +97,11 @@ public class DetailDevis extends HttpServlet {
 				//passez en facturation a l'étape au plus faible index
 				
 				Devis devis = devisService.getDevisById(Integer.valueOf(devisId));
-				
+				if(devis.getFactures().size()!=0) {
+					request.setAttribute("Erreur", "Le devis est déjà en facturation");
+					doGet(request, response);
+					return;
+				}
 				
 				//Mettre a jour les stock
 				//On recupe l'entrepot

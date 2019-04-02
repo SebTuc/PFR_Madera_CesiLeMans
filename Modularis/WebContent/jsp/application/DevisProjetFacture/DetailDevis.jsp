@@ -11,9 +11,14 @@
 <body>
 
 	<jsp:include page="/jsp/common/navbar.jsp" />
-
-	<a href="/Modularis/DevisFacture/ListDevis"
-		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
+<c:choose>
+	<c:when test="${hiddenBtn == false }">
+		<a href="/Modularis/DevisFacture/ListDevis" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
+	</c:when>
+	<c:otherwise>
+		<a href="/Modularis/DevisFacture/ListFacture" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
+	</c:otherwise>
+</c:choose>
 	<br />
 	<c:choose>
 			<c:when test="${Erreur != null }">
@@ -65,18 +70,18 @@
 						<ul>
 							<c:forEach var="Piece" items="${Plan.pieces}">
 								<li><input type="checkbox"
-									name="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}"
-									id="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}">
+									name="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}${fn:escapeXml(Plan.planId)}"
+									id="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}${fn:escapeXml(Plan.planId)}">
 									<label
-									for="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}">Pièce
+									for="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}${fn:escapeXml(Plan.planId)}">Pièce
 										: ${fn:escapeXml(Piece.nom)} - ${fn:escapeXml(Piece.surface)}m&sup2;</label>
 									<ul>
 										<c:forEach var="Module" items="${Piece.modules}">
 											<li><input type="checkbox"
-												name="${fn:escapeXml(Module.nom)}${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}"
-												id="${fn:escapeXml(Module.nom)}${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}">
+												name="${fn:escapeXml(Module.nom)}${fn:escapeXml(Module.moduleId)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}"
+												id="${fn:escapeXml(Module.nom)}${fn:escapeXml(Module.moduleId)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}">
 												<label
-												for="${fn:escapeXml(Module.nom)}${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}">Module
+												for="${fn:escapeXml(Module.nom)}${fn:escapeXml(Module.moduleId)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}">Module
 													: ${fn:escapeXml(Module.nom)}</label>
 												<ul>
 												<c:choose>
@@ -96,9 +101,9 @@
 																> ${fn:escapeXml(ModuleXComposant.composant.nom)}
 																${fn:escapeXml(ModuleXComposant.composant.prixUnitaire)}&euro;
 																x${fn:escapeXml(ModuleXComposant.quantite)} | HT:
-																<fmt:formatNumber type="number" groupingUsed="false" var="PrixUHT"
+																<fmt:formatNumber type="number" groupingUsed="false"
 																	value="${fn:escapeXml(ModuleXComposant.quantite * ModuleXComposant.composant.prixUnitaire)}"
-																	maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(PrixUHT * 1.2)}" maxFractionDigits="2" />&euro;
+																	maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml((ModuleXComposant.quantite * ModuleXComposant.composant.prixUnitaire) * 1.2)}" maxFractionDigits="2" />&euro;
 															</h4>
 														</li>
 													</c:forEach>
@@ -123,10 +128,14 @@
 		<form method="post">
 			<input type="text" name="devisId" id="devisId" value="${fn:escapeXml(Devis.devisId) }" style="display:none">
 			<div class="row justify-content-center">
-				<div class="col-md-3 col-sm-6">
-					<button class="btn btn-success btn-block btn-blok" name="btnFacture" id="btnFacture">Passer en facturation</button>
-				</div>
-				<br>
+				<c:choose>
+					<c:when test="${hiddenBtn == false }">
+						<div class="col-md-3 col-sm-6">
+							<button class="btn btn-success btn-block btn-blok" name="btnFacture" id="btnFacture">Passer en facturation</button>
+						</div>
+						<br>
+					</c:when>
+				</c:choose>
 				<div class="col-md-3 col-sm-6">
 					<a href="/Modularis/DevisFacture/Devis?id=${fn:escapeXml(Devis.devisId)}" class="btn btn-primary btn-block">Générer PDF</a>
 				</div>
