@@ -3,6 +3,8 @@ package com.ril.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,8 +25,8 @@ public class Facture implements java.io.Serializable {
 	private Integer factureId;
 	private Devis devis;
 	private EtapeFacture etapeFacture;
+	private Date dateModification;
 
-	
 
 	public Facture() {
 	}
@@ -32,6 +34,12 @@ public class Facture implements java.io.Serializable {
 	public Facture(Devis devis, EtapeFacture etapeFacture) {
 		this.devis = devis;
 		this.etapeFacture = etapeFacture;
+	}
+	
+	public Facture(Devis devis, EtapeFacture etapeFacture,Date dateModification) {
+		this.devis = devis;
+		this.etapeFacture = etapeFacture;
+		this.dateModification = dateModification;
 	}
 
 	@Id
@@ -66,6 +74,14 @@ public class Facture implements java.io.Serializable {
 		this.etapeFacture = etapeFacture;
 	}
 	
+	@Column(name = "DATE_MODIFICATION", nullable = false)
+	public Date getDateModification() {
+		return dateModification;
+	}
+
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
+	}
 	
 	public int compareTo(Facture o) {
 		return getDevis().getDateCreation().compareTo(o.getDevis().getDateCreation());

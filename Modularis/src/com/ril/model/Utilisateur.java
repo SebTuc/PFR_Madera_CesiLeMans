@@ -35,11 +35,12 @@ public class Utilisateur implements java.io.Serializable {
 	public Utilisateur() {
 	}
 
-	public Utilisateur(DonneesPersonelle donneesPersonelle, Metier metier, String login, String password) {
+	public Utilisateur(DonneesPersonelle donneesPersonelle, Metier metier, String login, String password , Entrepot entrepot) {
 		this.donneesPersonelle = donneesPersonelle;
 		this.metier = metier;
 		this.login = login;
 		this.password = password;
+		this.entrepot = entrepot;
 	}
 
 	public Utilisateur(DonneesPersonelle donneesPersonelle, Metier metier, String login, String password,

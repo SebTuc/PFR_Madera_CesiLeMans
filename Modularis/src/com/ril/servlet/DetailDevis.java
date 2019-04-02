@@ -1,6 +1,7 @@
 package com.ril.servlet;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,13 +57,14 @@ public class DetailDevis extends HttpServlet {
 			HttpSession session = request.getSession();
 			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
 		}
+		
 		String devisId = request.getParameter("id");
 		if(MethodeUtile.isInteger(devisId)) {
 			 Devis devis = devisService.getDevisById(Integer.valueOf(devisId));
 		        
 		        request.setAttribute("Devis", devis);
 		        
-				request.getRequestDispatcher("/jsp/application/DevisProjetFacture/Devis.jsp").forward(request, response);
+				request.getRequestDispatcher("/jsp/application/DevisProjetFacture/DetailDevis.jsp").forward(request, response);
 		}else {
 			
 			response.sendRedirect("/Modularis/DevisFacture/ListDevis");
@@ -138,11 +140,18 @@ public class DetailDevis extends HttpServlet {
 				devis = devisService.getDevisById(Integer.valueOf(devisId));
 				EtapeFacture firstEtape = etapeFactureService.findFirstEtape();
 				Etat etat = etatService.getEtatById(2);
+				Date dateNow = new Date();
 				devis.setEtat(etat);
 				
-				factureService.addFacture(devis, firstEtape);
+				Integer factureId = factureService.addFacture(devis, firstEtape,dateNow);
 				
-				response.sendRedirect("/Modularis/DevisFacture/ListFacture");
+				if(factureId == -1) {
+					request.setAttribute("Erreur", "Erreur lors du passage en facturation.");
+					doGet(request, response);
+				}else {
+					response.sendRedirect("/Modularis/DevisFacture/ListFacture");
+				}
+				
 			}else {
 				request.setAttribute("Erreur", "Erreur lors du passage en facturation.");
 				doGet(request, response);

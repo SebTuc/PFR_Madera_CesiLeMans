@@ -12,10 +12,9 @@
 
 	<jsp:include page="/jsp/common/navbar.jsp" />
 
-	<a href="/Modularis/DevisFacture/ListFacture"
+	<a href="/Modularis/DevisFacture/ListDevis"
 		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
 	<br />
-	
 	<c:choose>
 			<c:when test="${Erreur != null }">
 				<div class="row justify-content-center">
@@ -23,42 +22,41 @@
 				</div>
 			</c:when>
 		</c:choose>
-	
-	<div id="toPDF">
-		<div class="col-lg-12 text-center">
-			<h1>Détail facture de
-				${fn:escapeXml(Facture.devis.client.donneesPersonelle.nom)}
-				${fn:escapeXml(Facture.devis.client.donneesPersonelle.prenom)}</h1>
-			<br />
-		</div>
-		<div class="col-lg-12 text-center">
-			<h6>Devis fait le ${fn:escapeXml(Facture.dateModification)}</h6>
-		</div>
-		<div class="col-lg-12 text-center">
-			<h6>par :
-				${fn:escapeXml(Facture.devis.utilisateur.donneesPersonelle.nom)}
-				${fn:escapeXml(Facture.devis.utilisateur.donneesPersonelle.prenom)}</h6>
-		</div>
-
+<div id="toPDF">
+	<div class="col-lg-12 text-center">
+		<h1>Détail du devis de
+			${fn:escapeXml(Devis.client.donneesPersonelle.nom)}
+			${fn:escapeXml(Devis.client.donneesPersonelle.prenom)}</h1>
 		<br />
-		<div class="container">
-			<div class="row">
-				<div class="row justify-content-center w-100">
-					<div class="media w-100">
-						<div class="media-body">
-							<h5>Projet : ${fn:escapeXml(Facture.devis.projet.nom)} | Prix du devis: ${fn:escapeXml(Facture.devis.prixHt)}&euro; </h5>
-						</div>
-						<c:choose>
-							<c:when test="${Facture.devis.projet.image.imageId != null}">
-								<img src="/Modularis/Photo?id=${Facture.devis.projet.image.imageId }"
-									class="ml-3" style="max-height: 60px;" />
-							</c:when>
-						</c:choose>
-					</div>
+	</div>
+	<div class="col-lg-12 text-center">
+		<h6>Fait le ${fn:escapeXml(Devis.dateCreation)}</h6>
+	</div>
+	<div class="col-lg-12 text-center">
+		<h6>par :
+			${fn:escapeXml(Devis.utilisateur.donneesPersonelle.nom)}
+			${fn:escapeXml(Devis.utilisateur.donneesPersonelle.prenom)}</h6>
+	</div>
 
+	<br />
+	<div class="container">
+		<div class="row">
+			<div class="row justify-content-center w-100">
+				<div class="media w-100">
+					<div class="media-body">
+						<h5>Projet : ${fn:escapeXml(Devis.projet.nom)}</h5>
+					</div>
+					<c:choose>
+						<c:when test="${Devis.projet.image.imageId != null}">
+							<img src="/Modularis/Photo?id=${Devis.projet.image.imageId }"
+								class="ml-3" style="max-height: 60px;" />
+						</c:when>
+					</c:choose>
 				</div>
-				<ul class="devisdetail checklist">
-				<c:forEach var="Plan" items="${Facture.devis.projet.plans}">
+
+			</div>
+			<ul class="devisdetail checklist">
+				<c:forEach var="Plan" items="${Devis.projet.plans}">
 					<li><input type="checkbox"
 						name="${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}"
 						id="${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}">
@@ -111,51 +109,31 @@
 							</c:forEach>
 						</ul></li>
 				</c:forEach>
-			
-					<c:choose>
-						<c:when test="${PourcentageDejaPayer != 0}">
-						<li>
-							<h5><del> D&eacute;j&agrave; pay&eacute; (${fn:escapeXml(PourcentageDejaPayer)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(DejaPayer)}" maxFractionDigits="2" />&euro;</del></h5>
-						</li>
-						</c:when>
-					</c:choose>
-					
-					
-					<li>
-						<h4>> ${fn:escapeXml(Facture.etapeFacture.etape)} (${fn:escapeXml(Facture.etapeFacture.pourcentage)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro;</h4>
-					</li>
-				</ul>
-				<br> <br>
-				<div class="row justify-content-end w-100"
-					style="color: red; font-size: 180%;">Prix total HT : ${fn:escapeXml(ResteAPayer)}&euro;</div>
-			</div>
+			</ul>
+			<br>
+			<br>
+			<div class="row justify-content-end w-100"
+				style="color: red; font-size: 180%;">Prix total HT :
+				${Devis.prixHt}&euro;</div>
 		</div>
-		<div id="editor"></div>
 	</div>
-	<br>
-	<br>
-
-	<form method="post">
-		<input type="text" name="factureId" id="factureId"
-			value="${fn:escapeXml(Facture.factureId) }" style="display: none">
-		<div class="row justify-content-center">
-			<div class="col-md-3 col-sm-6">
-				<button class="btn btn-warning btn-block btn-blok" name="btnFactureBack"
-					id="btnFactureBack">Etape Facturation pr&eacute;c&eacute;dente</button>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<button class="btn btn-success btn-block btn-blok" name="btnFacture"
-					id="btnFacture">Etape Facturation suivante</button>
-			</div>
-			
-			<br>
-			<div class="col-md-3 col-sm-6">
-					<a href="/Modularis/DevisFacture/Facture?id=${fn:escapeXml(Facture.factureId)}" class="btn btn-primary btn-block">Générer PDF</a>
+	<div id="editor"></div>
+</div>
+	<br> <br>
+	
+		<form method="post">
+			<input type="text" name="devisId" id="devisId" value="${fn:escapeXml(Devis.devisId) }" style="display:none">
+			<div class="row justify-content-center">
+				<div class="col-md-3 col-sm-6">
+					<button class="btn btn-success btn-block btn-blok" name="btnFacture" id="btnFacture">Passer en facturation</button>
 				</div>
-			<br>
-			<br>
-		</div>
-	</form>
+				<br>
+				<div class="col-md-3 col-sm-6">
+					<a href="/Modularis/DevisFacture/Devis?id=${fn:escapeXml(Devis.devisId)}" class="btn btn-primary btn-block">Générer PDF</a>
+				</div>
+				<br>
+			</div>
+		</form>
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />
 </body>
 </html>

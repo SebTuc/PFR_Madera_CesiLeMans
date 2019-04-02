@@ -79,12 +79,20 @@
     <url-pattern>/Configuration</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>Facture</servlet-name>
-    <servlet-class>com.ril.servlet.Facture</servlet-class>
+    <servlet-name>FacturePDF</servlet-name>
+    <servlet-class>com.ril.servlet.FacturePDF</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Facture</servlet-name>
+    <servlet-name>FacturePDF</servlet-name>
     <url-pattern>/DevisFacture/Facture</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DevisPDF</servlet-name>
+    <servlet-class>com.ril.servlet.DevisPDF</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DevisPDF</servlet-name>
+    <url-pattern>/DevisFacture/DevisPDF</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Annuaire</servlet-name>

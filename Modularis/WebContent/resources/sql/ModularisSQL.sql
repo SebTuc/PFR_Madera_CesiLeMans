@@ -100,6 +100,7 @@ CREATE TABLE FACTURE(
         FACTURE_ID       int (11) Auto_increment  NOT NULL ,
         DEVIS_ID         Int NOT NULL ,
         ETAPE_FACTURE_ID Int NOT NULL ,
+        DATE_MODFICATION Date NOT NULL,
         PRIMARY KEY (FACTURE_ID )
 )ENGINE=InnoDB;
 
@@ -151,6 +152,7 @@ CREATE TABLE DONNEES_PERSONELLE(
         EMAIL                 Varchar (100) ,
         ADRESSE               Varchar (250) ,
         TELEPHONE             Varchar (25) ,
+        VILLE             	  Varchar (100) ,
         CODE_POSTAL           Varchar (25) ,
         PRIMARY KEY (DONNEES_PERSONELLE_ID )
 )ENGINE=InnoDB;

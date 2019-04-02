@@ -1,7 +1,6 @@
 package com.ril.servlet;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,15 +17,16 @@ import com.ril.service.FactureService;
 import com.ril.utils.MethodeUtile;
 
 /**
- * Servlet implementation class DetailFacture
+ * Servlet implementation class FacturePDF
  */
-@WebServlet("/DetailFacture")
-public class DetailFacture extends HttpServlet {
+@WebServlet("/FacturePDF")
+public class FacturePDF extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	private FactureService factureService = new FactureService();
+	
 	private EtapeFactureService etapeFactureService = new EtapeFactureService();
-   
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(!MethodeUtile.isConnected(response , request)) {
 			response.sendRedirect(request.getContextPath()+"/Connexion");
@@ -64,7 +64,7 @@ public class DetailFacture extends HttpServlet {
 		        request.setAttribute("PourcentageDejaPayer", percentageDejaPayer);
 		        request.setAttribute("ResteAPayer", ResteAPayer);
 		        request.setAttribute("Facture", facture);
-				request.getRequestDispatcher("/jsp/application/DevisProjetFacture/DetailFacture.jsp").forward(request, response);
+				request.getRequestDispatcher("/jsp/application/DevisProjetFacture/Facture.jsp").forward(request, response);
 		}else {
 			
 			response.sendRedirect("/Modularis/DevisFacture/ListFacture");
@@ -75,6 +75,7 @@ public class DetailFacture extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		if(!MethodeUtile.isConnected(response , request)) {
 			response.sendRedirect(request.getContextPath()+"/Connexion");
 			return;
@@ -82,48 +83,6 @@ public class DetailFacture extends HttpServlet {
 			HttpSession session = request.getSession();
 			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
 		}
-		
-		String btnFacture = request.getParameter("btnFacture");
-		String factureId = request.getParameter("factureId");
-		String btnFactureBack = request.getParameter("btnFactureBack");
-		Date dateNow = new Date();
-		
-		if(btnFacture != null && factureId != null) {
-			if(MethodeUtile.isInteger(factureId)) {
-				//passez en facturation a l'étape 1 c'est a dire 3% et devis accepter
-				Facture facture = factureService.getFactureById(Integer.valueOf(factureId));
-				EtapeFacture nextEtape = etapeFactureService.findNextEtape(facture.getEtapeFacture());
-				if(nextEtape!=null) {
-					facture.setEtapeFacture(nextEtape);
-					facture.setDateModification(dateNow);
-					factureService.editFacture(facture);
-				}else {
-					request.setAttribute("Erreur", "Ceci est la dernier étape de facturation.");
-				}
-				
-				
-			}
-		}
-		
-		if(btnFactureBack != null && factureId != null) {
-			if(MethodeUtile.isInteger(factureId)) {
-				//passez en facturation a l'étape 1 c'est a dire 3% et devis accepter
-				Facture facture = factureService.getFactureById(Integer.valueOf(factureId));
-				EtapeFacture beforeEtape = etapeFactureService.findBeforeEtape(facture.getEtapeFacture());
-				if(beforeEtape!=null) {
-					facture.setEtapeFacture(beforeEtape);
-					facture.setDateModification(dateNow);
-					factureService.editFacture(facture);
-				}else {
-					request.setAttribute("Erreur", "Ceci est la premiere étape de facturation.");
-				}
-				
-				
-			}
-		}
-		
-		
-		
 		doGet(request, response);
 	}
 
