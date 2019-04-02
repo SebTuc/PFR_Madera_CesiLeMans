@@ -14,6 +14,7 @@ public class ProjetService {
 	
 	private PieceService pieceService = new PieceService();
 	private ModuleService moduleService = new ModuleService();
+	private PlanService planService = new PlanService();
 	
 	public int addProjet(Projet projet) {
 		
@@ -95,8 +96,8 @@ public class ProjetService {
 
 		for(Plan plan : projet.getPlans()) {
 			for(Piece piece : plan.getPieces()) {
-				List<Module> ListModule = new ArrayList<Module>(piece.getModules());
-				removeListModuleToPiece(ListModule,piece);
+					List<Module> ListModule = new ArrayList<Module>(piece.getModules());
+					removeListModuleToPiece(ListModule,piece);
 			}
 		}
 	}
@@ -120,10 +121,11 @@ public class ProjetService {
 
 		ProjetHome dao = new ProjetHome();
 		
-		if(projet != null) {
-			
-			dao.remove(projet);
-		}
+		removeAllModuleInProjet(projet);
+		
+		projet = getProjetById(projet.getProjetId());
+		
+		dao.remove(projet);
 	}
 	
 		

@@ -82,7 +82,7 @@ public class AjoutUtilisateur extends HttpServlet {
 					
 					Metier boulot = metierService.getMetierById(Integer.valueOf(metier));
 					
-					utilisateurService.addUtilisateur(donneePerso, boulot, login, password);
+//					utilisateurService.addUtilisateur(donneePerso, boulot, login, password);
 
 					//Definit la reponse comme "See Other" et redirige
 					//Evite la multi-insertion après un refresh de l'utilsateur		
