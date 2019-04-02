@@ -1,17 +1,17 @@
 package com.ril.model;
 // Generated 9 janv. 2019 13:51:31 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,12 +23,14 @@ import javax.persistence.Table;
 @Table(name = "composant", catalog = "modularisbdd")
 public class Composant implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer composantId;
 	private FamilleComposant familleComposant;
 	private Fournisseur fournisseur;
 	private Materiaux materiaux;
 	private String nom;
 	private float prixUnitaire;
+	private Boolean display;
 	private Set<Stock> stocks = new HashSet<Stock>(0);
 	private Set<ModuleXComposant> moduleXComposants = new HashSet<ModuleXComposant>(0);
 
@@ -98,6 +100,15 @@ public class Composant implements java.io.Serializable {
 		this.materiaux = materiaux;
 	}
 
+	@Column(name = "DISPLAY", nullable = true)
+	public Boolean isDisplay() {
+		return display;
+	}
+
+	public void setDisplay(Boolean display) {
+		this.display = display;
+	}
+	
 	@Column(name = "NOM", nullable = false, length = 100)
 	public String getNom() {
 		return this.nom;
@@ -116,12 +127,10 @@ public class Composant implements java.io.Serializable {
 		this.prixUnitaire = prixUnitaire;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "composant_x_stock", catalog = "modularisbdd", joinColumns = {
-			@JoinColumn(name = "COMPOSANT_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "STOCK_ID", nullable = false, updatable = false) })
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "composant")
 	public Set<Stock> getStocks() {
-		return this.stocks;
+		return stocks;
 	}
 
 	public void setStocks(Set<Stock> stocks) {
@@ -132,6 +141,8 @@ public class Composant implements java.io.Serializable {
 	public Set<ModuleXComposant> getModuleXComposants() {
 		return this.moduleXComposants;
 	}
+
+	
 
 	public void setModuleXComposants(Set<ModuleXComposant> moduleXComposants) {
 		this.moduleXComposants = moduleXComposants;

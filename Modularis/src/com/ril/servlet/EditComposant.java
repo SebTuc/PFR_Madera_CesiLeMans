@@ -8,15 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Composant;
 import com.ril.model.FamilleComposant;
 import com.ril.model.Fournisseur;
 import com.ril.model.Materiaux;
+import com.ril.model.Utilisateur;
 import com.ril.service.ComposantService;
 import com.ril.service.FamilleComposantService;
 import com.ril.service.FournisseurService;
 import com.ril.service.MateriauxService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class EditComposant
@@ -32,6 +35,13 @@ public class EditComposant extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
+		}
 		String composantId = request.getParameter("id");
 
 		Composant composant = composantService.getComposantById(Integer.valueOf(composantId));
@@ -59,29 +69,77 @@ public class EditComposant extends HttpServlet {
 		String familleComposant = request.getParameter("familleComposant");
 		String materiaux = request.getParameter("materiaux");	
 		String fournisseur = request.getParameter("fournisseur");	
-		
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
+		}
 		if (nom != null && prixUnitaire != null && familleComposant != null && materiaux != null && fournisseur != null) {						
-			if (nom.trim() != null && prixUnitaire.trim() != null && familleComposant.trim() != null && materiaux.trim() != null && fournisseur.trim() != null) {	
-				
-				//Ajout verif /!\
-				FamilleComposant familleCompo = familleComposantService.getFamilleComposantById(Integer.valueOf(familleComposant));
-				Fournisseur fourni = fournisseurService.getFournisseurById(Integer.valueOf(fournisseur));
-				Materiaux mater = materiauxService.getMateriauxById(Integer.valueOf(materiaux));
-				
-				Composant composant =composantService.getComposantById(Integer.valueOf(ComposantId));
-				
-				composant.setFamilleComposant(familleCompo);
-				composant.setFournisseur(fourni);
-				composant.setMateriaux(mater);
-				composant.setNom(nom);
-				composant.setPrixUnitaire(Float.valueOf(prixUnitaire));
-				
-				composantService.editComposant(composant);
-
-				//Definit la reponse comme "See Other" et redirige
-				//Evite la multi-insertion après un refresh de l'utilsateur		
-				response.sendRedirect("/Modularis/Configuration/ListComposant");
+			if (!(nom.equals("")) && !(prixUnitaire.equals(""))&& !(familleComposant.equals("")) && !(materiaux.equals("")) && !(fournisseur.equals(""))) {	
+				if(MethodeUtile.isFloat(prixUnitaire)) {
+					if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
+						FamilleComposant familleCompo = familleComposantService.getFamilleComposantById(Integer.valueOf(familleComposant));
+						Fournisseur fourni = fournisseurService.getFournisseurById(Integer.valueOf(fournisseur));
+						Materiaux mater = materiauxService.getMateriauxById(Integer.valueOf(materiaux));
+						
+						Composant composant =composantService.getComposantById(Integer.valueOf(ComposantId));
+						
+						if(composantService.composantInDevisOrCatalogue(composant)) {
+							//On clone et display false l'autre
+							
+							request.setAttribute("Erreur", "Impossible d'ï¿½diter, le composant est utiliser dans 1 ou plusieur devis/catalogue.");
+							request.setAttribute("NomComposant", nom);
+							if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
+								request.setAttribute("FamilleComposantId", familleComposant);
+								request.setAttribute("MateriauxId", materiaux);
+								request.setAttribute("FournisseurId", fournisseur);
+							}
+							doGet(request , response);
+							return;
+							//Ou on empeche l'edition ????
+//							composant.setDisplay(false);
+//							composantService.editComposant(composant);
+//
+//							composantService.addComposant(familleCompo, fourni, mater, nom, Float.valueOf(prixUnitaire));
+							
+						}else {
+							composant.setFamilleComposant(familleCompo);
+							composant.setFournisseur(fourni);
+							composant.setMateriaux(mater);
+							composant.setNom(nom);
+							composant.setPrixUnitaire(Float.valueOf(prixUnitaire));
+							
+							composantService.editComposant(composant);
+						}
+	
+						response.sendRedirect("/Modularis/Configuration/ListComposant");
+					}else {
+						
+						request.setAttribute("Erreur", "Saisie incorrect.");
+						request.setAttribute("NomComposant", nom);
+						request.setAttribute("PrixUnitaire", prixUnitaire);
+						doGet(request , response);
+					}
+				}else {
+					request.setAttribute("Erreur", "Saisie incorrect (prix).");
+					request.setAttribute("NomComposant", nom);
+					if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
+						request.setAttribute("FamilleComposantId", familleComposant);
+						request.setAttribute("MateriauxId", materiaux);
+						request.setAttribute("FournisseurId", fournisseur);
+					}
+					doGet(request , response);
+					
+				}
+			}else {
+				request.setAttribute("Erreur", "Veillez saisir toute les informations.");
+				doGet(request , response);
 			}
+		}else {
+			request.setAttribute("Erreur", "Veillez saisir toute les informations.");
+			doGet(request , response);
 		}
 	}
 

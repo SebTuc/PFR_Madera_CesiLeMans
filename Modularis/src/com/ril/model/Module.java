@@ -3,6 +3,8 @@ package com.ril.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,13 +25,15 @@ import javax.persistence.Table;
 @Table(name = "module", catalog = "modularisbdd")
 public class Module implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer moduleId;
 	private Angle angle;
 	private Gamme gamme;
 	private Set<Piece> pieces = new HashSet<Piece>(0);
 	private String nom;
 	private UniteMesure uniteMesure;
-	private Integer valeurAngle;
+	private boolean display;
+
 	private Set<ModuleXComposant> moduleXComposants = new HashSet<ModuleXComposant>(0);
 
 	public Module() {
@@ -42,6 +46,12 @@ public class Module implements java.io.Serializable {
 		this.uniteMesure = uniteMesure;
 	}
 	
+	public Module( Gamme gamme, String nom,UniteMesure uniteMesure) {
+		this.gamme = gamme;
+		this.nom = nom;
+		this.uniteMesure = uniteMesure;
+	}
+	
 	public Module(Angle angle, Gamme gamme, Set<Piece> pieces, String nom,UniteMesure uniteMesure) {
 		this.angle = angle;
 		this.gamme = gamme;
@@ -49,14 +59,22 @@ public class Module implements java.io.Serializable {
 		this.nom = nom;
 		this.uniteMesure = uniteMesure;
 	}
+	
+	public Module(Angle angle, Gamme gamme, Set<Piece> pieces, String nom,UniteMesure uniteMesure,boolean display) {
+		this.angle = angle;
+		this.gamme = gamme;
+		this.pieces = pieces;
+		this.nom = nom;
+		this.uniteMesure = uniteMesure;
+		this.display = display;
+	}
 
-	public Module(Angle angle, Gamme gamme, Set<Piece> pieces, String nom, Integer valeurAngle,UniteMesure uniteMesure,
+	public Module(Angle angle, Gamme gamme, Set<Piece> pieces, String nom,UniteMesure uniteMesure,
 			Set<ModuleXComposant> moduleXComposants) {
 		this.angle = angle;
 		this.gamme = gamme;
 		this.pieces = pieces;
 		this.nom = nom;
-		this.valeurAngle = valeurAngle;
 		this.moduleXComposants = moduleXComposants;
 		this.uniteMesure = uniteMesure;
 	}
@@ -75,7 +93,7 @@ public class Module implements java.io.Serializable {
 	
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UNITE_ID", nullable = false)
+	@JoinColumn(name = "UNITE_MESURE_ID", nullable = false)
 	public UniteMesure getUniteMesure() {
 		return this.uniteMesure;
 	}
@@ -126,17 +144,18 @@ public class Module implements java.io.Serializable {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
-	@Column(name = "VALEUR_ANGLE")
-	public Integer getValeurAngle() {
-		return this.valeurAngle;
+	
+	@Column(name = "DISPLAY", nullable = false)
+	public boolean isDisplay() {
+		return display;
 	}
 
-	public void setValeurAngle(Integer valeurAngle) {
-		this.valeurAngle = valeurAngle;
+	public void setDisplay(boolean display) {
+		this.display = display;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module")
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "module" , cascade = CascadeType.ALL)
 	public Set<ModuleXComposant> getModuleXComposants() {
 		return this.moduleXComposants;
 	}

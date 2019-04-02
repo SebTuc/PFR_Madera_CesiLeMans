@@ -8,9 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.ril.model.Composant;
-import com.ril.model.Fournisseur;
 import com.ril.model.Utilisateur;
 import com.ril.service.UtilisateurService;
 
@@ -20,22 +19,9 @@ import com.ril.service.UtilisateurService;
 @WebServlet("/Connexion")
 public class Connexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Connexion() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    private UtilisateurService user = new UtilisateurService();
-    private String wok;
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-    public String getwOK() {
-        return wok;
-    }
+
+
+	private UtilisateurService user = new UtilisateurService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -47,29 +33,41 @@ public class Connexion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Utilisateur> ListUser = user.getAllUtilisateurs();
-		
+
 		String login = request.getParameter("login");
 		String pw	= request.getParameter("password");
-		
-		for(Utilisateur utilisateur : ListUser) {
-			if(login != "") {
-				if(login == utilisateur.getLogin()){
-					if(pw != "") {
-						if(pw == utilisateur.getPassword()){
-							wok = "Connexion réussie.";
-							response.sendRedirect("/Modularis");
-						}else {
-							wok = "Mauvais mot de passe pour cet utilisateur.";
+
+		String valeurRetour = "";
+		if(ListUser != null) {
+			if(!login.equals("") && login != null) {
+				if(!pw.equals("") && pw != null) {
+					for(Utilisateur utilisateur : ListUser) {
+						if(login.equals(utilisateur.getLogin())){
+							if(pw.equals(utilisateur.getPassword())){
+								
+								HttpSession session = request.getSession();
+								session.setAttribute("SessionUtilisateur", utilisateur);
+								response.sendRedirect("/Modularis");
+																
+							}else {
+								valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";
+							}
+						}else{
+							valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";
 						}
-					}else{
-						wok = "Veuillez saisir un mot de passe.";
 					}
+				}else{
+					valeurRetour = "Veuillez saisir un login.";
 				}
-			}else{
-				wok = "Veuillez saisir un login.";
+			}else {
+				valeurRetour = "Veuillez saisir un mot de passe.";
 			}
+		}else {
+			valeurRetour = "Contacter le support, aucun compte existant.";
 		}
-		System.out.println(wok);
+		//Creer une session connecter et empecher l'ouverture des autre page si pas connecter /!\
+		request.setAttribute("Erreur", valeurRetour);
+
 		doGet(request, response);
 	}
 }

@@ -16,7 +16,11 @@
 
 <a href="/Modularis/Configuration" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 <div role="main" class="container-fluid">
-<!-- Faire une collapse et un bouton pour l'ouvrir avec critere de recherche ou un truc comme sa , ensuite faire dans le get un trie sur la list selon les parametre recu en get -->
+	<c:choose>
+			<c:when test="${Erreur != null }">
+				<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+			</c:when>
+		</c:choose>
 <div class="row justify-content-center">
 	<h3>Liste des composants</h3>
 </div>
@@ -30,18 +34,32 @@
 			<div class="jumbotron" style="padding: 2rem 2rem">
 				<h5>selectionner les critere de recherche et valider :</h5>
 				<br>
-				<label for="familleComposant">Famille Compopsant</label>
+				<label for="familleComposant">Famille Composant</label>
 				<select id="familleComposant" class="custom-select" name="familleComposant" required>
 					<option value="-1" selected></option>
 			   		<c:forEach var="FamilleComposant" items="${ListFamilleComposant }">
-			   			<option value="${fn:escapeXml(FamilleComposant.familleComposantId) }">${fn:escapeXml(FamilleComposant.nom) } </option>
+			   			<c:choose>
+						    <c:when test="${FamilleComposant.familleComposantId == familleComposantId }">
+						       <option selected value="${fn:escapeXml(FamilleComposant.familleComposantId) }">${fn:escapeXml(FamilleComposant.nom) } </option>
+						    </c:when>    
+						    <c:otherwise>
+								<option value="${fn:escapeXml(FamilleComposant.familleComposantId) }">${fn:escapeXml(FamilleComposant.nom) } </option>
+						    </c:otherwise>
+						</c:choose>
 			   		</c:forEach>
 				</select>
 				<label for="materiaux">Materiaux</label>
 				<select id="materiaux" class="custom-select" name="materiaux" required>
 					<option value="-1" selected></option>
 			   		<c:forEach var="Materiaux" items="${ListMateriaux }">
-			   			<option value="${fn:escapeXml(Materiaux.materiauxId) }">${fn:escapeXml(Materiaux.nom) } </option>
+			   			<c:choose>
+							    <c:when test="${Materiaux.materiauxId == materiauxId}">
+							       <option selected value="${fn:escapeXml(Materiaux.materiauxId) }">${fn:escapeXml(Materiaux.nom) } </option>
+							    </c:when>    
+							    <c:otherwise>
+									<option value="${fn:escapeXml(Materiaux.materiauxId) }">${fn:escapeXml(Materiaux.nom) } </option>
+							    </c:otherwise>
+							</c:choose>
 			   		</c:forEach>
 				</select>
 				<br><br>
@@ -65,7 +83,7 @@
 <br>
 <form id="List" method="post">
 	<div class="row justify-content-center">
-		<ul class="list-group" style="max-height: 500px;overflow: auto;">
+		<ul class="list-group list-radio">
 			<c:choose>
 				<c:when test="${isEmptyList == true }">
 				<li class="list-group-item">

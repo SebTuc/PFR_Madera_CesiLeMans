@@ -1,13 +1,15 @@
 package com.ril.model;
 // Generated 9 janv. 2019 10:36:15 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,11 +21,13 @@ import javax.persistence.Table;
 @Table(name = "donnees_personelle", catalog = "modularisbdd")
 public class DonneesPersonelle implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer donneesPersonelleId;
 	private String nom;
 	private String prenom;
 	private String email;
 	private String adresse;
+	private String ville;
 	private String telephone;
 	private String codePostal;
 	private Set<Client> clients = new HashSet<Client>(0);
@@ -37,6 +41,17 @@ public class DonneesPersonelle implements java.io.Serializable {
 		this.prenom = prenom;
 	}
 
+	public DonneesPersonelle(String nom, String prenom, String email, String adresse, String telephone,
+			String codePostal, String ville , Entrepot entrepot) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
+		this.telephone = telephone;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
+	
 	public DonneesPersonelle(String nom, String prenom, String email, String adresse, String telephone,
 			String codePostal, Set<Client> clients, Set<Utilisateur> utilisateurs) {
 		this.nom = nom;
@@ -114,6 +129,16 @@ public class DonneesPersonelle implements java.io.Serializable {
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
+	
+	@Column(name = "VILLE", length = 100)
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "donneesPersonelle")
 	public Set<Client> getClients() {

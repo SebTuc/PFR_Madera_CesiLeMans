@@ -8,14 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.FamilleComposant;
 import com.ril.model.Fournisseur;
 import com.ril.model.Materiaux;
+import com.ril.model.Utilisateur;
 import com.ril.service.ComposantService;
 import com.ril.service.FamilleComposantService;
 import com.ril.service.FournisseurService;
 import com.ril.service.MateriauxService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutComposant
@@ -28,10 +31,17 @@ public class AjoutComposant extends HttpServlet {
 	private FamilleComposantService familleComposantService = new FamilleComposantService();
 	private FournisseurService fournisseurService = new FournisseurService();
 	private MateriauxService materiauxService = new MateriauxService();
-	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
+		}
+		
 		List<FamilleComposant> ListFamilleComposant = familleComposantService.getAllFamilleComposant();
 		List<Fournisseur> ListFournisseur = fournisseurService.getAllFournisseurs();
 		List<Materiaux> ListMateriaux = materiauxService.getAllMateriauxs();
@@ -54,21 +64,53 @@ public class AjoutComposant extends HttpServlet {
 		String materiaux = request.getParameter("materiaux");	
 		String fournisseur = request.getParameter("fournisseur");	
 		
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
+		}
+		
 		if (nom != null && prixUnitaire != null && familleComposant != null && materiaux != null && fournisseur != null) {						
-			if (nom.trim() != null && prixUnitaire.trim() != null && familleComposant.trim() != null && materiaux.trim() != null && fournisseur.trim() != null) {	
-				
-				//Ajout verif /!\
-				FamilleComposant familleCompo = familleComposantService.getFamilleComposantById(Integer.valueOf(familleComposant));
-				Fournisseur fourni = fournisseurService.getFournisseurById(Integer.valueOf(fournisseur));
-				Materiaux mater = materiauxService.getMateriauxById(Integer.valueOf(materiaux));
-				
-				
-				composantService.addComposant(familleCompo, fourni, mater, nom, Float.valueOf(prixUnitaire));
-
-				//Definit la reponse comme "See Other" et redirige
-				//Evite la multi-insertion après un refresh de l'utilsateur		
-				response.sendRedirect("/Modularis/Configuration/ListComposant");
+			if (!(nom.equals("")) && !(prixUnitaire.equals(""))&& !(familleComposant.equals("")) && !(materiaux.equals("")) && !(fournisseur.equals(""))) {	
+				if(MethodeUtile.isFloat(prixUnitaire)) {
+					if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
+						//Ajout verif /!\
+						FamilleComposant familleCompo = familleComposantService.getFamilleComposantById(Integer.valueOf(familleComposant));
+						Fournisseur fourni = fournisseurService.getFournisseurById(Integer.valueOf(fournisseur));
+						Materiaux mater = materiauxService.getMateriauxById(Integer.valueOf(materiaux));
+						
+						
+						composantService.addComposant(familleCompo, fourni, mater, nom, Float.valueOf(prixUnitaire));
+						
+						response.sendRedirect("/Modularis/Configuration/ListComposant");
+						
+					}else {
+						
+						request.setAttribute("Erreur", "Saisie incorrect.");
+						request.setAttribute("NomComposant", nom);
+						request.setAttribute("PrixUnitaire", prixUnitaire);
+						doGet(request , response);
+					}
+				}else {
+					request.setAttribute("Erreur", "Saisie incorrect (prix).");
+					request.setAttribute("NomComposant", nom);
+					if(MethodeUtile.isInteger(materiaux) && MethodeUtile.isInteger(fournisseur) && MethodeUtile.isInteger(familleComposant)) {
+						request.setAttribute("FamilleComposantId", familleComposant);
+						request.setAttribute("MateriauxId", materiaux);
+						request.setAttribute("FournisseurId", fournisseur);
+					}
+					doGet(request , response);
+					
+				}
+			}else {
+				request.setAttribute("Erreur", "Veillez saisir toute les informations.");
+				doGet(request , response);
 			}
+		}else {
+			request.setAttribute("Erreur", "Veillez saisir toute les informations.");
+			doGet(request , response);
 		}
 	}
 

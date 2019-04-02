@@ -23,13 +23,17 @@ public class Image {
 	
 	private Set<Projet> projet = new HashSet<Projet>();
 	
+	public Image() {
+	}
+
+	
 	public Image(byte[] photo) {
 		this.photo = photo;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "PROJET_ID", unique = true, nullable = false)
+	@Column(name = "IMAGE_ID", unique = true, nullable = false)
 	public Integer getImageId() {
 		return imageId;
 	}

@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Table(name = "module_x_composant", catalog = "modularisbdd")
 public class ModuleXComposant implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private ModuleXComposantId id;
 	private Composant composant;
 	private Module module;

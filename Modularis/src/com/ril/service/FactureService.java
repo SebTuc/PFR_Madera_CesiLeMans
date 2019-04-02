@@ -1,22 +1,47 @@
 package com.ril.service;
 
+import java.util.Date;
+import java.util.List;
+
 import com.ril.daoHibernate.FactureHome;
 import com.ril.model.Devis;
+import com.ril.model.EtapeFacture;
 import com.ril.model.Facture;
 
 public class FactureService {
 
-	public int addFacture(Devis devis, String etape, Integer pourcentage) {
+	public int addFacture(Devis devis, EtapeFacture etapeFacture ) {
 		
 		FactureHome dao = new FactureHome();
 		
-		if(devis != null && etape != null && pourcentage != null) {
+		if(devis != null && etapeFacture != null) {
 			
 			Facture facture = new Facture();
 			
 			facture.setDevis(devis);
-			facture.setEtape(etape);
-			facture.setPourcentage(pourcentage);
+			facture.setEtapeFacture(etapeFacture);
+			
+			dao.persist(facture);
+			
+			return facture.getFactureId();
+			
+		} else {
+			
+			return -1;
+		}
+	}
+	
+	public int addFacture(Devis devis, EtapeFacture etapeFacture,Date dateModification ) {
+		
+		FactureHome dao = new FactureHome();
+		
+		if(devis != null && etapeFacture != null) {
+			
+			Facture facture = new Facture();
+			
+			facture.setDevis(devis);
+			facture.setEtapeFacture(etapeFacture);
+			facture.setDateModification(dateModification);
 			
 			dao.persist(facture);
 			
@@ -65,4 +90,13 @@ public class FactureService {
 		
 		return dao.findById(id);
 	}
+	
+
+	public List<Facture> getAllFacture(){
+		
+		FactureHome dao = new FactureHome();
+		
+		return dao.findAll();
+	}
+	
 }

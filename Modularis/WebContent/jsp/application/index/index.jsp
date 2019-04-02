@@ -11,28 +11,26 @@
 
 </head>
 <body>
-
 	<!-- INDEX -->
 	<jsp:include page="/jsp/common/navbar.jsp" />
-	
+	 <br />
+	<div class="text-center">
+        	<h1>Bienvenue sur l'application Modularis !</h1>
+      	</div>
     <div role="main" class="container">
    		 <br />
-		 <div class="col-lg-12 text-center">
-        	<h1>Bienvenue sur l'application Modularis !</h1>
-        	<br />
-      	</div>
 	     <div class="row">
 			<div class="col-sm-6 col-md-4">
 				<button onclick="window.location.href = 'Catalogue';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">shopping_cart</i> <br/>Catalogue (Visionner / Editer)</button>
 			</div>
 			<div class="col-sm-6 col-md-4">
-				<button onclick="window.location.href = 'Devis';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">library_books</i> <br/>Devis / Facture</button>
+				<button onclick="window.location.href = 'DevisFacture';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">library_books</i> <br/>Devis / Facture</button>
 			</div>
 			<div class="col-sm-6 col-md-4">
 				<button onclick="window.location.href = 'Annuaire';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">people</i> <br/>Annuaire</button>
 			</div>
 			<div class="col-sm-6 col-md-4">
-				<button onclick="window.location.href = 'Gestion Stock';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">search</i> <br/>Gestion Stock</button>
+				<button onclick="window.location.href = 'GestionStock/ListEntrepot';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">search</i> <br/>Gestion Stock</button>
 			</div>
 			<div class="col-sm-6 col-md-4">
 				<button onclick="window.location.href = 'Configuration';" class="btn-modularis btn-modularis-hover"><i class="material-icons md-48">settings</i> <br/> Configuration</button>

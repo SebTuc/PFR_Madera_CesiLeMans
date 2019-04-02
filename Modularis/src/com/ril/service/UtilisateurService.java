@@ -4,18 +4,19 @@ import java.util.List;
 
 import com.ril.daoHibernate.UtilisateurHome;
 import com.ril.model.DonneesPersonelle;
+import com.ril.model.Entrepot;
 import com.ril.model.Metier;
 import com.ril.model.Utilisateur;
 
 public class UtilisateurService {
 
-	public int addUtilisateur(DonneesPersonelle donneesPersonelle, Metier metier, String login, String password) {
+	public int addUtilisateur(DonneesPersonelle donneesPersonelle, Metier metier, Entrepot entrepot, String login, String password) {
 		
 		UtilisateurHome dao = new UtilisateurHome();
 		
 		if(donneesPersonelle != null && metier != null && login !=null && password !=null) {
 			
-			Utilisateur utilisateur = new Utilisateur(donneesPersonelle, metier, login, password);
+			Utilisateur utilisateur = new Utilisateur(donneesPersonelle, metier, login, password,entrepot);
 			
 			dao.persist(utilisateur);
 			

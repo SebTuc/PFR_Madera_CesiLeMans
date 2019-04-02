@@ -1,13 +1,15 @@
 package com.ril.model;
 // Generated 9 janv. 2019 10:36:15 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,10 +21,13 @@ import javax.persistence.Table;
 @Table(name = "entrepot", catalog = "modularisbdd")
 public class Entrepot implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer entrepotId;
 	private String lieux;
 	private Set<Stock> stocks = new HashSet<Stock>(0);
+	private Set<Utilisateur> utilisateurs = new HashSet<Utilisateur>(0);
 
+	
 	public Entrepot() {
 	}
 
@@ -64,5 +69,15 @@ public class Entrepot implements java.io.Serializable {
 	public void setStocks(Set<Stock> stocks) {
 		this.stocks = stocks;
 	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entrepot")
+	public Set<Utilisateur> getUtilisateurs() {
+		return utilisateurs;
+	}
+
+	public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
+		this.utilisateurs = utilisateurs;
+	}
+
 
 }

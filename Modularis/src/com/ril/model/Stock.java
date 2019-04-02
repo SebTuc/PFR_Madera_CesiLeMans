@@ -1,16 +1,14 @@
 package com.ril.model;
 // Generated 9 janv. 2019 10:36:15 by Hibernate Tools 4.3.5.Final
 
-import java.util.HashSet;
-import java.util.Set;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,12 +19,14 @@ import javax.persistence.Table;
 @Table(name = "stock", catalog = "modularisbdd")
 public class Stock implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer stockId;
 	private Entrepot entrepot;
 	private int quantite;
-	private Set<Composant> composants = new HashSet<Composant>(0);
+	private Composant composant;
 
 	public Stock() {
+		
 	}
 
 	public Stock(Entrepot entrepot, int quantite) {
@@ -34,10 +34,10 @@ public class Stock implements java.io.Serializable {
 		this.quantite = quantite;
 	}
 
-	public Stock(Entrepot entrepot, int quantite, Set<Composant> composants) {
+	public Stock(Entrepot entrepot, int quantite, Composant composant) {
 		this.entrepot = entrepot;
 		this.quantite = quantite;
-		this.composants = composants;
+		this.composant = composant;
 	}
 
 	@Id
@@ -71,13 +71,15 @@ public class Stock implements java.io.Serializable {
 		this.quantite = quantite;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "stocks")
-	public Set<Composant> getComposants() {
-		return this.composants;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "COMPOSANT_ID", nullable = false)
+	public Composant getComposant() {
+		return composant;
 	}
 
-	public void setComposants(Set<Composant> composants) {
-		this.composants = composants;
+	public void setComposant(Composant composant) {
+		this.composant = composant;
 	}
+
 
 }

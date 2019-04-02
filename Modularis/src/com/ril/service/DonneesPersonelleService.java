@@ -5,11 +5,11 @@ import com.ril.model.DonneesPersonelle;
 
 public class DonneesPersonelleService {
 
-	public int addDonneesPersonelle(String nom, String prenom, String email, String adresse, String telephone, String codePostal) {
+	public int addDonneesPersonelle(String nom, String prenom, String email, String adresse, String telephone, String codePostal, String ville) {
 		
 		DonneesPersonelleHome dao = new DonneesPersonelleHome();
 		
-		if(nom != null && prenom != null && email != null && adresse != null && telephone != null && codePostal != null) {
+		if(nom != null && prenom != null && email != null && adresse != null && telephone != null && codePostal != null && ville !=null) {
 			
 			DonneesPersonelle donneesPersonelle = new DonneesPersonelle();
 			
@@ -19,6 +19,7 @@ public class DonneesPersonelleService {
 			donneesPersonelle.setAdresse(adresse);
 			donneesPersonelle.setTelephone(telephone);
 			donneesPersonelle.setCodePostal(codePostal);
+			donneesPersonelle.setVille(ville);
 			
 			dao.persist(donneesPersonelle);
 			

@@ -31,6 +31,46 @@
     <url-pattern>/Connexion</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DetailDevis</servlet-name>
+    <servlet-class>com.ril.servlet.DetailDevis</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailDevis</servlet-name>
+    <url-pattern>/DevisFacture/DetailDevis</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DetailFacture</servlet-name>
+    <servlet-class>com.ril.servlet.DetailFacture</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailFacture</servlet-name>
+    <url-pattern>/DevisFacture/DetailFacture</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListEntrepot</servlet-name>
+    <servlet-class>com.ril.servlet.ListEntrepot</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListEntrepot</servlet-name>
+    <url-pattern>/GestionStock/ListEntrepot</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutStock</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutStock</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutStock</servlet-name>
+    <url-pattern>/GestionStock/AjoutStock</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Deconnexion</servlet-name>
+    <servlet-class>com.ril.servlet.Deconnexion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/Deconnexion</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Configuration</servlet-name>
     <servlet-class>com.ril.servlet.Configuration</servlet-class>
   </servlet>
@@ -39,8 +79,32 @@
     <url-pattern>/Configuration</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>FacturePDF</servlet-name>
+    <servlet-class>com.ril.servlet.FacturePDF</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FacturePDF</servlet-name>
+    <url-pattern>/DevisFacture/Facture</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DevisPDF</servlet-name>
+    <servlet-class>com.ril.servlet.DevisPDF</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DevisPDF</servlet-name>
+    <url-pattern>/DevisFacture/Devis</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Annuaire</servlet-name>
     <servlet-class>com.ril.servlet.Annuaire</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Catalogue</servlet-name>
+    <url-pattern>/Catalogue</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Catalogue</servlet-name>
+    <servlet-class>com.ril.servlet.Catalogue</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Annuaire</servlet-name>
@@ -135,12 +199,12 @@
     <url-pattern>/Annuaire/AjoutFournisseur</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>AjoutEtat</servlet-name>
-    <servlet-class>com.ril.servlet.AjoutEtat</servlet-class>
+    <servlet-name>AjoutEtapeFacture</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutEtapeFacture</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AjoutEtat</servlet-name>
-    <url-pattern>/Configuration/AjoutEtat</url-pattern>
+    <servlet-name>AjoutEtapeFacture</servlet-name>
+    <url-pattern>/Configuration/AjoutEtapeFacture</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>EditComposant</servlet-name>
@@ -150,8 +214,7 @@
     <servlet-name>EditComposant</servlet-name>
     <url-pattern>/Configuration/EditComposant</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>AjoutUtilisateur</servlet-name>
     <servlet-class>com.ril.servlet.AjoutUtilisateur</servlet-class>
   </servlet>
@@ -159,13 +222,181 @@
     <servlet-name>AjoutUtilisateur</servlet-name>
     <url-pattern>/Annuaire/AjoutUtilisateur</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
+    <servlet-name>EditUtilisateur</servlet-name>
+    <servlet-class>com.ril.servlet.EditUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditUtilisateur</servlet-name>
+    <url-pattern>/Annuaire/EditUtilisateur</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ListUtilisateur</servlet-name>
     <servlet-class>com.ril.servlet.ListUtilisateur</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ListUtilisateur</servlet-name>
     <url-pattern>/Annuaire/ListUtilisateur</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutCatalogue</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutCatalogue</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutCatalogue</servlet-name>
+    <url-pattern>/Catalogue/AjoutCatalogue</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditCatalogue</servlet-name>
+    <servlet-class>com.ril.servlet.EditCatalogue</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditCatalogue</servlet-name>
+    <url-pattern>/Catalogue/EditCatalogue</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListCatalogue</servlet-name>
+    <servlet-class>com.ril.servlet.ListCatalogue</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListCatalogue</servlet-name>
+    <url-pattern>/Catalogue/ListCatalogue</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListCatalogueProjet</servlet-name>
+    <servlet-class>com.ril.servlet.ListCatalogueProjet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListCatalogueProjet</servlet-name>
+    <url-pattern>/Catalogue/ListCatalogueProjet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DetailCatalogueProjet</servlet-name>
+    <servlet-class>com.ril.servlet.DetailCatalogueProjet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailCatalogueProjet</servlet-name>
+    <url-pattern>/Catalogue/DetailCatalogueProjet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListModule</servlet-name>
+    <servlet-class>com.ril.servlet.ListModule</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListModule</servlet-name>
+    <url-pattern>/Configuration/ListModule</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutModule</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutModule</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutModule</servlet-name>
+    <url-pattern>/Configuration/AjoutModule</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditModule</servlet-name>
+    <servlet-class>com.ril.servlet.EditModule</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditModule</servlet-name>
+    <url-pattern>/Configuration/EditModule</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutClient</servlet-name>
+    <servlet-class>com.ril.servlet.AjoutClient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutClient</servlet-name>
+    <url-pattern>/Annuaire/AjoutClient</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListClient</servlet-name>
+    <servlet-class>com.ril.servlet.ListClient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListClient</servlet-name>
+    <url-pattern>/Annuaire/ListClient</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DevisFacture</servlet-name>
+    <servlet-class>com.ril.servlet.DevisFacture</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DevisFacture</servlet-name>
+    <url-pattern>/DevisFacture</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListProjet</servlet-name>
+    <servlet-class>com.ril.servlet.ListProjet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListProjet</servlet-name>
+    <url-pattern>/DevisFacture/ListProjet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListDevis</servlet-name>
+    <servlet-class>com.ril.servlet.ListDevis</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListDevis</servlet-name>
+    <url-pattern>/DevisFacture/ListDevis</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditProjet</servlet-name>
+    <servlet-class>com.ril.servlet.EditProjet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProjet</servlet-name>
+    <url-pattern>/DevisFacture/EditProjet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditPlan</servlet-name>
+    <servlet-class>com.ril.servlet.EditPlan</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditPlan</servlet-name>
+    <url-pattern>/DevisFacture/EditPlan</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditPiece</servlet-name>
+    <servlet-class>com.ril.servlet.EditPiece</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditPiece</servlet-name>
+    <url-pattern>/DevisFacture/EditPiece</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CreerProjet</servlet-name>
+    <servlet-class>com.ril.servlet.CreerProjet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreerProjet</servlet-name>
+    <url-pattern>/DevisFacture/CreerProjet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditProjetName</servlet-name>
+    <servlet-class>com.ril.servlet.EditProjetName</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProjetName</servlet-name>
+    <url-pattern>/DevisFacture/EditProjetName</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListFacture</servlet-name>
+    <servlet-class>com.ril.servlet.ListFacture</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListFacture</servlet-name>
+    <url-pattern>/DevisFacture/ListFacture</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Photo</servlet-name>
+    <servlet-class>com.ril.servlet.Photo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Photo</servlet-name>
+    <url-pattern>/Photo</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>

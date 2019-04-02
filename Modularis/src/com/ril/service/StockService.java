@@ -3,18 +3,19 @@ package com.ril.service;
 import java.util.List;
 
 import com.ril.daoHibernate.StockHome;
+import com.ril.model.Composant;
 import com.ril.model.Entrepot;
 import com.ril.model.Stock;
 
 public class StockService {
 	
-	public int addStock(Entrepot entrepot, Integer quantite) {
+	public int addStock(Entrepot entrepot, Integer quantite,Composant composant) {
 		
 		StockHome dao = new StockHome();
 		
-		if(entrepot != null && quantite != null) {
+		if(entrepot != null && quantite != null && !findIfComposantExistInEntrepot(entrepot , composant)) {
 			
-			Stock stock = new Stock(entrepot, quantite);
+			Stock stock = new Stock(entrepot, quantite , composant);
 			
 			dao.persist(stock);
 			
@@ -24,6 +25,16 @@ public class StockService {
 			
 			return -1;
 		}
+	}
+	
+	private boolean findIfComposantExistInEntrepot(Entrepot entrepot , Composant composant) {
+		
+		for(Stock stock : entrepot.getStocks()) {
+			if(stock.getComposant().getComposantId() == composant.getComposantId()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void editStock(Stock stock) {
@@ -70,4 +81,5 @@ public class StockService {
 		
 		return dao.findAll();
 	}
+	
 }

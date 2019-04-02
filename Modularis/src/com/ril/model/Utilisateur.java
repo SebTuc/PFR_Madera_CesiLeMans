@@ -1,13 +1,15 @@
 package com.ril.model;
 // Generated 9 janv. 2019 10:36:15 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,21 +23,24 @@ import javax.persistence.Table;
 @Table(name = "utilisateur", catalog = "modularisbdd")
 public class Utilisateur implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer utilisateurId;
 	private DonneesPersonelle donneesPersonelle;
 	private Metier metier;
 	private String login;
 	private String password;
+	private Entrepot entrepot;
 	private Set<Devis> devises = new HashSet<Devis>(0);
 
 	public Utilisateur() {
 	}
 
-	public Utilisateur(DonneesPersonelle donneesPersonelle, Metier metier, String login, String password) {
+	public Utilisateur(DonneesPersonelle donneesPersonelle, Metier metier, String login, String password , Entrepot entrepot) {
 		this.donneesPersonelle = donneesPersonelle;
 		this.metier = metier;
 		this.login = login;
 		this.password = password;
+		this.entrepot = entrepot;
 	}
 
 	public Utilisateur(DonneesPersonelle donneesPersonelle, Metier metier, String login, String password,
@@ -49,7 +54,6 @@ public class Utilisateur implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "UTILISATEUR_ID", unique = true, nullable = false)
 	public Integer getUtilisateurId() {
 		return this.utilisateurId;
@@ -104,6 +108,15 @@ public class Utilisateur implements java.io.Serializable {
 
 	public void setDevises(Set<Devis> devises) {
 		this.devises = devises;
+	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ENTREPOT_ID", nullable = false)
+	public Entrepot getEntrepot() {
+		return entrepot;
+	}
+
+	public void setEntrepot(Entrepot entrepot) {
+		this.entrepot = entrepot;
 	}
 
 }

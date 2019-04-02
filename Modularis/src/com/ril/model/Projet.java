@@ -6,6 +6,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,10 +25,14 @@ import javax.persistence.Table;
 @Table(name = "projet", catalog = "modularisbdd")
 public class Projet implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer projetId;
 	private Set<Catalogue> catalogue = new HashSet<Catalogue>(0);
 	
 	private String nom;
+	
+	private Boolean isClone;
+	
 	private Set<Devis> devises = new HashSet<Devis>(0);
 	private Set<Plan> plans = new HashSet<Plan>(0);
 	
@@ -39,6 +44,18 @@ public class Projet implements java.io.Serializable {
 	public Projet( String nom) {
 		this.nom = nom;
 	}
+	
+	public Projet( String nom,Image image) {
+		this.nom = nom;
+		this.image = image;
+	}
+	
+	public Projet( String nom,Image image,Set<Plan> plans) {
+		this.nom = nom;
+		this.image = image;
+		this.plans = plans;
+	}
+	
 	public Projet(Set<Catalogue> catalogue, String nom) {
 		this.catalogue = catalogue;
 		this.nom = nom;
@@ -90,7 +107,7 @@ public class Projet implements java.io.Serializable {
 		this.devises = devises;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projet")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projet", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<Plan> getPlans() {
 		return this.plans;
 	}
@@ -98,6 +115,16 @@ public class Projet implements java.io.Serializable {
 	public void setPlans(Set<Plan> plans) {
 		this.plans = plans;
 	}
+	
+	@Column(name = "IS_CLONE", nullable = true)
+	public Boolean isClone() {
+		return isClone;
+	}
+
+	public void setClone(Boolean isClone) {
+		this.isClone = isClone;
+	}
+
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "IMAGE_ID", nullable = false)

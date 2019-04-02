@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ril.model.Gamme;
+import com.ril.model.Utilisateur;
 import com.ril.service.GammeService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class AjoutGamme
@@ -23,6 +26,13 @@ public class AjoutGamme extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
+		}
 		List<Gamme> listGamme = gammeService.getAllGammes();
 		
 		request.setAttribute("ListGamme", listGamme);
@@ -36,7 +46,13 @@ public class AjoutGamme extends HttpServlet {
 		String action = request.getParameter("action");
 		String idValeur = request.getParameter("id");
 		String valeur = request.getParameter("valeur");
-				
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}else {
+			HttpSession session = request.getSession();
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
+		}
 		// Ajout ou Delete
 		if(action != null) {
 			if(action.equals("Delete")) {
@@ -61,7 +77,7 @@ public class AjoutGamme extends HttpServlet {
 				gammeService.addGamme(gammeNom);
 				
 				//Definit la reponse comme "See Other" et redirige
-				//Evite la multi-insertion après un refresh de l'utilsateur		
+				//Evite la multi-insertion aprï¿½s un refresh de l'utilsateur		
 				response.setStatus(303);	
 				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutGamme");
 			}

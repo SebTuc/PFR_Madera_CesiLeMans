@@ -29,7 +29,6 @@
         <property name="show_sql">true</property>
         
        	<!-- <property name="default_schema">MKYONG</property>  -->
-       	
        	<mapping class="com.ril.model.Angle"/>
        	<mapping class="com.ril.model.Image"/>        
        	<mapping class="com.ril.model.Catalogue"/>
@@ -38,6 +37,7 @@
       	<mapping class="com.ril.model.Devis"/>
       	<mapping class="com.ril.model.DonneesPersonelle"/>
 		<mapping class="com.ril.model.Entrepot"/>
+		<mapping class="com.ril.model.EtapeFacture"/>
 		<mapping class="com.ril.model.Etat"/>
 		<mapping class="com.ril.model.Facture"/>
 		<mapping class="com.ril.model.FamilleComposant"/>

@@ -22,7 +22,7 @@
 <form method="post">
   <div class="form-group">
     <label for="formGroupExampleInput">Nom</label>
-    <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom Fournisseur" required>
+    <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom Fournisseur" autofocus required>
   </div>
   <div class="form-row">
 	  <div class="form-group col-md-6">

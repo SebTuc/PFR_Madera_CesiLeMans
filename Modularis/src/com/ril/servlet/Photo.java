@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ril.model.Image;
 import com.ril.service.ImageService;
+import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class Photo
@@ -55,6 +56,10 @@ public class Photo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String imageId = request.getParameter("id");
 
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}
         // Check if ID is supplied to the request.
         if (imageId == null) {
             // Do your thing if the ID is not supplied to the request.
@@ -90,6 +95,10 @@ public class Photo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(!MethodeUtile.isConnected(response , request)) {
+			response.sendRedirect(request.getContextPath()+"/Connexion");
+			return;
+		}
 		processRequest(request, response);
 	}
 

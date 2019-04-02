@@ -1,13 +1,15 @@
 package com.ril.model;
 // Generated 9 janv. 2019 13:15:45 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,6 +21,7 @@ import javax.persistence.Table;
 @Table(name = "unite_mesure", catalog = "modularisbdd")
 public class UniteMesure implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer uniteId;
 	private String nomUnite;
 	private Set<Module> module = new HashSet<Module>(0);
@@ -38,7 +41,7 @@ public class UniteMesure implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "UNITE_ID", unique = true, nullable = false)
+	@Column(name = "UNITE_MESURE_ID", unique = true, nullable = false)
 	public Integer getUniteId() {
 		return this.uniteId;
 	}
@@ -47,7 +50,7 @@ public class UniteMesure implements java.io.Serializable {
 		this.uniteId = uniteId;
 	}
 
-	@Column(name = "NOM_UNITE", nullable = false, length = 25)
+	@Column(name = "NOM", nullable = false, length = 25)
 	public String getNomUnite() {
 		return this.nomUnite;
 	}
