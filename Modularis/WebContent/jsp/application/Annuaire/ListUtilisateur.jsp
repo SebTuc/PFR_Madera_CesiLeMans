@@ -18,6 +18,11 @@
 
 <br>
 <br>
+<c:choose>
+	<c:when test="${Erreur != null}">
+		<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+	</c:when>
+</c:choose>
 <div class="card card-edition">
 
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
@@ -26,23 +31,23 @@
 				{"data":"nomUtilisateur","title": "Nom"},
 				{"data":"prenomUtilisateur","title": "Prenom"},
 				{"data":"adresseUtilisateur","title": "Adresse"},
+				{"data":"villeUtilisateur","title": "Ville"},
 				{"data":"codePostalUtilisateur","title": "Code postal"},
 				{"data":"telephoneUtilisateur","title": "Telephone"},
 				{"data":"emailUtilisateur","title": "Email"},
 				{"data":"metierUtilisateur","type": "disabled","title": "Metier"},
-				{"data":"loginUtilisateur","title": "Login"},
-				{"data":"passwordUtilisateur","type": "password","title": "Password"}]' 
+				{"data":"entrepotUtilisateur","type": "disabled","title": "Entrepot"}]' 
 				
 				data-set='[<c:forEach var="Utilisateur" items="${ListUtilisateur}">{"id":"${fn:escapeXml(Utilisateur.utilisateurId)}",
 				"nomUtilisateur":"${fn:escapeXml(Utilisateur.donneesPersonelle.nom)}",
 				"prenomUtilisateur":"${fn:escapeXml(Utilisateur.donneesPersonelle.prenom)}",
 				"adresseUtilisateur":"${fn:escapeXml(Utilisateur.donneesPersonelle.adresse)}",
+				"villeUtilisateur":"${fn:escapeXml(Utilisateur.donneesPersonelle.ville)}",
 				"codePostalUtilisateur":"${fn:escapeXml(Utilisateur.donneesPersonelle.codePostal)}",
 				"telephoneUtilisateur":"${fn:escapeXml(Utilisateur.donneesPersonelle.telephone)}",
 				"emailUtilisateur":"${fn:escapeXml(Utilisateur.donneesPersonelle.email)}",
 				"metierUtilisateur":"${fn:escapeXml(Utilisateur.metier.nom)}",
-				"loginUtilisateur":"${fn:escapeXml(Utilisateur.login)}",
-				"passwordUtilisateur":"${fn:escapeXml(Utilisateur.password)}"},</c:forEach>]'>
+				"entrepotUtilisateur":"${fn:escapeXml(Utilisateur.entrepot.nom)}"},</c:forEach>]'>
 
 		</table>
 	</div>
@@ -52,7 +57,10 @@
   
   	<div class="row justify-content-center">
 		<a href="/Modularis/Annuaire/AjoutUtilisateur" class="btn btn-outline-success">Ajouter un utilisateur</a>
+		<a href="/Modularis/Annuaire/EditUtilisateur" class="btn btn-outline-success">Editer un utilisateur</a>
 	</div>
+
+
 
 </div>	
   <jsp:include page="/jsp/common/defaultScripts.jsp" />

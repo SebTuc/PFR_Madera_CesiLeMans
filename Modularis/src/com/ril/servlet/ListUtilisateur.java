@@ -29,7 +29,10 @@ public class ListUtilisateur extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			Utilisateur utilisateur = (Utilisateur)session.getAttribute("Utilisateur");
+			if (utilisateur.getMetier().getNom() != "admin")
+				return;
+			request.setAttribute("Utilisateur", utilisateur);
 		}
 		List<Utilisateur> ListUtilisateur = utilisateurService.getAllUtilisateurs();
 		request.setAttribute("ListUtilisateur", ListUtilisateur);
