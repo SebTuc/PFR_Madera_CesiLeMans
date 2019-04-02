@@ -1,10 +1,10 @@
-/*Fichier contenant toutes les interactions dynamiques du site ou futur code liaison avec le back en JEE (Eventuellement de l'AJAX pour la recherche,...)*/
+	/*Fichier contenant toutes les interactions dynamiques du site ou futur code liaison avec le back en JEE (Eventuellement de l'AJAX pour la recherche,...)*/
 
 /*Init du menu*/
 $(document).ready(function () {
 	$("#open-btn").click(e => { $("#mySidenav").css('width', '250px') });
 	$("#close-btn").click(e => { $("#mySidenav").css('width', '0px') });
-		
+
 	loadAltDataTable("Edition");
 });
 
@@ -13,10 +13,11 @@ $(document).ready(function () {
  * Initialise une DataTable modifiable
  * @param {String} idTable ID de l'element <table> à initialiser
  */
-function loadAltDataTable(idTable) {
+function loadAltDataTable(idTable, editable = true, removable = true) {
 
 
 	var tableHtml, dataSet, columnDefs;
+	var buttonsDefined = [];
 
 	tableHtml = $('#' + idTable);
 
@@ -35,12 +36,15 @@ function loadAltDataTable(idTable) {
 	} else {
 		dataSet = null;
 	}
-	
+
 	// Recuperation des definition de columns (nom de colonnes du tableau) au format parsable en JSON
 	columnDefs = $(tableHtml).attr("column-defs");
 
 	// Verification et parse des valeurs en JSON
 	if (columnDefs.length > 1) { columnDefs = JSON.parse(columnDefs); }
+
+	if(editable){buttonsDefined.push({extend: 'selected',text: 'Edition ligne s&eacute;lectionn&eacute;e',name: 'edit'})}
+	if(removable){buttonsDefined.push({extend: 'selected',text: 'Suppression ligne s&eacute;lectionn&eacute;e',name: 'delete'})}
 
 	var myTable = $(tableHtml).DataTable({
 		data: dataSet,							// Definition des donnees a afficher
@@ -74,18 +78,7 @@ function loadAltDataTable(idTable) {
 				"next": "<i class=\"material-icons\">keyboard_arrow_right</i>"
 			}
 		},
-		buttons: [
-			{
-				extend: 'selected', 			// Definit que l'action s'execute sur la ligne selectionné
-				text: 'Edition ligne s&eacute;lectionn&eacute;e',
-				name: 'edit',        			// Ne pas changer le nom
-
-			},
-			{
-				extend: 'selected', 			// Definit que l'action s'execute sur la ligne selectionné
-				text: 'Suppression ligne s&eacute;lectionn&eacute;e',
-				name: 'delete',     				// Ne pas changer le nom
-			}],
+		buttons: buttonsDefined,
 		onDeleteRow: function (datatable, rowdata, success, error) {
 			var request = formatAjaxRequest(rowdata);
 			request += "&action=Delete";
@@ -196,7 +189,7 @@ function launchConfimModal(element) {
 			console.log(error);
 		}
 	}
-	
+
 	$("#confirm-modal").modal();
 
 }

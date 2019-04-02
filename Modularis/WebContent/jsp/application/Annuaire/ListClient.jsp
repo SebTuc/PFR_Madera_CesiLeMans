@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="ISO-8859-1">
-  <title>list client</title>
+  <title>Liste des clients</title>
   <jsp:include page="/jsp/common/defaultHeadLinks.jsp" />
 
 </head>
@@ -26,6 +26,7 @@
 				{"data":"nomClient","title": "Nom"},
 				{"data":"prenomClient","title": "Prenom"},
 				{"data":"adresseClient","title": "Adresse"},
+				{"data":"ville","title": "Ville"},
 				{"data":"codePostalClient","title": "Code postal"},
 				{"data":"telephoneClient","title": "Telephone"},
 				{"data":"emailClient","title": "Email"}]' 
@@ -34,6 +35,7 @@
 				"nomClient":"${fn:escapeXml(Client.donneesPersonelle.nom)}",
 				"prenomClient":"${fn:escapeXml(Client.donneesPersonelle.prenom)}",
 				"adresseClient":"${fn:escapeXml(Client.donneesPersonelle.adresse)}",
+				"ville":"${fn:escapeXml(Client.donneesPersonelle.ville)}",
 				"codePostalClient":"${fn:escapeXml(Client.donneesPersonelle.codePostal)}",
 				"telephoneClient":"${fn:escapeXml(Client.donneesPersonelle.telephone)}",
 				"emailClient":"${fn:escapeXml(Client.donneesPersonelle.email)}"},</c:forEach>]'>

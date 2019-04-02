@@ -29,7 +29,7 @@ public class DevisPDF extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		
 		String devisId = request.getParameter("id");
@@ -55,7 +55,7 @@ public class DevisPDF extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		doGet(request, response);
 	}

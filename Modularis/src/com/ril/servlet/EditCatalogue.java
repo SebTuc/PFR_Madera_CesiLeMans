@@ -42,7 +42,7 @@ public class EditCatalogue extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		// Premierer recuperation de tous les projets et catalogues
 		this.listCatalogue =  catalogueService.getAllCatalogues();
@@ -81,7 +81,7 @@ public class EditCatalogue extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		if (action != null && action != "" ) {
 			if(MethodeUtile.isInteger(idProjet)) {

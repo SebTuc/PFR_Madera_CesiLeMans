@@ -33,7 +33,7 @@ public class DetailFacture extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		String factureId = request.getParameter("id");
 		if(MethodeUtile.isInteger(factureId)) {
@@ -80,7 +80,7 @@ public class DetailFacture extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		
 		String btnFacture = request.getParameter("btnFacture");
@@ -90,7 +90,7 @@ public class DetailFacture extends HttpServlet {
 		
 		if(btnFacture != null && factureId != null) {
 			if(MethodeUtile.isInteger(factureId)) {
-				//passez en facturation a l'étape 1 c'est a dire 3% et devis accepter
+				//passez en facturation a l'ï¿½tape 1 c'est a dire 3% et devis accepter
 				Facture facture = factureService.getFactureById(Integer.valueOf(factureId));
 				EtapeFacture nextEtape = etapeFactureService.findNextEtape(facture.getEtapeFacture());
 				if(nextEtape!=null) {
@@ -98,7 +98,7 @@ public class DetailFacture extends HttpServlet {
 					facture.setDateModification(dateNow);
 					factureService.editFacture(facture);
 				}else {
-					request.setAttribute("Erreur", "Ceci est la dernier étape de facturation.");
+					request.setAttribute("Erreur", "Ceci est la dernier ï¿½tape de facturation.");
 				}
 				
 				
@@ -107,7 +107,7 @@ public class DetailFacture extends HttpServlet {
 		
 		if(btnFactureBack != null && factureId != null) {
 			if(MethodeUtile.isInteger(factureId)) {
-				//passez en facturation a l'étape 1 c'est a dire 3% et devis accepter
+				//passez en facturation a l'ï¿½tape 1 c'est a dire 3% et devis accepter
 				Facture facture = factureService.getFactureById(Integer.valueOf(factureId));
 				EtapeFacture beforeEtape = etapeFactureService.findBeforeEtape(facture.getEtapeFacture());
 				if(beforeEtape!=null) {
@@ -115,7 +115,7 @@ public class DetailFacture extends HttpServlet {
 					facture.setDateModification(dateNow);
 					factureService.editFacture(facture);
 				}else {
-					request.setAttribute("Erreur", "Ceci est la premiere étape de facturation.");
+					request.setAttribute("Erreur", "Ceci est la premiere ï¿½tape de facturation.");
 				}
 				
 				

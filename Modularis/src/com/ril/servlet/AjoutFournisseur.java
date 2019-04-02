@@ -29,7 +29,7 @@ public class AjoutFournisseur extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		request.getRequestDispatcher("/jsp/application/Annuaire/AjoutFournisseur.jsp").forward(request, response);
 	}
@@ -48,7 +48,7 @@ public class AjoutFournisseur extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		if (nom != null && adresse != null && codePostal != null) {						
 			if (nom.trim() != null) {	
@@ -62,7 +62,7 @@ public class AjoutFournisseur extends HttpServlet {
 				fournisseurService.addFournisseur(nom, adresse, codePostal, telephone, email);
 
 				//Definit la reponse comme "See Other" et redirige
-				//Evite la multi-insertion après un refresh de l'utilsateur		
+				//Evite la multi-insertion aprï¿½s un refresh de l'utilsateur		
 				response.sendRedirect("/Modularis/Annuaire/ListFournisseur");
 			}
 		}

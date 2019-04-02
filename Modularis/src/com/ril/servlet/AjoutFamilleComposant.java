@@ -30,7 +30,7 @@ public class AjoutFamilleComposant extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		List<FamilleComposant> ListFamilleComposant = familleComposantService.getAllFamilleComposant();
 		request.setAttribute("ListFamilleComposant", ListFamilleComposant);
@@ -52,7 +52,7 @@ public class AjoutFamilleComposant extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		// Ajout ou Delete
 		if(action != null) {
@@ -78,7 +78,7 @@ public class AjoutFamilleComposant extends HttpServlet {
 				familleComposantService.addFamilleComposant(familleComposantNom);
 
 				//Definit la reponse comme "See Other" et redirige
-				//Evite la multi-insertion après un refresh de l'utilsateur		
+				//Evite la multi-insertion aprï¿½s un refresh de l'utilsateur		
 				response.setStatus(303);	
 				response.sendRedirect(request.getContextPath()+"/Configuration/AjoutFamilleComposant");
 			}

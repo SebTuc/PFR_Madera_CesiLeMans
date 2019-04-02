@@ -36,7 +36,7 @@ public class AjoutStock extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		
 
@@ -61,7 +61,7 @@ public class AjoutStock extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 
 
@@ -117,7 +117,7 @@ public class AjoutStock extends HttpServlet {
 						response.setStatus(303);	
 						response.sendRedirect(request.getContextPath()+"/GestionStock/AjoutStock?id="+Integer.valueOf(idEntrepot));
 					}else {
-						request.setAttribute("Erreur", "Les informations saisie exist déjà");
+						request.setAttribute("Erreur", "Les informations saisie exist dï¿½jï¿½");
 						doGet(request,response);
 					}
 				
@@ -133,7 +133,7 @@ public class AjoutStock extends HttpServlet {
 				doGet(request,response);
 			}
 		}else {
-			request.setAttribute("Erreur", "Erreur Veuillez réessayer.");
+			request.setAttribute("Erreur", "Erreur Veuillez rï¿½essayer.");
 			doGet(request,response);
 		}
 	}

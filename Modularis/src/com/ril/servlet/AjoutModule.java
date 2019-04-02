@@ -47,7 +47,7 @@ public class AjoutModule extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 
 		List<Gamme> ListGamme = gammeService.getAllGammes();
@@ -94,7 +94,7 @@ public class AjoutModule extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		if(sendSubmit != null) {
 			if(sendSubmit.equals("Ok")) {

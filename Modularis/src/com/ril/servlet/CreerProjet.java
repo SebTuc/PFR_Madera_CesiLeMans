@@ -41,7 +41,7 @@ public class CreerProjet extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		request.getRequestDispatcher("/jsp/application/DevisProjetFacture/CreerProjet.jsp").forward(request, response);
 	}
@@ -54,7 +54,7 @@ public class CreerProjet extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		String nomProjet=null;
 
@@ -104,13 +104,13 @@ public class CreerProjet extends HttpServlet {
 					response.sendRedirect("/Modularis/DevisFacture/ListProjet");
 
 				}else {
-					request.setAttribute("Erreur", "Taille de l'image supérieur a la limite maximal (1Go).");
+					request.setAttribute("Erreur", "Taille de l'image supï¿½rieur a la limite maximal (1Go).");
 					doGet(request, response);
 
 				}
 			}
 		} catch (FileUploadException e) {
-			request.setAttribute("Erreur", "Erreur lors de l'ajout des données.");
+			request.setAttribute("Erreur", "Erreur lors de l'ajout des donnï¿½es.");
 			doGet(request, response);
 		} catch (Exception ex) {
 			request.setAttribute("Erreur", "Une erreur est survenue.");

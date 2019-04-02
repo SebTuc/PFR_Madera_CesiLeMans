@@ -46,10 +46,9 @@ public class Connexion extends HttpServlet {
 							if(pw.equals(utilisateur.getPassword())){
 								
 								HttpSession session = request.getSession();
-								session.setAttribute("Utilisateur", utilisateur);
+								session.setAttribute("SessionUtilisateur", utilisateur);
 								response.sendRedirect("/Modularis");
-								
-								
+																
 							}else {
 								valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";
 							}

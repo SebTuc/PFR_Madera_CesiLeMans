@@ -34,7 +34,7 @@ public class ListEntrepot extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		List<Entrepot> ListEntre = entrepotService.getAllEntrepots();
 		List<EntrepotBean> ListEntrepot = new ArrayList<EntrepotBean>();
@@ -67,7 +67,7 @@ public class ListEntrepot extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		doGet(request, response);
 	}

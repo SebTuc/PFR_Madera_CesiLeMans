@@ -31,7 +31,7 @@ public class ListFournisseur extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		List<Fournisseur> ListFournisseur = fournisseurService.getAllFournisseurs();
 		request.setAttribute("ListFournisseur", ListFournisseur);
@@ -54,7 +54,7 @@ public class ListFournisseur extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		if(action != null) {
 			if(action.equals("Delete")) {

@@ -16,7 +16,7 @@ public class UtilisateurService {
 		
 		if(donneesPersonelle != null && metier != null && login !=null && password !=null) {
 			
-			Utilisateur utilisateur = new Utilisateur(donneesPersonelle, metier,entrepot login, password);
+			Utilisateur utilisateur = new Utilisateur(donneesPersonelle, metier, login, password,entrepot);
 			
 			dao.persist(utilisateur);
 			

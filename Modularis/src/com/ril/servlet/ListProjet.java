@@ -74,7 +74,7 @@ public class ListProjet extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		List<Projet> ListProjet = projetService.getAllProjets();
 		List<Client> ListClient = clientService.getAllClients();
@@ -121,7 +121,7 @@ public class ListProjet extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 
 		if( btnEditer != null && projetId != null) {
@@ -147,7 +147,7 @@ public class ListProjet extends HttpServlet {
 			
 		}else if( btnSupprimer==null && btnEditer == null && btnEditerProjet == null && projetId != null && clientId != null) {
 			
-			//On Créer un devis pour sa on calcul le prix de tout HT et on recup la date du jour et bien sur le projet
+			//On Crï¿½er un devis pour sa on calcul le prix de tout HT et on recup la date du jour et bien sur le projet
 			if(MethodeUtile.isInteger(projetId) && MethodeUtile.isInteger(clientId)) {
 				Projet projet = projetService.getProjetById(Integer.valueOf(projetId));
 				Date date = new Date();

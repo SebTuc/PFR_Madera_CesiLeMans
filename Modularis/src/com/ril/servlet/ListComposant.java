@@ -40,7 +40,7 @@ public class ListComposant extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		List<Composant> ListCompo= composantService.getAllComposants();
 		List<FamilleComposant> ListFamilleComposant = familleComposantService.getAllFamilleComposant();
@@ -136,7 +136,7 @@ public class ListComposant extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 
 		if( btnEditer != null && composantId != null) {
@@ -154,7 +154,7 @@ public class ListComposant extends HttpServlet {
 					
 				}else {
 					//Empecher la suppresion ????
-					request.setAttribute("Erreur", "Impossible de supprimer se composant, le composant est utilisé dans un ou plusieur devis/catalogue.");
+					request.setAttribute("Erreur", "Impossible de supprimer se composant, le composant est utilisï¿½ dans un ou plusieur devis/catalogue.");
 					doGet(request, response);
 //					composant.setDisplay(false);
 //					composantService.editComposant(composant);
@@ -163,7 +163,7 @@ public class ListComposant extends HttpServlet {
 				
 			}else {
 				
-				request.setAttribute("Erreur", "L'id est incorrect, si le problème persiste contacter le support.");
+				request.setAttribute("Erreur", "L'id est incorrect, si le problï¿½me persiste contacter le support.");
 			}
 			
 			doGet(request, response);

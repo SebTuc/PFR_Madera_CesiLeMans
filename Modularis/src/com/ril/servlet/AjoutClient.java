@@ -32,7 +32,7 @@ public class AjoutClient extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		request.getRequestDispatcher("/jsp/application/Annuaire/AjoutClient.jsp").forward(request, response);
 	}
@@ -45,6 +45,7 @@ public class AjoutClient extends HttpServlet {
 		String prenom = request.getParameter("prenom");
 		String adresse = request.getParameter("adresse");	
 		String codePostal = request.getParameter("codePostal");
+		String ville = request.getParameter("ville");
 		String telephone = request.getParameter("telephone");	
 		String email = request.getParameter("email");
 		
@@ -53,7 +54,7 @@ public class AjoutClient extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		//rajouter verife du reste
 		if (nom != null && prenom != null) {						
@@ -62,21 +63,22 @@ public class AjoutClient extends HttpServlet {
 				if(adresse == null)adresse = "";
 				if(email == null)email = "";
 				if(codePostal == null)codePostal = "";
+				if(ville == null)ville = "";
 				
-				DonneesPersonelle donneePerso = donneeService.getDonneesPersonelleById(donneeService.addDonneesPersonelle(nom, prenom, email, adresse, telephone, codePostal));
+				DonneesPersonelle donneePerso = donneeService.getDonneesPersonelleById(donneeService.addDonneesPersonelle(nom, prenom, email, adresse, telephone, codePostal, ville));
 					
 					clientService.addClient(donneePerso);
 
 					//Definit la reponse comme "See Other" et redirige
-					//Evite la multi-insertion après un refresh de l'utilsateur		
+					//Evite la multi-insertion aprï¿½s un refresh de l'utilsateur		
 					response.sendRedirect("/Modularis/Annuaire/ListClient");
 					
 			}else {
-				request.setAttribute("Erreur", "Valeur saisie erronée.");
+				request.setAttribute("Erreur", "Valeur saisie erronï¿½e.");
 				doGet(request, response);
 			}
 		}else {
-			request.setAttribute("Erreur", "Valeur saisie erronée.");
+			request.setAttribute("Erreur", "Valeur saisie erronï¿½e.");
 			doGet(request, response);
 		}
 	}

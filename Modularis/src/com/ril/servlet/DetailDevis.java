@@ -55,7 +55,7 @@ public class DetailDevis extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		
 		String devisId = request.getParameter("id");
@@ -82,14 +82,14 @@ public class DetailDevis extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		String btnFacture = request.getParameter("btnFacture");
 		String devisId = request.getParameter("devisId");
 		
 		if(btnFacture != null && devisId != null) {
 			if(MethodeUtile.isInteger(devisId)) {
-				//passez en facturation a l'étape au plus faible index
+				//passez en facturation a l'ï¿½tape au plus faible index
 				
 				Devis devis = devisService.getDevisById(Integer.valueOf(devisId));
 				

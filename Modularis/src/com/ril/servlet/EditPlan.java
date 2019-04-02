@@ -35,7 +35,7 @@ public class EditPlan extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		//Verifier que l'on edit pas un projet/plan qui n'est pas en catalogue ou en devis
 		if(MethodeUtile.isInteger(planId)) {
@@ -81,7 +81,7 @@ public class EditPlan extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 
 		if( btnEditer != null && pieceId != null) {
@@ -113,7 +113,7 @@ public class EditPlan extends HttpServlet {
 							
 							response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditPiece?id="+IdPieceAdd);
 						}else {
-							request.setAttribute("Erreur", "Veuillez saisir un nom de pièce.");
+							request.setAttribute("Erreur", "Veuillez saisir un nom de piï¿½ce.");
 							doGet(request, response);
 						}
 					}catch(Exception e){

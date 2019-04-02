@@ -26,7 +26,7 @@ public class Configuration extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		request.getRequestDispatcher("/jsp/application/index/Configuration.jsp").forward(request, response);
 	}

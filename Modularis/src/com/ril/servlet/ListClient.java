@@ -21,16 +21,16 @@ import com.ril.utils.MethodeUtile;
 @WebServlet("/ListClient")
 public class ListClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   private ClientService clientService = new ClientService();
-	
+
+	private ClientService clientService = new ClientService();
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(!MethodeUtile.isConnected(response , request)) {
 			response.sendRedirect(request.getContextPath()+"/Connexion");
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		List<Client> ListClient = clientService.getAllClients();
 		request.setAttribute("ListClient", ListClient);
@@ -44,53 +44,56 @@ public class ListClient extends HttpServlet {
 		String idValeur = request.getParameter("id");
 		String nomClient = request.getParameter("nomClient");
 		String prenomClient = request.getParameter("prenomClient");
-		
+		String ville = request.getParameter("ville");
 		String codePostalClient = request.getParameter("codePostalClient");
 		String adresseClient = request.getParameter("adresseClient");
 		String telephoneClient = request.getParameter("telephoneClient");
 		String emailClient = request.getParameter("emailClient");
-		
+
 		String action = request.getParameter("action");
 		if(!MethodeUtile.isConnected(response , request)) {
 			response.sendRedirect(request.getContextPath()+"/Connexion");
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		if(action != null) {
 			if(action.equals("Delete")) {
-				
+
 				clientService.removeClientById(Integer.valueOf(idValeur));
-				
+
 			}else if(action.equals("Edition")) {
-				
+
 				Client client = clientService.getClientById(Integer.valueOf(idValeur));
 
 				//pour le reste c'est une erreur ! 
 				if(codePostalClient == null) codePostalClient = "";
 				if(telephoneClient == null) telephoneClient = "";
 				if(emailClient == null) emailClient = "";
-				
+				if(ville == null) ville = "";
+
 				client.getDonneesPersonelle().setNom(nomClient);
 				client.getDonneesPersonelle().setPrenom(prenomClient);
 				client.getDonneesPersonelle().setCodePostal(codePostalClient);
 				client.getDonneesPersonelle().setTelephone(telephoneClient);
 				client.getDonneesPersonelle().setEmail(emailClient);
 				client.getDonneesPersonelle().setAdresse(adresseClient);
+				client.getDonneesPersonelle().setVille(ville);
 
 				clientService.editClient(client);
-				
+
 				// Retour de l'objet modifier sous format json
 				response.setStatus(200);
 				response.setContentType("application/json");
 				response.getWriter().print("{ \"id\": \""+client.getClientId()+"\""
 						+ ", \"nomClient\": \""+client.getDonneesPersonelle().getNom()+"\""
-								+ ", \"prenomClient\": \""+client.getDonneesPersonelle().getPrenom()+"\""
-										+ ", \"adresseClient\": \""+client.getDonneesPersonelle().getAdresse()+"\""
-											+ ", \"codePostalClient\": \""+client.getDonneesPersonelle().getCodePostal()+"\""
-													+ ", \"telephoneClient\": \""+client.getDonneesPersonelle().getTelephone()+"\""
-															+ ", \"emailClient\": \""+client.getDonneesPersonelle().getEmail()+"\"}");
+						+ ", \"prenomClient\": \""+client.getDonneesPersonelle().getPrenom()+"\""
+						+ ", \"adresseClient\": \""+client.getDonneesPersonelle().getAdresse()+"\""
+						+ ", \"ville\": \""+client.getDonneesPersonelle().getVille()+"\""
+						+ ", \"codePostalClient\": \""+client.getDonneesPersonelle().getCodePostal()+"\""
+						+ ", \"telephoneClient\": \""+client.getDonneesPersonelle().getTelephone()+"\""
+						+ ", \"emailClient\": \""+client.getDonneesPersonelle().getEmail()+"\"}");
 				response.getWriter().flush();
 			}
 		}

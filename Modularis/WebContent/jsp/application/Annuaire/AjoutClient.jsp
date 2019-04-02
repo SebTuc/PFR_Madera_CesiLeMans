@@ -39,11 +39,16 @@
 						placeholder="Prenom Utilisateur" required>
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="formGroupExampleInput2">Adresse</label> <input
+					type="text" class="form-control" name="adresse" id="adresse"
+					placeholder="Adresse">
+			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="formGroupExampleInput2">Adresse</label> <input
-						type="text" class="form-control" name="adresse" id="adresse"
-						placeholder="Adresse">
+					<label for="formGroupExampleInput2">Ville</label> <input
+						type="text" class="form-control" name="ville" id="ville"
+						placeholder="Ville">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="formGroupExampleInput2">Code Postal</label> <input
@@ -51,6 +56,7 @@
 						placeholder="Code postal">
 				</div>
 			</div>
+
 			<div class="form-group">
 				<label for="formGroupExampleInput2">Telephone</label> <input
 					type="text" class="form-control" name="telephone" id="telephone"

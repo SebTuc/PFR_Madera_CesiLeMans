@@ -223,6 +223,14 @@
     <url-pattern>/Annuaire/AjoutUtilisateur</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>EditUtilisateur</servlet-name>
+    <servlet-class>com.ril.servlet.EditUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditUtilisateur</servlet-name>
+    <url-pattern>/Annuaire/EditUtilisateur</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ListUtilisateur</servlet-name>
     <servlet-class>com.ril.servlet.ListUtilisateur</servlet-class>
   </servlet>

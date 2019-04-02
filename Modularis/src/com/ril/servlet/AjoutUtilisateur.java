@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ril.model.DonneesPersonelle;
+import com.ril.model.Entrepot;
 import com.ril.model.Metier;
 import com.ril.model.Utilisateur;
 import com.ril.service.DonneesPersonelleService;
+import com.ril.service.EntrepotService;
 import com.ril.service.MetierService;
 import com.ril.service.UtilisateurService;
 import com.ril.utils.MethodeUtile;
@@ -28,6 +30,8 @@ public class AjoutUtilisateur extends HttpServlet {
 	private UtilisateurService utilisateurService = new UtilisateurService();
 	private DonneesPersonelleService donneeService = new DonneesPersonelleService(); 
 	private MetierService metierService = new MetierService(); 
+	private EntrepotService entrepotService = new EntrepotService(); 
+
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -36,7 +40,7 @@ public class AjoutUtilisateur extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		List<Metier> ListMetier = metierService.getAllMetiers();
 		request.setAttribute("ListMetier", ListMetier);
@@ -49,9 +53,11 @@ public class AjoutUtilisateur extends HttpServlet {
 		String prenom = request.getParameter("prenom");
 		String adresse = request.getParameter("adresse");	
 		String codePostal = request.getParameter("codePostal");
+		String ville = request.getParameter("ville");
 		String telephone = request.getParameter("telephone");	
 		String email = request.getParameter("email");
 		String metier = request.getParameter("metier");
+		String entrepot = request.getParameter("entrepot");
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
@@ -60,7 +66,7 @@ public class AjoutUtilisateur extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		//rajouter verife du reste
 		if (nom != null) {						
@@ -69,6 +75,7 @@ public class AjoutUtilisateur extends HttpServlet {
 				if(adresse == null)adresse = "";
 				if(email == null)email = "";
 				if(codePostal == null)codePostal = "";
+				if(ville == null)ville = "";
 				
 				if(!password.equals(confirmPassword)) {
 					
@@ -78,14 +85,15 @@ public class AjoutUtilisateur extends HttpServlet {
 					
 				}else {
 					
-					DonneesPersonelle donneePerso = donneeService.getDonneesPersonelleById(donneeService.addDonneesPersonelle(nom, prenom, email, adresse, telephone, codePostal));
+					DonneesPersonelle donneePerso = donneeService.getDonneesPersonelleById(donneeService.addDonneesPersonelle(nom, prenom, email, adresse, telephone, codePostal, ville));
 					
 					Metier boulot = metierService.getMetierById(Integer.valueOf(metier));
+					Entrepot bati = entrepotService.getEntrepotById(Integer.valueOf(entrepot));
 					
-					utilisateurService.addUtilisateur(donneePerso, boulot, login, password);
+					utilisateurService.addUtilisateur(donneePerso, boulot,bati, login, password);
 
 					//Definit la reponse comme "See Other" et redirige
-					//Evite la multi-insertion après un refresh de l'utilsateur		
+					//Evite la multi-insertion aprï¿½s un refresh de l'utilsateur		
 					response.sendRedirect("/Modularis/Annuaire/ListUtilisateur");
 					
 				}

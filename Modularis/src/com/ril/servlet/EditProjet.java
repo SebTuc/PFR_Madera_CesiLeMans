@@ -36,7 +36,7 @@ private PlanService planService = new PlanService();
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		//Verifier que l'on edit pas un projet qui n'est pas en catalogue ou en devis
 		if(MethodeUtile.isInteger(projetId)) {
@@ -84,7 +84,7 @@ private PlanService planService = new PlanService();
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		if( btnEditer != null && planId != null) {
 

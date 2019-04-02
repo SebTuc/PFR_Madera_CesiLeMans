@@ -31,7 +31,7 @@ public class AjoutEtapeFacture extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		List<EtapeFacture> ListEtapeFacture = etapeFactureService.getAllEtapeFacture();
 		request.setAttribute("ListEtapeFacture", ListEtapeFacture);
@@ -45,7 +45,7 @@ public class AjoutEtapeFacture extends HttpServlet {
 			return;
 		}else {
 			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("Utilisateur"));
+			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
 		}
 		String insertNEtape = request.getParameter("insertNEtape");
 		String insertEtape = request.getParameter("insertEtape");

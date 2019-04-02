@@ -50,7 +50,7 @@ public class MethodeUtile {
 	
 	public static boolean isConnected(HttpServletResponse response , HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("Utilisateur") == null) {
+		if(session.getAttribute("SessionUtilisateur") == null) {
 			return false;
 		}else {
 			return true;
