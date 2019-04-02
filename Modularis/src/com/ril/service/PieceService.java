@@ -62,12 +62,15 @@ public class PieceService {
 		if(id != null) {
 
 			Piece piece = getPieceById(id);
+			if(piece.getModules().size()!=0) {
+				List<Module> list = new ArrayList<Module>(piece.getModules());
+				
+				removeListModuleToPiece(list,piece);
+
+				piece = getPieceById(piece.getPieceId());
+			}
 			
-			List<Module> list = new ArrayList<Module>(piece.getModules());
 			
-			removeListModuleToPiece(list,piece);
-			
-			piece = getPieceById(piece.getPieceId());
 			
 			dao.remove(piece);
 		}
@@ -92,11 +95,13 @@ public class PieceService {
 		
 		if(piece != null) {
 			
-			List<Module> list = new ArrayList<Module>(piece.getModules());
-			
-			removeListModuleToPiece(list,piece);
-			
-			piece = getPieceById(piece.getPieceId());
+			if(piece.getModules().size()!=0) {
+				List<Module> list = new ArrayList<Module>(piece.getModules());
+				
+				removeListModuleToPiece(list,piece);
+
+				piece = getPieceById(piece.getPieceId());
+			}
 			
 			dao.remove(piece);
 		}

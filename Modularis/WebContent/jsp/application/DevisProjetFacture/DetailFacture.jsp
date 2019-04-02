@@ -46,7 +46,7 @@
 				<div class="row justify-content-center w-100">
 					<div class="media w-100">
 						<div class="media-body">
-							<h5>Projet : ${fn:escapeXml(Facture.devis.projet.nom)} | Prix du devis: ${fn:escapeXml(Facture.devis.prixHt)}&euro; </h5>
+							<h5>Projet : ${fn:escapeXml(Facture.devis.projet.nom)} | Prix du devis HT: ${fn:escapeXml(Facture.devis.prixHt)}&euro; | Prix du devis TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${(Facture.devis.prixHt) * 1.2}" maxFractionDigits="2" />&euro; </h5>
 						</div>
 						<c:choose>
 							<c:when test="${Facture.devis.projet.image.imageId != null}">
@@ -67,18 +67,18 @@
 						<ul>
 							<c:forEach var="Piece" items="${Plan.pieces}">
 								<li><input type="checkbox"
-									name="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}"
-									id="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}">
+									name="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}${fn:escapeXml(Plan.planId)}"
+									id="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}${fn:escapeXml(Plan.planId)}">
 									<label
-									for="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}">Pièce
+									for="${fn:escapeXml(Piece.nom)}${fn:escapeXml(Piece.pieceId)}${fn:escapeXml(Plan.planId)}">Pièce
 										: ${fn:escapeXml(Piece.nom)} - ${fn:escapeXml(Piece.surface)}m&sup2;</label>
 									<ul>
 										<c:forEach var="Module" items="${Piece.modules}">
 											<li><input type="checkbox"
-												name="${fn:escapeXml(Module.nom)}${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}"
-												id="${fn:escapeXml(Module.nom)}${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}">
+												name="${fn:escapeXml(Module.nom)}${fn:escapeXml(Module.moduleId)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}"
+												id="${fn:escapeXml(Module.nom)}${fn:escapeXml(Module.moduleId)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}">
 												<label
-												for="${fn:escapeXml(Module.nom)}${fn:escapeXml(Plan.nom)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}">Module
+												for="${fn:escapeXml(Module.nom)}${fn:escapeXml(Module.moduleId)}${fn:escapeXml(Plan.planId)}${fn:escapeXml(Piece.pieceId)}">Module
 													: ${fn:escapeXml(Module.nom)}</label>
 												<ul>
 												<c:choose>
@@ -86,7 +86,7 @@
 													<li>
 														<h4>
 															> ${fn:escapeXml(Module.angle.typeAngle)}
-																HT: ${fn:escapeXml(Module.angle.prixUnitaire)}&euro; 
+																HT: ${fn:escapeXml(Module.angle.prixUnitaire)}&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Module.angle.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro;
 															</h4>
 													</li>
 												</c:when>
@@ -100,7 +100,7 @@
 																x${fn:escapeXml(ModuleXComposant.quantite)} | HT:
 																<fmt:formatNumber type="number" groupingUsed="false"
 																	value="${fn:escapeXml(ModuleXComposant.quantite * ModuleXComposant.composant.prixUnitaire)}"
-																	maxFractionDigits="3" />
+																	maxFractionDigits="2" /> | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml((ModuleXComposant.quantite * ModuleXComposant.composant.prixUnitaire) * 1.2)}" maxFractionDigits="2" />&euro; />
 																&euro;
 															</h4>
 														</li>
@@ -115,19 +115,19 @@
 					<c:choose>
 						<c:when test="${PourcentageDejaPayer != 0}">
 						<li>
-							<h5><del> D&eacute;j&agrave; pay&eacute; (${fn:escapeXml(PourcentageDejaPayer)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(DejaPayer)}" maxFractionDigits="2" />&euro;</del></h5>
+							<h5><del> D&eacute;j&agrave; pay&eacute; (${fn:escapeXml(PourcentageDejaPayer)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(DejaPayer)}" maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${DejaPayer * 1.2}" maxFractionDigits="2" />&euro;</del></h5>
 						</li>
 						</c:when>
 					</c:choose>
 					
 					
 					<li>
-						<h4>> ${fn:escapeXml(Facture.etapeFacture.etape)} (${fn:escapeXml(Facture.etapeFacture.pourcentage)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro;</h4>
+						<h4>> ${fn:escapeXml(Facture.etapeFacture.etape)} (${fn:escapeXml(Facture.etapeFacture.pourcentage)} %) HT: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${ResteAPayer * 1.2}" maxFractionDigits="2" />&euro;</h4>
 					</li>
 				</ul>
 				<br> <br>
 				<div class="row justify-content-end w-100"
-					style="color: red; font-size: 180%;">Prix total HT : ${fn:escapeXml(ResteAPayer)}&euro;</div>
+					style="color: red; font-size: 150%;">Prix total HT : <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ResteAPayer)}" maxFractionDigits="2" />&euro;  | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${ResteAPayer * 1.2}" maxFractionDigits="2" />&euro;</div>
 			</div>
 		</div>
 		<div id="editor"></div>
@@ -147,7 +147,9 @@
 				<button class="btn btn-success btn-block btn-blok" name="btnFacture"
 					id="btnFacture">Etape Facturation suivante</button>
 			</div>
-			
+			<div class="col-md-3 col-sm-6">
+					<a href="/Modularis/DevisFacture/DetailDevis?id=${fn:escapeXml(Facture.devis.devisId)}" class="btn btn-primary btn-block">Visualiser detail devis</a>
+				</div>
 			<br>
 			<div class="col-md-3 col-sm-6">
 					<a href="/Modularis/DevisFacture/Facture?id=${fn:escapeXml(Facture.factureId)}" class="btn btn-primary btn-block">Générer PDF</a>

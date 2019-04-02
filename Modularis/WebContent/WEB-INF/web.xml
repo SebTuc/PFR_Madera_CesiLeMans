@@ -92,7 +92,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>DevisPDF</servlet-name>
-    <url-pattern>/DevisFacture/DevisPDF</url-pattern>
+    <url-pattern>/DevisFacture/Devis</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Annuaire</servlet-name>

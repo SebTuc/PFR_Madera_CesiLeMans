@@ -58,7 +58,7 @@ public class Plan implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PROJET_ID", nullable = false)
+	@JoinColumn(name = "PROJET_ID", nullable = false )
 	public Projet getProjet() {
 		return this.projet;
 	}
@@ -76,7 +76,7 @@ public class Plan implements java.io.Serializable {
 		this.nom = nom;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plan", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plan",cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<Piece> getPieces() {
 		return this.pieces;
 	}

@@ -9,7 +9,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/Facture.css" rel="stylesheet">
 </head>
 <body>
-	<a href="/Modularis/DevisFacture/ListDevis"
+	<a href="/Modularis/DevisFacture/DetailDevis?id=${fn:escapeXml(Devis.devisId)}"
 		class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>Retour</a>
 	<br />
     <div class="invoice-box" id="section-to-print">
@@ -46,7 +46,7 @@
                                 <span class="t-invoice-from"></span><br>
                                 <span id="company-name">MADERA</span><br>
                                 <span id="company-address">${fn:escapeXml(Devis.utilisateur.entrepot.lieux)}</span><br>
-                                <span id="company-country">FRANCE</span><br>
+                                <span id="company-town">FRANCE</span><br>
                             </td>
                             
                             <td class="information-client">
@@ -64,7 +64,7 @@
         <table class="invoice-items" cellpadding="0" cellspacing="0">
         	 <tr class="heading">
         		<td><span class="t-item">Composant</span></td>
-				<td><span class="t-price">Prix U</span></td>
+				<td><span class="t-price">Prix U (HT | TTC)</span></td>
             </tr>  
             <c:forEach var="Plan" items="${Devis.projet.plans}">
             	<c:forEach var="Piece" items="${Plan.pieces}">
@@ -73,13 +73,13 @@
 		            	<c:choose>
 							<c:when test="${Module.angle != null }">
 								<td>${fn:escapeXml(Module.angle.typeAngle)}</td>
-							    <td>${fn:escapeXml(Module.angle.prixUnitaire)}&euro;</td>
+							    <td>${fn:escapeXml(Module.angle.prixUnitaire)}&euro; | <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Module.angle.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro;</td>
 							</c:when>
 						</c:choose>
 	            		<c:forEach var="ModuleXComposant" items="${Module.moduleXComposants}">
 	            			<tr>
 				                <td>${fn:escapeXml(ModuleXComposant.composant.nom)} (x${fn:escapeXml(ModuleXComposant.quantite)})</td>
-				                <td>${fn:escapeXml(ModuleXComposant.composant.prixUnitaire)}&euro;</td>
+				                <td>${fn:escapeXml(ModuleXComposant.composant.prixUnitaire)}&euro; | <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(ModuleXComposant.composant.prixUnitaire * 1.2)}" maxFractionDigits="2" />&euro;</td>
 			                </tr>
 		                </c:forEach>
 	                </c:forEach>
@@ -89,7 +89,7 @@
         
         <div class="invoice-summary">
             <div class="invoice-total">TOTAL HT :
-				${Devis.prixHt}&euro;</div>
+				<fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Devis.prixHt)}" maxFractionDigits="2" />&euro; | TTC: <fmt:formatNumber type="number" groupingUsed="false" value="${fn:escapeXml(Devis.prixHt * 1.2)}" maxFractionDigits="2" />&euro;</div>
             <div class="invoice-final"></div>
             <div class="invoice-exchange"></div>
         </div>

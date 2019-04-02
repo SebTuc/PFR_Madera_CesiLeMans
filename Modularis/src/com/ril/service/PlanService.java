@@ -82,9 +82,10 @@ public class PlanService {
 			Plan plan = getPlanById(id);
 			
 			for(Piece piece : plan.getPieces()) {
-				
-				pieceService.removePiece(piece);
-				
+				if(piece.getModules().size()!=0) {
+					List<Module> list = new ArrayList<Module>(piece.getModules());
+					removeListModuleToPiece(list,piece);
+				}
 			}
 			
 			plan = getPlanById(plan.getPlanId());
@@ -99,13 +100,12 @@ public class PlanService {
 		if(plan != null) {
 			
 			for(Piece piece : plan.getPieces()) {
-				
-				List<Module> list = new ArrayList<Module>(piece.getModules());
-				removeListModuleToPiece(list,piece);
-				
+				if(piece.getModules().size()!=0) {
+					List<Module> list = new ArrayList<Module>(piece.getModules());
+					removeListModuleToPiece(list,piece);
+					plan = getPlanById(plan.getPlanId());
+				}
 			}
-			
-			plan = getPlanById(plan.getPlanId());
 			
 			dao.remove(plan);
 		}

@@ -8,6 +8,7 @@
   <a href="/Modularis/Annuaire">Annuaire</a>
   <a href="/Modularis/DevisFacture">Devis/Facture</a>
   <a href="/Modularis/Catalogue">Catalogue</a>
+  <a href="/Modularis/GestionStock/ListEntrepot">Stock</a>
 </div>
 
 <!-- NAVBAR -->

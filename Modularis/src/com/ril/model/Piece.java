@@ -49,7 +49,6 @@ public class Piece implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "PIECE_ID", unique = true, nullable = false)
 	public Integer getPieceId() {
 		return this.pieceId;
