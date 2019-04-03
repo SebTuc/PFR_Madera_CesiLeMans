@@ -56,7 +56,7 @@ public class DetailDevis extends HttpServlet {
 			 if(devis.getFactures().size() != 0) {
 				 request.setAttribute("hiddenBtn", true);
 			 }else {
-				 request.setAttribute("hiddenBtn", true);
+				 request.setAttribute("hiddenBtn", false);
 			 }
 		        
 		        request.setAttribute("Devis", devis);

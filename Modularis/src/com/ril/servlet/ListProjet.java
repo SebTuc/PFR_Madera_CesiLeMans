@@ -107,15 +107,6 @@ public class ListProjet extends HttpServlet {
 		String btnEditerProjet = request.getParameter("btnEditerProjet");
 		String clientId = request.getParameter("clientId");
 
-
-		HttpSession session = request.getSession(false);
-		if(session == null) {
-			response.sendRedirect(request.getContextPath()+"/Modularis");
-			return;
-		}
-		request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-
-
 		if( btnEditer != null && projetId != null) {
 			if(MethodeUtile.isInteger(projetId)) {
 				response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditProjet?id="+projetId);
@@ -143,8 +134,8 @@ public class ListProjet extends HttpServlet {
 			if(MethodeUtile.isInteger(projetId) && MethodeUtile.isInteger(clientId)) {
 				Projet projet = projetService.getProjetById(Integer.valueOf(projetId));
 				Date date = new Date();
-
-				Utilisateur utilisateur = (Utilisateur) session.getAttribute("Utilisateur");
+				HttpSession session = request.getSession(false);
+				Utilisateur utilisateur = (Utilisateur) session.getAttribute("SessionUtilisateur");
 				//OU
 				//				Utilisateur utilisateur = session.getAttribute("Utilisateur");
 				Client client = clientService.getClientById(Integer.valueOf(clientId));

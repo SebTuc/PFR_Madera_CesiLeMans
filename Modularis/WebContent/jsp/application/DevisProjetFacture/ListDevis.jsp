@@ -44,7 +44,7 @@
 								<div class="media">
   									<div class="media-body">
 										<input class="form-check-input" type="radio" name="radio" id="${fn:escapeXml(Devis.devisId)}" value="${fn:escapeXml(Devis.devisId)}">
-										<label class="form-check-label label-lg" for="${fn:escapeXml(Devis.devisId)}">${fn:escapeXml(Devis.projet.nom)} </label>
+										<label class="form-check-label label-lg" for="${fn:escapeXml(Devis.devisId)}">${fn:escapeXml(Devis.projet.nom)} |  ${fn:escapeXml(Devis.client.donneesPersonelle.prenom)}  ${fn:escapeXml(Devis.client.donneesPersonelle.nom)}</label>
 									</div>
 									<c:choose>
 										<c:when test="${Devis.projet.image.imageId != null}">
@@ -73,26 +73,8 @@
 		
 </form>
 </div>
-<div class="modal static fade" id="ModalConfirmationSuppression" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationSuppressionTitle" aria-hidden="true">
-	  	<div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="ModalConfirmationSuppressionTitle">Suppression</h5>
-		      </div>
-		      <div class="modal-body">
-		        Etez-vous sur de vouloir continuer ?
-		      </div>
-			      <div class="modal-footer">
-			        <button type="button" id="btnModalSupprNon" class="btn btn-primary" data-dismiss="modal">Non</button>
-			    	<button type="button" id="btnModalSupprOui" class="btn btn-danger">Oui</button>
-		    	</div>
-		   	</div>
-		</div>
-	</div>
-
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
-  <script type='text/javascript'
-		src='<%=request.getContextPath()%>/resources/js/generateDevis.js'></script>
+	<jsp:include page="/jsp/common/confirmModal.jsp"/>
 </body>
 
 </html>

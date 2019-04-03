@@ -40,7 +40,7 @@ public class AuthentificationFilter implements Filter {
 		String loginURI = req.getContextPath() + "/Connexion";
 		
 		String uri = req.getRequestURI();
-		this.context.log("Requested Resource::"+uri);
+//		this.context.log("Requested Resource::"+uri);
 		
 		HttpSession session = req.getSession(false);
 		
