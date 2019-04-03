@@ -54,7 +54,7 @@ public class EditUtilisateur extends HttpServlet {
 			if(MethodeUtile.isInteger(idUtilisateur)) {
 				if (isAdmin || utilisateurConnected.getUtilisateurId() == Integer.parseInt(idUtilisateur)){						
 					utilisateurToEdit = utilisateurService.getUtilisateurById(Integer.parseInt(idUtilisateur));
-				} else { error = "Vous n'avez pas l'autorisation d'acceder ï¿½ cette page"; }
+				} else { error = "Vous n'avez pas l'autorisation d'acceder à cette page"; }
 			} else {	error = "Id non valide"; }
 		} else {
 			utilisateurToEdit = utilisateurService.getUtilisateurById(utilisateurConnected.getUtilisateurId());

@@ -47,9 +47,6 @@ public class DetailDevis extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-	
-		
 		String devisId = request.getParameter("id");
 		if(MethodeUtile.isInteger(devisId)) {
 			 Devis devis = devisService.getDevisById(Integer.valueOf(devisId));

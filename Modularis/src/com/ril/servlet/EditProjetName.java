@@ -115,11 +115,11 @@ public class EditProjetName extends HttpServlet {
 						File file = File.createTempFile("img", ".png", uploadDir);
 						item.write(file);
 
-						if(file.length() < 10000000){
+						if(file.length() < 9000000){
 
 							array = Files.readAllBytes(file.toPath());
 						}else {
-							request.setAttribute("Erreur", "Taille de l'image supï¿½rieur a la limite maximal (1Go).");
+							request.setAttribute("Erreur", "Taille de l'image supï¿½rieur a la limite maximal (9Mo).");
 							doGet(request, response);
 
 						}
@@ -137,7 +137,7 @@ public class EditProjetName extends HttpServlet {
 
 			}
 		} catch (FileUploadException e) {
-			request.setAttribute("Erreur", "Erreur lors de l'ajout des donnï¿½es.");
+			request.setAttribute("Erreur", "Erreur lors de l'ajout des données.");
 			doGet(request, response);
 		} catch (Exception ex) {
 			request.setAttribute("Erreur", "Une erreur est survenue.");

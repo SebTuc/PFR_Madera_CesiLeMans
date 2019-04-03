@@ -140,12 +140,12 @@
 			value="${fn:escapeXml(Facture.factureId) }" style="display: none">
 		<div class="row justify-content-center">
 			<div class="col-md-3 col-sm-6">
-				<button type="button" class="btn btn-warning btn-block btn-blok" name="btnFactureBack"
+				<button type="button" class="btn btn-warning btn-block" name="btnFactureBack"
 					id="btnFacturePrev" data-toggle="modal"
 					data-target="#ModalSimpleConfirmation">Etape Facturation pr&eacute;c&eacute;dente</button>
 			</div>
 			<div class="col-md-3 col-sm-6">
-				<button type="button" class="btn btn-success btn-block btn-blok" name="btnFacture"
+				<button type="button" class="btn btn-success btn-block" name="btnFacture"
 					id="btnFactureNext" data-toggle="modal"
 					data-target="#ModalSimpleConfirmation">Etape Facturation suivante</button>
 			</div>

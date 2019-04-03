@@ -24,7 +24,7 @@ public class ListUtilisateur extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur)session.getAttribute("SessionUtilisateur");
 		if(utilisateur != null) {			
 			if (!utilisateur.getMetier().getNom().equals("Moderateur")) {
@@ -32,9 +32,6 @@ public class ListUtilisateur extends HttpServlet {
 				return;
 			}
 		}
-
-		request.setAttribute("Utilisateur", utilisateur);
-
 		List<Utilisateur> ListUtilisateur = utilisateurService.getAllUtilisateurs();
 		request.setAttribute("ListUtilisateur", ListUtilisateur);
 		request.getRequestDispatcher("/jsp/application/Annuaire/ListUtilisateur.jsp").forward(request, response);

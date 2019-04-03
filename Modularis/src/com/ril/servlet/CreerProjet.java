@@ -49,6 +49,7 @@ public class CreerProjet extends HttpServlet {
 
 		FileItemFactory itemfactory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(itemfactory);
+		
 		try {
 
 			List<FileItem> items = upload.parseRequest(request);
@@ -76,7 +77,7 @@ public class CreerProjet extends HttpServlet {
 				File file = File.createTempFile("img", ".png", uploadDir);
 				item.write(file);
 
-				if(file.length() < 10000000){
+				if(file.length() < 9000000){
 
 					byte[] array = Files.readAllBytes(file.toPath());
 					Integer imageId = imageService.addImage(array);
@@ -87,13 +88,13 @@ public class CreerProjet extends HttpServlet {
 					response.sendRedirect("/Modularis/DevisFacture/ListProjet");
 
 				}else {
-					request.setAttribute("Erreur", "Taille de l'image supï¿½rieur a la limite maximal (1Go).");
+					request.setAttribute("Erreur", "Taille de l'image supérieur a la limite maximal (9Mo).");
 					doGet(request, response);
 
 				}
 			}
 		} catch (FileUploadException e) {
-			request.setAttribute("Erreur", "Erreur lors de l'ajout des donnï¿½es.");
+			request.setAttribute("Erreur", "Erreur lors de l'ajout des données.");
 			doGet(request, response);
 		} catch (Exception ex) {
 			request.setAttribute("Erreur", "Une erreur est survenue.");
