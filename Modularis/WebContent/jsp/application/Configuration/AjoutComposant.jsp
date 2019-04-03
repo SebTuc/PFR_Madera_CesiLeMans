@@ -45,7 +45,7 @@
 					<label for="familleComposant">Famille Composant</label> 
 					<select
 						id="familleComposant" name="familleComposant"
-						class="custom-select" required>
+						class="w-100 selectpicker" data-live-search="true" required>
 						<option value=""></option>
 						<c:forEach var="FamilleComposant" items="${ListFamilleComposant }">
 							<c:choose>
@@ -61,7 +61,7 @@
 				</div>
 				<div class="form-group col-md-4">
 					<label for="fournisseur">Fournisseur</label> <select
-						id="fournisseur" class="custom-select" name="fournisseur" required>
+						id="fournisseur" class="w-100 selectpicker" data-live-search="true" name="fournisseur" required>
 						<option value=""></option>
 						<c:forEach var="Fournisseur" items="${ListFournisseur }">
 							<c:choose>
@@ -77,7 +77,7 @@
 				</div>
 				<div class="form-group col-md-4">
 					<label for="materiaux">Materiaux</label> <select id="materiaux"
-						name="materiaux" class="custom-select" required>
+						name="materiaux" class="w-100 selectpicker" data-live-search="true" required>
 						<option value=""></option>
 						<c:forEach var="Materiaux" items="${ListMateriaux }">
 							<c:choose>

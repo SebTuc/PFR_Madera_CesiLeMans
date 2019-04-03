@@ -98,7 +98,7 @@
 				<div class="modal-body">
 					<label for="Composant">Client</label>
 					<!-- 					<select id="Composant" name="Composant" class="selectpicker" data-live-search="true" required> -->
-					<select id="Client" name="Client" class="custom-select"
+					<select id="Client" name="Client"  class="w-100 selectpicker" data-live-search="true"
 						required>
 						<option value=""></option>
 						<c:forEach var="Client" items="${ListClient}">

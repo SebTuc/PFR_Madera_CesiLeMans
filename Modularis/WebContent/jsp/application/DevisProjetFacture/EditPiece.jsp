@@ -96,7 +96,7 @@
 		 	</div>
 			<div class="form-group col-md-4 col-6">
 				<label for="module">Selectionner le module a ajouter</label> 
-				<select id="module" name="module" class="custom-select">
+				<select id="module" name="module"  class="w-100 selectpicker" data-live-search="true">
 						<option value=""></option>
 					<c:forEach var="Module" items="${ListModule }">
 						<option value="${fn:escapeXml(Module.moduleId) }">${fn:escapeXml(Module.nom) }  |  Gamme : ${fn:escapeXml(Module.gamme.nom)}</option>

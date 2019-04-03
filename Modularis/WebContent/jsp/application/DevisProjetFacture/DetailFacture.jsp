@@ -135,17 +135,19 @@
 	<br>
 	<br>
 
-	<form method="post">
+	<form method="post" id="formNextPrev">
 		<input type="text" name="factureId" id="factureId"
 			value="${fn:escapeXml(Facture.factureId) }" style="display: none">
 		<div class="row justify-content-center">
 			<div class="col-md-3 col-sm-6">
-				<button class="btn btn-warning btn-block btn-blok" name="btnFactureBack"
-					id="btnFactureBack">Etape Facturation pr&eacute;c&eacute;dente</button>
+				<button type="button" class="btn btn-warning btn-block btn-blok" name="btnFactureBack"
+					id="btnFacturePrev" data-toggle="modal"
+					data-target="#ModalSimpleConfirmation">Etape Facturation pr&eacute;c&eacute;dente</button>
 			</div>
 			<div class="col-md-3 col-sm-6">
-				<button class="btn btn-success btn-block btn-blok" name="btnFacture"
-					id="btnFacture">Etape Facturation suivante</button>
+				<button type="button" class="btn btn-success btn-block btn-blok" name="btnFacture"
+					id="btnFactureNext" data-toggle="modal"
+					data-target="#ModalSimpleConfirmation">Etape Facturation suivante</button>
 			</div>
 			<div class="col-md-3 col-sm-6">
 					<a href="/Modularis/DevisFacture/DetailDevis?id=${fn:escapeXml(Facture.devis.devisId)}" class="btn btn-primary btn-block">Visualiser detail devis</a>
@@ -158,6 +160,20 @@
 			<br>
 		</div>
 	</form>
+	
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />
+	<jsp:include page="/jsp/common/confirmModal.jsp" />
+	<script type="text/javascript">
+	$("#btnFactureNext").add("#btnFacturePrev").click(function(e){
+		$("#btnSimpleModalOui").click(function(){			
+			var input = $("<input>")
+	        .attr("type", "hidden")
+	        .attr("name", e.target.attributes.name.value);
+			
+	        $('#formNextPrev').append(input);
+			$("#formNextPrev").submit();
+		})
+	});
+	</script>
 </body>
 </html>
