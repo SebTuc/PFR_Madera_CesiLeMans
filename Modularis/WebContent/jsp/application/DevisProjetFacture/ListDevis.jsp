@@ -28,6 +28,49 @@
 <div class="row justify-content-center">
 	<h3>Liste des Devis en attente</h3>
 </div>
+<div class="row justify-content-center">
+	<button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#collapsedCritere" aria-expanded="false" aria-controls="collapseExample" >Ajouter critere de recherce</button>
+</div>
+<br>
+<div class="collapse" id="collapsedCritere">
+	<form method="get">
+		<div class="row justify-content-center">
+			<div class="jumbotron" style="padding: 2rem 2rem">
+				<h5>selectionner le	 critere de recherche et valider :</h5>
+				<br>
+				<label for="client">Client</label>
+				<select id="clientId" class="custom-select" name="clientId" required>
+					<option value="-1" selected></option>
+			   		<c:forEach var="Client" items="${ListClient }">
+			   			<c:choose>
+						    <c:when test="${Client.clientId == clientId }">
+						       <option selected value="${fn:escapeXml(Client.clientId) }">${fn:escapeXml(Client.donneesPersonelle.nom)}  ${fn:escapeXml(Client.donneesPersonelle.prenom)} </option>
+						    </c:when>    
+						    <c:otherwise>
+								<option value="${fn:escapeXml(Client.clientId) }">${fn:escapeXml(Client.donneesPersonelle.nom)}  ${fn:escapeXml(Client.donneesPersonelle.prenom)} </option>
+						    </c:otherwise>
+						</c:choose>
+			   		</c:forEach>
+				</select>
+				<br><br>
+				<div class="row justify-content-center">
+					<div class="col-6 justify-content-center">
+						<div class="row justify-content-center">
+							<button class="btn btn-primary" name="btnCritere" id="btnCritere">Appliquer</button>
+						</div>
+					</div>
+					<div class="col-6 justify-content-center">
+						<div class="row justify-content-center">
+							<a href="/Modularis/DevisFacture/ListDevis" class="btn btn-primary">Refresh</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+</div>
+<br>
 <form id="List" method="post">
 	<div class="row justify-content-center">
 		<ul class="list-group list-radio" >

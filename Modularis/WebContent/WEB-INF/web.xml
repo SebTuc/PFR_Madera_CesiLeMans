@@ -107,16 +107,16 @@
     <servlet-class>com.ril.servlet.Annuaire</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Catalogue</servlet-name>
-    <url-pattern>/Catalogue</url-pattern>
+    <servlet-name>Annuaire</servlet-name>
+    <url-pattern>/Annuaire</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Catalogue</servlet-name>
     <servlet-class>com.ril.servlet.Catalogue</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Annuaire</servlet-name>
-    <url-pattern>/Annuaire</url-pattern>
+    <servlet-name>Catalogue</servlet-name>
+    <url-pattern>/Catalogue</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>AjoutMetier</servlet-name>

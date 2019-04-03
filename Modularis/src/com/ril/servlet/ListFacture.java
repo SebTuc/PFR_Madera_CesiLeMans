@@ -1,7 +1,10 @@
 package com.ril.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ril.model.Client;
 import com.ril.model.Facture;
+import com.ril.service.ClientService;
 import com.ril.service.FactureService;
 import com.ril.utils.MethodeUtile;
 
@@ -22,17 +27,42 @@ public class ListFacture extends HttpServlet {
 
 
 	private FactureService factureService = new FactureService();
+	private ClientService clientService = new ClientService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Facture> ListFacture = factureService.getAllFacture();
+		List<Facture> ListFact = factureService.getAllFacture();
 		//Trier par date
-
-		if(ListFacture == null) {
+		List<Facture> ListFacture = new ArrayList<Facture>(ListFact);
+		//sorted by date modification
+		ListFacture = ListFacture.stream().sorted(Comparator.comparing(Facture::getDateModification).reversed()).collect(Collectors.toList());
+		
+		
+		String clientId = request.getParameter("clientId");
+		if(clientId != null) {
+			if(!clientId.equals("")) {
+				if(MethodeUtile.isInteger(clientId)) {
+					//filter par client id
+					ListFacture = ListFacture.stream().filter(d -> d.getDevis().getClient().getClientId() == Integer.valueOf(clientId)).collect(Collectors.toList());
+					request.setAttribute("clientId", clientId);
+				}else {
+					request.setAttribute("Erreur", "Veuillez saisir un client.");
+				}
+			}else {
+				request.setAttribute("Erreur", "Veuillez saisir un client.");
+			}
+		}
+		
+		if(ListFacture.size() == 0) {
 
 			request.setAttribute("isEmptyList", true);
 		}else {
 			request.setAttribute("isEmptyList", false);
 		}
+		
+		List<Client> ListClient = clientService.getAllClients();
+		
+		request.setAttribute("ListClient", ListClient);
+		
 		request.setAttribute("ListFacture", ListFacture);
 		request.getRequestDispatcher("/jsp/application/DevisProjetFacture/ListFacture.jsp").forward(request, response);
 	}
