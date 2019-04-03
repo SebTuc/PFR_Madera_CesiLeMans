@@ -128,6 +128,8 @@
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
   
    <jsp:include page="/jsp/common/confirmModal.jsp" />
+   <script type='text/javascript'
+		src='<%=request.getContextPath()%>/resources/js/generateDevis.js'></script>
 </body>
 
 </html>
