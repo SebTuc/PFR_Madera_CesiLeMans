@@ -21,7 +21,7 @@
 <div class="card card-edition">
 
 	<div class="card-body" style="overflow-x: scroll; overflow:auto;padding:0;">
-		<table id="Edition" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important;text-align: center; "
+		<table id="Client" class="table table-edition table-striped table-bordered"cellspacing="0px" style="width:100%;overflow-y:auto; margin-top:-1px!important ;margin-bottom:0!important;text-align: center; "
 				column-defs='[{"data": "id","title": "","type": "hidden","visible": false},
 				{"data":"nomClient","title": "Nom"},
 				{"data":"prenomClient","title": "Prenom"},
@@ -52,6 +52,9 @@
 
 </div>	
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
+  	<script type="text/javascript">
+		loadAltDataTable("Client",true,false);
+	</script>
 </body>
 
 </html>

@@ -44,11 +44,7 @@ public class ListClient extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if(action != null) {
-			if(action.equals("Delete")) {
-
-				clientService.removeClientById(Integer.valueOf(idValeur));
-
-			}else if(action.equals("Edition")) {
+			if(action.equals("Edition")) {
 
 				Client client = clientService.getClientById(Integer.valueOf(idValeur));
 

@@ -41,11 +41,8 @@ public class ListFournisseur extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if(action != null) {
-			if(action.equals("Delete")) {
 
-				fournisseurService.removeFournisseurById(Integer.valueOf(idValeur));
-
-			}else if(action.equals("Edition")) {
+			if(action.equals("Edition")) {
 
 				Fournisseur fournisseur = fournisseurService.getFournisseurById(Integer.valueOf(idValeur));
 
