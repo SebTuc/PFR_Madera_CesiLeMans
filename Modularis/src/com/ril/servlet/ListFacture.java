@@ -32,7 +32,11 @@ public class ListFacture extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Facture> ListFact = factureService.getAllFacture();
 		//Trier par date
-		List<Facture> ListFacture = new ArrayList<Facture>(ListFact);
+		List<Facture> ListFacture = new ArrayList<Facture>();
+		if(ListFact != null) {
+			ListFacture = ListFact;
+		}
+		
 		//sorted by date modification
 		ListFacture = ListFacture.stream().sorted(Comparator.comparing(Facture::getDateModification).reversed()).collect(Collectors.toList());
 		
