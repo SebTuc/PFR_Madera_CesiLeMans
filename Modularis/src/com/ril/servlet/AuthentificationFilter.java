@@ -81,6 +81,7 @@ public class AuthentificationFilter implements Filter {
 							
 							//connected grace a une session actif
 							utilisateur = (Utilisateur)session.getAttribute("SessionUtilisateur");
+							utilisateur = utilisateurService.getUtilisateurById(utilisateur.getUtilisateurId());
 						}else {
 							//connected grace au cookie
 							session.setAttribute("SessionUtilisateur", utilisateur);

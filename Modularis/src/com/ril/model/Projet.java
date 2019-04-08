@@ -107,7 +107,7 @@ public class Projet implements java.io.Serializable {
 		this.devises = devises;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projet", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projet", cascade = CascadeType.ALL)
 	public Set<Plan> getPlans() {
 		return this.plans;
 	}

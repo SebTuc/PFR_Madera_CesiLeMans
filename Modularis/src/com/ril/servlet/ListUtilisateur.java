@@ -26,6 +26,7 @@ public class ListUtilisateur extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur)session.getAttribute("SessionUtilisateur");
+		utilisateur = utilisateurService.getUtilisateurById(utilisateur.getUtilisateurId());
 		if(utilisateur != null) {			
 			if (!utilisateur.getMetier().getNom().equals("Moderateur")) {
 				response.sendRedirect(request.getContextPath()+"/Annuaire");

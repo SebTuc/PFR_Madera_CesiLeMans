@@ -43,6 +43,8 @@ public class EditUtilisateur extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if(session != null) {
 			utilisateurConnected = (Utilisateur)session.getAttribute("SessionUtilisateur");
+			//Il ne stock pas les liaison en session ( la liaison metier ici... )
+			utilisateurConnected = utilisateurService.getUtilisateurById(utilisateurConnected.getUtilisateurId());
 			if (utilisateurConnected.getMetier().getNom().equals("Moderateur"))	{
 				isAdmin = true;
 			}
