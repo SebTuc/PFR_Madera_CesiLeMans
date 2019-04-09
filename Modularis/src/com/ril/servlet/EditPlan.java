@@ -96,7 +96,7 @@ public class EditPlan extends HttpServlet {
 
 							response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditPiece?id="+IdPieceAdd);
 						}else {
-							request.setAttribute("Erreur", "Veuillez saisir un nom de piï¿½ce.");
+							request.setAttribute("Erreur", "Veuillez saisir un nom de pièce.");
 							doGet(request, response);
 						}
 					}catch(Exception e){

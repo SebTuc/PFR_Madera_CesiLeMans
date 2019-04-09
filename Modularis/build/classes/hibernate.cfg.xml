@@ -6,55 +6,59 @@
 
 <hibernate-configuration>
 
-    <session-factory>
+	<session-factory>
 
-        <!-- Database connection settings -->
-        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/modularisbdd?useSSL=false</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password"></property>
+		<!-- Database connection settings -->
+		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/modularisbdd?useSSL=false</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
 
-        <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">10</property>
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.pool_size">10</property>
 
 		<!-- Enable Hibernate's automatic session context management -->
 		<property name="current_session_context_class">thread</property>
-        <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
-        <!-- Disable the second-level cache  -->
-        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+		<property name="connection.autoReconnect">true</property>
+		<property name="connection.autoReconnectForPools">true</property>
+		<property name="connection.is-connection-validation-required">true</property>
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
-        <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">true</property>
-        
-       	<!-- <property name="default_schema">MKYONG</property>  -->
-       	<mapping class="com.ril.model.Angle"/>
-       	<mapping class="com.ril.model.Image"/>        
-       	<mapping class="com.ril.model.Catalogue"/>
-      	<mapping class="com.ril.model.Client"/>
-      	<mapping class="com.ril.model.Composant"/>
-      	<mapping class="com.ril.model.Devis"/>
-      	<mapping class="com.ril.model.DonneesPersonelle"/>
-		<mapping class="com.ril.model.Entrepot"/>
-		<mapping class="com.ril.model.EtapeFacture"/>
-		<mapping class="com.ril.model.Etat"/>
-		<mapping class="com.ril.model.Facture"/>
-		<mapping class="com.ril.model.FamilleComposant"/>
-		<mapping class="com.ril.model.Fournisseur"/>
-		<mapping class="com.ril.model.Gamme"/>
-		<mapping class="com.ril.model.Materiaux"/>
-		<mapping class="com.ril.model.Metier"/>
-		<mapping class="com.ril.model.Module"/>
-		<mapping class="com.ril.model.ModuleXComposant"/>
-		<mapping class="com.ril.model.ModuleXComposantId"/>
-		<mapping class="com.ril.model.Piece"/>
-		<mapping class="com.ril.model.Plan"/>
-		<mapping class="com.ril.model.Projet"/>
-		<mapping class="com.ril.model.Stock"/>
-		<mapping class="com.ril.model.UniteMesure"/>
-		<mapping class="com.ril.model.Utilisateur"/>
-	   	
-   </session-factory>
-        
+		<!-- Disable the second-level cache -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+
+		<!-- <property name="default_schema">MKYONG</property> -->
+		<mapping class="com.ril.model.Angle" />
+		<mapping class="com.ril.model.Image" />
+		<mapping class="com.ril.model.Catalogue" />
+		<mapping class="com.ril.model.Client" />
+		<mapping class="com.ril.model.Composant" />
+		<mapping class="com.ril.model.Devis" />
+		<mapping class="com.ril.model.DonneesPersonelle" />
+		<mapping class="com.ril.model.Entrepot" />
+		<mapping class="com.ril.model.EtapeFacture" />
+		<mapping class="com.ril.model.Etat" />
+		<mapping class="com.ril.model.Facture" />
+		<mapping class="com.ril.model.FamilleComposant" />
+		<mapping class="com.ril.model.Fournisseur" />
+		<mapping class="com.ril.model.Gamme" />
+		<mapping class="com.ril.model.Materiaux" />
+		<mapping class="com.ril.model.Metier" />
+		<mapping class="com.ril.model.Module" />
+		<mapping class="com.ril.model.ModuleXComposant" />
+		<mapping class="com.ril.model.ModuleXComposantId" />
+		<mapping class="com.ril.model.Piece" />
+		<mapping class="com.ril.model.Plan" />
+		<mapping class="com.ril.model.Projet" />
+		<mapping class="com.ril.model.Stock" />
+		<mapping class="com.ril.model.UniteMesure" />
+		<mapping class="com.ril.model.Utilisateur" />
+
+	</session-factory>
+
 </hibernate-configuration>

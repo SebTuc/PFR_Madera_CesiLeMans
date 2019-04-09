@@ -76,7 +76,7 @@ public class Plan implements java.io.Serializable {
 		this.nom = nom;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plan",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plan",cascade = CascadeType.REMOVE)
 	public Set<Piece> getPieces() {
 		return this.pieces;
 	}

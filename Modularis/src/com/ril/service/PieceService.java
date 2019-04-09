@@ -114,12 +114,7 @@ public class PieceService {
 		return dao.findById(id);
 	}
 
-	public Piece getPieceByNomAndPlan(String nom,Plan plan) {
-
-		PieceHome dao = new PieceHome();
-
-		return dao.findByNomAndPlan(nom, plan);
-	}
+	
 
 	/*
 	 * Return false si la liaison module / piece exist OU si module ou piece est vide
