@@ -10,7 +10,7 @@
 <body>
 	<!-- LISTE DES ENTREPOTS -->
 	<jsp:include page="/jsp/common/navbar.jsp" />
-	<a href="/Modularis" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
+	<a href="/Modularis/Index" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 	 <br />
 	<div class="text-center">
         	<h1>Gestion des stocks</h1>

@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Devis;
 import com.ril.model.Entrepot;
@@ -19,7 +18,6 @@ import com.ril.model.ModuleXComposant;
 import com.ril.model.Piece;
 import com.ril.model.Plan;
 import com.ril.model.Stock;
-import com.ril.model.Utilisateur;
 import com.ril.service.DevisService;
 import com.ril.service.EntrepotService;
 import com.ril.service.EtapeFactureService;
@@ -49,22 +47,13 @@ public class DetailDevis extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
-		
 		String devisId = request.getParameter("id");
 		if(MethodeUtile.isInteger(devisId)) {
 			 Devis devis = devisService.getDevisById(Integer.valueOf(devisId));
 			 if(devis.getFactures().size() != 0) {
 				 request.setAttribute("hiddenBtn", true);
 			 }else {
-				 request.setAttribute("hiddenBtn", true);
+				 request.setAttribute("hiddenBtn", false);
 			 }
 		        
 		        request.setAttribute("Devis", devis);
@@ -82,13 +71,7 @@ public class DetailDevis extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+		
 		String btnFacture = request.getParameter("btnFacture");
 		String devisId = request.getParameter("devisId");
 		

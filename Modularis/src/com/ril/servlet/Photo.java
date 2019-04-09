@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ril.model.Image;
 import com.ril.service.ImageService;
-import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class Photo
@@ -25,12 +24,8 @@ public class Photo extends HttpServlet {
     
     public void init() throws ServletException {
 
-        // Define base path somehow. You can define it as init-param of the servlet.
         this.imagePath = "/var/webapp/images";
 
-        // In a Windows environment with the Applicationserver running on the
-        // c: volume, the above path is exactly the same as "c:\var\webapp\images".
-        // In Linux/Mac/UNIX, it is just straightforward "/var/webapp/images".
     }
 	
 	 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -50,33 +45,19 @@ public class Photo extends HttpServlet {
 	        }
 	    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String imageId = request.getParameter("id");
 
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}
-        // Check if ID is supplied to the request.
         if (imageId == null) {
-            // Do your thing if the ID is not supplied to the request.
-            // Throw an exception, or send 404, or show default/warning image, or just ignore it.
             response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
             return;
         }
         
         ImageService imageService = new ImageService();
-        // Lookup Image by ImageId in database.
-        // Do your "SELECT * FROM Image WHERE ImageID" thing.
         Image image = imageService.getImageById(Integer.valueOf(imageId));
 
-        // Check if image is actually retrieved from database.
         if (image == null) {
-            // Do your thing if the image does not exist in database.
-            // Throw an exception, or send 404, or show default/warning image, or just ignore it.
             response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
             return;
         }
@@ -90,15 +71,9 @@ public class Photo extends HttpServlet {
         response.getOutputStream().write(image.getPhoto());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}
+
 		processRequest(request, response);
 	}
 

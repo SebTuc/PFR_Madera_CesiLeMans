@@ -96,7 +96,7 @@
 		 	</div>
 			<div class="form-group col-md-4 col-6">
 				<label for="module">Selectionner le module a ajouter</label> 
-				<select id="module" name="module" class="custom-select">
+				<select id="module" name="module"  class="w-100 selectpicker" data-live-search="true">
 						<option value=""></option>
 					<c:forEach var="Module" items="${ListModule }">
 						<option value="${fn:escapeXml(Module.moduleId) }">${fn:escapeXml(Module.nom) }  |  Gamme : ${fn:escapeXml(Module.gamme.nom)}</option>
@@ -121,24 +121,9 @@
 </form>
 </div>
 
-<div class="modal static fade" id="ModalConfirmationSuppression" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationSuppressionTitle" aria-hidden="true">
-	  	<div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="ModalConfirmationSuppressionTitle">Suppression</h5>
-		      </div>
-		      <div class="modal-body">
-		        Etez-vous sur de vouloir continuer ?
-		      </div>
-			      <div class="modal-footer">
-			        <button type="button" id="btnModalSupprNon" class="btn btn-primary" data-dismiss="modal">Non</button>
-			    	<button type="button" id="btnModalSupprOui" class="btn btn-danger">Oui</button>
-		    	</div>
-		   	</div>
-		</div>
-	</div>
-
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
+    
+   <jsp:include page="/jsp/common/confirmModal.jsp" />
     <script type='text/javascript'
 		src='<%=request.getContextPath()%>/resources/js/generateDevis.js'></script>
 </body>

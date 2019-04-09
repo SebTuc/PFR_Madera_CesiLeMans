@@ -9,13 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Module;
 import com.ril.model.Piece;
 import com.ril.model.Plan;
 import com.ril.model.Projet;
-import com.ril.model.Utilisateur;
 import com.ril.service.ModuleService;
 import com.ril.service.PieceService;
 import com.ril.service.PlanService;
@@ -35,15 +33,7 @@ public class DetailCatalogueProjet extends HttpServlet {
 	private ModuleService moduleService = new ModuleService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+		
 		String idProjet = request.getParameter("idProjet");
 
 		if (idProjet != null && MethodeUtile.isInteger(idProjet)) {			
@@ -62,13 +52,6 @@ public class DetailCatalogueProjet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idProjet = request.getParameter("idProjet");
 
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 		if (idProjet != null && MethodeUtile.isInteger(idProjet)) {
 
 			// Copie du projet en renvoie vers edition projet

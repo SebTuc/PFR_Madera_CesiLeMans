@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "image", catalog = "modularisbdd")
+@Table(name = "IMAGE", catalog = "ModularisBDD")
 public class Image {
 
 	private Integer imageId;

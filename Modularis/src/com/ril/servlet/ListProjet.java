@@ -24,7 +24,6 @@ import com.ril.service.ClientService;
 import com.ril.service.DevisService;
 import com.ril.service.EtatService;
 import com.ril.service.ProjetService;
-import com.ril.service.UtilisateurService;
 import com.ril.utils.MethodeUtile;
 
 /**
@@ -35,16 +34,15 @@ public class ListProjet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ProjetService projetService = new ProjetService();
-	private UtilisateurService utilisateurService = new UtilisateurService();
 	private ClientService clientService = new ClientService();
 	private DevisService devisService = new DevisService();
 	private EtatService etatService = new EtatService();
-	
-	
+
+
 	public float getPrixTotalDuProjet(Projet projet) {
-		
+
 		float prixTotal = 0.0f;
-		
+
 		for(Plan plan : projet.getPlans()) {
 			for(Piece piece : plan.getPieces()) {
 				for(Module module : piece.getModules()) {
@@ -54,27 +52,21 @@ public class ListProjet extends HttpServlet {
 					for(ModuleXComposant modXComp : module.getModuleXComposants()) {
 						int quantite = modXComp.getQuantite();
 						float prixUnitaire = modXComp.getComposant().getPrixUnitaire();
-						
+
 						prixTotal+=(prixUnitaire * (float)quantite);
-						
+
 					}
 				}
 			}
 		}
-		
-		
+
+
 		return prixTotal;
-		
+
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+
 		List<Projet> ListProjet = projetService.getAllProjets();
 		List<Client> ListClient = clientService.getAllClients();
 		List<Projet> List = new ArrayList<Projet>();
@@ -84,9 +76,9 @@ public class ListProjet extends HttpServlet {
 				//On ne prend que les projet qui ne sont pas en devis ou qui ne sont pas dans le catalogue
 				if(projet.getCatalogue().size() == 0) {
 					if(projet.getDevises().size() == 0) {
-						
+
 						List.add(projet);
-						
+
 					}
 				}
 			}
@@ -95,16 +87,16 @@ public class ListProjet extends HttpServlet {
 			}else {
 				request.setAttribute("isEmptyList", false);
 			}
-			
+
 			request.setAttribute("ListProjet", List);
 		}else {
-			
+
 			request.setAttribute("isEmptyList", true);
 			request.setAttribute("ListProjet", ListProjet);
 		}
-		
+
 		request.setAttribute("ListClient", ListClient);
-		
+
 		request.getRequestDispatcher("/jsp/application/DevisProjetFacture/ListProjet.jsp").forward(request, response);
 	}
 
@@ -114,59 +106,50 @@ public class ListProjet extends HttpServlet {
 		String btnSupprimer = request.getParameter("btnSupprimer");
 		String btnEditerProjet = request.getParameter("btnEditerProjet");
 		String clientId = request.getParameter("clientId");
-		
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 
 		if( btnEditer != null && projetId != null) {
 			if(MethodeUtile.isInteger(projetId)) {
-			response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditProjet?id="+projetId);
+				response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditProjet?id="+projetId);
 			}else {
 				request.setAttribute("Erreur", "Projet ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 				doGet(request, response);
 			}
-			
+
 		}else if( btnSupprimer != null && projetId != null) {
 			if(MethodeUtile.isInteger(projetId)) {
 
-				
+
 				projetService.removeProjetById(Integer.valueOf(projetId));
-				
+
 				doGet(request, response);
 			}else {
 				request.setAttribute("Erreur", "Projet ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 				doGet(request, response);
 			}
-			
-			
+
+
 		}else if( btnSupprimer==null && btnEditer == null && btnEditerProjet == null && projetId != null && clientId != null) {
-			
+
 			//On Cr�er un devis pour sa on calcul le prix de tout HT et on recup la date du jour et bien sur le projet
 			if(MethodeUtile.isInteger(projetId) && MethodeUtile.isInteger(clientId)) {
 				Projet projet = projetService.getProjetById(Integer.valueOf(projetId));
 				Date date = new Date();
-				//On recuperer le nom/prenom de l'utilisateur connecter
-				HttpSession session = request.getSession();
-				Utilisateur utilisateur = (Utilisateur) session.getAttribute("Utilisateur");
+				HttpSession session = request.getSession(false);
+				Utilisateur utilisateur = (Utilisateur) session.getAttribute("SessionUtilisateur");
 				//OU
-//				Utilisateur utilisateur = session.getAttribute("Utilisateur");
+				//				Utilisateur utilisateur = session.getAttribute("Utilisateur");
 				Client client = clientService.getClientById(Integer.valueOf(clientId));
 				Float prixTotal = getPrixTotalDuProjet(projet);
 				//Letat devis on le met a brouillon au debut
 				Etat etat = etatService.getEtatById(1);
 				//On creer le devis avec toute ces info
 				try {
-					
+
 					Integer devisId = devisService.addDevis(client, etat, projet, utilisateur, prixTotal, date);
-					
+
 					//on envois sur le devis
 					response.sendRedirect(request.getContextPath()+ "/DevisFacture/DetailDevis?id="+devisId);
-					
+
 				}catch(Exception e) {
 					request.setAttribute("Erreur", "Creation abort.");
 					doGet(request, response);
@@ -176,11 +159,11 @@ public class ListProjet extends HttpServlet {
 				request.setAttribute("Erreur", "Projet ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 				doGet(request, response);
 			}
-			
+
 		}else if( btnEditerProjet != null && projetId != null) {
 			if(MethodeUtile.isInteger(projetId)) {
-			response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditProjetName?id="+projetId);
-			
+				response.sendRedirect(request.getContextPath()+ "/DevisFacture/EditProjetName?id="+projetId);
+
 			}else {
 				request.setAttribute("Erreur", "Projet ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 				doGet(request, response);
@@ -188,10 +171,10 @@ public class ListProjet extends HttpServlet {
 		}else {
 			request.setAttribute("Erreur", "Veuillez saisir un projet.");
 			doGet(request, response);
-			
+
 		}
-		
-		
+
+
 	}
 
 }

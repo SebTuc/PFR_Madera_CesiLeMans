@@ -114,10 +114,10 @@
 		<div class="col-6">
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-sm-12">
-					<button class="btn btn-warning btn-block btn-lg" name="btnEditer" id="btnEditer">Editer</button>
+					<button class="btn btn-warning btn-block btn-block" name="btnEditer" id="btnEditer">Editer</button>
 				</div>
 				<div class="col-md-6 col-sm-12">
-					<button class="btn btn-danger btn-block btn-lg" name="btnSupprimer" id="btnSupprimer">Supprimer</button>
+					<button class="btn btn-danger btn-block btn-block" name="btnSupprimer" id="btnSupprimer" type="button" data-toggle="modal" data-target="#ModalConfirmationSuppression" id="btnSupprimer">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -125,25 +125,11 @@
 </form>
 
 </div>
-
-<div class="modal static fade" id="ModalConfirmationSuppression" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationSuppressionTitle" aria-hidden="true">
-	  	<div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="ModalConfirmationSuppressionTitle">Suppression</h5>
-		      </div>
-		      <div class="modal-body">
-		        Etez-vous sur de vouloir continuer ?
-		      </div>
-			      <div class="modal-footer">
-			        <button type="button" id="btnModalSupprNon" class="btn btn-primary" data-dismiss="modal">Non</button>
-			    	<button type="button" id="btnModalSupprOui" class="btn btn-danger">Oui</button>
-		    	</div>
-		   	</div>
-		</div>
-	</div>
-
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
+  
+   <jsp:include page="/jsp/common/confirmModal.jsp" />
+   <script type='text/javascript'
+		src='<%=request.getContextPath()%>/resources/js/generateDevis.js'></script>
 </body>
 
 </html>

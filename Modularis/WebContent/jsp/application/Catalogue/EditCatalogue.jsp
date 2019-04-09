@@ -16,7 +16,11 @@
 	<a href="/Modularis/Catalogue" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span>
 		Retour</a>
 	<div role="main" class="container-fluid p2">
-
+<c:choose>
+				<c:when test="${Erreur != null }">
+					<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+				</c:when>
+			</c:choose>
 		<br><br>
 		
 		<div class="row d-none d-sm-flex">

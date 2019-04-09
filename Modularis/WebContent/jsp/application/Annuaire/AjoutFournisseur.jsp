@@ -17,7 +17,11 @@
 <a href="/Modularis/Annuaire/ListFournisseur" class="btn btn-outline-dark return-btn"><span aria-hidden="true">&larr;</span> Retour</a>
 
 <div role="main" class="container">
- 
+ <c:choose>
+				<c:when test="${Erreur != null }">
+					<div class="alert alert-danger" role="alert">${fn:escapeXml(Erreur)}</div>
+				</c:when>
+			</c:choose>
 <br><br>
 <form method="post">
   <div class="form-group">

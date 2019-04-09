@@ -8,12 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Client;
-import com.ril.model.Utilisateur;
 import com.ril.service.ClientService;
-import com.ril.utils.MethodeUtile;
 
 /**
  * Servlet implementation class ListClient
@@ -25,13 +22,7 @@ public class ListClient extends HttpServlet {
 	private ClientService clientService = new ClientService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+
 		List<Client> ListClient = clientService.getAllClients();
 		request.setAttribute("ListClient", ListClient);
 		request.getRequestDispatcher("/jsp/application/Annuaire/ListClient.jsp").forward(request, response);
@@ -51,19 +42,9 @@ public class ListClient extends HttpServlet {
 		String emailClient = request.getParameter("emailClient");
 
 		String action = request.getParameter("action");
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
+
 		if(action != null) {
-			if(action.equals("Delete")) {
-
-				clientService.removeClientById(Integer.valueOf(idValeur));
-
-			}else if(action.equals("Edition")) {
+			if(action.equals("Edition")) {
 
 				Client client = clientService.getClientById(Integer.valueOf(idValeur));
 

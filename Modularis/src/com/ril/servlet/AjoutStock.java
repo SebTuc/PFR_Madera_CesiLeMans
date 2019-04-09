@@ -8,12 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ril.model.Composant;
 import com.ril.model.Entrepot;
 import com.ril.model.Stock;
-import com.ril.model.Utilisateur;
 import com.ril.service.ComposantService;
 import com.ril.service.EntrepotService;
 import com.ril.service.StockService;
@@ -31,16 +29,7 @@ public class AjoutStock extends HttpServlet {
 	private StockService stockService			= new StockService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
-		
 
-		
 		String entrepotId = request.getParameter("id");
 		if(MethodeUtile.isInteger(entrepotId)) {
 			 Entrepot entrepot = entrepotService.getEntrepotById(Integer.valueOf(entrepotId));
@@ -56,14 +45,6 @@ public class AjoutStock extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
-
 
 		String insertQuantite = request.getParameter("insertQuantite");
 		String idComposant = request.getParameter("idComposant");

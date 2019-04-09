@@ -14,7 +14,6 @@ public class ProjetService {
 	
 	private PieceService pieceService = new PieceService();
 	private ModuleService moduleService = new ModuleService();
-	private PlanService planService = new PlanService();
 	
 	public int addProjet(Projet projet) {
 		

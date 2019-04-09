@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,10 @@ import com.ril.service.UtilisateurService;
 @WebServlet("/Connexion")
 public class Connexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	//3 mois
+	private static final Integer TIME_EXPIRE_COOKIE = 90*(24*(60*60));
+	//1 jour
+	private static final Integer TIME_EXPIRE_SESSION = 1*(24*(60*60));
 
 	private UtilisateurService user = new UtilisateurService();
 
@@ -36,6 +40,7 @@ public class Connexion extends HttpServlet {
 
 		String login = request.getParameter("login");
 		String pw	= request.getParameter("password");
+		String addToCookie = request.getParameter("addToCookie");
 
 		String valeurRetour = "";
 		if(ListUser != null) {
@@ -47,7 +52,20 @@ public class Connexion extends HttpServlet {
 								
 								HttpSession session = request.getSession();
 								session.setAttribute("SessionUtilisateur", utilisateur);
-								response.sendRedirect("/Modularis");
+								//Session expire après 24H / 1J
+								session.setMaxInactiveInterval(TIME_EXPIRE_SESSION);
+								//Only String in Cookie donc on envoie l'utilisateur ID
+								if(addToCookie != null) {
+									//Camoufler la data pour quelle ne sois pas lu par un tiers!
+									String structuredDataForCookie = utilisateur.getLogin()+"."+ utilisateur.getPassword() +"."+utilisateur.getUtilisateurId().toString();  
+									Cookie cookieUtilisateur = new Cookie("UtlisateurLoginPasswordId",structuredDataForCookie);
+									
+									//Cookie expire après 24H / 1J
+									cookieUtilisateur.setMaxAge(TIME_EXPIRE_COOKIE);
+									response.addCookie(cookieUtilisateur);
+								}
+								
+								response.sendRedirect("/Modularis/Index");
 																
 							}else {
 								valeurRetour = "Les identifiants pour cette utilisateur sont incorrect.";

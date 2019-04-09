@@ -11,7 +11,7 @@
 <body>
 	<jsp:include page="/jsp/common/navbar.jsp" />
 
-	<a href="/Modularis" class="btn btn-outline-dark return-btn"><span
+	<a href="/Modularis/Index" class="btn btn-outline-dark return-btn"><span
 		aria-hidden="true">&larr;</span> Retour</a>
 	<div role="main" class="container">
 		<div class="col-lg-12 text-center">

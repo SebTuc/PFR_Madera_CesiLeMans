@@ -28,6 +28,49 @@
 <div class="row justify-content-center">
 	<h3>Liste des Devis en attente</h3>
 </div>
+<div class="row justify-content-center">
+	<button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#collapsedCritere" aria-expanded="false" aria-controls="collapseExample" >Ajouter critere de recherce</button>
+</div>
+<br>
+<div class="collapse" id="collapsedCritere">
+	<form method="get">
+		<div class="row justify-content-center">
+			<div class="jumbotron" style="padding: 2rem 2rem">
+				<h5>selectionner le	 critere de recherche et valider :</h5>
+				<br>
+				<label for="client">Client</label>
+				<select id="clientId" class="custom-select" name="clientId" required>
+					<option value="-1" selected></option>
+			   		<c:forEach var="Client" items="${ListClient }">
+			   			<c:choose>
+						    <c:when test="${Client.clientId == clientId }">
+						       <option selected value="${fn:escapeXml(Client.clientId) }">${fn:escapeXml(Client.donneesPersonelle.nom)}  ${fn:escapeXml(Client.donneesPersonelle.prenom)} </option>
+						    </c:when>    
+						    <c:otherwise>
+								<option value="${fn:escapeXml(Client.clientId) }">${fn:escapeXml(Client.donneesPersonelle.nom)}  ${fn:escapeXml(Client.donneesPersonelle.prenom)} </option>
+						    </c:otherwise>
+						</c:choose>
+			   		</c:forEach>
+				</select>
+				<br><br>
+				<div class="row justify-content-center">
+					<div class="col-6 justify-content-center">
+						<div class="row justify-content-center">
+							<button class="btn btn-primary" name="btnCritere" id="btnCritere">Appliquer</button>
+						</div>
+					</div>
+					<div class="col-6 justify-content-center">
+						<div class="row justify-content-center">
+							<a href="/Modularis/DevisFacture/ListDevis" class="btn btn-primary">Refresh</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+</div>
+<br>
 <form id="List" method="post">
 	<div class="row justify-content-center">
 		<ul class="list-group list-radio" >
@@ -44,7 +87,7 @@
 								<div class="media">
   									<div class="media-body">
 										<input class="form-check-input" type="radio" name="radio" id="${fn:escapeXml(Devis.devisId)}" value="${fn:escapeXml(Devis.devisId)}">
-										<label class="form-check-label label-lg" for="${fn:escapeXml(Devis.devisId)}">${fn:escapeXml(Devis.projet.nom)} </label>
+										<label class="form-check-label label-lg" for="${fn:escapeXml(Devis.devisId)}">${fn:escapeXml(Devis.projet.nom)} |  ${fn:escapeXml(Devis.client.donneesPersonelle.prenom)}  ${fn:escapeXml(Devis.client.donneesPersonelle.nom)}</label>
 									</div>
 									<c:choose>
 										<c:when test="${Devis.projet.image.imageId != null}">
@@ -73,24 +116,8 @@
 		
 </form>
 </div>
-<div class="modal static fade" id="ModalConfirmationSuppression" tabindex="-1" role="dialog" aria-labelledby="ModalConfirmationSuppressionTitle" aria-hidden="true">
-	  	<div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="ModalConfirmationSuppressionTitle">Suppression</h5>
-		      </div>
-		      <div class="modal-body">
-		        Etez-vous sur de vouloir continuer ?
-		      </div>
-			      <div class="modal-footer">
-			        <button type="button" id="btnModalSupprNon" class="btn btn-primary" data-dismiss="modal">Non</button>
-			    	<button type="button" id="btnModalSupprOui" class="btn btn-danger">Oui</button>
-		    	</div>
-		   	</div>
-		</div>
-	</div>
-
   <jsp:include page="/jsp/common/defaultScripts.jsp" />
+  <jsp:include page="/jsp/common/confirmModal.jsp"/>
   <script type='text/javascript'
 		src='<%=request.getContextPath()%>/resources/js/generateDevis.js'></script>
 </body>

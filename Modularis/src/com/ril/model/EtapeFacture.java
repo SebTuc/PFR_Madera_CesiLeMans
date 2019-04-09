@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
-@Table(name = "etape_facture", catalog = "modularisbdd")
+@Table(name = "ETAPE_FACTURE", catalog = "ModularisBDD")
 public class EtapeFacture {
 	
 	

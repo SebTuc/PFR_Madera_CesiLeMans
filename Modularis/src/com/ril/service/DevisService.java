@@ -17,7 +17,6 @@ import com.ril.model.Utilisateur;
 
 public class DevisService {
 	private PieceService pieceService = new PieceService();
-	private PlanService planService = new PlanService();
 	private ModuleService moduleService = new ModuleService();
 
 public int addDevis(Client client, Etat etat, Projet projet, Utilisateur utilisateur, Float prixHt, Date dateCreation) {

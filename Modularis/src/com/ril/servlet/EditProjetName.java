@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -20,7 +19,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.ril.model.Image;
 import com.ril.model.Projet;
-import com.ril.model.Utilisateur;
 import com.ril.service.ImageService;
 import com.ril.service.ProjetService;
 import com.ril.utils.MethodeUtile;
@@ -37,13 +35,6 @@ public class EditProjetName extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 		String idProjet = request.getParameter("id");
 		if(idProjet != null) {
 			if(MethodeUtile.isInteger(idProjet)) {
@@ -75,14 +66,6 @@ public class EditProjetName extends HttpServlet {
 		String id=null;
 		byte[] array=null;
 		String btnType=null;
-
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			request.setAttribute("Erreur", "Aucune saisie.");
@@ -132,11 +115,11 @@ public class EditProjetName extends HttpServlet {
 						File file = File.createTempFile("img", ".png", uploadDir);
 						item.write(file);
 
-						if(file.length() < 10000000){
+						if(file.length() < 9000000){
 
 							array = Files.readAllBytes(file.toPath());
 						}else {
-							request.setAttribute("Erreur", "Taille de l'image supï¿½rieur a la limite maximal (1Go).");
+							request.setAttribute("Erreur", "Taille de l'image supï¿½rieur a la limite maximal (9Mo).");
 							doGet(request, response);
 
 						}
@@ -154,7 +137,7 @@ public class EditProjetName extends HttpServlet {
 
 			}
 		} catch (FileUploadException e) {
-			request.setAttribute("Erreur", "Erreur lors de l'ajout des donnï¿½es.");
+			request.setAttribute("Erreur", "Erreur lors de l'ajout des données.");
 			doGet(request, response);
 		} catch (Exception ex) {
 			request.setAttribute("Erreur", "Une erreur est survenue.");
@@ -178,9 +161,9 @@ public class EditProjetName extends HttpServlet {
 						//Si le nom est modifier on supprime le Is Clone
 						projet.setClone(null);
 					}
-					
+
 				}
-				
+
 				projet.setNom(nomProjet);
 
 				projetService.editProjet(projet);
@@ -199,7 +182,7 @@ public class EditProjetName extends HttpServlet {
 				projet.setImage(null);
 
 				projetService.editProjet(projet);
-				
+
 				request.setAttribute("Erreur", "Suppresion de l'image OK.");
 				doGet(request, response);
 

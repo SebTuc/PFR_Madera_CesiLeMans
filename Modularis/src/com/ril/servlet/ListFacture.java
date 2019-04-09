@@ -1,17 +1,20 @@
 package com.ril.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.ril.model.Client;
 import com.ril.model.Facture;
-import com.ril.model.Utilisateur;
+import com.ril.service.ClientService;
 import com.ril.service.FactureService;
 import com.ril.utils.MethodeUtile;
 
@@ -21,27 +24,49 @@ import com.ril.utils.MethodeUtile;
 @WebServlet("/ListFacture")
 public class ListFacture extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-  
+
+
 	private FactureService factureService = new FactureService();
-	
+	private ClientService clientService = new ClientService();
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
-		List<Facture> ListFacture = factureService.getAllFacture();
+		List<Facture> ListFact = factureService.getAllFacture();
 		//Trier par date
+		List<Facture> ListFacture = new ArrayList<Facture>();
+		if(ListFact != null) {
+			ListFacture = ListFact;
+		}
 		
-		if(ListFacture == null) {
-			
+		//sorted by date modification
+		ListFacture = ListFacture.stream().sorted(Comparator.comparing(Facture::getDateModification).reversed()).collect(Collectors.toList());
+		
+		
+		String clientId = request.getParameter("clientId");
+		if(clientId != null) {
+			if(!clientId.equals("")) {
+				if(MethodeUtile.isInteger(clientId)) {
+					//filter par client id
+					ListFacture = ListFacture.stream().filter(d -> d.getDevis().getClient().getClientId() == Integer.valueOf(clientId)).collect(Collectors.toList());
+					request.setAttribute("clientId", clientId);
+				}else {
+					request.setAttribute("Erreur", "Veuillez saisir un client.");
+				}
+			}else {
+				request.setAttribute("Erreur", "Veuillez saisir un client.");
+			}
+		}
+		
+		if(ListFacture.size() == 0) {
+
 			request.setAttribute("isEmptyList", true);
 		}else {
 			request.setAttribute("isEmptyList", false);
 		}
+		
+		List<Client> ListClient = clientService.getAllClients();
+		
+		request.setAttribute("ListClient", ListClient);
+		
 		request.setAttribute("ListFacture", ListFacture);
 		request.getRequestDispatcher("/jsp/application/DevisProjetFacture/ListFacture.jsp").forward(request, response);
 	}
@@ -53,39 +78,31 @@ public class ListFacture extends HttpServlet {
 		String factureId = request.getParameter("radio");
 		String btnVisualiser = request.getParameter("btnVisualiser");
 		String btnSupprimer = request.getParameter("btnSupprimer");
-		
-		if(!MethodeUtile.isConnected(response , request)) {
-			response.sendRedirect(request.getContextPath()+"/Connexion");
-			return;
-		}else {
-			HttpSession session = request.getSession();
-			request.setAttribute("Utilisateur", (Utilisateur)session.getAttribute("SessionUtilisateur"));
-		}
 
 		if( btnVisualiser != null && factureId != null) {
 			if(MethodeUtile.isInteger(factureId)) {
-			response.sendRedirect(request.getContextPath()+ "/DevisFacture/DetailFacture?id="+factureId);
+				response.sendRedirect(request.getContextPath()+ "/DevisFacture/DetailFacture?id="+factureId);
 			}else {
 				request.setAttribute("Erreur", "Projet ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 				doGet(request, response);
 			}
-			
+
 		}else if( btnSupprimer != null && factureId != null) {
 			if(MethodeUtile.isInteger(factureId)) {
 
 				request.setAttribute("Erreur", "A voir se qu'il faut faire.");
-				
+
 				doGet(request, response);
 			}else {
 				request.setAttribute("Erreur", "Devis ID n'est pas un chiffre, si le probleme persiste, contacter le support.");
 				doGet(request, response);
 			}
-			
-			
+
+
 		}else {
 			request.setAttribute("Erreur", "Veuillez saisir un projet.");
 			doGet(request, response);
-			
+
 		}
 	}
 

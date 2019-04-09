@@ -93,8 +93,18 @@
             <div class="invoice-final"></div>
             <div class="invoice-exchange"></div>
         </div>
+       <br><br><br>
+	<c:choose>
+							<c:when test="${Devis.projet.image.imageId != null}">
+								<div class="row justify-content-center">
+								<img src="/Modularis/Photo?id=${Devis.projet.image.imageId }"
+									class="ml-3" style="max-height: 400px;" />
+									</div>
+							</c:when>
+						</c:choose>
     </div>
-	<br>
+	<br><br>
+
 	<button class="btn-impression" type=button onclick="window.print();">Générer en PDF</button>
 	<jsp:include page="/jsp/common/defaultScripts.jsp" />
 </body>

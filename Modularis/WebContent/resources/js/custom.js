@@ -6,6 +6,8 @@ $(document).ready(function () {
 	$("#close-btn").click(e => { $("#mySidenav").css('width', '0px') });
 
 	loadAltDataTable("Edition");
+	
+	$(".list-radio .list-group-item").click(e => {$(e.target).find('.form-check-input').prop("checked", true)});
 });
 
 

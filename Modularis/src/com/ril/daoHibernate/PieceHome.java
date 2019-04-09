@@ -14,8 +14,6 @@ import org.jboss.logging.Logger;
 import com.ril.hibernate.HibernateUtil;
 import com.ril.model.Module;
 import com.ril.model.Piece;
-import com.ril.model.Piece_;
-import com.ril.model.Plan;
 
 /**
  * Home object for domain model class Piece.
@@ -112,25 +110,7 @@ public class PieceHome {
 		}
 	}
 	
-	public Piece findByNomAndPlan(String nom , Plan plan) {
-		
-		Session session = HibernateUtil.getSession();
 
-		CriteriaBuilder builder = HibernateUtil.getCriteriaBuilder();
-		
-		CriteriaQuery<Piece> crit = builder.createQuery(Piece.class);
-		
-		Root<Piece> PieceRoot = crit.from(Piece.class);
-		
-		crit.select(PieceRoot );
-		
-		crit.where(builder.equal(PieceRoot.get(Piece_.nom), nom),
-				builder.equal(PieceRoot.get(Piece_.plan), plan));
-		
-		Piece piece = session.createQuery(crit).getSingleResult();
-
-		return piece;
-	}
 	
 	public List<Piece> findAll() {
 		log.debug("getting all Piece");
