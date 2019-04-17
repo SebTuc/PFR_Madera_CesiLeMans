@@ -1,24 +1,26 @@
 package com.ril.utils;
 
-public class AttemptsTry {
-	
-	/*
-	 * @author TUCCIO Sebastien
-	 * @version 0.0.1
-	 * Bean of attempts 
-	 */
+
+/**
+ * Bean of login attempts
+ * @author TUCCIO Sebastien
+ *  
+ */
+
+class LoginAttempts {
 	
 	private String login;
 	private String sessionId;
 	private Long timeAccess;
-
-	protected AttemptsTry(String login , String sessionId, Long timeAccess) {
+	
+	protected LoginAttempts(String login , String sessionId) {
 
 		this.login = login;
 		this.sessionId = sessionId;
-		this.timeAccess = timeAccess;
+		this.timeAccess = System.currentTimeMillis();
 		
 	}
+	
 	
 	//Getter and Setter
 	protected String getLogin() {
@@ -44,6 +46,5 @@ public class AttemptsTry {
 	protected void setTimeAccess(Long timeAccess) {
 		this.timeAccess = timeAccess;
 	}
-	
-	
+
 }

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.ril.model.Utilisateur;
 import com.ril.service.UtilisateurService;
-import com.ril.utils.PreventBruteForce;
+import com.ril.utils.SecurityUtils;
 
 /**
  * Servlet implementation class Connexion
@@ -47,16 +47,17 @@ public class Connexion extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		flagBruteForce = PreventBruteForce.DetectBruteForce(login,session.getId());
+		flagBruteForce = SecurityUtils.PreventMultiLoginRequest(login,session.getId());
 		String valeurRetour = "";
 		if(flagBruteForce != true) {
-			
 			if(ListUser != null) {
 				if(!login.equals("") && login != null) {
 					if(!pw.equals("") && pw != null) {
 						for(Utilisateur utilisateur : ListUser) {
 							if(login.equals(utilisateur.getLogin())){
 								if(pw.equals(utilisateur.getPassword())){
+									
+									SecurityUtils.SuccefullLogined(login, session.getId());
 									
 									session.setAttribute("SessionUtilisateur", utilisateur);
 									//Session expire après 24H / 1J
@@ -93,7 +94,7 @@ public class Connexion extends HttpServlet {
 				valeurRetour = "Contacter le support, aucun compte existant.";
 			}
 		}else {
-			valeurRetour = "Multiple requete detecter, veuillez retenter de vous connecter plus tard.";
+			valeurRetour = "Multiple tentative de connexion detecter, veuillez retenter de vous connecter plus tard.";
 		}
 		
 		//Creer une session connecter et empecher l'ouverture des autre page si pas connecter /!\

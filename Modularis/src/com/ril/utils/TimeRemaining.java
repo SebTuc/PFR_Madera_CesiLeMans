@@ -1,24 +1,19 @@
 package com.ril.utils;
 
-public class TimeRemaining {
+
+/**
+ * Bean of the timeRemaining, is the time to wait after multiple attemps to connect to one login
+ * @author TUCCIO Sebastien
+ */
+class TimeRemaining {
 	
-	/*
-	 * @author TUCCIO Sebastien
-	 * @version 0.0.1
-	 * Bean of the timeRemaining, is the time to wait after multiple attemps to connect to one login
-	 */
-	
-	//in minute
-	private static final int MAX_WAITING_TIME = 10;
-	private static final int MIN_WAITING_TIME = 5;
-	
+	private static final int MAX_WAITING_TIME = ConstanteSecurity.getMaxWaitingTime();
+	private static final int MIN_WAITING_TIME = ConstanteSecurity.getMaxWaitingTime();
 	
 	private Long timeWait;
 	private String loginWait ;
-	// Set ALL for lock all session ?
 	private String sessionId ;
 	
-
 	protected TimeRemaining(String loginWait,String sessionId) {
 		
 		this.timeWait = setTimeRandomly();
@@ -45,32 +40,19 @@ public class TimeRemaining {
 		return (System.currentTimeMillis() + (Math.round(randomNumber) * 60000));
 	}
 	
-	
+	/*
+	 * Getter
+	 */
 	protected Long getTimeWait() {
 		return timeWait;
 	}
-
 
 	protected String getLoginWait() {
 		return loginWait;
 	}
 
-
-	protected void setLoginWait(String loginWait) {
-		this.loginWait = loginWait;
-	}
-	
-
 	protected String getSessionId() {
 		return sessionId;
 	}
-
-
-	protected void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
-
-
 	
-
 }
